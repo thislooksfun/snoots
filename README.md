@@ -62,8 +62,15 @@
 
 A modern, fully-featured, strongly-typed reddit api.
 
+# WARNING
+
+This project is in early alpha. Things can (and likely will) change at any time
+for any reason. If you need a stable reddit api today, use [snoowrap][sw].
+
 ## Installation
 
 ```
 npm i snoots
 ```
+
+[sw]: https://github.com/not-an-aardvark/snoowrap
