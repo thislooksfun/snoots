@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+set -e
+echo "1: '$1'"
+echo "2: '$2'"
+echo "3: '$3'"
+
+pkgdiff=$(git diff "$1".."$2" -- package.json)
+if [[ $(echo "$pkgdiff" | wc -l) -gt 0 ]]; then
+  npm run clean
+  npm ci
+fi
