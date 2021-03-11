@@ -74,4 +74,6 @@ stable reddit api today, use [snoowrap][sw].
 npm i snoots
 ```
 
+Note: Node 14+ is required.
+
 [sw]: https://github.com/not-an-aardvark/snoowrap
