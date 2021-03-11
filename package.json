@@ -15,6 +15,9 @@
     "prepublishOnly": "pinst --disable && npm run clean && npm run lint && npm run build",
     "postpublish": "pinst --enable"
   },
+  "dependencies": {
+    "got": "^11.8.2"
+  },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
