@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run lint
+echo "Linting staged files..."
+git diff -z --diff-filter=ACM --name-only --cached | xargs -0 npx prettier -c
