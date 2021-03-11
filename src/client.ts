@@ -1,5 +1,10 @@
 import type { Credentials } from "./helper/api/creds";
 import type { Token } from "./helper/accessToken";
+import type { Data } from "./helper/types";
+import type { OauthOpts } from "./helper/api/oauth";
+import type { Query } from "./helper/api/core";
+import * as anon from "./helper/api/anon";
+import * as oauth from "./helper/api/oauth";
 import refreshToken from "./helper/accessToken";
 
 export interface UsernameAuth {
@@ -30,6 +35,21 @@ export default class Client {
     this.userAgent = opts.userAgent;
   }
 
+  async get<T>(path: string, query: Query = {}): Promise<T> {
+    if (this.creds) {
+      return oauth.get(await this.oAuth(), path, query);
+    } else {
+      return anon.get(this.userAgent, path, query);
+    }
+  }
+  async post<T>(path: string, data: Data, query: Query = {}): Promise<T> {
+    if (this.creds) {
+      return oauth.post(await this.oAuth(), path, data, query);
+    } else {
+      return anon.post(this.userAgent, path, data, query);
+    }
+  }
+
   protected async updateAccessToken(): Promise<void> {
     if (!this.auth) throw "No auth";
     if (!this.creds) throw "No creds";
@@ -40,5 +60,13 @@ export default class Client {
       this.creds,
       this.userAgent
     );
+  }
+
+  protected async oAuth(): Promise<OauthOpts> {
+    await this.updateAccessToken();
+    return {
+      token: this.token!.access,
+      userAgent: this.userAgent,
+    };
   }
 }
