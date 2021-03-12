@@ -36,11 +36,13 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run gendoc
-      - run: npx semantic-release
+      - id: semrel
+        uses: codfish/semantic-release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Deploy docs
+        if: steps.semrel.outputs.new-release-published == 'true'
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
