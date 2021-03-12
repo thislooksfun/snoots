@@ -68,6 +68,9 @@ This project is in early alpha. Things can (and likely will) change at any time
 for any reason, and large parts of the api are not yet supported. If you need a
 stable reddit api today, use [snoowrap][sw].
 
+If you want to help guide the future of the project towards v1.0.0, please check
+out [this discussion](https://github.com/thislooksfun/snoots/discussions/4)!
+
 ## Installation
 
 ```sh
