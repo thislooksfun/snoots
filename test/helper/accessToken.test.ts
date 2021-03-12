@@ -39,7 +39,7 @@ describe("updateAccessToken()", () => {
         fc.string(),
         async (tkn, auth, creds, agent) => {
           postForm.mockReset();
-          const prms = updateAccessToken(tkn, auth, creds, agent);
+          const prms = updateAccessToken(agent, tkn, creds, auth);
           await expect(prms).resolves.toStrictEqual(tkn);
           expect(postForm).not.toBeCalled();
         }
@@ -58,7 +58,7 @@ describe("updateAccessToken()", () => {
         async (tkn, auth, creds, newTkn, agent) => {
           postForm.mockReset().mockReturnValue(newTkn);
 
-          const prms = await updateAccessToken(tkn, auth, creds, agent);
+          const prms = await updateAccessToken(agent, tkn, creds, auth);
           expect(postForm).toBeCalled();
 
           expect(prms.access).toEqual(newTkn.accessToken);
@@ -66,5 +66,13 @@ describe("updateAccessToken()", () => {
         }
       )
     );
+  });
+
+  xdescribe("grants", () => {
+    // TODO: Test that different auths request different grants.
+    // BODY: Using a TokenAuth should request a `refresh_token` grant. Using a
+    // BODY: UsernameAuth should request a `password` grant, and using no auth
+    // BODY: should request a client_credentials grant. This is currently
+    // BODY: pending https://github.com/nock/nock/issues/2171.
   });
 });
