@@ -2,6 +2,9 @@ import type { Data } from "../types";
 import type { OptionsOfTextResponseBody } from "got";
 import got from "got";
 
+/** A mapping of query parameters to add to a request. */
+export type Query = Record<string, string>;
+
 export interface BasicAuth {
   user: string;
   pass: string;
@@ -10,8 +13,6 @@ export interface BearerAuth {
   bearer: string;
 }
 export type Auth = BasicAuth | BearerAuth;
-
-export type Query = Record<string, string>;
 
 interface RedditError {
   error: string;
