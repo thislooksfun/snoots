@@ -1,4 +1,5 @@
 /dist
 /types
+/docs
 node_modules
 .DS_Store
