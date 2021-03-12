@@ -10,12 +10,21 @@ import refreshToken from "./helper/accessToken";
 
 /** Username and password based authentication */
 export interface UsernameAuth {
+  /** The username of the reddit account to control. */
   username: string;
+
+  /** The password of the reddit account to control. */
   password: string;
 }
 
 /** OAuth token based authentication */
 export interface TokenAuth {
+  /**
+   * An OAuth refresh token.
+   *
+   * Snoots does not provide any way to get a refresh token. If you want to use
+   * this code path you have to go through the oauth flow yourself.
+   */
   refreshToken: string;
 }
 
