@@ -20,6 +20,28 @@ jobs:
       - run: npm run build
       - run: npm test
 
+  # This is a TEMPORARY job to deploy docs while in alpha.
+  # TODO: Remove this when releasing v1.0.0
+  alphadoc:
+    name: Alpha Documentation
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: [test]
+    environment: npm
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npm run gendoc && touch docs/.nojekyll
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true
+
   release:
     name: Release
     runs-on: ubuntu-latest
