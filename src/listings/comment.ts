@@ -66,6 +66,7 @@ class MoreComments extends More<Comment> {
   }
 }
 
+/** @internal */
 export default class CommentListing extends Listing<Comment> {
   constructor(l: _Listing, ctx: Context) {
     let more: MoreComments | undefined;
