@@ -44,7 +44,6 @@ export interface VoteableData extends ContentData {
   authorFlairText: string | null;
   authorFlairTextColor: string | null;
   authorFlairType: "text" | "richtext";
-  authorFullname: string;
   authorPatreonFlair: boolean;
   bannedAtUtc: number | null;
   bannedBy: string | null; // RedditUser | null;
@@ -87,7 +86,6 @@ export default class Voteable extends Content implements VoteableData {
   authorFlairText: string | null;
   authorFlairTextColor: string | null;
   authorFlairType: "text" | "richtext";
-  authorFullname: string;
   authorPatreonFlair: boolean;
   bannedAtUtc: number | null;
   bannedBy: string | null;
@@ -133,7 +131,6 @@ export default class Voteable extends Content implements VoteableData {
     this.authorFlairText = data.authorFlairText;
     this.authorFlairTextColor = data.authorFlairTextColor;
     this.authorFlairType = data.authorFlairType;
-    this.authorFullname = data.authorFullname;
     this.authorPatreonFlair = data.authorPatreonFlair;
     this.bannedAtUtc = data.bannedAtUtc;
     this.bannedBy = data.bannedBy;
