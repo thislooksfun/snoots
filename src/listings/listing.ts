@@ -45,6 +45,7 @@ export default class Listing<T> {
   protected ctx: Context;
   protected arr: T[];
   protected more?: More<T>;
+  protected next?: Listing<T>;
 
   /**
    * Create a new listing.
@@ -66,12 +67,15 @@ export default class Listing<T> {
     // If we have elements on hand, it's not empty.
     if (this.arr.length > 0) return false;
 
-    // If arr is empty and we don't have a way to get more, we're empty.
+    // If arr is empty with no way to get more, it's empty.
     if (!this.more) return true;
 
-    // TODO: Cache this somehow?
-    const list = await this.more.fetch(this.ctx);
-    return list.empty();
+    // This listing is empty but can fetch more. Do so, and if it was
+    // successful, it's not empty.
+    if (!this.next) {
+      this.next = await this.more.fetch(this.ctx);
+    }
+    return this.next.arr.length > 0;
   }
 
   /**
@@ -103,7 +107,9 @@ export default class Listing<T> {
         if (res === false) return;
       }
 
-      if (page.more) {
+      if (page.next) {
+        page = page.next;
+      } else if (page.more) {
         page = await page.more.fetch(this.ctx);
       } else {
         page = null;
