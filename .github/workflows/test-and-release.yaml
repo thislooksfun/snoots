@@ -35,7 +35,7 @@ jobs:
           node-version: 10.x
       - run: npm ci
       - run: npm run build
-      - run: npm run gendoc
+      - run: npm run gendoc && touch docs/.nojekyll
       - id: semrel
         uses: codfish/semantic-release-action@v1
         env:
