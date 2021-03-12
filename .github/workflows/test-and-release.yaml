@@ -35,7 +35,14 @@ jobs:
           node-version: 10.x
       - run: npm ci
       - run: npm run build
+      - run: npm run gendoc
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true

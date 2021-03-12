@@ -3,6 +3,7 @@
 node_modules
 /dist
 /types
+/docs
 CHANGELOG.md
 
 # (local) env files
