@@ -57,14 +57,13 @@ export default class Client {
   }
 
   protected async updateAccessToken(): Promise<void> {
-    if (!this.auth) throw "No auth";
     if (!this.creds) throw "No creds";
 
     this.token = await refreshToken(
+      this.userAgent,
       this.token,
-      this.auth,
       this.creds,
-      this.userAgent
+      this.auth
     );
   }
 

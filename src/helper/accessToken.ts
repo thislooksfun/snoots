@@ -17,23 +17,27 @@ export interface TokenResponse {
 }
 
 export default async function updateAccessToken(
+  userAgent: string,
   token: Token | null,
-  auth: Auth,
   creds: Credentials,
-  userAgent: string
+  auth?: Auth
 ): Promise<Token> {
   const expiration = token?.expiration ?? 0;
   if (expiration > Date.now()) return token!;
 
   // Token is expired or missing, time to (re)generate!
   let grant: Data = {};
-  if ("refreshToken" in auth) {
-    grant.grant_type = "refresh_token";
-    grant.refresh_token = auth.refreshToken;
+  if (auth) {
+    if ("refreshToken" in auth) {
+      grant.grant_type = "refresh_token";
+      grant.refresh_token = auth.refreshToken;
+    } else {
+      grant.grant_type = "password";
+      grant.username = auth.username;
+      grant.password = auth.password;
+    }
   } else {
-    grant.grant_type = "password";
-    grant.username = auth.username;
-    grant.password = auth.password;
+    grant.grant_type = "client_credentials";
   }
 
   const raw: Data = await postForm(
