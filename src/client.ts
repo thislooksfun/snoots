@@ -5,6 +5,7 @@ import type { OauthOpts } from "./helper/api/oauth";
 import type { Query } from "./helper/api/core";
 import * as anon from "./helper/api/anon";
 import * as oauth from "./helper/api/oauth";
+import CommentControls from "./controls/comment";
 import refreshToken from "./helper/accessToken";
 
 export interface UsernameAuth {
@@ -23,6 +24,8 @@ export interface ClientOptions {
 }
 
 export default class Client {
+  /** Controls for interacting with comments. */
+  public comments: CommentControls;
   protected auth?: Auth;
   protected creds?: Credentials;
   protected token: Token | null;
@@ -33,6 +36,9 @@ export default class Client {
     this.creds = opts.creds;
     this.token = null;
     this.userAgent = opts.userAgent;
+
+    // Set up controls after we have initalized the internal state.
+    this.comments = new CommentControls(this);
   }
 
   async get<T>(path: string, query: Query = {}): Promise<T> {
