@@ -65,6 +65,51 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The main Client class. This is the primary way you will interact with snoots.</p>
+					</div>
+					<p>Every Client instance is fully independent, so you are free to create as many
+					as you require.</p>
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><p>The most common way to use snoots is to make a client</p>
+							<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">userAgent:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your user agent&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">auth:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">username:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your username&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">password:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your password&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #001080">creds:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your client id&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your client secret&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						</dd>
+						<dt>example</dt>
+						<dd><p>If you want to make requests not on behalf of a user, you can leave
+							out the <code>auth</code> key. See <a href="../interfaces/clientoptions.html#auth">ClientOptions.auth</a> for more details.</p>
+							<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">userAgent:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your user agent&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">creds:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your client id&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your client secret&gt;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">});</span>
+</code></pre>
+						</dd>
+						<dt>example</dt>
+						<dd><p>If you want to make completely unauthenticated requests, you can
+								leave out both the <code>auth</code> and <code>creds</code> keys. See <a href="../interfaces/clientoptions.html#creds">ClientOptions.creds</a>
+							for more details and restrictions.</p>
+							<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({ </span><span style="color: #001080">userAgent:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&lt;your user agent&gt;&#039;</span><span style="color: #000000"> })</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -105,19 +150,27 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Client<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClientOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Client<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">: </span><a href="../interfaces/clientoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ClientOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/93d60e8/src/client.ts#L32">client.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/7391759/src/client.ts#L103">client.ts:103</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Make a new snoots Client.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>opts: <span class="tsd-signature-type">ClientOptions</span></h5>
+									<h5>opts: <a href="../interfaces/clientoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ClientOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The options to configure this client with.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></h4>
@@ -133,7 +186,7 @@
 					<div class="tsd-signature tsd-kind-icon">comments<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">default</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/93d60e8/src/client.ts#L28">client.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/7391759/src/client.ts#L99">client.ts:99</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -155,25 +208,46 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/93d60e8/src/client.ts#L44">client.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/7391759/src/client.ts#L134">client.ts:134</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Perform a GET request to the reddit api.</p>
+								</div>
+								<p>You shouldn&#39;t ever have to use this directly.</p>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>If the endpoint returns an error.</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>T</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>The type to cast the response to.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>path: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The path of the endpoint.</p>
+									</div>
 								</li>
 								<li>
 									<h5>query: <span class="tsd-signature-type">Query</span><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Any query parameters to pass to the endpoint.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The JSON response from the endpoint.</p>
 						</li>
 					</ul>
 				</section>
@@ -187,28 +261,52 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/93d60e8/src/client.ts#L51">client.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/7391759/src/client.ts#L157">client.ts:157</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Perform a POST request to the reddit api.</p>
+								</div>
+								<p>You shouldn&#39;t ever have to use this directly.</p>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>If the endpoint returns an error.</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>T</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>The type to cast the response to.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>path: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The path of the endpoint.</p>
+									</div>
 								</li>
 								<li>
 									<h5>data: <span class="tsd-signature-type">Data</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The data to POST.</p>
+									</div>
 								</li>
 								<li>
 									<h5>query: <span class="tsd-signature-type">Query</span><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Any query parameters to pass to the endpoint.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The JSON response from the endpoint.</p>
 						</li>
 					</ul>
 				</section>
@@ -245,6 +343,18 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/tokenauth.html" class="tsd-kind-icon">Token<wbr>Auth</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/usernameauth.html" class="tsd-kind-icon">Username<wbr>Auth</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#auth" class="tsd-kind-icon">Auth</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -257,6 +367,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 		</div>
 	</div>
