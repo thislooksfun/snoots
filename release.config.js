@@ -11,6 +11,8 @@ module.exports = {
   ],
   preset: "conventionalcommits",
   // TODO: This should be changed as we move to beta.
-  branches: [{ name: "fakebranch", channel: "release" }],
-  branches: [{ name: "master", channel: "alpha", prerelease: "alpha" }],
+  branches: [
+    { name: "foobar", channel: "release" },
+    { name: "master", channel: "alpha", prerelease: "alpha" },
+  ],
 };
