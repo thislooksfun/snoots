@@ -70,7 +70,7 @@ stable reddit api today, use [snoowrap][sw].
 
 ## Installation
 
-```
+```sh
 npm i snoots
 ```
 
