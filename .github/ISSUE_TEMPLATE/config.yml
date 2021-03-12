@@ -7,3 +7,7 @@ contact_links:
   - name: Support and Questions
     url: https://github.com/thislooksfun/snoots/discussions?discussions_q=category%3AQ%26A
     about: Need help or just have a general question? Please open a discussion thread.
+
+  - name: Security
+    url: https://github.com/thislooksfun/snoots/blob/master/SECURITY.md
+    about: Need to securely report a vulnerability? Check out the security policy.
