@@ -51,7 +51,6 @@ export interface VoteableData extends ContentData {
   canGild: boolean;
   canModPost: boolean;
   distinguished: "admin" | "moderator" | null;
-  downs: number;
   edited: number | boolean;
   gilded: number;
   gildings: Gildings;
@@ -74,7 +73,6 @@ export interface VoteableData extends ContentData {
   subredditId: string;
   subredditNamePrefixed: string;
   subredditType: SubredditType;
-  ups: number;
   userReports: string[];
 }
 
@@ -97,7 +95,6 @@ export default class Voteable extends Content implements VoteableData {
   canGild: boolean;
   canModPost: boolean;
   distinguished: "admin" | "moderator" | null;
-  downs: number;
   edited: number | boolean;
   gilded: number;
   gildings: Gildings;
@@ -119,7 +116,6 @@ export default class Voteable extends Content implements VoteableData {
   subredditId: string;
   subredditNamePrefixed: string;
   subredditType: SubredditType;
-  ups: number;
   userReports: string[];
 
   protected controls: VoteableControls;
@@ -146,7 +142,6 @@ export default class Voteable extends Content implements VoteableData {
     this.canGild = data.canGild;
     this.canModPost = data.canModPost;
     this.distinguished = data.distinguished;
-    this.downs = data.downs;
     this.edited = data.edited;
     this.gilded = data.gilded;
     this.gildings = data.gildings;
@@ -168,7 +163,6 @@ export default class Voteable extends Content implements VoteableData {
     this.subredditId = data.subredditId;
     this.subredditNamePrefixed = data.subredditNamePrefixed;
     this.subredditType = data.subredditType;
-    this.ups = data.ups;
     this.userReports = data.userReports;
   }
 
