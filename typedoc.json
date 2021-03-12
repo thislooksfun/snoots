@@ -1,5 +1,6 @@
 {
   "excludeInternal": true,
   "excludePrivate": true,
-  "excludeProtected": true
+  "excludeProtected": true,
+  "media": "./media"
 }

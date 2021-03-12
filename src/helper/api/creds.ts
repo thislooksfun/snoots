@@ -4,7 +4,25 @@ import * as core from "./core";
 
 const endpoint = "https://www.reddit.com";
 
-/** Reddit API application credentials */
+/**
+ * Reddit API application credentials
+ *
+ * To get these values:
+ *
+ * 1. Log in to Reddit account. If you are writing a bot, use the account you
+ *    wish to control.
+ * 1. Go to https://www.reddit.com/prefs/apps/.
+ * 1. Scroll to the bottom and click 'are you a developer? create an app...'.
+ * 1. Select the type of application you wish to make. Most likely this will be
+ *    'script'.
+ * 1. Put in a name and redirect uri (it don't matter what you put, but you
+ *    can't leave them blank).
+ * 1. (optional) Add your main account as a developer.
+ * 1. The ID is just below the name of the application, and the secret is where
+ *    it says "secret"
+ *
+ * ![Where to find the client ID and secret](media://app_creds.png)
+ */
 export interface Credentials {
   /** The ID of your Reddit application. */
   clientId: string;
