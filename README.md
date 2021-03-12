@@ -79,4 +79,11 @@ npm i snoots
 
 Note: Node 14+ is required.
 
+# Contributing
+
+If you want to help out, please read the [CONTRIBUTING.md][c.md].
+
+<!-- Links -->
+
 [sw]: https://github.com/not-an-aardvark/snoowrap
+[c.md]: https://github.com/thislooksfun/snoots/blob/master/CONTRIBUTING.md
