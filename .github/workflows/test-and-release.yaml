@@ -34,6 +34,7 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - run: npm run gendoc && touch docs/.nojekyll
+      - run: npx husky uninstall
       - name: Deploy docs
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
@@ -62,6 +63,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npx husky uninstall
       - name: Deploy docs
         if: steps.semrel.outputs.new-release-published == 'true'
         uses: JamesIves/github-pages-deploy-action@4.0.0
