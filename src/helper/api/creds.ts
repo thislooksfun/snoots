@@ -4,8 +4,12 @@ import * as core from "./core";
 
 const endpoint = "https://www.reddit.com";
 
+/** Reddit API application credentials */
 export interface Credentials {
+  /** The ID of your Reddit application. */
   clientId: string;
+
+  /** The secret of your Reddit application. */
   clientSecret: string;
 }
 
