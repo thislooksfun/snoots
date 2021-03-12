@@ -2,11 +2,13 @@ import type { Data } from "../helper/types";
 import type Client from "../client";
 import { group } from "../helper/util";
 
+/** @internal */
 export interface Context {
   client: Client;
   post: string;
 }
 
+/** @internal */
 export interface RedditMore {
   count: number;
   name: string;
@@ -16,6 +18,7 @@ export interface RedditMore {
   children: string[];
 }
 
+/** @internal */
 export abstract class More<T> {
   protected data: RedditMore;
 
@@ -37,21 +40,31 @@ export abstract class More<T> {
   }
 }
 
-/** A function to be executed for each element in a Listing. */
+/**
+ * A function to be executed for each element in a Listing.
+ *
+ * If this function returns or resolves to `false` the iteration will be halted.
+ *
+ * @template T The type of data this will be passed.
+ */
 export type EachFn<T> = (t: T) => Promise<boolean | void> | boolean | void;
 
-/** A listing of objects. */
+/**
+ * A Listing of objects.
+ *
+ * Listings are probably the most common data type on Reddit. Snoots
+ * intentionally exposes as little as possible about the internal workings to
+ * minimize the amount of boilerplate needed to interact with them.
+ *
+ * @template T The type of objects this Listing holds.
+ */
 export default class Listing<T> {
   protected ctx: Context;
   protected arr: T[];
   protected more?: More<T>;
   protected next?: Listing<T>;
 
-  /**
-   * Create a new listing.
-   *
-   * @internal
-   */
+  /** @internal */
   constructor(ctx: Context, arr: T[], more?: More<T>) {
     this.ctx = ctx;
     this.arr = arr;
@@ -61,7 +74,8 @@ export default class Listing<T> {
   /**
    * Whether or not this listing is empty.
    *
-   * @returns A promise that resolves to true iff the listing is empty.
+   * @returns A promise that resolves to either `true` if the listing is empty
+   * or `false` if it's not.
    */
   async empty(): Promise<boolean> {
     // If we have elements on hand, it's not empty.
@@ -81,7 +95,12 @@ export default class Listing<T> {
   /**
    * Whether or not this listing can perform a fetch to get more data.
    *
-   * @returns True iff the listing can fetch more.
+   * If this returns `false` you can be sure that this listing will never cause
+   * an api call. If this is `true` it does *not* mean that there are more
+   * unfetched items in the Listing, only that there *might* be.
+   *
+   * @returns `true` if the listing could try to fetch more items, `false`
+   * otherwise.
    */
   canFetchMore(): boolean {
     return !!this.more;
