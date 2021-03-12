@@ -27,7 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: [test]
-    environment: npm
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
