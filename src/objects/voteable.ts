@@ -34,9 +34,9 @@ export type SubredditType =
 
 export interface VoteableData extends ContentData {
   approvedAtUtc: number | null;
-  approvedBy: string | null; // RedditUser | null
+  approvedBy: string | null;
   archived: boolean;
-  author: string; // RedditUser
+  author: string;
   authorFlairBackgroundColor: string | null;
   authorFlairCssClass: string | null;
   authorFlairRichtext: RichTextFlair[];
@@ -47,7 +47,7 @@ export interface VoteableData extends ContentData {
   authorPatreonFlair: boolean;
   authorPremium: boolean;
   bannedAtUtc: number | null;
-  bannedBy: string | null; // RedditUser | null;
+  bannedBy: string | null;
   canGild: boolean;
   canModPost: boolean;
   distinguished: "admin" | "moderator" | null;
@@ -63,13 +63,13 @@ export interface VoteableData extends ContentData {
   noFollow: boolean;
   numReports: number;
   permalink: string;
-  removalReason: any; // ?
+  removalReason: any;
   reportReasons: string[];
   saved: boolean;
   score: number;
   sendReplies: boolean;
   stickied: boolean;
-  subreddit: string; // Subreddit
+  subreddit: string;
   subredditId: string;
   subredditType: SubredditType;
   userReports: string[];
