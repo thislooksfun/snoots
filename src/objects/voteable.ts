@@ -66,14 +66,14 @@ export interface VoteableData extends ContentData {
   /** The username of the user who created this item. */
   author: string;
 
-  // TODO: Document Voteable.authorFlair*
-  authorFlairBackgroundColor: string | null;
-  authorFlairCssClass: string | null;
-  authorFlairRichtext: RichTextFlair[];
-  authorFlairTemplateId: string | null;
-  authorFlairText: string | null;
-  authorFlairTextColor: string | null;
-  authorFlairType: "text" | "richtext";
+  // TODO: Document or remove VoteableData.authorFlair*
+  // authorFlairBackgroundColor: string | null;
+  // authorFlairCssClass: string | null;
+  // authorFlairRichtext: RichTextFlair[];
+  // authorFlairTemplateId: string | null;
+  // authorFlairText: string | null;
+  // authorFlairTextColor: string | null;
+  // authorFlairType: "text" | "richtext";
 
   /** Whether or not the author has a Patreon flair. */
   authorPatreonFlair: boolean;
@@ -164,8 +164,8 @@ export interface VoteableData extends ContentData {
    */
   modReportsDismissed?: [string, string][];
 
-  // TODO: Document Voteable.noFollow
-  noFollow: boolean;
+  // TODO: Document or remove VoteableData.noFollow
+  // noFollow: boolean;
 
   /**
    * The number of reports this item has.
@@ -186,8 +186,8 @@ export interface VoteableData extends ContentData {
   /** The permalink to this item, relative to reddit.com. */
   permalink: string;
 
-  // TODO: Document Voteable.removalReason
-  removalReason: any;
+  // TODO: Document or remove VoteableData.removalReason
+  // removalReason: any;
 
   /** Whether or not you have saved this item. */
   saved: boolean;
@@ -229,13 +229,13 @@ export default abstract class Voteable extends Content implements VoteableData {
   approvedBy: string | null;
   archived: boolean;
   author: string;
-  authorFlairBackgroundColor: string | null;
-  authorFlairCssClass: string | null;
-  authorFlairRichtext: RichTextFlair[];
-  authorFlairTemplateId: string | null;
-  authorFlairText: string | null;
-  authorFlairTextColor: string | null;
-  authorFlairType: "text" | "richtext";
+  // authorFlairBackgroundColor: string | null;
+  // authorFlairCssClass: string | null;
+  // authorFlairRichtext: RichTextFlair[];
+  // authorFlairTemplateId: string | null;
+  // authorFlairText: string | null;
+  // authorFlairTextColor: string | null;
+  // authorFlairType: "text" | "richtext";
   authorPatreonFlair: boolean;
   authorPremium: boolean;
   bannedAtUtc: number | null;
@@ -254,10 +254,10 @@ export default abstract class Voteable extends Content implements VoteableData {
   modReasonTitle: string | null;
   modReports: [string, string][];
   modReportsDismissed?: [string, string][];
-  noFollow: boolean;
+  // noFollow: boolean;
   numReports: number;
   permalink: string;
-  removalReason: any;
+  // removalReason: any;
   saved: boolean;
   score: number;
   sendReplies: boolean;
@@ -279,13 +279,13 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.approvedBy = data.approvedBy;
     this.archived = data.archived;
     this.author = data.author;
-    this.authorFlairBackgroundColor = data.authorFlairBackgroundColor;
-    this.authorFlairCssClass = data.authorFlairCssClass;
-    this.authorFlairRichtext = data.authorFlairRichtext;
-    this.authorFlairTemplateId = data.authorFlairTemplateId;
-    this.authorFlairText = data.authorFlairText;
-    this.authorFlairTextColor = data.authorFlairTextColor;
-    this.authorFlairType = data.authorFlairType;
+    // this.authorFlairBackgroundColor = data.authorFlairBackgroundColor;
+    // this.authorFlairCssClass = data.authorFlairCssClass;
+    // this.authorFlairRichtext = data.authorFlairRichtext;
+    // this.authorFlairTemplateId = data.authorFlairTemplateId;
+    // this.authorFlairText = data.authorFlairText;
+    // this.authorFlairTextColor = data.authorFlairTextColor;
+    // this.authorFlairType = data.authorFlairType;
     this.authorPatreonFlair = data.authorPatreonFlair;
     this.authorPremium = data.authorPremium;
     this.bannedAtUtc = data.bannedAtUtc;
@@ -304,10 +304,10 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.modReasonTitle = data.modReasonTitle;
     this.modReports = data.modReports;
     this.modReportsDismissed = data.modReportsDismissed;
-    this.noFollow = data.noFollow;
+    // this.noFollow = data.noFollow;
     this.numReports = data.numReports;
     this.permalink = data.permalink;
-    this.removalReason = data.removalReason;
+    // this.removalReason = data.removalReason;
     this.saved = data.saved;
     this.score = data.score;
     this.sendReplies = data.sendReplies;
