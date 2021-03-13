@@ -1,17 +1,14 @@
 import type Client from "../client";
+import BaseControls from "./base";
 
 /** The vote types. 1 = upvote, 0 = no vote, -1 = downvote. */
 export type Vote = 1 | 0 | -1;
 
 /** The base controls for all content that you can vote on. */
-export default abstract class VoteableControls {
-  protected client: Client;
-  protected type: string;
-
+export default abstract class VoteableControls extends BaseControls {
   /** @internal */
   constructor(client: Client, type: string) {
-    this.client = client;
-    this.type = type;
+    super(client, `${type}_`);
   }
 
   /**
@@ -23,8 +20,8 @@ export default abstract class VoteableControls {
    * @returns A promise that resolves when the change has been made.
    */
   protected async inboxReplies(id: string, enabled: boolean): Promise<void> {
-    const state = enabled;
-    return this.client.post("api/sendreplies", { id: this.name(id), state });
+    const req = { id: this.namespace(id), state: enabled };
+    return this.client.post("api/sendreplies", req);
   }
 
   /**
@@ -58,7 +55,7 @@ export default abstract class VoteableControls {
    * @returns A promise that resolves when the vote has been cast.
    */
   protected async vote(id: string, vote: Vote): Promise<void> {
-    return this.client.post("api/vote", { id: this.name(id), dir: vote });
+    return this.client.post("api/vote", { id: this.namespace(id), dir: vote });
   }
 
   /**
@@ -104,7 +101,7 @@ export default abstract class VoteableControls {
    * @returns a promise that resolves when the item has been saved.
    */
   async save(id: string): Promise<void> {
-    return this.client.post("api/save", { id: this.name(id) });
+    return this.client.post("api/save", { id: this.namespace(id) });
   }
 
   /**
@@ -117,7 +114,7 @@ export default abstract class VoteableControls {
    * @returns a promise that resolves when the item has been unsaved.
    */
   async unsave(id: string): Promise<void> {
-    return this.client.post("api/unsave", { id: this.name(id) });
+    return this.client.post("api/unsave", { id: this.namespace(id) });
   }
 
   /**
@@ -129,7 +126,7 @@ export default abstract class VoteableControls {
    * @returns A promise that resolves when the edit is complete.
    */
   async edit(id: string, newText: string): Promise<void> {
-    const body = { thing_id: this.name(id), text: newText };
+    const body = { thing_id: this.namespace(id), text: newText };
     return this.client.post("api/editusertext", body);
   }
 
@@ -141,7 +138,7 @@ export default abstract class VoteableControls {
    * @returns A promise that resolves when the item has been deleted.
    */
   async delete(id: string): Promise<void> {
-    return this.client.post("api/del", { id: this.name(id) });
+    return this.client.post("api/del", { id: this.namespace(id) });
   }
 
   /**
@@ -152,17 +149,6 @@ export default abstract class VoteableControls {
    * @returns A promise that resolves when the item has been gilded.
    */
   async gild(id: string): Promise<void> {
-    return this.client.post(`api/v1/gold/gild/${this.name(id)}`, {});
-  }
-
-  /**
-   * Convert an id into a full name.
-   *
-   * @param id The ID of the item.
-   *
-   * @returns The full name of the item.
-   */
-  protected name(id: string): string {
-    return `${this.type}_${id}`;
+    return this.client.post(`api/v1/gold/gild/${this.namespace(id)}`, {});
   }
 }

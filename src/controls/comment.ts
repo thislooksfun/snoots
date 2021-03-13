@@ -38,9 +38,8 @@ export default class CommentControls extends VoteableControls {
    * @throws If the comment couldn't be found.
    */
   async fetch(id: string): Promise<Comment> {
-    const res: RedditObject = await this.client.get("api/info", {
-      id: this.name(id),
-    });
+    const req = { id: this.namespace(id) };
+    const res: RedditObject = await this.client.get("api/info", req);
 
     if (res.kind !== "Listing") {
       // TODO: Use a custom error type.
@@ -69,15 +68,15 @@ export default class CommentControls extends VoteableControls {
     const how = state === "none" ? "no" : "yes";
     const sticky = state === "sticky";
 
-    const body = { how, sticky, id: this.name(id) };
+    const body = { how, sticky, id: this.namespace(id) };
     return this.client.post("api/distinguish", body);
   }
 
   /** @internal */
   fromRaw(raw: RedditObject): Comment {
-    if (raw.kind != this.type) {
+    if (raw.kind != "t1") {
       // TODO: Use a custom error type.
-      throw `Invalid (expected ${this.type}, got ${raw.kind})`;
+      throw `Invalid (expected t1, got ${raw.kind})`;
     }
 
     const rDat = raw.data;
