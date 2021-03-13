@@ -2,16 +2,29 @@ import VoteableControls from "../controls/voteable";
 import type { ContentData } from "./content";
 import Content from "./content";
 
-export interface RichTextFlair {
-  /** The string representation of the emoji */
-  a?: string;
-  /** The type of the flair entry */
-  e: "text" | "emoji";
-  /** URL of the emoji image */
-  u?: string;
-  /** The text content of a text flair */
-  t?: string;
+/** A rich text flair containing text. */
+export interface RichTextFlairText {
+  /** The type of the flair entry. */
+  e: "text";
+
+  /** The text content of the flair. */
+  t: string;
 }
+
+/** A rich text flair containing emoji. */
+export interface RichTextFlairEmoji {
+  /** The type of the flair entry. */
+  e: "emoji";
+
+  /** URL of the emoji image. */
+  u: string;
+
+  /** The string representation of the emoji. */
+  a: string;
+}
+
+/** A rich text flair. */
+export type RichTextFlair = RichTextFlairText | RichTextFlairEmoji;
 
 export interface Gildings {
   /** Number of Reddit Silver awarded */
