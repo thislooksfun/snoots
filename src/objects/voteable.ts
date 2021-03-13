@@ -28,11 +28,11 @@ export type RichTextFlair = RichTextFlairText | RichTextFlairEmoji;
 
 export interface Gildings {
   /** Number of Reddit Silver awarded */
-  gid_1: number;
+  gid_1?: number;
   /** Number of Reddit Gold awarded */
-  gid_2: number;
+  gid_2?: number;
   /** Number of Reddit Platinum awarded */
-  gid_3: number;
+  gid_3?: number;
 }
 
 export type SubredditType =
