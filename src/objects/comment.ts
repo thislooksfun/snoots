@@ -5,7 +5,6 @@ import Listing from "../listings/listing";
 import Voteable from "./voteable";
 
 export interface CommentData extends VoteableData {
-  approved: boolean;
   bodyHtml: string;
   body: string;
   collapsedReason: any;
@@ -23,7 +22,6 @@ export interface CommentData extends VoteableData {
 }
 
 export default class Comment extends Voteable implements CommentData {
-  approved: boolean;
   bodyHtml: string;
   body: string;
   collapsedReason: any;
@@ -45,7 +43,6 @@ export default class Comment extends Voteable implements CommentData {
     super(controls, data);
     this.controls = controls;
 
-    this.approved = data.approved;
     this.bodyHtml = data.bodyHtml;
     this.body = data.body;
     this.collapsedReason = data.collapsedReason;

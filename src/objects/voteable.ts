@@ -33,6 +33,7 @@ export type SubredditType =
   | "public";
 
 export interface VoteableData extends ContentData {
+  approved: boolean;
   approvedAtUtc: number | null;
   approvedBy: string | null;
   archived: boolean;
@@ -76,6 +77,7 @@ export interface VoteableData extends ContentData {
 }
 
 export default abstract class Voteable extends Content implements VoteableData {
+  approved: boolean;
   approvedAtUtc: number | null;
   approvedBy: string | null;
   archived: boolean;
@@ -122,6 +124,7 @@ export default abstract class Voteable extends Content implements VoteableData {
     super(data);
     this.controls = controls;
 
+    this.approved = data.approved;
     this.approvedAtUtc = data.approvedAtUtc;
     this.approvedBy = data.approvedBy;
     this.archived = data.archived;
