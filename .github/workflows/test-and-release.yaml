@@ -39,28 +39,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  deploydoc:
-    name: Deploy documentation
-    runs-on: ubuntu-latest
-    # TODO: This TEMPORARILY bypasses the release job.
-    # BODY: This should be made to require the release job before v1.0.0. At
-    # BODY: that point we can likely also remove the 'if' clause here since that
-    # BODY: is accounted for by requiring 'release'.
-    # needs: [release]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: [test]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - run: npm ci
-      - run: npm run gendoc && touch docs/.nojekyll
-      - run: npx husky uninstall
-      - name: Deploy docs
-        uses: JamesIves/github-pages-deploy-action@4.0.0
-        with:
-          branch: gh-pages
-          folder: docs
-          clean: true

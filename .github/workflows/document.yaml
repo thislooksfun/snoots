@@ -1,0 +1,34 @@
+name: Publish Documentation
+
+on:
+  push:
+    branches: [master]
+  # TODO: Implement versioned docs.
+  # BODY: The other commented sections need to be resolved at the same time as
+  # BODY: this in order to implement this properly.
+  # BODY: This is pending JamesIves/github-pages-deploy-action#635.
+  # release:
+  #   types: [published]
+
+jobs:
+  deploydoc:
+    name: Deploy documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npm run gendoc
+      # - id: version
+      #   run: ./scripts/version-docs ${{ github.event_name }}
+      - run: npx husky uninstall
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true
+          # target-folder: ${{ steps.version.outputs.target }}
+          # pre-commit: '' # Need to write this after gpda#635 is resolved.
