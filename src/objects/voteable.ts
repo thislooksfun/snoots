@@ -72,10 +72,10 @@ export interface VoteableData extends ContentData {
   gildings: Gildings;
   /** true = upvoted, false = downvoted, null = hasn't voted */
   likes: boolean | null;
-  modNote: string;
-  modReasonBy: string;
-  modReasonTitle: string;
-  modReports: string[];
+  modNote: string | null;
+  modReasonBy: string | null;
+  modReasonTitle: string | null;
+  modReports: [string, string][];
   noFollow: boolean;
   numReports: number;
   permalink: string;
@@ -115,10 +115,10 @@ export default abstract class Voteable extends Content implements VoteableData {
   gilded: number;
   gildings: Gildings;
   likes: boolean | null;
-  modNote: string;
-  modReasonBy: string;
-  modReasonTitle: string;
-  modReports: string[];
+  modNote: string | null;
+  modReasonBy: string | null;
+  modReasonTitle: string | null;
+  modReports: [string, string][];
   noFollow: boolean;
   numReports: number;
   permalink: string;
