@@ -14,20 +14,43 @@ export interface BearerAuth {
 }
 export type Auth = BasicAuth | BearerAuth;
 
+export interface RedditJsonResponse<T> {
+  json: {
+    errors: string[];
+    data?: T;
+  };
+}
+
 interface RedditError {
   error: string;
   error_description?: string;
 }
 
-function errWrap<T>(res: RedditError | T): T {
-  if (!("error" in res)) return res;
-
-  let errMsg = `Reddit returned an error: ${res.error}`;
-  if (res.error_description != null) {
-    errMsg += `: ${res.error_description}`;
-  }
-
+function handleError(msg: string, desc?: string): never {
+  let errMsg = `Reddit returned an error: ${msg}`;
+  if (desc != null) errMsg += `: ${desc}`;
   throw new Error(errMsg);
+}
+
+type SomeResponse<T> = T | RedditError | RedditJsonResponse<T>;
+function errWrap<T>(res: SomeResponse<T>): T {
+  if ("json" in res) {
+    const { errors, data } = res.json;
+    if (errors.length > 0) {
+      handleError(errors[0]);
+    } else if (!data) {
+      // TODO: Use custom error type
+      throw "No data!";
+    } else {
+      return data;
+    }
+  } else {
+    if ("error" in res) {
+      handleError(res.error, res.error_description);
+    } else {
+      return res;
+    }
+  }
 }
 
 function opts(

@@ -51,13 +51,7 @@ class MoreComments extends More<Comment> {
 
       let things: RedditObject[] = [];
       for (const page of pages) {
-        const { json: res } = page;
-
-        // TODO: Handle these better
-        if (res.errors.length > 0) throw "Uh oh!";
-        if (!res.data?.things) throw "oh no!";
-
-        things = things.concat(res.data.things);
+        things = things.concat(page.things);
       }
 
       const children = fixCommentTree(things);
