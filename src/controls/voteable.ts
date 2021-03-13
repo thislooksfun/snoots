@@ -20,9 +20,9 @@ export default class VoteableControls {
   }
 
   /**
-   * Set whether or not inbox replies are enabled for this object.
+   * Set whether or not inbox replies are enabled for this item.
    *
-   * @param id The id of the object.
+   * @param id The id of the item.
    * @param enabled Whether or not replies should be enabled.
    *
    * @returns A promise that resolves when the change has been made.
@@ -33,9 +33,9 @@ export default class VoteableControls {
   }
 
   /**
-   * Enable inbox replies for this object.
+   * Enable inbox replies for this item.
    *
-   * @param id The id of the object.
+   * @param id The id of the item.
    *
    * @returns A promise that resolves when replies have been enabled.
    */
@@ -44,9 +44,9 @@ export default class VoteableControls {
   }
 
   /**
-   * Disable inbox replies for this object.
+   * Disable inbox replies for this item.
    *
-   * @param id The id of the object.
+   * @param id The id of the item.
    *
    * @returns A promise that resolves when replies have been disabled.
    */
@@ -67,7 +67,7 @@ export default class VoteableControls {
   /**
    * Cast a vote.
    *
-   * @param id The ID of the object to vote on.
+   * @param id The ID of the item to vote on.
    * @param vote The vote to cast.
    *
    * @returns A promise that resolves when the vote has been cast.
@@ -79,7 +79,7 @@ export default class VoteableControls {
   /**
    * Cast an upvote.
    *
-   * @param id The ID of the object to upvote.
+   * @param id The ID of the item to upvote.
    *
    * @returns A promise that resolves when the vote has been cast.
    */
@@ -90,7 +90,7 @@ export default class VoteableControls {
   /**
    * Remove your vote.
    *
-   * @param id The ID of the object to unvote.
+   * @param id The ID of the item to unvote.
    *
    * @returns A promise that resolves when the vote has been removed.
    */
@@ -101,7 +101,7 @@ export default class VoteableControls {
   /**
    * Cast a downvote.
    *
-   * @param id The ID of the object to downvote.
+   * @param id The ID of the item to downvote.
    *
    * @returns A promise that resolves when the vote has been cast.
    */
@@ -112,9 +112,9 @@ export default class VoteableControls {
   /**
    * Convert an id into a full name.
    *
-   * @param id The ID of the object.
+   * @param id The ID of the item.
    *
-   * @returns The full name of the object.
+   * @returns The full name of the item.
    */
   protected name(id: string): string {
     return `${this.type}_${id}`;

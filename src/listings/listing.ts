@@ -50,13 +50,13 @@ export abstract class More<T> {
 export type EachFn<T> = (t: T) => Promise<boolean | void> | boolean | void;
 
 /**
- * A Listing of objects.
+ * A Listing of items.
  *
  * Listings are probably the most common data type on Reddit. Snoots
  * intentionally exposes as little as possible about the internal workings to
  * minimize the amount of boilerplate needed to interact with them.
  *
- * @template T The type of objects this Listing holds.
+ * @template T The type of items this Listing holds.
  */
 export default class Listing<T> {
   protected ctx: Context;
