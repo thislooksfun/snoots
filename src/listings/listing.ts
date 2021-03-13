@@ -1,4 +1,4 @@
-import type { Data } from "../helper/types";
+import type { Data, RedditObject } from "../helper/types";
 import type Client from "../client";
 import { group } from "../helper/util";
 
@@ -6,6 +6,15 @@ import { group } from "../helper/util";
 export interface Context {
   client: Client;
   post: string;
+}
+
+/** @internal */
+export interface _Listing {
+  after: string | null;
+  before: string | null;
+  children: RedditObject[];
+  dist: number | null;
+  modhash: string | null;
 }
 
 /** @internal */

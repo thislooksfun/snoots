@@ -1,7 +1,9 @@
-import type { _Listing, RedditObject } from "../helper/types";
+import type { _Listing } from "../listings/listing";
 import type { CommentData } from "../objects/comment";
+import type { RedditObject } from "../helper/types";
 import type Client from "../client";
-import { camelCaseKeys, fakeMoreListing } from "../helper/util";
+import { camelCaseKeys } from "../helper/util";
+import { fakeMoreListing } from "../listings/util";
 import Comment from "../objects/comment";
 import CommentListing from "../listings/comment";
 import VoteableControls from "./voteable";

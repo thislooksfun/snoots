@@ -1,7 +1,7 @@
-import type { Data, RedditObject, _Listing } from "../helper/types";
-import type { Context, RedditMore } from "./listing";
+import type { Data, RedditObject } from "../helper/types";
+import type { _Listing, Context, RedditMore } from "./listing";
 import type Comment from "../objects/comment";
-import { emptyRedditListing, wrapChildren } from "../helper/util";
+import { emptyRedditListing, wrapChildren } from "./util";
 import { More } from "./listing";
 import Listing from "./listing";
 
