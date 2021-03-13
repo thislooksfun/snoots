@@ -187,8 +187,12 @@ export interface VoteableData extends ContentData {
   /** The type of the subreddit this item was posted in. */
   subredditType: SubredditType;
 
-  /** The current reports on this item that were made by users. */
-  userReports: string[];
+  /**
+   * The current reports on this item that were made by users.
+   *
+   * Each entry is of the form `[report, count]`.
+   */
+  userReports: [string, number][];
 }
 
 /** The base for all content that you can vote on. */
@@ -232,7 +236,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   stickied: boolean;
   subreddit: string;
   subredditType: SubredditType;
-  userReports: string[];
+  userReports: [string, number][];
 
   protected controls: VoteableControls;
 
