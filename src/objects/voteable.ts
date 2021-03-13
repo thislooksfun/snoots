@@ -86,7 +86,6 @@ export interface VoteableData extends ContentData {
   sendReplies: boolean;
   stickied: boolean;
   subreddit: string;
-  subredditId: string;
   subredditType: SubredditType;
   userReports: string[];
 }
@@ -131,7 +130,6 @@ export default abstract class Voteable extends Content implements VoteableData {
   sendReplies: boolean;
   stickied: boolean;
   subreddit: string;
-  subredditId: string;
   subredditType: SubredditType;
   userReports: string[];
 
@@ -180,7 +178,6 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.sendReplies = data.sendReplies;
     this.stickied = data.stickied;
     this.subreddit = data.subreddit;
-    this.subredditId = data.subredditId;
     this.subredditType = data.subredditType;
     this.userReports = data.userReports;
   }
