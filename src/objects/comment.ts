@@ -5,8 +5,8 @@ import Listing from "../listings/listing";
 import Voteable from "./voteable";
 
 export interface CommentData extends VoteableData {
-  bodyHtml: string;
   body: string;
+  bodyHtml: string;
   collapsedReason: any;
   collapsed: boolean;
   controversiality: number;
