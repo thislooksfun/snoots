@@ -10,7 +10,7 @@ export type Vote = 1 | 0 | -1;
  *
  * @internal
  */
-export default class VoteableControls {
+export default abstract class VoteableControls {
   protected client: Client;
   protected type: string;
 

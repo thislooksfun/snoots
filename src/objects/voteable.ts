@@ -75,7 +75,7 @@ export interface VoteableData extends ContentData {
   userReports: string[];
 }
 
-export default class Voteable extends Content implements VoteableData {
+export default abstract class Voteable extends Content implements VoteableData {
   approvedAtUtc: number | null;
   approvedBy: string | null;
   archived: boolean;

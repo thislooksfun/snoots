@@ -8,7 +8,7 @@ export interface ContentData {
 }
 
 /** The base class that all other items inherit from. */
-export default class Content implements ContentData {
+export default abstract class Content implements ContentData {
   createdUtc: number;
   id: string;
 
