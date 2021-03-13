@@ -119,7 +119,7 @@ export async function post<T>(
 ): Promise<T> {
   return await _post(path, {
     ...opts(endpoint, userAgent, query, auth),
-    json,
+    json: { api_type: "json", ...json },
   });
 }
 
