@@ -164,6 +164,24 @@ export default abstract class Voteable extends Content implements VoteableData {
   }
 
   /**
+   * Enable inbox replies for this item.
+   *
+   * @returns A promise that resolves when replies have been enabled.
+   */
+  async enableInboxReplies(): Promise<void> {
+    return this.controls.enableInboxReplies(this.id);
+  }
+
+  /**
+   * Disable inbox replies for this item.
+   *
+   * @returns A promise that resolves when replies have been disabled.
+   */
+  async disableInboxReplies(): Promise<void> {
+    return this.controls.disableInboxReplies(this.id);
+  }
+
+  /**
    * Cast an upvote.
    *
    * @returns A promise that resolves when the vote has been cast.
@@ -188,5 +206,56 @@ export default abstract class Voteable extends Content implements VoteableData {
    */
   async downvote(): Promise<void> {
     return this.controls.downvote(this.id);
+  }
+
+  /**
+   * Save this item.
+   *
+   * This will make this item show up at reddit.com/saved.
+   *
+   * @returns a promise that resolves when this item has been saved.
+   */
+  async save(): Promise<void> {
+    return this.controls.save(this.id);
+  }
+
+  /**
+   * Unsave this item.
+   *
+   * This will make this item no longer show up at reddit.com/saved.
+   *
+   * @returns a promise that resolves when this item has been unsaved.
+   */
+  async unsave(): Promise<void> {
+    return this.controls.unsave(this.id);
+  }
+
+  /**
+   * Edit this item.
+   *
+   * @param newText The new text to use.
+   *
+   * @returns A promise that resolves when the edit is complete.
+   */
+  async edit(newText: string): Promise<void> {
+    return this.controls.edit(this.id, newText);
+  }
+
+  /**
+   * Delete this item.
+   *
+   * @returns A promise that resolves when this item has been deleted.
+   */
+  async delete(): Promise<void> {
+    return this.controls.delete(this.id);
+  }
+
+  /**
+   * Give Reddit gold to the author of this item.
+   *
+   * @returns A promise that resolves when this item has been gilded.
+   */
+  async gild(): Promise<void> {
+    return this.controls.gild(this.id);
   }
 }
