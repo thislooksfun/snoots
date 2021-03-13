@@ -10,7 +10,6 @@ export interface CommentData extends VoteableData {
   collapsedReason: any;
   collapsed: boolean;
   controversiality: number;
-  depth: number;
   ignoreReports: boolean;
   isSubmitter: boolean;
   linkId: string;
@@ -27,7 +26,6 @@ export default class Comment extends Voteable implements CommentData {
   collapsedReason: any;
   collapsed: boolean;
   controversiality: number;
-  depth: number;
   ignoreReports: boolean;
   isSubmitter: boolean;
   linkId: string;
@@ -48,7 +46,6 @@ export default class Comment extends Voteable implements CommentData {
     this.collapsedReason = data.collapsedReason;
     this.collapsed = data.collapsed;
     this.controversiality = data.controversiality;
-    this.depth = data.depth;
     this.ignoreReports = data.ignoreReports;
     this.isSubmitter = data.isSubmitter;
     this.linkId = data.linkId;
