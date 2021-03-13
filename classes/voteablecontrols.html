@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CommentControls | snoots</title>
+	<title>VoteableControls | snoots</title>
 	<meta name="description" content="Documentation for snoots">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">snoots</a>
 				</li>
 				<li>
-					<a href="commentcontrols.html">CommentControls</a>
+					<a href="voteablecontrols.html">VoteableControls</a>
 				</li>
 			</ul>
-			<h1>Class CommentControls</h1>
+			<h1>Class VoteableControls</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Various methods to allow you to interact with comments.</p>
+						<p>The base controls for all content that you can vote on.</p>
 					</div>
 				</div>
 			</section>
@@ -76,10 +76,15 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="voteablecontrols.html" class="tsd-signature-type" data-tsd-kind="Class">VoteableControls</a>
+						<span class="tsd-signature-type">BaseControls</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">CommentControls</span>
+								<span class="target">VoteableControls</span>
+								<ul class="tsd-hierarchy">
+									<li>
+										<a href="commentcontrols.html" class="tsd-signature-type" data-tsd-kind="Class">CommentControls</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</li>
@@ -92,18 +97,16 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#delete" class="tsd-kind-icon">delete</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#disableinboxreplies" class="tsd-kind-icon">disable<wbr>Inbox<wbr>Replies</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="commentcontrols.html#distinguish" class="tsd-kind-icon">distinguish</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#downvote" class="tsd-kind-icon">downvote</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#edit" class="tsd-kind-icon">edit</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#enableinboxreplies" class="tsd-kind-icon">enable<wbr>Inbox<wbr>Replies</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="commentcontrols.html#fetch" class="tsd-kind-icon">fetch</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#gild" class="tsd-kind-icon">gild</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#save" class="tsd-kind-icon">save</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#unsave" class="tsd-kind-icon">unsave</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#unvote" class="tsd-kind-icon">unvote</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="commentcontrols.html#upvote" class="tsd-kind-icon">upvote</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#delete" class="tsd-kind-icon">delete</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#disableinboxreplies" class="tsd-kind-icon">disable<wbr>Inbox<wbr>Replies</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#downvote" class="tsd-kind-icon">downvote</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#edit" class="tsd-kind-icon">edit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#enableinboxreplies" class="tsd-kind-icon">enable<wbr>Inbox<wbr>Replies</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#gild" class="tsd-kind-icon">gild</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#save" class="tsd-kind-icon">save</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#unsave" class="tsd-kind-icon">unsave</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#unvote" class="tsd-kind-icon">unvote</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#upvote" class="tsd-kind-icon">upvote</a></li>
 							</ul>
 						</section>
 					</div>
@@ -111,16 +114,15 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="delete" class="tsd-anchor"></a>
 					<h3>delete</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#delete">delete</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L140">controls/voteable.ts:140</a></li>
 								</ul>
@@ -144,16 +146,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="disableinboxreplies" class="tsd-anchor"></a>
 					<h3>disable<wbr>Inbox<wbr>Replies</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">disable<wbr>Inbox<wbr>Replies<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#disableinboxreplies">disableInboxReplies</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L45">controls/voteable.ts:45</a></li>
 								</ul>
@@ -178,53 +179,14 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="distinguish" class="tsd-anchor"></a>
-					<h3>distinguish</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">distinguish<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DistinguishStates</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/comment.ts#L67">controls/comment.ts:67</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Distinguish a comment.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The ID of the comment to distinguish.</p>
-									</div>
-								</li>
-								<li>
-									<h5>state: <span class="tsd-signature-type">DistinguishStates</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>How the comment should be distinguished.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A promise that resolves when the comment has been distinguished.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="downvote" class="tsd-anchor"></a>
 					<h3>downvote</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">downvote<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#downvote">downvote</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L90">controls/voteable.ts:90</a></li>
 								</ul>
@@ -248,16 +210,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="edit" class="tsd-anchor"></a>
 					<h3>edit</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">edit<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, newText<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#edit">edit</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L128">controls/voteable.ts:128</a></li>
 								</ul>
@@ -287,16 +248,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="enableinboxreplies" class="tsd-anchor"></a>
 					<h3>enable<wbr>Inbox<wbr>Replies</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">enable<wbr>Inbox<wbr>Replies<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#enableinboxreplies">enableInboxReplies</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L34">controls/voteable.ts:34</a></li>
 								</ul>
@@ -321,52 +281,14 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="fetch" class="tsd-anchor"></a>
-					<h3>fetch</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">fetch<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/comment.ts#L40">controls/comment.ts:40</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Fetch a comment.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>throws</dt>
-									<dd><p>If the comment couldn&#39;t be found.</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The id of the comment to fetch.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A promise that resolves to the request comment.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="gild" class="tsd-anchor"></a>
 					<h3>gild</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">gild<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#gild">gild</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L151">controls/voteable.ts:151</a></li>
 								</ul>
@@ -390,16 +312,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="save" class="tsd-anchor"></a>
 					<h3>save</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">save<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#save">save</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L103">controls/voteable.ts:103</a></li>
 								</ul>
@@ -424,16 +345,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="unsave" class="tsd-anchor"></a>
 					<h3>unsave</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">unsave<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#unsave">unsave</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L116">controls/voteable.ts:116</a></li>
 								</ul>
@@ -458,16 +378,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="unvote" class="tsd-anchor"></a>
 					<h3>unvote</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">unvote<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#unvote">unvote</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L79">controls/voteable.ts:79</a></li>
 								</ul>
@@ -491,16 +410,15 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="upvote" class="tsd-anchor"></a>
 					<h3>upvote</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">upvote<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="voteablecontrols.html">VoteableControls</a>.<a href="voteablecontrols.html#upvote">upvote</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/30dd6b9/src/controls/voteable.ts#L68">controls/voteable.ts:68</a></li>
 								</ul>
@@ -539,57 +457,51 @@
 					<li class=" tsd-kind-class">
 						<a href="client.html" class="tsd-kind-icon">Client</a>
 					</li>
+					<li class=" tsd-kind-class">
+						<a href="commentcontrols.html" class="tsd-kind-icon">Comment<wbr>Controls</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="listing.html" class="tsd-kind-icon">Listing</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="commentcontrols.html" class="tsd-kind-icon">Comment<wbr>Controls</a>
+						<a href="voteablecontrols.html" class="tsd-kind-icon">Voteable<wbr>Controls</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#delete" class="tsd-kind-icon">delete</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#disableinboxreplies" class="tsd-kind-icon">disable<wbr>Inbox<wbr>Replies</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#delete" class="tsd-kind-icon">delete</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="commentcontrols.html#distinguish" class="tsd-kind-icon">distinguish</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#downvote" class="tsd-kind-icon">downvote</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#edit" class="tsd-kind-icon">edit</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#enableinboxreplies" class="tsd-kind-icon">enable<wbr>Inbox<wbr>Replies</a>
+								<a href="voteablecontrols.html#disableinboxreplies" class="tsd-kind-icon">disable<wbr>Inbox<wbr>Replies</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="commentcontrols.html#fetch" class="tsd-kind-icon">fetch</a>
+								<a href="voteablecontrols.html#downvote" class="tsd-kind-icon">downvote</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#gild" class="tsd-kind-icon">gild</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#edit" class="tsd-kind-icon">edit</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#save" class="tsd-kind-icon">save</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#enableinboxreplies" class="tsd-kind-icon">enable<wbr>Inbox<wbr>Replies</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#unsave" class="tsd-kind-icon">unsave</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#gild" class="tsd-kind-icon">gild</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#unvote" class="tsd-kind-icon">unvote</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#save" class="tsd-kind-icon">save</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="commentcontrols.html#upvote" class="tsd-kind-icon">upvote</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#unsave" class="tsd-kind-icon">unsave</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#unvote" class="tsd-kind-icon">unvote</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#upvote" class="tsd-kind-icon">upvote</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="listing.html" class="tsd-kind-icon">Listing</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="voteablecontrols.html" class="tsd-kind-icon">Voteable<wbr>Controls</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a>
 					</li>
