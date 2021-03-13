@@ -49,16 +49,6 @@ export default abstract class VoteableControls {
     return this.inboxReplies(id, false);
   }
 
-  // TODO: Implement these as well.
-  // async delete(id: string): Promise<void> {}
-  // async distinguish(id: string, state: DistinguishStates): Promise<void> {}
-  // async edit(updatedText: string): Promise<void> {}
-  // async expandReplies(options?: { limit?: number; depth?: number }): Promise<T> {}
-  // async gild(): Promise<void> {}
-  // async save(): Promise<void> {}
-  // async undistinguish(): Promise<void> {}
-  // async unsave(): Promise<void> {}
-
   /**
    * Cast a vote.
    *
@@ -102,6 +92,67 @@ export default abstract class VoteableControls {
    */
   async downvote(id: string): Promise<void> {
     return this.vote(id, -1);
+  }
+
+  /**
+   * Save an item.
+   *
+   * This will make the item show up at reddit.com/saved.
+   *
+   * @param id The ID of the item to save.
+   *
+   * @returns a promise that resolves when the item has been saved.
+   */
+  async save(id: string): Promise<void> {
+    return this.client.post("api/save", { id: this.name(id) });
+  }
+
+  /**
+   * Unsave an item.
+   *
+   * This will make the item no longer show up at reddit.com/saved.
+   *
+   * @param id The ID of the item to unsave.
+   *
+   * @returns a promise that resolves when the item has been unsaved.
+   */
+  async unsave(id: string): Promise<void> {
+    return this.client.post("api/unsave", { id: this.name(id) });
+  }
+
+  /**
+   * Edit an item.
+   *
+   * @param id The ID of the item to edit.
+   * @param newText The new text to use.
+   *
+   * @returns A promise that resolves when the edit is complete.
+   */
+  async edit(id: string, newText: string): Promise<void> {
+    const body = { thing_id: this.name(id), text: newText };
+    return this.client.post("api/editusertext", body);
+  }
+
+  /**
+   * Delete an item.
+   *
+   * @param id The ID of the item to edit.
+   *
+   * @returns A promise that resolves when the item has been deleted.
+   */
+  async delete(id: string): Promise<void> {
+    return this.client.post("api/del", { id: this.name(id) });
+  }
+
+  /**
+   * Give Reddit gold to the author of an item.
+   *
+   * @param id The ID of the item to gild.
+   *
+   * @returns A promise that resolves when the item has been gilded.
+   */
+  async gild(id: string): Promise<void> {
+    return this.client.post(`api/v1/gold/gild/${this.name(id)}`, {});
   }
 
   /**
