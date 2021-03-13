@@ -65,6 +65,7 @@ export interface VoteableData extends ContentData {
   banNote?: string;
   canGild: boolean;
   canModPost: boolean;
+  dismissedUserReports?: string[];
   distinguished: "admin" | "moderator" | null;
   edited: number | boolean;
   gilded: number;
@@ -110,6 +111,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   banNote?: string;
   canGild: boolean;
   canModPost: boolean;
+  dismissedUserReports?: string[];
   distinguished: "admin" | "moderator" | null;
   edited: number | boolean;
   gilded: number;
@@ -158,6 +160,7 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.banNote = data.banNote;
     this.canGild = data.canGild;
     this.canModPost = data.canModPost;
+    this.dismissedUserReports = data.dismissedUserReports;
     this.distinguished = data.distinguished;
     this.edited = data.edited;
     this.gilded = data.gilded;
