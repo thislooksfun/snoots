@@ -157,6 +157,13 @@ export interface VoteableData extends ContentData {
    */
   modReports: [string, string][];
 
+  /**
+   * The old reports on this item that were made by mods.
+   *
+   * Each entry is of the form `[report, username]`.
+   */
+  modReportsDismissed?: [string, string][];
+
   // TODO: Document Voteable.noFollow
   noFollow: boolean;
 
@@ -206,6 +213,13 @@ export interface VoteableData extends ContentData {
    * Each entry is of the form `[report, count]`.
    */
   userReports: [string, number][];
+
+  /**
+   * The old reports on this item that were made by users.
+   *
+   * Each entry is of the form `[report, count]`.
+   */
+  userReportsDismissed?: [string, number][];
 }
 
 /** The base for all content that you can vote on. */
@@ -239,6 +253,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   modReasonBy: string | null;
   modReasonTitle: string | null;
   modReports: [string, string][];
+  modReportsDismissed?: [string, string][];
   noFollow: boolean;
   numReports: number;
   permalink: string;
@@ -250,6 +265,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   subreddit: string;
   subredditType: SubredditType;
   userReports: [string, number][];
+  userReportsDismissed?: [string, number][];
 
   protected controls: VoteableControls;
 
@@ -287,6 +303,7 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.modReasonBy = data.modReasonBy;
     this.modReasonTitle = data.modReasonTitle;
     this.modReports = data.modReports;
+    this.modReportsDismissed = data.modReportsDismissed;
     this.noFollow = data.noFollow;
     this.numReports = data.numReports;
     this.permalink = data.permalink;
@@ -298,6 +315,7 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.subreddit = data.subreddit;
     this.subredditType = data.subredditType;
     this.userReports = data.userReports;
+    this.userReportsDismissed = data.userReportsDismissed;
   }
 
   /**
