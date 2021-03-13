@@ -1,6 +1,7 @@
-import VoteableControls from "../controls/voteable";
 import type { ContentData } from "./content";
+import type { SubredditType } from "../helper/types";
 import Content from "./content";
+import VoteableControls from "../controls/voteable";
 
 /** A rich text flair containing text. */
 export interface RichTextFlairText {
@@ -34,16 +35,6 @@ export interface Gildings {
   /** Number of Reddit Platinum awarded */
   gid_3?: number;
 }
-
-export type SubredditType =
-  | "gold_restricted"
-  | "archived"
-  | "restricted"
-  | "employees_only"
-  | "gold_only"
-  | "private"
-  | "user"
-  | "public";
 
 export interface VoteableData extends ContentData {
   approved: boolean;
