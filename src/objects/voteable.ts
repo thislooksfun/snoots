@@ -67,7 +67,7 @@ export interface VoteableData extends ContentData {
   canModPost: boolean;
   dismissedUserReports?: string[];
   distinguished: "admin" | "moderator" | null;
-  edited: number | boolean;
+  edited: number | false;
   gilded: number;
   gildings: Gildings;
   /** true = upvoted, false = downvoted, null = hasn't voted */
@@ -113,7 +113,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   canModPost: boolean;
   dismissedUserReports?: string[];
   distinguished: "admin" | "moderator" | null;
-  edited: number | boolean;
+  edited: number | false;
   gilded: number;
   gildings: Gildings;
   likes: boolean | null;
