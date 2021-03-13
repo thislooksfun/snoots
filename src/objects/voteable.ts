@@ -62,6 +62,7 @@ export interface VoteableData extends ContentData {
   authorPremium: boolean;
   bannedAtUtc: number | null;
   bannedBy: string | null;
+  banNote?: string;
   canGild: boolean;
   canModPost: boolean;
   distinguished: "admin" | "moderator" | null;
@@ -106,6 +107,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   authorPremium: boolean;
   bannedAtUtc: number | null;
   bannedBy: string | null;
+  banNote?: string;
   canGild: boolean;
   canModPost: boolean;
   distinguished: "admin" | "moderator" | null;
@@ -153,6 +155,7 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.authorPremium = data.authorPremium;
     this.bannedAtUtc = data.bannedAtUtc;
     this.bannedBy = data.bannedBy;
+    this.banNote = data.banNote;
     this.canGild = data.canGild;
     this.canModPost = data.canModPost;
     this.distinguished = data.distinguished;
