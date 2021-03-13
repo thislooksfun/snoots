@@ -24,8 +24,7 @@ export default class CommentControls extends VoteableControls {
    *
    * @returns A promise that resolves to the request comment.
    *
-   * TODO: Throw custom error if comment wasn't found.
-   * @throws
+   * @throws If the comment couldn't be found.
    */
   async fetch(id: string): Promise<Comment> {
     const res: RedditObject = await this.client.get("api/info", {
@@ -61,13 +60,7 @@ export default class CommentControls extends VoteableControls {
     return new Comment(this, data);
   }
 
-  /**
-   * Convert the 'replies' parameter to a Listing.
-   *
-   * @param replies The replies to convert.
-   *
-   * @returns The converted Listing.
-   */
+  /** @internal */
   protected listingifyReplies(
     replies: any,
     cmtName: string,
