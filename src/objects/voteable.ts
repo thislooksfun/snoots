@@ -80,7 +80,6 @@ export interface VoteableData extends ContentData {
   numReports: number;
   permalink: string;
   removalReason: any;
-  reportReasons: string[];
   saved: boolean;
   score: number;
   sendReplies: boolean;
@@ -124,7 +123,6 @@ export default abstract class Voteable extends Content implements VoteableData {
   numReports: number;
   permalink: string;
   removalReason: any;
-  reportReasons: string[];
   saved: boolean;
   score: number;
   sendReplies: boolean;
@@ -172,7 +170,6 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.numReports = data.numReports;
     this.permalink = data.permalink;
     this.removalReason = data.removalReason;
-    this.reportReasons = data.reportReasons;
     this.saved = data.saved;
     this.score = data.score;
     this.sendReplies = data.sendReplies;
