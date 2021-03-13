@@ -220,7 +220,7 @@ export default abstract class Voteable extends Content implements VoteableData {
    *
    * This will make this item show up at reddit.com/saved.
    *
-   * @returns a promise that resolves when this item has been saved.
+   * @returns A promise that resolves when this item has been saved.
    */
   async save(): Promise<void> {
     return this.controls.save(this.id);
@@ -231,7 +231,7 @@ export default abstract class Voteable extends Content implements VoteableData {
    *
    * This will make this item no longer show up at reddit.com/saved.
    *
-   * @returns a promise that resolves when this item has been unsaved.
+   * @returns A promise that resolves when this item has been unsaved.
    */
   async unsave(): Promise<void> {
     return this.controls.unsave(this.id);
