@@ -1,7 +1,5 @@
 import type Client from "../client";
 
-/** The ways to distinguish an item. */
-export type DistinguishStates = "clear" | "mod" | "sticky";
 /** The vote types. 1 = upvote, 0 = no vote, -1 = downvote. */
 export type Vote = 1 | 0 | -1;
 
