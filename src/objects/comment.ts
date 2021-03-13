@@ -1,3 +1,4 @@
+import type { DistinguishStates } from "../controls/comment";
 import type { VoteableData } from "./voteable";
 import CommentControls from "../controls/comment";
 import Listing from "../listings/listing";
@@ -70,5 +71,16 @@ export default class Comment extends Voteable implements CommentData {
    */
   async refetch(): Promise<Comment> {
     return this.controls.fetch(this.id);
+  }
+
+  /**
+   * Distinguish this comment.
+   *
+   * @param state How this comment should be distinguished.
+   *
+   * @returns A promise that resolves when this comment has been distinguished.
+   */
+  async distinguish(state: DistinguishStates): Promise<void> {
+    return this.controls.distinguish(this.id, state);
   }
 }

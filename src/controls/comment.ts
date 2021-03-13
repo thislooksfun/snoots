@@ -7,6 +7,15 @@ import CommentListing from "../listings/comment";
 import VoteableControls from "./voteable";
 
 /**
+ * The ways to distinguish a comment.
+ *
+ * Note that due to the way Reddit works, a comment cannot be sticky without
+ * also being mod-distinguished. For that reason setting `sticky` will also set
+ * `mod`.
+ */
+export type DistinguishStates = "none" | "mod" | "sticky";
+
+/**
  * Various methods to allow you to interact with comments.
  *
  * @category Controls
@@ -44,6 +53,22 @@ export default class CommentControls extends VoteableControls {
 
     const raw = list.children[0];
     return this.fromRaw(raw);
+  }
+
+  /**
+   * Distinguish a comment.
+   *
+   * @param id The ID of the comment to distinguish.
+   * @param state How the comment should be distinguished.
+   *
+   * @returns A promise that resolves when the comment has been distinguished.
+   */
+  async distinguish(id: string, state: DistinguishStates): Promise<void> {
+    const how = state === "none" ? "no" : "yes";
+    const sticky = state === "sticky";
+
+    const body = { how, sticky, id: this.name(id) };
+    return this.client.post("api/distinguish", body);
   }
 
   /** @internal */
