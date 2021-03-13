@@ -27,21 +27,46 @@ export interface RichTextFlairEmoji {
 /** A rich text flair. */
 export type RichTextFlair = RichTextFlairText | RichTextFlairEmoji;
 
+/** The Guildings an item has received. */
 export interface Gildings {
   /** Number of Reddit Silver awarded */
   gid_1?: number;
+
   /** Number of Reddit Gold awarded */
   gid_2?: number;
+
   /** Number of Reddit Platinum awarded */
   gid_3?: number;
 }
 
+/** The base for all content that you can vote on. */
 export interface VoteableData extends ContentData {
+  /** Whether or not this item was approved. */
   approved: boolean;
+
+  /**
+   * The unix timestamp of when this was approved.
+   *
+   * This can be null if the item either hasn't been approved or you don't have
+   * permission to know (i.e. you're not a mod on that subreddit).
+   */
   approvedAtUtc: number | null;
+
+  /**
+   * The username of the mod who approved this post.
+   *
+   * This can be null if the item either hasn't been approved or you don't have
+   * permission to know (i.e. you're not a mod on that subreddit).
+   */
   approvedBy: string | null;
+
+  /** Whether or not this post is archived. */
   archived: boolean;
+
+  /** The username of the user who created this item. */
   author: string;
+
+  // TODO: Document Voteable.authorFlair*
   authorFlairBackgroundColor: string | null;
   authorFlairCssClass: string | null;
   authorFlairRichtext: RichTextFlair[];
@@ -49,37 +74,124 @@ export interface VoteableData extends ContentData {
   authorFlairText: string | null;
   authorFlairTextColor: string | null;
   authorFlairType: "text" | "richtext";
+
+  /** Whether or not the author has a Patreon flair. */
   authorPatreonFlair: boolean;
+
+  /** Whether or not the author has Reddit Premium. */
   authorPremium: boolean;
+
+  /**
+   * The unix timestamp of when this item was banned (removed).
+   *
+   * This can be null if the item either hasn't been banned or you don't have
+   * permission to know (i.e. you're not a mod on that subreddit).
+   */
   bannedAtUtc: number | null;
+
+  /**
+   * The username of the mod who banned (removed) this item.
+   *
+   * This can be null if the item either hasn't been banned or you don't have
+   * permission to know (i.e. you're not a mod on that subreddit).
+   */
   bannedBy: string | null;
+
+  /** The note of why this item was banned (removed). */
   banNote?: string;
+
+  /** Whether or not this you can guild this item. */
   canGild: boolean;
+
+  /** Whether or not you can moderate this item. */
   canModPost: boolean;
+
+  /** The old reports on this item. */
   dismissedUserReports?: string[];
+
+  /** Whether or not this item was distinguished, and by whom. */
   distinguished: "admin" | "moderator" | null;
+
+  /** The unix timestamp when this item was edited, or `false` if it wasn't. */
   edited: number | false;
+
+  /** How many times this item has been guilded. */
   gilded: number;
+
+  /** The guildings that this item has received. */
   gildings: Gildings;
-  /** true = upvoted, false = downvoted, null = hasn't voted */
+
+  /**
+   * Whether and how you voted on this item.
+   *
+   * | Value   | Meaning                          |
+   * |---------|----------------------------------|
+   * | `true`  | You upvoted this item.           |
+   * | `false` | You downvoted this item.         |
+   * | `null`  | You have not voted on this item. |
+   */
   likes: boolean | null;
+
+  /**
+   * A note about why this item was removed that only the moderators can see, or
+   * null if no note was added or this item hasn't been removed.
+   */
   modNote: string | null;
+
+  /**
+   * The username of the mod who added a removal reason to this item, or null if
+   * no reason was given or this item hasn't been removed.
+   */
   modReasonBy: string | null;
+
+  /**
+   * The reason this item was removed, or null if no reason was given or this
+   * item hasn't been removed.
+   */
   modReasonTitle: string | null;
+
+  /**
+   * The current reports on this item that were made by mods.
+   *
+   * Each entry is of the form `[report, username]`.
+   */
   modReports: [string, string][];
+
+  // TODO: Document Voteable.noFollow
   noFollow: boolean;
+
+  /** The number of reports this item has. */
   numReports: number;
+
+  /** The permalink to this item, relative to reddit.com. */
   permalink: string;
+
+  // TODO: Document Voteable.removalReason
   removalReason: any;
+
+  /** Whether or not you have saved this item. */
   saved: boolean;
+
+  /** The score that this item has received. */
   score: number;
+
+  /** Whether or not replies to this item will notify the author. */
   sendReplies: boolean;
+
+  /** Whether or not this item has been sticked. */
   stickied: boolean;
+
+  /** The name of the subreddit this item was posted in. */
   subreddit: string;
+
+  /** The type of the subreddit this item was posted in. */
   subredditType: SubredditType;
+
+  /** The current reports on this item that were made by users. */
   userReports: string[];
 }
 
+/** The base for all content that you can vote on. */
 export default abstract class Voteable extends Content implements VoteableData {
   approved: boolean;
   approvedAtUtc: number | null;
@@ -124,6 +236,7 @@ export default abstract class Voteable extends Content implements VoteableData {
 
   protected controls: VoteableControls;
 
+  /** @internal */
   constructor(controls: VoteableControls, data: VoteableData) {
     super(data);
     this.controls = controls;
