@@ -20,7 +20,7 @@ export default class VoteableControls {
   }
 
   /**
-   * Set whether or not inbox replies are enabled for this item.
+   * Set whether or not inbox replies are enabled for an item.
    *
    * @param id The id of the item.
    * @param enabled Whether or not replies should be enabled.
@@ -33,7 +33,7 @@ export default class VoteableControls {
   }
 
   /**
-   * Enable inbox replies for this item.
+   * Enable inbox replies for an item.
    *
    * @param id The id of the item.
    *
@@ -44,7 +44,7 @@ export default class VoteableControls {
   }
 
   /**
-   * Disable inbox replies for this item.
+   * Disable inbox replies for an item.
    *
    * @param id The id of the item.
    *
