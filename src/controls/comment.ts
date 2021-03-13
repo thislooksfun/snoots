@@ -90,20 +90,5 @@ export default class CommentControls extends VoteableControls {
       console.dir(replies);
       throw "Unsupported reply type!";
     }
-
-    // TODO:
-    // /* If a comment is in a deep comment chain, reddit will send a single `more` object with name `t1__` in place of the
-    //   comment's replies. This is the equivalent of seeing a 'Continue this thread' link on the HTML site, and it indicates that
-    //   replies should be fetched by sending another request to view the deep comment alone, and parsing the replies from that. */
-    // if (
-    //   this.replies instanceof Listing &&
-    //   !this.replies.length &&
-    //   this.replies._more &&
-    //   this.replies._more.name === "t1__"
-    // ) {
-    //   this.replies = getEmptyRepliesListing(this);
-    // } else if (this.replies._more && !this.replies._more.link_id) {
-    //   this.replies._more.link_id = this.link_id;
-    // }
   }
 }
