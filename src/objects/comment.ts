@@ -7,8 +7,8 @@ import Voteable from "./voteable";
 export interface CommentData extends VoteableData {
   body: string;
   bodyHtml: string;
-  collapsedReason: any;
   collapsed: boolean;
+  collapsedReason: any;
   controversiality: number;
   ignoreReports: boolean;
   isSubmitter: boolean;
@@ -23,8 +23,8 @@ export interface CommentData extends VoteableData {
 export default class Comment extends Voteable implements CommentData {
   bodyHtml: string;
   body: string;
-  collapsedReason: any;
   collapsed: boolean;
+  collapsedReason: any;
   controversiality: number;
   ignoreReports: boolean;
   isSubmitter: boolean;
