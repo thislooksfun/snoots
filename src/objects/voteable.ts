@@ -160,7 +160,20 @@ export interface VoteableData extends ContentData {
   // TODO: Document Voteable.noFollow
   noFollow: boolean;
 
-  /** The number of reports this item has. */
+  /**
+   * The number of reports this item has.
+   *
+   * This *seems* to be calculated as follows:
+   * ```
+   * max(
+   *   modReports.length - modReportsDismissed.length,
+   *   userReports.length - userReportsDismissed.length
+   * )
+   * ```
+   *
+   * This means that it will be negative if there were reports that have been
+   * dismissed.
+   */
   numReports: number;
 
   /** The permalink to this item, relative to reddit.com. */
