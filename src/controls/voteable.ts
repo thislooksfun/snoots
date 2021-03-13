@@ -3,15 +3,12 @@ import type Client from "../client";
 /** The vote types. 1 = upvote, 0 = no vote, -1 = downvote. */
 export type Vote = 1 | 0 | -1;
 
-/**
- * This is an internal class that you likely shouldn't interact with directly.
- *
- * @internal
- */
+/** The base controls for all content that you can vote on. */
 export default abstract class VoteableControls {
   protected client: Client;
   protected type: string;
 
+  /** @internal */
   constructor(client: Client, type: string) {
     this.client = client;
     this.type = type;
