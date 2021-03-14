@@ -25,6 +25,12 @@
       src="https://flat.badgen.net/github/checks/thislooksfun/snoots"
     /></a
   >
+  <a href="https://app.codecov.io/gh/thislooksfun/snoots"
+    ><img
+      alt="coverage"
+      src="https://flat.badgen.net/codecov/c/github/thislooksfun/snoots"
+    /></a
+  >
   <a href="https://github.com/thislooksfun/snoots/blob/master/LICENSE"
     ><img
       alt="license"
