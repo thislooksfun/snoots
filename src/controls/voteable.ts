@@ -142,6 +142,18 @@ export default abstract class VoteableControls extends BaseControls {
   }
 
   /**
+   * Remove an item, optionally marking it as spam.
+   *
+   * @param id The ID of the item to remove.
+   * @param spam Whether or not to mark this item as spam. Defaults to false.
+   *
+   * @returns A promise that resolves when the item has been removed.
+   */
+  async remove(id: string, spam: boolean = false): Promise<void> {
+    return this.client.post("api/remove", { id: this.namespace(id), spam });
+  }
+
+  /**
    * Give Reddit gold to the author of an item.
    *
    * @param id The ID of the item to gild.

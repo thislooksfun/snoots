@@ -411,6 +411,17 @@ export default abstract class Voteable extends Content implements VoteableData {
   }
 
   /**
+   * Remove this item, optionally marking it as spam.
+   *
+   * @param spam Whether or not to mark this item as spam. Defaults to false.
+   *
+   * @returns A promise that resolves when this item has been removed.
+   */
+  async remove(spam: boolean = false): Promise<void> {
+    return this.controls.remove(this.id, spam);
+  }
+
+  /**
    * Give Reddit gold to the author of this item.
    *
    * @returns A promise that resolves when this item has been gilded.
