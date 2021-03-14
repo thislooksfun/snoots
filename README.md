@@ -31,12 +31,6 @@
       src="https://flat.badgen.net/codecov/c/github/thislooksfun/snoots"
     /></a
   >
-  <a href="https://github.com/thislooksfun/snoots/blob/master/LICENSE"
-    ><img
-      alt="license"
-      src="https://flat.badgen.net/github/license/thislooksfun/snoots"
-    /></a
-  >
 </p>
 
 <p align="center">
@@ -62,6 +56,12 @@
     ><img
       alt="npm dependents"
       src="https://flat.badgen.net/npm/dependents/snoots"
+    /></a
+  >
+  <a href="https://github.com/thislooksfun/snoots/blob/master/LICENSE"
+    ><img
+      alt="license"
+      src="https://flat.badgen.net/github/license/thislooksfun/snoots"
     /></a
   >
 </p>
