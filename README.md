@@ -74,7 +74,7 @@ out [this discussion](https://github.com/thislooksfun/snoots/discussions/4)!
 ## Installation
 
 ```sh
-npm i snoots
+npm i snoots@dev
 ```
 
 Note: Node 14+ is required.
