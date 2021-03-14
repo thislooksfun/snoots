@@ -1,11 +1,12 @@
-import type { Data, RedditObject } from "../helper/types";
+import type { Query } from "../helper/api/core";
+import type { RedditObject } from "../helper/types";
 import type Client from "../client";
-import { group } from "../helper/util";
 
 /** @internal */
 export interface Context {
   client: Client;
-  post: string;
+  post?: string;
+  req?: { url: string; query: Query };
 }
 
 /** @internal */
@@ -28,24 +29,26 @@ export interface RedditMore {
 }
 
 /** @internal */
-export abstract class More<T> {
-  protected data: RedditMore;
+export interface Fetcher<T> {
+  fetch(ctx: Context): Promise<Listing<T>>;
+}
 
-  constructor(data: RedditMore) {
-    this.data = data;
+/** @internal */
+export abstract class Pager<T> implements Fetcher<T> {
+  after: string;
+
+  constructor(after: string) {
+    this.after = after;
   }
 
   abstract fetch(ctx: Context): Promise<Listing<T>>;
 
-  protected async more(ctx: Context): Promise<Data[]> {
-    // api/morechildren has a max of 20 ids at a time, so we have to batch it.
-    const children = this.data.children;
-    const fetches = group(children, 20).map(c => {
-      const query = { children: c.join(","), link_id: `t3_${ctx.post}` };
-      return ctx.client.get<Data>("api/morechildren", query);
-    });
-
-    return Promise.all(fetches);
+  protected async nextPage(ctx: Context): Promise<_Listing> {
+    if (!ctx.req) throw "Unable to fetch next page";
+    const query = { limit: "100", after: this.after, ...ctx.req.query };
+    const res: RedditObject = await ctx.client.get(ctx.req.url, query);
+    if (res.kind !== "Listing") throw "oh well that's not supposed to happen.";
+    return res.data as _Listing;
   }
 }
 
@@ -70,14 +73,14 @@ export type EachFn<T> = (t: T) => Promise<boolean | void> | boolean | void;
 export default class Listing<T> {
   protected ctx: Context;
   protected arr: T[];
-  protected more?: More<T>;
+  protected fetcher?: Fetcher<T>;
   protected next?: Listing<T>;
 
   /** @internal */
-  constructor(ctx: Context, arr: T[], more?: More<T>) {
+  constructor(ctx: Context, arr: T[], fetcher?: Fetcher<T>) {
     this.ctx = ctx;
     this.arr = arr;
-    this.more = more;
+    this.fetcher = fetcher;
   }
 
   /**
@@ -91,12 +94,12 @@ export default class Listing<T> {
     if (this.arr.length > 0) return false;
 
     // If arr is empty with no way to get more, it's empty.
-    if (!this.more) return true;
+    if (!this.fetcher) return true;
 
     // This listing is empty but can fetch more. Do so, and if it was
     // successful, it's not empty.
     if (!this.next) {
-      this.next = await this.more.fetch(this.ctx);
+      this.next = await this.fetcher.fetch(this.ctx);
     }
     return this.next.arr.length > 0;
   }
@@ -112,7 +115,7 @@ export default class Listing<T> {
    * otherwise.
    */
   canFetchMore(): boolean {
-    return !!this.more;
+    return !!this.fetcher;
   }
 
   /**
@@ -137,8 +140,8 @@ export default class Listing<T> {
 
       if (page.next) {
         page = page.next;
-      } else if (page.more) {
-        page = await page.more.fetch(this.ctx);
+      } else if (page.fetcher) {
+        page = await page.fetcher.fetch(this.ctx);
       } else {
         page = null;
       }

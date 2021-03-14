@@ -1,9 +1,10 @@
-import type { Data, RedditObject } from "../helper/types";
-import type { _Listing, Context, RedditMore } from "./listing";
-import type Comment from "../objects/comment";
-import { emptyRedditListing, wrapChildren } from "./util";
-import { More } from "./listing";
-import Listing from "./listing";
+import type { Data, RedditObject } from "../../helper/types";
+import type { _Listing, Context, Fetcher, RedditMore } from "../listing";
+import type Comment from "../../objects/comment";
+import { emptyRedditListing, wrapChildren } from "./../util";
+import { group } from "../../helper/util";
+import Listing from "../listing";
+import CommentListing from "./commentListing";
 
 function fixCommentTree(objects: RedditObject[]) {
   // Map the items by their name.
@@ -33,7 +34,14 @@ function fixCommentTree(objects: RedditObject[]) {
   return tree;
 }
 
-class MoreComments extends More<Comment> {
+/** @internal */
+export default class MoreComments implements Fetcher<Comment> {
+  protected data: RedditMore;
+
+  constructor(data: RedditMore) {
+    this.data = data;
+  }
+
   async fetch(ctx: Context): Promise<Listing<Comment>> {
     if (this.data.name === "t1__") {
       const id = this.data.parent_id.slice(3);
@@ -58,27 +66,16 @@ class MoreComments extends More<Comment> {
       return new CommentListing(wrapChildren(children), ctx);
     }
   }
-}
 
-/** @internal */
-export default class CommentListing extends Listing<Comment> {
-  constructor(l: _Listing, ctx: Context) {
-    let more: MoreComments | undefined;
-    const arr = [];
-    for (const c of l.children) {
-      switch (c.kind) {
-        case "t1":
-          arr.push(ctx.client.comments.fromRaw(c));
-          break;
-        case "more":
-          more = new MoreComments(c.data as RedditMore);
-          break;
-        default:
-          console.dir(c);
-          throw "Invalid item!";
-      }
-    }
+  protected async more(ctx: Context): Promise<Data[]> {
+    // TODO: Test the 100 limit!
+    // api/morechildren has a max of 100 ids at a time, so we have to batch it.
+    const children = this.data.children;
+    const fetches = group(children, 100).map(c => {
+      const query = { children: c.join(","), link_id: `t3_${ctx.post}` };
+      return ctx.client.get<Data>("api/morechildren", query);
+    });
 
-    super(ctx, arr, more);
+    return Promise.all(fetches);
   }
 }

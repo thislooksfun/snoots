@@ -10,13 +10,11 @@ export const emptyRedditListing: _Listing = {
 };
 
 export function wrapChildren(children: RedditObject[]): _Listing {
-  return {
-    after: null,
-    before: null,
-    children,
-    dist: null,
-    modhash: null,
-  };
+  return { after: null, before: null, children, dist: null, modhash: null };
+}
+
+export function fakeListingAfter(after: string): _Listing {
+  return { after, before: null, children: [], dist: null, modhash: null };
 }
 
 export function fakeMoreListing(name: string): _Listing {
