@@ -3,12 +3,8 @@ name: Publish Documentation
 on:
   push:
     branches: [master]
-  # TODO: Implement versioned docs.
-  # BODY: The other commented sections need to be resolved at the same time as
-  # BODY: this in order to implement this properly.
-  # BODY: This is pending JamesIves/github-pages-deploy-action#635.
-  # release:
-  #   types: [published]
+  release:
+    types: [published]
 
 jobs:
   deploydoc:
@@ -20,15 +16,76 @@ jobs:
         with:
           node-version: 14.x
       - run: npm ci
-      - run: npm run gendoc
-      # - id: version
-      #   run: ./scripts/version-docs ${{ github.event_name }}
       - run: npx husky uninstall
+
+      - id: version
+        uses: actions/github-script@v3
+        with:
+          result-encoding: string
+          script: |
+            switch (context.eventName) {
+              case "push":
+                return "master";
+              case "release":
+                const pkgPth = `${process.env.GITHUB_WORKSPACE}/package.json`;
+                const { version } = require(pkgPth);
+                return `v${version}`;
+              default:
+                console.log("Something went very wrong :(");
+                console.log(`Got unexpected event '${evnt}'`);
+                process.exit(1);
+            }
+
+      - name: Update dochome
+        uses: actions/github-script@v3
+        env:
+          VERSION: ${{ steps.version.outputs.result }}
+        with:
+          script: |
+            const fs = require("fs");
+            const path = require("path");
+
+            const root = process.env.GITHUB_WORKSPACE;
+            const dochomePth = path.join(root, "dochome.md");
+            const tmplt = fs.readFileSync(dochomePth, { encoding: "utf-8" });
+            const dochome = tmplt.replace(/{{version}}/g, process.env.VERSION);
+            fs.writeFileSync(dochomePth, dochome);
+
+      - run: npm run gendoc
+
       - name: Deploy docs
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
           folder: docs
+          commit-message: Deploy docs for ${{ steps.version.outputs.result }}
+          target-folder: docs/${{ steps.version.outputs.result }}
+          git-config-name: github-actions[bot]
+          git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
           clean: true
-          # target-folder: ${{ steps.version.outputs.target }}
-          # pre-commit: '' # Need to write this after gpda#635 is resolved.
+
+  symlink:
+    name: Update symlinks
+    runs-on: ubuntu-latest
+    needs: [deploydoc]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: cd .meta/scripts && npm ci
+      - run: node .meta/scripts/update_symlinks.js
+      - name: Commit and push
+        run: |
+          if [ -z "$(git status --porcelain docs)" ]; then
+            echo "Nothing to commit, exiting early!"
+            exit 0
+          fi
+
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs
+          git commit -m "Update version links"
+          git push
