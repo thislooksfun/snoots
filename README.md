@@ -145,6 +145,10 @@ async function printChain(c: Comment, indent: string = "") {
 
 More examples will come as snoots evolves!
 
+## Advanced
+
+Didn't find what you were looking for? Check out the [full documentation][cd].
+
 # Contributing
 
 If you want to help out, please read the [CONTRIBUTING.md][c.md].
