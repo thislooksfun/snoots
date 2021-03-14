@@ -2,5 +2,6 @@
   "excludeInternal": true,
   "excludePrivate": true,
   "excludeProtected": true,
-  "media": "./media"
+  "media": "./media",
+  "readme": "dochome.md"
 }
