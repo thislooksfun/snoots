@@ -36,6 +36,7 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - run: npm run build
+      - run: npx husky uninstall
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
