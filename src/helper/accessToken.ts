@@ -7,12 +7,14 @@ import { camelCaseKeys } from "./util";
 export interface Token {
   access: string;
   expiration: number;
+  refresh?: string;
 }
 
 export interface TokenResponse {
   accessToken: string;
   tokenType: string;
   expiresIn: number;
+  refreshToken?: string;
   scope: string;
 }
 
@@ -28,7 +30,10 @@ export default async function updateAccessToken(
   // Token is expired or missing, time to (re)generate!
   let grant: Data = {};
   if (auth) {
-    if ("refreshToken" in auth) {
+    if (token?.refresh != null) {
+      grant.grant_type = "refresh_token";
+      grant.refresh_token = token.refresh;
+    } else if ("refreshToken" in auth) {
       grant.grant_type = "refresh_token";
       grant.refresh_token = auth.refreshToken;
     } else {
@@ -52,5 +57,6 @@ export default async function updateAccessToken(
   return {
     access: tkns.accessToken,
     expiration: Date.now() + tkns.expiresIn * 1000,
+    refresh: tkns.refreshToken,
   };
 }
