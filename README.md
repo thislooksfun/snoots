@@ -79,6 +79,25 @@ npm i snoots@dev
 
 Note: Node 14+ is required.
 
+## Examples
+
+Print a comment tree to stdout.
+
+```ts
+async function printChain(c: Comment, indent: string = "") {
+  const body = c.body.replace(/\n/g, "\n" + indent);
+  console.log(`${indent}(${c.id}) ${c.author}: ${body}`);
+  await c.replies.each(r => printChain(r, indent + "  "));
+}
+
+(async () => {
+  const comment = await client.comments.fetch("gqe92yr");
+  await printChain(comment);
+})();
+```
+
+More examples will come as snoots evolves!
+
 # Contributing
 
 If you want to help out, please read the [CONTRIBUTING.md][c.md].
