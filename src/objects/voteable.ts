@@ -121,6 +121,9 @@ export interface VoteableData extends ContentData {
   /** The guildings that this item has received. */
   gildings: Gildings;
 
+  /** Whether or not future reports of this item will be ignored. */
+  ignoreReports: boolean;
+
   /**
    * Whether and how you voted on this item.
    *
@@ -251,6 +254,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   edited: number | false;
   gilded: number;
   gildings: Gildings;
+  ignoreReports: boolean;
   likes: boolean | null;
   modNote: string | null;
   modReasonBy: string | null;
@@ -302,6 +306,7 @@ export default abstract class Voteable extends Content implements VoteableData {
     this.edited = data.edited;
     this.gilded = data.gilded;
     this.gildings = data.gildings;
+    this.ignoreReports = data.ignoreReports;
     this.likes = data.likes;
     this.modNote = data.modNote;
     this.modReasonBy = data.modReasonBy;
@@ -419,6 +424,24 @@ export default abstract class Voteable extends Content implements VoteableData {
    */
   async remove(spam: boolean = false): Promise<void> {
     return this.controls.remove(this.id, spam);
+  }
+
+  /**
+   * Ignore any future reports on this item.
+   *
+   * @returns A promise that resolves when the setting has been changed.
+   */
+  async ignoreFutureReports(): Promise<void> {
+    return this.controls.ignoreFutureReports(this.id);
+  }
+
+  /**
+   * Unignore any future reports on this item.
+   *
+   * @returns A promise that resolves when the setting has been changed.
+   */
+  async unignoreFutureReports(): Promise<void> {
+    return this.controls.unignoreFutureReports(this.id);
   }
 
   /**

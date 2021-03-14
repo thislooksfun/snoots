@@ -154,6 +154,28 @@ export default abstract class VoteableControls extends BaseControls {
   }
 
   /**
+   * Ignore any future reports of an item.
+   *
+   * @param id The ID of the item to ignore reports for.
+   *
+   * @returns A promise that resolves when the setting has been changed.
+   */
+  async ignoreFutureReports(id: string): Promise<void> {
+    return this.client.post("api/ignore_reports", { id: this.namespace(id) });
+  }
+
+  /**
+   * Unignore any future reports of an item.
+   *
+   * @param id The ID of the item to unignore reports for.
+   *
+   * @returns A promise that resolves when the setting has been changed.
+   */
+  async unignoreFutureReports(id: string): Promise<void> {
+    return this.client.post("api/unignore_reports", { id: this.namespace(id) });
+  }
+
+  /**
    * Give Reddit gold to the author of an item.
    *
    * @param id The ID of the item to gild.
