@@ -9,9 +9,7 @@ const endpoint = "https://www.reddit.com";
  *
  * To get these values:
  *
- * 1. Log in to Reddit account. If you are writing a bot, use the account you
- *    wish to control.
- * 1. Go to https://www.reddit.com/prefs/apps/.
+ * 1. Log into Reddit and go to https://www.reddit.com/prefs/apps/.
  * 1. Scroll to the bottom and click 'are you a developer? create an app...'.
  * 1. Select the type of application you wish to make. Most likely this will be
  *    'script'.
