@@ -66,7 +66,7 @@
   >
 </p>
 
-A modern, fully-featured, strongly-typed reddit api.
+A modern, fully-featured, strongly-typed reddit api wrapper.
 
 # WARNING
 
