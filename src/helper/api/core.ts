@@ -112,6 +112,20 @@ export async function get<T>(
 export async function post<T>(
   endpoint: string,
   path: string,
+  form: Data,
+  query: Query = {},
+  userAgent: string,
+  auth?: Auth
+): Promise<T> {
+  return await _post(path, {
+    ...opts(endpoint, userAgent, query, auth),
+    form: { api_type: "json", ...form },
+  });
+}
+
+export async function postJson<T>(
+  endpoint: string,
+  path: string,
   json: Data,
   query: Query = {},
   userAgent: string,
@@ -120,19 +134,5 @@ export async function post<T>(
   return await _post(path, {
     ...opts(endpoint, userAgent, query, auth),
     json: { api_type: "json", ...json },
-  });
-}
-
-export async function postForm<T>(
-  endpoint: string,
-  path: string,
-  form: Data,
-  query: Query = {},
-  userAgent: string,
-  auth?: Auth
-): Promise<T> {
-  return await _post(path, {
-    ...opts(endpoint, userAgent, query, auth),
-    form,
   });
 }

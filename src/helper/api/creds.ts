@@ -45,20 +45,20 @@ export async function post<T>(
   creds: Credentials,
   userAgent: string,
   path: string,
-  json: Data,
-  query: Query = {}
-): Promise<T> {
-  const auth: BasicAuth = { user: creds.clientId, pass: creds.clientSecret };
-  return core.post(endpoint, `${path}.json`, json, query, userAgent, auth);
-}
-
-export async function postForm<T>(
-  creds: Credentials,
-  userAgent: string,
-  path: string,
   form: Data,
   query: Query = {}
 ): Promise<T> {
   const auth: BasicAuth = { user: creds.clientId, pass: creds.clientSecret };
-  return core.postForm(endpoint, `${path}.json`, form, query, userAgent, auth);
+  return core.post(endpoint, `${path}.json`, form, query, userAgent, auth);
+}
+
+export async function postJson<T>(
+  creds: Credentials,
+  userAgent: string,
+  path: string,
+  json: Data,
+  query: Query = {}
+): Promise<T> {
+  const auth: BasicAuth = { user: creds.clientId, pass: creds.clientSecret };
+  return core.postJson(endpoint, `${path}.json`, json, query, userAgent, auth);
 }

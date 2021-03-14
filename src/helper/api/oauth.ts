@@ -21,19 +21,19 @@ export async function get<T>(
 export async function post<T>(
   opts: OauthOpts,
   path: string,
-  json: Data,
-  query: Query = {}
-): Promise<T> {
-  const auth: BearerAuth = { bearer: opts.token };
-  return core.post(endpoint, path, json, query, opts.userAgent, auth);
-}
-
-export async function postForm<T>(
-  opts: OauthOpts,
-  path: string,
   form: Data,
   query: Query = {}
 ): Promise<T> {
   const auth: BearerAuth = { bearer: opts.token };
-  return core.postForm(endpoint, path, form, query, opts.userAgent, auth);
+  return core.post(endpoint, path, form, query, opts.userAgent, auth);
+}
+
+export async function postJson<T>(
+  opts: OauthOpts,
+  path: string,
+  json: Data,
+  query: Query = {}
+): Promise<T> {
+  const auth: BearerAuth = { bearer: opts.token };
+  return core.postJson(endpoint, path, json, query, opts.userAgent, auth);
 }

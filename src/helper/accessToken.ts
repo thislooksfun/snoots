@@ -1,7 +1,7 @@
 import type { Auth } from "../client";
 import type { Data } from "./types";
 import type { Credentials } from "./api/creds";
-import { postForm } from "./api/creds";
+import { post } from "./api/creds";
 import { camelCaseKeys } from "./util";
 
 export interface Token {
@@ -40,7 +40,7 @@ export default async function updateAccessToken(
     grant.grant_type = "client_credentials";
   }
 
-  const raw: Data = await postForm(
+  const raw: Data = await post(
     creds,
     userAgent,
     "api/v1/access_token",

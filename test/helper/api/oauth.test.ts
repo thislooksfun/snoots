@@ -124,14 +124,14 @@ describe("post()", () => {
   });
 });
 
-describe("postForm()", () => {
+describe("postJson()", () => {
   it("should pass common values", async () => {
     const n = nock("https://oauth.reddit.com")
       .post("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
     const oo = { token: "sometkn", userAgent: "baz" };
-    await oauth.postForm(oo, "foo/bar", { bar: "foo" }, {});
+    await oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
 
     // TODO: Add tests for body, user agent, and auth.
     // BODY: Pending https://github.com/nock/nock/issues/2171.
@@ -144,7 +144,7 @@ describe("postForm()", () => {
       .reply(200, { bim: "bom" });
 
     const oo = { token: "sometkn", userAgent: "baz" };
-    const req = oauth.postForm(oo, "foo/bar", { bar: "foo" }, {});
+    const req = oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
     await expect(req).resolves.toStrictEqual({ bim: "bom" });
 
     n.done();
@@ -157,7 +157,7 @@ describe("postForm()", () => {
         .reply(200, { error: "whoops" });
 
       const oo = { token: "sometkn", userAgent: "baz" };
-      const req = oauth.postForm(oo, "foo/bar", { bar: "foo" }, {});
+      const req = oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
       const err = new Error("Reddit returned an error: whoops");
       await expect(req).rejects.toStrictEqual(err);
 
@@ -173,7 +173,7 @@ describe("postForm()", () => {
         });
 
       const oo = { token: "sometkn", userAgent: "baz" };
-      const req = oauth.postForm(oo, "foo/bar", { bar: "foo" }, {});
+      const req = oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
       const err = new Error(
         "Reddit returned an error: whoops: something went wrong :("
       );

@@ -7,7 +7,7 @@ import updateAccessToken from "../../src/helper/accessToken";
 // Mocking
 import * as creds from "../../src/helper/api/creds";
 jest.mock("../../src/helper/api/creds");
-const postForm = creds.postForm as jest.Mock;
+const post = creds.post as jest.Mock;
 
 // Just in case something slips through, don't actually ping reddit.
 beforeAll(() => nock.disableNetConnect());
@@ -38,10 +38,10 @@ describe("updateAccessToken()", () => {
         fcutil.creds(),
         fc.string(),
         async (tkn, auth, creds, agent) => {
-          postForm.mockReset();
+          post.mockReset();
           const prms = updateAccessToken(agent, tkn, creds, auth);
           await expect(prms).resolves.toStrictEqual(tkn);
-          expect(postForm).not.toBeCalled();
+          expect(post).not.toBeCalled();
         }
       )
     );
@@ -56,10 +56,10 @@ describe("updateAccessToken()", () => {
         tknResponse(),
         fc.string(),
         async (tkn, auth, creds, newTkn, agent) => {
-          postForm.mockReset().mockReturnValue(newTkn);
+          post.mockReset().mockReturnValue(newTkn);
 
           const prms = await updateAccessToken(agent, tkn, creds, auth);
-          expect(postForm).toBeCalled();
+          expect(post).toBeCalled();
 
           expect(prms.access).toEqual(newTkn.accessToken);
           expect(prms.expiration).toBeGreaterThan(Date.now());

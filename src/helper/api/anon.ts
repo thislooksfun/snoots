@@ -14,17 +14,17 @@ export async function get<T>(
 export async function post<T>(
   userAgent: string,
   path: string,
-  json: Data,
-  query: Query = {}
-): Promise<T> {
-  return core.post(endpoint, `${path}.json`, json, query, userAgent);
-}
-
-export async function postForm<T>(
-  userAgent: string,
-  path: string,
   form: Data,
   query: Query = {}
 ): Promise<T> {
-  return core.postForm(endpoint, `${path}.json`, form, query, userAgent);
+  return core.post(endpoint, `${path}.json`, form, query, userAgent);
+}
+
+export async function postJson<T>(
+  userAgent: string,
+  path: string,
+  json: Data,
+  query: Query = {}
+): Promise<T> {
+  return core.postJson(endpoint, `${path}.json`, json, query, userAgent);
 }

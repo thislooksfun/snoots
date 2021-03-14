@@ -171,6 +171,29 @@ export default class Client {
     }
   }
 
+  /**
+   * Perform a json-formatted POST request to the reddit api.
+   *
+   * You shouldn't ever have to use this directly.
+   *
+   * @template T The type to cast the response to.
+   *
+   * @param path The path of the endpoint.
+   * @param data The data to POST.
+   * @param query Any query parameters to pass to the endpoint.
+   *
+   * @returns The JSON response from the endpoint.
+   *
+   * @throws If the endpoint returns an error.
+   */
+  async postJson<T>(path: string, data: Data, query: Query = {}): Promise<T> {
+    if (this.creds) {
+      return oauth.postJson(await this.oAuth(), path, data, query);
+    } else {
+      return anon.postJson(this.userAgent, path, data, query);
+    }
+  }
+
   protected async updateAccessToken(): Promise<void> {
     if (!this.creds) throw "No creds";
 
