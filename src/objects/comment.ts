@@ -4,28 +4,72 @@ import CommentControls from "../controls/comment";
 import Listing from "../listings/listing";
 import Voteable from "./voteable";
 
+/** The attributes specific to Comment objects. */
 export interface CommentData extends VoteableData {
+  /** The plaintext body of the comment. */
   body: string;
+
+  /** The html rendered body of the comment. */
   bodyHtml: string;
+
+  /** Whether or not this comment is collapsed. */
   collapsed: boolean;
-  collapsedReason: any;
-  controversiality: number;
-  ignoreReports: boolean;
+
+  // TODO: Document or remove CommentData.collapsedBecauseCrowdControl
+  // This seems to always be null.
+  // collapsedBecauseCrowdControl: null;
+
+  // TODO: Document or remove CommentData.collapsedReason
+  // This seems to always be null.
+  // collapsedReason: null;
+
+  // TODO: Document or remove CommentData.commentType
+  // This seems to always be null.
+  // commentType: null;
+
+  // TODO: Document or remove CommentData.controversiality
+  // This seems to always be 0.
+  // controversiality: 0;
+
+  /** Whether or not the author of this comment is also the op of the post. */
   isSubmitter: boolean;
+
+  /**
+   * The fully-qualified ID of the post the comment was posted on.
+   *
+   * @internal
+   */
   linkId: string;
+
+  /**
+   * The fully-qualified ID of the parent of this comment.
+   *
+   * @internal
+   */
   parentId: string;
+
+  /** The replies to this comment. */
   replies: Listing<Comment>;
+
+  /**
+   * Whether or not this comment has its score hidden.
+   *
+   * Note: if this is true, {@link score} will always be `1`.
+   */
   scoreHidden: boolean;
+
+  /** Whether or not this comment has been marked as spam. */
   spam: boolean;
 }
 
+/** A single comment. */
 export default class Comment extends Voteable implements CommentData {
   bodyHtml: string;
   body: string;
   collapsed: boolean;
-  collapsedReason: any;
-  controversiality: number;
-  ignoreReports: boolean;
+  // collapsedReason: null;
+  // controversiality: number;
+  // ignoreReports: boolean;
   isSubmitter: boolean;
   linkId: string;
   parentId: string;
@@ -35,16 +79,17 @@ export default class Comment extends Voteable implements CommentData {
 
   protected controls: CommentControls;
 
+  /** @internal */
   constructor(controls: CommentControls, data: CommentData) {
     super(controls, data);
     this.controls = controls;
 
     this.bodyHtml = data.bodyHtml;
     this.body = data.body;
-    this.collapsedReason = data.collapsedReason;
+    // this.collapsedReason = data.collapsedReason;
     this.collapsed = data.collapsed;
-    this.controversiality = data.controversiality;
-    this.ignoreReports = data.ignoreReports;
+    // this.controversiality = data.controversiality;
+    // this.ignoreReports = data.ignoreReports;
     this.isSubmitter = data.isSubmitter;
     this.linkId = data.linkId;
     this.parentId = data.parentId;
@@ -63,6 +108,43 @@ export default class Comment extends Voteable implements CommentData {
   async refetch(): Promise<Comment> {
     return this.controls.fetch(this.id);
   }
+
+  /**
+   * Get the ID of the parent of this comment.
+   *
+   * @returns The ID of the parent, or null if this is a top-level comment.
+   */
+  parentCommentId(): string | null {
+    if (this.parentId.startsWith("t1_")) {
+      return this.parentId.slice(3);
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Fetch the parent of this comment.
+   *
+   * @returns A promise that either resolves the the parent of this comment, or
+   * null if this is a top-level comment.
+   */
+  async fetchParent(): Promise<Comment | null> {
+    const id = this.parentCommentId();
+    if (!id) return null;
+    return this.controls.fetch(id);
+  }
+
+  /**
+   * Get the ID of the post the comment was posted on.
+   *
+   * @returns The ID of the post.
+   */
+  postId(): string {
+    return this.linkId.slice(3);
+  }
+
+  // TODO: implement Comment.fetchPost()
+  // async fetchPost(): Promise<Post> {}
 
   /**
    * Distinguish this comment.

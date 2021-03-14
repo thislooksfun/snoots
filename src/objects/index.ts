@@ -3,3 +3,6 @@ export * from "./content";
 
 export { default as Votable } from "./voteable";
 export * from "./voteable";
+
+export { default as Comment } from "./comment";
+export * from "./comment";
