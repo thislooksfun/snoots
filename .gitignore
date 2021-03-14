@@ -1,5 +1,6 @@
+/coverage
 /dist
-/types
 /docs
-node_modules
+/types
 .DS_Store
+node_modules
