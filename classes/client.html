@@ -139,6 +139,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#post" class="tsd-kind-icon">post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#postjson" class="tsd-kind-icon">post<wbr>Json</a></li>
 							</ul>
 						</section>
 					</div>
@@ -156,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/2edbba5/src/client.ts#L112">client.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/254482f/src/client.ts#L112">client.ts:112</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -186,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">comments<span class="tsd-signature-symbol">:</span> <a href="commentcontrols.html" class="tsd-signature-type" data-tsd-kind="Class">CommentControls</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/2edbba5/src/client.ts#L108">client.ts:108</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/254482f/src/client.ts#L108">client.ts:108</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -208,7 +209,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/2edbba5/src/client.ts#L143">client.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/254482f/src/client.ts#L143">client.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -261,12 +262,71 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/2edbba5/src/client.ts#L166">client.ts:166</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/254482f/src/client.ts#L166">client.ts:166</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Perform a POST request to the reddit api.</p>
+								</div>
+								<p>You shouldn&#39;t ever have to use this directly.</p>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>If the endpoint returns an error.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>The type to cast the response to.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The path of the endpoint.</p>
+									</div>
+								</li>
+								<li>
+									<h5>data: <a href="../modules.html#data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The data to POST.</p>
+									</div>
+								</li>
+								<li>
+									<h5>query: <a href="../modules.html#query" class="tsd-signature-type" data-tsd-kind="Type alias">Query</a><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Any query parameters to pass to the endpoint.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The JSON response from the endpoint.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="postjson" class="tsd-anchor"></a>
+					<h3>post<wbr>Json</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">post<wbr>Json&lt;T&gt;<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><a href="../modules.html#data" class="tsd-signature-type" data-tsd-kind="Type alias">Data</a>, query<span class="tsd-signature-symbol">?: </span><a href="../modules.html#query" class="tsd-signature-type" data-tsd-kind="Type alias">Query</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/254482f/src/client.ts#L189">client.ts:189</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Perform a json-formatted POST request to the reddit api.</p>
 								</div>
 								<p>You shouldn&#39;t ever have to use this directly.</p>
 								<dl class="tsd-comment-tags">
@@ -342,15 +402,27 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="client.html#post" class="tsd-kind-icon">post</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="client.html#postjson" class="tsd-kind-icon">post<wbr>Json</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
+						<a href="comment.html" class="tsd-kind-icon">Comment</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="commentcontrols.html" class="tsd-kind-icon">Comment<wbr>Controls</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="content.html" class="tsd-kind-icon">Content</a>
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="listing.html" class="tsd-kind-icon">Listing</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="votable.html" class="tsd-kind-icon">Votable</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="voteablecontrols.html" class="tsd-kind-icon">Voteable<wbr>Controls</a>
@@ -359,13 +431,31 @@
 						<a href="../interfaces/clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/commentdata.html" class="tsd-kind-icon">Comment<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/contentdata.html" class="tsd-kind-icon">Content<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/credentials.html" class="tsd-kind-icon">Credentials</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/gildings.html" class="tsd-kind-icon">Gildings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/richtextflairemoji.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Emoji</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/richtextflairtext.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/tokenauth.html" class="tsd-kind-icon">Token<wbr>Auth</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/usernameauth.html" class="tsd-kind-icon">Username<wbr>Auth</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/voteabledata.html" class="tsd-kind-icon">Voteable<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#auth" class="tsd-kind-icon">Auth</a>
@@ -378,6 +468,12 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#query" class="tsd-kind-icon">Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#richtextflair" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#subreddittype" class="tsd-kind-icon">Subreddit<wbr>Type</a>
 					</li>
 				</ul>
 			</nav>
@@ -394,10 +490,11 @@
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 		</div>
 	</div>

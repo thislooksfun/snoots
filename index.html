@@ -131,9 +131,76 @@
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
-				<pre><code class="language-sh"><span style="color: #000000">npm i snoots</span>
+				<pre><code class="language-sh"><span style="color: #000000">npm i snoots@dev</span>
 </code></pre>
 				<p>Note: Node 14+ is required.</p>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h2>Getting Started</h2>
+				</a>
+				<a href="#user-bots" id="user-bots" style="color: inherit; text-decoration: none;">
+					<h3>User Bots</h3>
+				</a>
+				<p>To get started making a bot with snoots:</p>
+				<ol>
+					<li><a href="https://thislooks.fun/snoots/interfaces/credentials">Create an application</a></li>
+					<li>Come up with a user agent. See <a href="https://thislooks.fun/snoots/interfaces/clientoptions#useragent">here</a> for more info.</li>
+					<li>Create a new <a href="https://thislooks.fun/snoots/classes/client">Client</a> instance.<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">userAgent:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the user agent&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">creds:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientId:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the client id&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the client secret&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #001080">auth:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">username:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the reddit account username&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">password:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the reddit account password&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">});</span>
+</code></pre>
+					</li>
+					<li>Use the api! If you need some help, check out the <a href="#examples">examples</a>.</li>
+				</ol>
+				<a href="#crawler--scraper" id="crawler--scraper" style="color: inherit; text-decoration: none;">
+					<h3>Crawler / Scraper</h3>
+				</a>
+				<p>If you just want to retreive information from the Reddit api without controlling
+				a user account you can do that!</p>
+				<ol>
+					<li><a href="https://thislooks.fun/snoots/interfaces/credentials">Create an application</a><sup>1</sup></li>
+					<li>Come up with a user agent. See <a href="https://thislooks.fun/snoots/interfaces/clientoptions#useragent">here</a> for more info</li>
+					<li>Create a new <a href="https://thislooks.fun/snoots/classes/client">Client</a> instance.<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">userAgent:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the user agent&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">creds:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientId:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the client id&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the client secret&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">});</span>
+</code></pre>
+					</li>
+					<li>Use the api! If you need some help, check out the <a href="#examples">examples</a>.</li>
+				</ol>
+				<p><sup>1</sup> If you <em>really</em> don&#39;t want to make an application you can skip this
+					step and leave off the <code>creds</code> parameter, but note that performing requests
+				without an application means you have a <em>much</em> lower ratelimit.</p>
+				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+					<h2>Examples</h2>
+				</a>
+				<p>Print a comment tree to stdout.</p>
+				<pre><code class="language-ts"><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">printChain</span><span style="color: #000000">(</span><span style="color: #001080">c</span><span style="color: #000000">: </span><span style="color: #267F99">Comment</span><span style="color: #000000">, </span><span style="color: #001080">indent</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">body</span><span style="color: #000000"> = </span><span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #795E26">replace</span><span style="color: #000000">(</span><span style="color: #811F3F">/\n/</span><span style="color: #0000FF">g</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;</span><span style="color: #EE0000">\n</span><span style="color: #A31515">&quot;</span><span style="color: #000000"> + </span><span style="color: #001080">indent</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">indent</span><span style="color: #0000FF">}</span><span style="color: #A31515">(</span><span style="color: #0000FF">${</span><span style="color: #001080">c</span><span style="color: #000000FF">.</span><span style="color: #001080">id</span><span style="color: #0000FF">}</span><span style="color: #A31515">) </span><span style="color: #0000FF">${</span><span style="color: #001080">c</span><span style="color: #000000FF">.</span><span style="color: #001080">author</span><span style="color: #0000FF">}</span><span style="color: #A31515">: </span><span style="color: #0000FF">${</span><span style="color: #001080">body</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #001080">replies</span><span style="color: #000000">.</span><span style="color: #795E26">each</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">printChain</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">, </span><span style="color: #001080">indent</span><span style="color: #000000"> + </span><span style="color: #A31515">&quot;  &quot;</span><span style="color: #000000">));</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">comment</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">comments</span><span style="color: #000000">.</span><span style="color: #795E26">fetch</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;gqe92yr&quot;</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">printChain</span><span style="color: #000000">(</span><span style="color: #001080">comment</span><span style="color: #000000">);</span>
+<span style="color: #000000">})();</span>
+</code></pre>
+				<p>More examples will come as snoots evolves!</p>
+				<a href="#advanced" id="advanced" style="color: inherit; text-decoration: none;">
+					<h2>Advanced</h2>
+				</a>
+				<p>Didn&#39;t find what you were looking for? Check out the <a href="https://thislooks.fun/snoots/classes/client">full documentation</a>.</p>
 				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
 					<h1>Contributing</h1>
 				</a>
@@ -158,10 +225,19 @@
 						<a href="classes/client.html" class="tsd-kind-icon">Client</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/comment.html" class="tsd-kind-icon">Comment</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/commentcontrols.html" class="tsd-kind-icon">Comment<wbr>Controls</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/content.html" class="tsd-kind-icon">Content</a>
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/listing.html" class="tsd-kind-icon">Listing</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/votable.html" class="tsd-kind-icon">Votable</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/voteablecontrols.html" class="tsd-kind-icon">Voteable<wbr>Controls</a>
@@ -170,13 +246,31 @@
 						<a href="interfaces/clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentdata.html" class="tsd-kind-icon">Comment<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contentdata.html" class="tsd-kind-icon">Content<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/credentials.html" class="tsd-kind-icon">Credentials</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/gildings.html" class="tsd-kind-icon">Gildings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/richtextflairemoji.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Emoji</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/richtextflairtext.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/tokenauth.html" class="tsd-kind-icon">Token<wbr>Auth</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/usernameauth.html" class="tsd-kind-icon">Username<wbr>Auth</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/voteabledata.html" class="tsd-kind-icon">Voteable<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#auth" class="tsd-kind-icon">Auth</a>
@@ -189,6 +283,12 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#query" class="tsd-kind-icon">Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#richtextflair" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#subreddittype" class="tsd-kind-icon">Subreddit<wbr>Type</a>
 					</li>
 				</ul>
 			</nav>
@@ -205,10 +305,11 @@
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 		</div>
 	</div>
