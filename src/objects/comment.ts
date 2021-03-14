@@ -14,7 +14,6 @@ export interface CommentData extends VoteableData {
   isSubmitter: boolean;
   linkId: string;
   parentId: string;
-  removed: boolean;
   replies: Listing<Comment>;
   scoreHidden: boolean;
   spam: boolean;
@@ -30,7 +29,6 @@ export default class Comment extends Voteable implements CommentData {
   isSubmitter: boolean;
   linkId: string;
   parentId: string;
-  removed: boolean;
   replies: Listing<Comment>;
   scoreHidden: boolean;
   spam: boolean;
@@ -50,7 +48,6 @@ export default class Comment extends Voteable implements CommentData {
     this.isSubmitter = data.isSubmitter;
     this.linkId = data.linkId;
     this.parentId = data.parentId;
-    this.removed = data.removed;
     this.replies = data.replies;
     this.scoreHidden = data.scoreHidden;
     this.spam = data.spam;

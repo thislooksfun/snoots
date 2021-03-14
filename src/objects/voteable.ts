@@ -186,6 +186,9 @@ export interface VoteableData extends ContentData {
   /** The permalink to this item, relative to reddit.com. */
   permalink: string;
 
+  /** Whether or not this item has been removed. */
+  removed: boolean;
+
   // TODO: Document or remove VoteableData.removalReason
   // removalReason: any;
 
@@ -257,6 +260,7 @@ export default abstract class Voteable extends Content implements VoteableData {
   // noFollow: boolean;
   numReports: number;
   permalink: string;
+  removed: boolean;
   // removalReason: any;
   saved: boolean;
   score: number;
@@ -307,6 +311,7 @@ export default abstract class Voteable extends Content implements VoteableData {
     // this.noFollow = data.noFollow;
     this.numReports = data.numReports;
     this.permalink = data.permalink;
+    this.removed = data.removed;
     // this.removalReason = data.removalReason;
     this.saved = data.saved;
     this.score = data.score;
