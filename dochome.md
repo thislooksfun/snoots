@@ -6,9 +6,8 @@ Welcome to the snoots documentation!
 
 Helpful links:
 
-- [repo](https://github.com/thislooksfun/snoots)
-- [more versions](https://thislooks.fun/snoots/docs)
-- [getting started](#getting-started)
+- [GitHub repo](https://github.com/thislooksfun/snoots)
+- [More versions](https://thislooks.fun/snoots/docs)
 
 ---
 
