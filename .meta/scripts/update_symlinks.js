@@ -18,16 +18,20 @@ function updateVersion(key, nv) {
 function isSL(pth) {
   return fs.existsSync(pth) && fs.lstatSync(pth).isSymbolicLink();
 }
+function isDir(pth) {
+  return fs.existsSync(pth) && fs.lstatSync(pth).isDirectory();
+}
 
 for (const name of fs.readdirSync(docRoot)) {
   console.log(`Checking file ${docRoot}/${name}`);
-  if (!semver.valid(name)) continue;
   if (isSL(name)) continue;
+  if (!isDir(name)) continue;
+  versions[name] = name;
+  if (!semver.valid(name)) continue;
 
   const { major, minor, patch, prerelease } = semver.parse(name);
 
   updateVersion("latest", name);
-  updateVersion(name, name);
   if (prerelease.length > 0) {
     const prType = prerelease[0];
     updateVersion(`v${major}.${minor}.${patch}-${prType}`, name);
