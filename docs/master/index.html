@@ -58,99 +58,28 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#snoots" id="snoots" style="color: inherit; text-decoration: none;">
-					<h1>snoots</h1>
+				<!-- This README will become the documentation home page. -->
+				<a href="#snoots--master" id="snoots--master" style="color: inherit; text-decoration: none;">
+					<h1>Snoots @ master</h1>
 				</a>
-				<p align="center">
-					<a href="https://github.com/semantic-release/semantic-release"
-					><img
-					alt="semantic release"
-					src="https://flat.badgen.net/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80/semantic%20release/e10079"
-					/></a
-					>
-					<a href="https://github.com/thislooksfun/snoots/releases/latest"
-					><img
-					alt="latest release"
-					src="https://flat.badgen.net/github/release/thislooksfun/snoots"
-					/></a
-					>
-					<a href="https://github.com/thislooksfun/snoots/releases"
-					><img
-					alt="latest stable release"
-					src="https://flat.badgen.net/github/release/thislooksfun/snoots/stable"
-					/></a
-					>
-					<a href="#"
-					><img
-					alt="checks status"
-					src="https://flat.badgen.net/github/checks/thislooksfun/snoots"
-					/></a
-					>
-					<a href="https://app.codecov.io/gh/thislooksfun/snoots"
-					><img
-					alt="coverage"
-					src="https://flat.badgen.net/codecov/c/github/thislooksfun/snoots"
-					/></a
-					>
-				</p>
-				<p align="center">
-					<a href="https://www.npmjs.com/package/snoots?activeTab=versions"
-					><img
-					alt="npm version"
-					src="https://flat.badgen.net/npm/v/snoots"
-					/></a
-					>
-					<a href="https://github.com/thislooksfun/snoots/tree/master/types"
-					><img
-					alt="npm types"
-					src="https://flat.badgen.net/npm/types/snoots"
-					/></a
-					>
-					<a href="https://www.npmjs.com/package/snoots"
-					><img
-					alt="weekly npm downloads"
-					src="https://flat.badgen.net/npm/dw/snoots"
-					/></a
-					>
-					<a href="https://www.npmjs.com/package/snoots?activeTab=dependents"
-					><img
-					alt="npm dependents"
-					src="https://flat.badgen.net/npm/dependents/snoots"
-					/></a
-					>
-					<a href="https://github.com/thislooksfun/snoots/blob/master/LICENSE"
-					><img
-					alt="license"
-					src="https://flat.badgen.net/github/license/thislooksfun/snoots"
-					/></a
-					>
-				</p>
-				<p>A modern, fully-featured, strongly-typed reddit api.</p>
-				<a href="#warning" id="warning" style="color: inherit; text-decoration: none;">
-					<h1>WARNING</h1>
-				</a>
-				<p>This project is in early alpha. Things can (and likely will) change at any time
-					for any reason without warning, and large parts of the api are not yet
-				supported. If you need a stable reddit api today, use <a href="https://github.com/not-an-aardvark/snoowrap">snoowrap</a>.</p>
-				<p>If you want to help guide the future of the project towards v1.0.0, please check
-				out <a href="https://github.com/thislooksfun/snoots/discussions/4">this discussion</a>!</p>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<pre><code class="language-sh"><span style="color: #000000">npm i snoots@dev</span>
-</code></pre>
-				<p>Note: Node 14+ is required.</p>
+				<p>Welcome to the snoots documentation!</p>
+				<p>Helpful links:</p>
+				<ul>
+					<li><a href="https://github.com/thislooksfun/snoots">GitHub repo</a></li>
+					<li><a href="https://thislooks.fun/snoots/docs">More versions</a></li>
+				</ul>
+				<hr>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
-					<h2>Getting Started</h2>
+					<h1>Getting Started</h1>
 				</a>
 				<a href="#user-bots" id="user-bots" style="color: inherit; text-decoration: none;">
-					<h3>User Bots</h3>
+					<h2>User Bots</h2>
 				</a>
 				<p>To get started making a bot with snoots:</p>
 				<ol>
 					<li><a href="https://thislooks.fun/snoots/interfaces/credentials">Create an application</a></li>
 					<li>Come up with a user agent. See <a href="https://thislooks.fun/snoots/interfaces/clientoptions#useragent">here</a> for more info.</li>
-					<li>Create a new <a href="https://thislooks.fun/snoots/classes/client">Client</a> instance.<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
+					<li>Create a new <a href="https://thislooks.fun/snoots/docs/latest/classes/client">Client</a> instance.<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">userAgent:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the user agent&gt;&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">creds:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">    </span><span style="color: #001080">clientId:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the client id&gt;&quot;</span><span style="color: #000000">,</span>
@@ -166,14 +95,14 @@
 					<li>Use the api! If you need some help, check out the <a href="#examples">examples</a>.</li>
 				</ol>
 				<a href="#crawler--scraper" id="crawler--scraper" style="color: inherit; text-decoration: none;">
-					<h3>Crawler / Scraper</h3>
+					<h2>Crawler / Scraper</h2>
 				</a>
 				<p>If you just want to retreive information from the Reddit api without controlling
 				a user account you can do that!</p>
 				<ol>
 					<li><a href="https://thislooks.fun/snoots/interfaces/credentials">Create an application</a><sup>1</sup></li>
 					<li>Come up with a user agent. See <a href="https://thislooks.fun/snoots/interfaces/clientoptions#useragent">here</a> for more info</li>
-					<li>Create a new <a href="https://thislooks.fun/snoots/classes/client">Client</a> instance.<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
+					<li>Create a new <a href="https://thislooks.fun/snoots/docs/latest/classes/client">Client</a> instance.<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Client</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">userAgent:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the user agent&gt;&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">creds:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">    </span><span style="color: #001080">clientId:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;&lt;the client id&gt;&quot;</span><span style="color: #000000">,</span>
@@ -188,7 +117,7 @@
 					step and leave off the <code>creds</code> parameter, but note that performing requests
 				without an application means you have a <em>much</em> lower ratelimit.</p>
 				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
-					<h2>Examples</h2>
+					<h1>Examples</h1>
 				</a>
 				<p>Print a comment tree to stdout.</p>
 				<pre><code class="language-ts"><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">printChain</span><span style="color: #000000">(</span><span style="color: #001080">c</span><span style="color: #000000">: </span><span style="color: #267F99">Comment</span><span style="color: #000000">, </span><span style="color: #001080">indent</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">) {</span>
@@ -203,14 +132,6 @@
 <span style="color: #000000">})();</span>
 </code></pre>
 				<p>More examples will come as snoots evolves!</p>
-				<a href="#advanced" id="advanced" style="color: inherit; text-decoration: none;">
-					<h2>Advanced</h2>
-				</a>
-				<p>Didn&#39;t find what you were looking for? Check out the <a href="https://thislooks.fun/snoots/classes/client">full documentation</a>.</p>
-				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
-					<h1>Contributing</h1>
-				</a>
-				<p>If you want to help out, please read the <a href="https://github.com/thislooksfun/snoots/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 				<!-- Links -->
 			</div>
 		</div>
