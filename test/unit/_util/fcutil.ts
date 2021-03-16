@@ -1,17 +1,22 @@
-import type { Auth } from "../../../src/client";
+import type { Auth, TokenAuth, UsernameAuth } from "../../../src/client";
 import type { Credentials } from "../../../src/helper/api/creds";
 import fc from "fast-check";
 
+export function usernameAuth(): fc.Arbitrary<UsernameAuth> {
+  return fc.record({
+    username: fc.string(),
+    password: fc.string(),
+  });
+}
+
+export function tokenAuth(): fc.Arbitrary<TokenAuth> {
+  return fc.record({
+    refreshToken: fc.string(),
+  });
+}
+
 export function auth(): fc.Arbitrary<Auth> {
-  return fc.oneof(
-    fc.record({
-      username: fc.string(),
-      password: fc.string(),
-    }),
-    fc.record({
-      refreshToken: fc.string(),
-    })
-  );
+  return fc.oneof(usernameAuth(), tokenAuth());
 }
 
 export function creds(): fc.Arbitrary<Credentials> {
