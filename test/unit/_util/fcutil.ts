@@ -1,5 +1,5 @@
-import type { Auth } from "../../src/client";
-import type { Credentials } from "../../src/helper/api/creds";
+import type { Auth } from "../../../src/client";
+import type { Credentials } from "../../../src/helper/api/creds";
 import fc from "fast-check";
 
 export function auth(): fc.Arbitrary<Auth> {
