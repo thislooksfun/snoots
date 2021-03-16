@@ -1,25 +1,39 @@
 import nock from "nock";
 import * as oauth from "../../../../src/helper/api/oauth";
 
+beforeAll(() => nock.disableNetConnect());
 afterEach(() => nock.cleanAll());
-afterAll(() => nock.restore());
+afterAll(() => {
+  nock.restore();
+  nock.enableNetConnect();
+});
 
 describe("get()", () => {
   it("should pass common values", async () => {
-    const n = nock("https://oauth.reddit.com")
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .get("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
     const oo = { token: "sometkn", userAgent: "baz" };
     await oauth.get(oo, "foo/bar", {});
 
-    // TODO: Add tests for user agent and auth.
-    // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 
   it("should give back json data", async () => {
-    const n = nock("https://oauth.reddit.com")
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .get("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
@@ -32,7 +46,13 @@ describe("get()", () => {
 
   describe("when given an api error", () => {
     it("should throw", async () => {
-      const n = nock("https://oauth.reddit.com")
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .get("/foo/bar?api_type=json&raw_json=1")
         .reply(200, { error: "whoops" });
 
@@ -45,7 +65,13 @@ describe("get()", () => {
     });
 
     it("should use the description if available", async () => {
-      const n = nock("https://oauth.reddit.com")
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .get("/foo/bar?api_type=json&raw_json=1")
         .reply(200, {
           error: "whoops",
@@ -66,20 +92,32 @@ describe("get()", () => {
 
 describe("post()", () => {
   it("should pass common values", async () => {
-    const n = nock("https://oauth.reddit.com")
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
     const oo = { token: "sometkn", userAgent: "baz" };
     await oauth.post(oo, "foo/bar", { bar: "foo" }, {});
 
-    // TODO: Add tests for body, user agent, and auth.
+    // TODO: Add tests for body.
     // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 
   it("should give back json data", async () => {
-    const n = nock("https://oauth.reddit.com")
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
@@ -92,7 +130,13 @@ describe("post()", () => {
 
   describe("when given an api error", () => {
     it("should throw", async () => {
-      const n = nock("https://oauth.reddit.com")
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, { error: "whoops" });
 
@@ -105,7 +149,13 @@ describe("post()", () => {
     });
 
     it("should use the description if available", async () => {
-      const n = nock("https://oauth.reddit.com")
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, {
           error: "whoops",
@@ -126,20 +176,32 @@ describe("post()", () => {
 
 describe("postJson()", () => {
   it("should pass common values", async () => {
-    const n = nock("https://oauth.reddit.com")
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
     const oo = { token: "sometkn", userAgent: "baz" };
     await oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
 
-    // TODO: Add tests for body, user agent, and auth.
+    // TODO: Add tests for body.
     // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 
   it("should give back json data", async () => {
-    const n = nock("https://oauth.reddit.com")
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
@@ -152,7 +214,13 @@ describe("postJson()", () => {
 
   describe("when given an api error", () => {
     it("should throw", async () => {
-      const n = nock("https://oauth.reddit.com")
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, { error: "whoops" });
 
@@ -165,7 +233,13 @@ describe("postJson()", () => {
     });
 
     it("should use the description if available", async () => {
-      const n = nock("https://oauth.reddit.com")
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, {
           error: "whoops",
