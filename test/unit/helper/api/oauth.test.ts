@@ -98,15 +98,14 @@ describe("post()", () => {
         authorization: "bearer sometkn",
       },
     };
+    const expectedBody = { api_type: "json", bar: "foo" };
     const n = nock("https://oauth.reddit.com", opts)
-      .post("/foo/bar?api_type=json&raw_json=1")
+      .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
     const oo = { token: "sometkn", userAgent: "baz" };
     await oauth.post(oo, "foo/bar", { bar: "foo" }, {});
 
-    // TODO: Add tests for body.
-    // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 
@@ -182,15 +181,14 @@ describe("postJson()", () => {
         authorization: "bearer sometkn",
       },
     };
+    const expectedBody = { api_type: "json", bar: "foo" };
     const n = nock("https://oauth.reddit.com", opts)
-      .post("/foo/bar?api_type=json&raw_json=1")
+      .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
     const oo = { token: "sometkn", userAgent: "baz" };
     await oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
 
-    // TODO: Add tests for body.
-    // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 

@@ -69,14 +69,13 @@ describe("get()", () => {
 describe("post()", () => {
   it("should pass common values", async () => {
     const opts = { reqheaders: { "user-agent": "baz" } };
+    const expectedBody = { api_type: "json", bar: "foo" };
     const n = nock("https://www.reddit.com", opts)
-      .post("/foo/bar.json?api_type=json&raw_json=1")
+      .post("/foo/bar.json?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
     await anon.post("baz", "foo/bar", { bar: "foo" }, {});
 
-    // TODO: Add tests for body.
-    // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 
@@ -129,14 +128,13 @@ describe("post()", () => {
 describe("postJson()", () => {
   it("should pass common values", async () => {
     const opts = { reqheaders: { "user-agent": "baz" } };
+    const expectedBody = { api_type: "json", bar: "foo" };
     const n = nock("https://www.reddit.com", opts)
-      .post("/foo/bar.json?api_type=json&raw_json=1")
+      .post("/foo/bar.json?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
     await anon.postJson("baz", "foo/bar", { bar: "foo" }, {});
 
-    // TODO: Add tests for body.
-    // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 

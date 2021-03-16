@@ -70,14 +70,13 @@ describe("get()", () => {
 describe("post()", () => {
   it("should pass common values", async () => {
     const opts = { reqheaders: { "user-agent": "baz" } };
+    const expectedBody = { api_type: "json", bar: "foo" };
     const n = nock(domain, opts)
-      .post("/foo/bar?api_type=json&raw_json=1")
+      .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
     await core.post(domain, "foo/bar", { bar: "foo" }, {}, "baz");
 
-    // TODO: Add tests for body.
-    // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 
@@ -130,14 +129,13 @@ describe("post()", () => {
 describe("postJson()", () => {
   it("should pass common values", async () => {
     const opts = { reqheaders: { "user-agent": "baz" } };
+    const expectedBody = { api_type: "json", bar: "foo" };
     const n = nock(domain, opts)
-      .post("/foo/bar?api_type=json&raw_json=1")
+      .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
     await core.postJson(domain, "foo/bar", { bar: "foo" }, {}, "baz");
 
-    // TODO: Add tests for body.
-    // BODY: Pending https://github.com/nock/nock/issues/2171.
     n.done();
   });
 
