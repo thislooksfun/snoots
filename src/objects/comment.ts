@@ -103,7 +103,7 @@ export default class Comment extends Voteable implements CommentData {
    *
    * Note: This returns a _new object_, it is _not_ mutating.
    *
-   * @returns The newly fetched comment.
+   * @returns A promise that resolves to the newly fetched comment.
    */
   async refetch(): Promise<Comment> {
     return this.controls.fetch(this.id);
