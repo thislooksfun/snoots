@@ -133,7 +133,7 @@ export default abstract class VoteableControls extends BaseControls {
   /**
    * Delete an item.
    *
-   * @param id The ID of the item to edit.
+   * @param id The ID of the item to delete.
    *
    * @returns A promise that resolves when the item has been deleted.
    */
