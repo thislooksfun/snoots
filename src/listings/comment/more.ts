@@ -68,10 +68,11 @@ export default class MoreComments implements Fetcher<Comment> {
   }
 
   protected async more(ctx: Context): Promise<Data[]> {
-    // TODO: Test the 100 limit!
-    // api/morechildren has a max of 100 ids at a time, so we have to batch it.
+    // api/morechildren can't handle more than ~75 items at a time, so we have
+    // to batch it. Yes the docs *say* 100, but if we do that we start loosing
+    // items.
     const children = this.data.children;
-    const fetches = group(children, 100).map(c => {
+    const fetches = group(children, 75).map(c => {
       const query = { children: c.join(","), link_id: `t3_${ctx.post}` };
       return ctx.client.get<Data>("api/morechildren", query);
     });
