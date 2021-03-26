@@ -432,6 +432,9 @@ export default abstract class Voteable
   /**
    * Remove this item, optionally marking it as spam.
    *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
+   *
    * @param spam Whether or not to mark this item as spam. Defaults to false.
    *
    * @returns A promise that resolves when this item has been removed.
@@ -443,6 +446,9 @@ export default abstract class Voteable
   /**
    * Ignore any future reports on this item.
    *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
+   *
    * @returns A promise that resolves when the setting has been changed.
    */
   async ignoreFutureReports(): Promise<void> {
@@ -451,6 +457,9 @@ export default abstract class Voteable
 
   /**
    * Unignore any future reports on this item.
+   *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
    *
    * @returns A promise that resolves when the setting has been changed.
    */

@@ -161,6 +161,9 @@ export default abstract class VoteableControls extends ReplyableControls {
   /**
    * Remove an item, optionally marking it as spam.
    *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
+   *
    * @param id The ID of the item to remove.
    * @param spam Whether or not to mark this item as spam. Defaults to false.
    *
@@ -173,6 +176,9 @@ export default abstract class VoteableControls extends ReplyableControls {
   /**
    * Ignore any future reports of an item.
    *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
+   *
    * @param id The ID of the item to ignore reports for.
    *
    * @returns A promise that resolves when the setting has been changed.
@@ -183,6 +189,9 @@ export default abstract class VoteableControls extends ReplyableControls {
 
   /**
    * Unignore any future reports of an item.
+   *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
    *
    * @param id The ID of the item to unignore reports for.
    *
