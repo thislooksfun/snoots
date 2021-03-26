@@ -1,15 +1,16 @@
 name: Publish Documentation
 
 on:
-  workflow_run:
-    workflows: ["Release"]
-    types: [completed]
+  push:
+    branches: [master]
 
 jobs:
   deploydoc:
     name: Deploy documentation
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.8.0
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -17,28 +18,15 @@ jobs:
       - run: npm ci
       - run: npx husky uninstall
 
-      - id: version
-        uses: actions/github-script@v3
-        with:
-          result-encoding: string
-          script: |
-            switch (context.eventName) {
-              case "push":
-                return "master";
-              case "release":
-                const pkgPth = `${process.env.GITHUB_WORKSPACE}/package.json`;
-                const { version } = require(pkgPth);
-                return `v${version}`;
-              default:
-                console.log("Something went very wrong :(");
-                console.log(`Got unexpected event '${context.eventName}'`);
-                process.exit(1);
-            }
+      - id: branch
+        name: Extract branch
+        shell: bash
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
       - name: Update dochome
         uses: actions/github-script@v3
         env:
-          VERSION: ${{ steps.version.outputs.result }}
+          VERSION: ${{ steps.branch.outputs.name }}
         with:
           script: |
             const fs = require("fs");
@@ -57,34 +45,8 @@ jobs:
         with:
           branch: gh-pages
           folder: docs
-          commit-message: Deploy docs for ${{ steps.version.outputs.result }}
-          target-folder: docs/${{ steps.version.outputs.result }}
+          commit-message: Deploy docs for branch ${{ steps.branch.outputs.name }}
+          target-folder: docs/${{ steps.branch.outputs.name }}
           git-config-name: github-actions[bot]
           git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
           clean: true
-
-  symlink:
-    name: Update symlinks
-    runs-on: ubuntu-latest
-    needs: [deploydoc]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - run: cd .meta/scripts && npm ci
-      - run: node .meta/scripts/update_symlinks.js
-      - name: Commit and push
-        run: |
-          if [ -z "$(git status --porcelain docs)" ]; then
-            echo "Nothing to commit, exiting early!"
-            exit 0
-          fi
-
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs
-          git commit -m "Update version links"
-          git push

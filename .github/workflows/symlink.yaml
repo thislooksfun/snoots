@@ -1,0 +1,36 @@
+name: Update Documentation Symlinks
+
+on:
+  push:
+    branches: [gh-pages]
+  workflow_run:
+    workflows: ["Publish Documentation", "Release"]
+    types: [completed]
+
+jobs:
+  symlink:
+    name: Update symlinks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.8.0
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: cd .meta/scripts && npm ci
+      - run: node .meta/scripts/update_symlinks.js
+      - name: Commit and push
+        run: |
+          if [ -z "$(git status --porcelain docs)" ]; then
+            echo "Nothing to commit, exiting early!"
+            exit 0
+          fi
+
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs
+          git commit -m "Update version links"
+          git push

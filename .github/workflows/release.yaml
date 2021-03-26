@@ -9,9 +9,15 @@ on:
 jobs:
   release:
     name: Release
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment: npm
+    outputs:
+      didRelease: ${{ steps.semrel.outputs.new-release-published }}
+      newVersion: v${{ steps.semrel.outputs.release-version }}
     steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.8.0
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -21,7 +27,48 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx husky uninstall
-      - run: npx semantic-release
+      - id: semrel
+        uses: codfish/semantic-release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  document:
+    name: Document new version
+    needs: [release]
+    if: jobs.release.outputs.didRelease == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npx husky uninstall
+      - name: Update dochome
+        uses: actions/github-script@v3
+        env:
+          VERSION: ${{ jobs.release.outputs.newVersion }}
+        with:
+          script: |
+            const fs = require("fs");
+            const path = require("path");
+
+            const root = process.env.GITHUB_WORKSPACE;
+            const dochomePth = path.join(root, "dochome.md");
+            const tmplt = fs.readFileSync(dochomePth, { encoding: "utf-8" });
+            const dochome = tmplt.replace(/{{version}}/g, process.env.VERSION);
+            fs.writeFileSync(dochomePth, dochome);
+
+      - run: npm run gendoc
+
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: docs
+          commit-message: Deploy docs for ${{ jobs.release.outputs.newVersion }}
+          target-folder: docs/${{ jobs.release.outputs.newVersion }}
+          git-config-name: github-actions[bot]
+          git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
+          clean: true
