@@ -114,6 +114,34 @@ export default class Listing<T> {
   }
 
   /**
+   * Execute a function on pages of the listing.
+   *
+   * If the function returns or resolves to `false`, the execution will be
+   * halted prematurely to allow breaking out in the middle of the iteration.
+   *
+   * @param fn The function to execute.
+   *
+   * @returns A promise that resolves when the listing has been exausted.
+   */
+  async eachPage(fn: Awaitable<T[], boolean | void>): Promise<void> {
+    let page: Listing<T> | null = this;
+
+    do {
+      // If the function returns false at any point, we are done.
+      const res = await fn(page.arr);
+      if (res === false) return;
+
+      if (page.next) {
+        page = page.next;
+      } else if (page.fetcher) {
+        page = await page.fetcher.fetch(this.ctx);
+      } else {
+        page = null;
+      }
+    } while (page != null);
+  }
+
+  /**
    * Execute a function on each element of the listing.
    *
    * If the function returns or resolves to `false`, the execution will be
@@ -124,22 +152,13 @@ export default class Listing<T> {
    * @returns A promise that resolves when the listing has been exausted.
    */
   async each(fn: Awaitable<T, boolean | void>): Promise<void> {
-    let page: Listing<T> | null = this;
-
-    do {
-      for (const el of page.arr) {
+    await this.eachPage(async page => {
+      for (const el of page) {
         // If the function returns false at any point, we are done.
         const res = await fn(el);
-        if (res === false) return;
+        if (res === false) return false;
       }
-
-      if (page.next) {
-        page = page.next;
-      } else if (page.fetcher) {
-        page = await page.fetcher.fetch(this.ctx);
-      } else {
-        page = null;
-      }
-    } while (page != null);
+      return true;
+    });
   }
 }
