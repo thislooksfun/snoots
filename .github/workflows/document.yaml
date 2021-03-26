@@ -26,7 +26,7 @@ jobs:
       - name: Update dochome
         uses: actions/github-script@v3
         env:
-          VERSION: ${{ steps.branch.outputs.name }}
+          VERSION: ${{ steps.branch.outputs.short_ref }}
         with:
           script: |
             const fs = require("fs");
@@ -45,8 +45,8 @@ jobs:
         with:
           branch: gh-pages
           folder: docs
-          commit-message: Deploy docs for branch ${{ steps.branch.outputs.name }}
-          target-folder: docs/${{ steps.branch.outputs.name }}
+          commit-message: Deploy docs for branch ${{ steps.branch.outputs.short_ref }}
+          target-folder: docs/${{ steps.branch.outputs.short_ref }}
           git-config-name: github-actions[bot]
           git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
           clean: true
