@@ -13,7 +13,7 @@ export default class CommentListing extends Listing<Comment> {
       fetcher = new CommentPager(l.after);
     }
 
-    const arr = [];
+    const arr: Comment[] = [];
     for (const c of l.children) {
       switch (c.kind) {
         case "t1":
