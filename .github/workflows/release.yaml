@@ -36,7 +36,7 @@ jobs:
   document:
     name: Document new version
     needs: [release]
-    if: jobs.release.outputs.didRelease == 'true'
+    if: needs.release.outputs.didRelease == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
       - name: Update dochome
         uses: actions/github-script@v3
         env:
-          VERSION: ${{ jobs.release.outputs.newVersion }}
+          VERSION: ${{ needs.release.outputs.newVersion }}
         with:
           script: |
             const fs = require("fs");
@@ -67,8 +67,8 @@ jobs:
         with:
           branch: gh-pages
           folder: docs
-          commit-message: Deploy docs for ${{ jobs.release.outputs.newVersion }}
-          target-folder: docs/${{ jobs.release.outputs.newVersion }}
+          commit-message: Deploy docs for ${{ needs.release.outputs.newVersion }}
+          target-folder: docs/${{ needs.release.outputs.newVersion }}
           git-config-name: github-actions[bot]
           git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
           clean: true
