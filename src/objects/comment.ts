@@ -57,9 +57,6 @@ export interface CommentData extends VoteableData {
    * Note: if this is true, {@link score} will always be `1`.
    */
   scoreHidden: boolean;
-
-  /** Whether or not this comment has been marked as spam. */
-  spam: boolean;
 }
 
 /** A single comment. */
@@ -75,7 +72,6 @@ export default class Comment extends Voteable implements CommentData {
   parentId: string;
   replies: Listing<Comment>;
   scoreHidden: boolean;
-  spam: boolean;
 
   protected controls: CommentControls;
 
@@ -95,7 +91,6 @@ export default class Comment extends Voteable implements CommentData {
     this.parentId = data.parentId;
     this.replies = data.replies;
     this.scoreHidden = data.scoreHidden;
-    this.spam = data.spam;
   }
 
   /**

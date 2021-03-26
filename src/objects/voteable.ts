@@ -205,6 +205,9 @@ export interface VoteableData extends ContentData {
   /** Whether or not replies to this item will notify the author. */
   sendReplies: boolean;
 
+  /** Whether or not this item has been marked as spam. */
+  spam?: boolean;
+
   /** Whether or not this item has been sticked. */
   stickied: boolean;
 
@@ -272,6 +275,7 @@ export default abstract class Voteable
   saved: boolean;
   score: number;
   sendReplies: boolean;
+  spam?: boolean;
   stickied: boolean;
   subreddit: string;
   subredditType: SubredditType;
@@ -324,6 +328,7 @@ export default abstract class Voteable
     this.saved = data.saved;
     this.score = data.score;
     this.sendReplies = data.sendReplies;
+    this.spam = data.spam;
     this.stickied = data.stickied;
     this.subreddit = data.subreddit;
     this.subredditType = data.subredditType;
