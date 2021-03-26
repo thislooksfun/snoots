@@ -161,4 +161,20 @@ export default class Listing<T> {
       return true;
     });
   }
+
+  /**
+   * Determines whether the specified callback function returns true for any
+   * element of the listing.
+   *
+   * @param fn The matcher to run on each element. If this returns `true` at any
+   * point the searching is stopped.
+   *
+   * @returns A promise that resolves to `true` if `fn` returned `true` for some
+   * element in the listing, or `false` if it reached the end of the listing.
+   */
+  async some(fn: Awaitable<T, boolean>): Promise<boolean> {
+    let found = false;
+    await this.each(async el => !(found = await fn(el)));
+    return found;
+  }
 }
