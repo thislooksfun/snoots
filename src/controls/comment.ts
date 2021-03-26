@@ -74,10 +74,8 @@ export default class CommentControls extends VoteableControls {
 
   /** @internal */
   fromRaw(raw: RedditObject): Comment {
-    if (raw.kind != "t1") {
-      // TODO: Use a custom error type.
-      throw `Invalid (expected t1, got ${raw.kind})`;
-    }
+    // TODO: Use a custom error type.
+    if (raw.kind != "t1") throw `Invalid (expected t1, got ${raw.kind})`;
 
     const rDat = raw.data;
     const postId = rDat.link_id.slice(3);
