@@ -116,10 +116,8 @@ export default class Listing<T> {
   /**
    * Execute a function on pages of the listing.
    *
-   * If the function returns or resolves to `false`, the execution will be
-   * halted prematurely to allow breaking out in the middle of the iteration.
-   *
-   * @param fn The function to execute.
+   * @param fn The function to execute. If this returns or resolves to `false`
+   * the execution will be halted.
    *
    * @returns A promise that resolves when the listing has been exausted.
    */
@@ -144,10 +142,8 @@ export default class Listing<T> {
   /**
    * Execute a function on each element of the listing.
    *
-   * If the function returns or resolves to `false`, the execution will be
-   * halted prematurely to allow breaking out in the middle of the iteration.
-   *
-   * @param fn The function to execute.
+   * @param fn The function to execute. If this returns or resolves to `false`
+   * the execution will be halted.
    *
    * @returns A promise that resolves when the listing has been exausted.
    */
