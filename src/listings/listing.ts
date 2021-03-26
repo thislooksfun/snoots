@@ -1,5 +1,5 @@
 import type { Query } from "../helper/api/core";
-import type { RedditObject } from "../helper/types";
+import type { Awaitable, RedditObject } from "../helper/types";
 import type Client from "../client";
 
 /** @internal */
@@ -52,14 +52,6 @@ export abstract class Pager<T> implements Fetcher<T> {
   }
 }
 
-/**
- * A function to be executed for each element in a Listing.
- *
- * If this function returns or resolves to `false` the iteration will be halted.
- *
- * @template T The type of data this will be passed.
- */
-export type EachFn<T> = (t: T) => Promise<boolean | void> | boolean | void;
 
 /**
  * A Listing of items.
@@ -128,7 +120,7 @@ export default class Listing<T> {
    *
    * @returns A promise that resolves when the listing has been exausted.
    */
-  async each(fn: EachFn<T>): Promise<void> {
+  async each(fn: Awaitable<T, boolean | void>): Promise<void> {
     let page: Listing<T> | null = this;
 
     do {
