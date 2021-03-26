@@ -105,7 +105,9 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="listing.html#canfetchmore" class="tsd-kind-icon">can<wbr>Fetch<wbr>More</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="listing.html#each" class="tsd-kind-icon">each</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="listing.html#eachpage" class="tsd-kind-icon">each<wbr>Page</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="listing.html#empty" class="tsd-kind-icon">empty</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="listing.html#some" class="tsd-kind-icon">some</a></li>
 							</ul>
 						</section>
 					</div>
@@ -123,7 +125,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/listings/listing.ts#L117">listings/listing.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/listings/listing.ts#L112">listings/listing.ts:112</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -144,28 +146,60 @@
 					<a name="each" class="tsd-anchor"></a>
 					<h3>each</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">each<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="../modules.html#eachfn" class="tsd-signature-type" data-tsd-kind="Type alias">EachFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">each<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="../modules.html#awaitable" class="tsd-signature-type" data-tsd-kind="Type alias">Awaitable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/listings/listing.ts#L131">listings/listing.ts:131</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/listings/listing.ts#L150">listings/listing.ts:150</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Execute a function on each element of the listing.</p>
 								</div>
-								<p>If the function returns or resolves to <code>false</code>, the execution will be
-								halted prematurely to allow breaking out in the middle of the iteration.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>fn: <a href="../modules.html#eachfn" class="tsd-signature-type" data-tsd-kind="Type alias">EachFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>fn: <a href="../modules.html#awaitable" class="tsd-signature-type" data-tsd-kind="Type alias">Awaitable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The function to execute.</p>
+										<p>The function to execute. If this returns or resolves to <code>false</code>
+										the execution will be halted.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that resolves when the listing has been exausted.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="eachpage" class="tsd-anchor"></a>
+					<h3>each<wbr>Page</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">each<wbr>Page<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="../modules.html#awaitable" class="tsd-signature-type" data-tsd-kind="Type alias">Awaitable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/listings/listing.ts#L124">listings/listing.ts:124</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Execute a function on pages of the listing.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <a href="../modules.html#awaitable" class="tsd-signature-type" data-tsd-kind="Type alias">Awaitable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The function to execute. If this returns or resolves to <code>false</code>
+										the execution will be halted.</p>
 									</div>
 								</li>
 							</ul>
@@ -184,7 +218,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/listings/listing.ts#L92">listings/listing.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/listings/listing.ts#L87">listings/listing.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -195,6 +229,41 @@
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>A promise that resolves to either <code>true</code> if the listing is empty
 							or <code>false</code> if it&#39;s not.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="some" class="tsd-anchor"></a>
+					<h3>some</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">some<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="../modules.html#awaitable" class="tsd-signature-type" data-tsd-kind="Type alias">Awaitable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/listings/listing.ts#L171">listings/listing.ts:171</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Determines whether the specified callback function returns true for any
+									element of the listing.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <a href="../modules.html#awaitable" class="tsd-signature-type" data-tsd-kind="Type alias">Awaitable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The matcher to run on each element. If this returns <code>true</code> at any
+										point the searching is stopped.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that resolves to <code>true</code> if <code>fn</code> returned <code>true</code> for some
+							element in the listing, or <code>false</code> if it reached the end of the listing.</p>
 						</li>
 					</ul>
 				</section>
@@ -237,12 +306,24 @@
 								<a href="listing.html#each" class="tsd-kind-icon">each</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="listing.html#eachpage" class="tsd-kind-icon">each<wbr>Page</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="listing.html#empty" class="tsd-kind-icon">empty</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="listing.html#some" class="tsd-kind-icon">some</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="post.html" class="tsd-kind-icon">Post</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="postcontrols.html" class="tsd-kind-icon">Post<wbr>Controls</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="votable.html" class="tsd-kind-icon">Votable</a>
 					</li>
@@ -265,6 +346,9 @@
 						<a href="../interfaces/gildings.html" class="tsd-kind-icon">Gildings</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/postdata.html" class="tsd-kind-icon">Post<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/richtextflairemoji.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Emoji</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -282,11 +366,11 @@
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#auth" class="tsd-kind-icon">Auth</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#awaitable" class="tsd-kind-icon">Awaitable</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#data" class="tsd-kind-icon">Data</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="../modules.html#eachfn" class="tsd-kind-icon">Each<wbr>Fn</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#query" class="tsd-kind-icon">Query</a>

@@ -76,13 +76,16 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="basecontrols.html" class="tsd-signature-type" data-tsd-kind="Class">BaseControls</a>
+						<span class="tsd-signature-type">ReplyableControls</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">VoteableControls</span>
 								<ul class="tsd-hierarchy">
 									<li>
 										<a href="commentcontrols.html" class="tsd-signature-type" data-tsd-kind="Class">CommentControls</a>
+									</li>
+									<li>
+										<a href="postcontrols.html" class="tsd-signature-type" data-tsd-kind="Class">PostControls</a>
 									</li>
 								</ul>
 							</li>
@@ -97,6 +100,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#approve" class="tsd-kind-icon">approve</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#delete" class="tsd-kind-icon">delete</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#disableinboxreplies" class="tsd-kind-icon">disable<wbr>Inbox<wbr>Replies</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#downvote" class="tsd-kind-icon">downvote</a></li>
@@ -105,6 +109,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#gild" class="tsd-kind-icon">gild</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#ignorefuturereports" class="tsd-kind-icon">ignore<wbr>Future<wbr>Reports</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#remove" class="tsd-kind-icon">remove</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#reply" class="tsd-kind-icon">reply</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#report" class="tsd-kind-icon">report</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#save" class="tsd-kind-icon">save</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#unignorefuturereports" class="tsd-kind-icon">unignore<wbr>Future<wbr>Reports</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#unsave" class="tsd-kind-icon">unsave</a></li>
@@ -118,6 +124,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="approve" class="tsd-anchor"></a>
+					<h3>approve</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">approve<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L171">controls/voteable.ts:171</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Approve an item.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>note</dt>
+									<dd><p>This requires the authenticated user to be a moderator of the
+										subreddit with the <code>posts</code> permission.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ID of the item to approve.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that resolves when the item has been approved.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="delete" class="tsd-anchor"></a>
 					<h3>delete</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -127,7 +171,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L140">controls/voteable.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L157">controls/voteable.ts:157</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -159,7 +203,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L45">controls/voteable.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L47">controls/voteable.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -191,7 +235,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L90">controls/voteable.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L92">controls/voteable.ts:92</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -223,7 +267,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L128">controls/voteable.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L145">controls/voteable.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -261,7 +305,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L34">controls/voteable.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L36">controls/voteable.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -293,7 +337,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L185">controls/voteable.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L225">controls/voteable.ts:225</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -325,13 +369,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L163">controls/voteable.ts:163</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L200">controls/voteable.ts:200</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Ignore any future reports of an item.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>note</dt>
+									<dd><p>This requires the authenticated user to be a moderator of the
+										subreddit with the <code>posts</code> permission.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -357,13 +407,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L152">controls/voteable.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L186">controls/voteable.ts:186</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Remove an item, optionally marking it as spam.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>note</dt>
+									<dd><p>This requires the authenticated user to be a moderator of the
+										subreddit with the <code>posts</code> permission.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -386,6 +442,84 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="reply" class="tsd-anchor"></a>
+					<h3>reply</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">reply<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type" data-tsd-kind="Class">Comment</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L104">controls/voteable.ts:104</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Reply to an item.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ID of the item to reply to.</p>
+									</div>
+								</li>
+								<li>
+									<h5>text: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The text content of the reply to post.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="comment.html" class="tsd-signature-type" data-tsd-kind="Class">Comment</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that resolves to the comment reply.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="report" class="tsd-anchor"></a>
+					<h3>report</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">report<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/replyable.ts#L16">controls/replyable.ts:16</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Report an item to the mods.</p>
+								</div>
+								<p>The report will be anonymous if you are not a mod of the subreddit. If you
+								are a mod the report will be tied to your username.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ID of the item to report.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The reason you are reporting the item.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that resolves when the item has been reported.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="save" class="tsd-anchor"></a>
 					<h3>save</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -395,7 +529,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L103">controls/voteable.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L120">controls/voteable.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,13 +562,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L174">controls/voteable.ts:174</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L214">controls/voteable.ts:214</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Unignore any future reports of an item.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>note</dt>
+									<dd><p>This requires the authenticated user to be a moderator of the
+										subreddit with the <code>posts</code> permission.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -460,7 +600,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L116">controls/voteable.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L133">controls/voteable.ts:133</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -493,7 +633,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L79">controls/voteable.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L81">controls/voteable.ts:81</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -525,7 +665,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/controls/voteable.ts#L68">controls/voteable.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/controls/voteable.ts#L70">controls/voteable.ts:70</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -578,6 +718,12 @@
 						<a href="listing.html" class="tsd-kind-icon">Listing</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="post.html" class="tsd-kind-icon">Post</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="postcontrols.html" class="tsd-kind-icon">Post<wbr>Controls</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="votable.html" class="tsd-kind-icon">Votable</a>
 					</li>
 				</ul>
@@ -585,6 +731,9 @@
 					<li class="current tsd-kind-class">
 						<a href="voteablecontrols.html" class="tsd-kind-icon">Voteable<wbr>Controls</a>
 						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#approve" class="tsd-kind-icon">approve</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="voteablecontrols.html#delete" class="tsd-kind-icon">delete</a>
 							</li>
@@ -608,6 +757,12 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="voteablecontrols.html#remove" class="tsd-kind-icon">remove</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#reply" class="tsd-kind-icon">reply</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#report" class="tsd-kind-icon">report</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="voteablecontrols.html#save" class="tsd-kind-icon">save</a>
@@ -644,6 +799,9 @@
 						<a href="../interfaces/gildings.html" class="tsd-kind-icon">Gildings</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/postdata.html" class="tsd-kind-icon">Post<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/richtextflairemoji.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Emoji</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -661,11 +819,11 @@
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#auth" class="tsd-kind-icon">Auth</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#awaitable" class="tsd-kind-icon">Awaitable</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#data" class="tsd-kind-icon">Data</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="../modules.html#eachfn" class="tsd-kind-icon">Each<wbr>Fn</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#query" class="tsd-kind-icon">Query</a>

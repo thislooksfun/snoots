@@ -65,6 +65,7 @@
 							<h3>Controls Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class"><a href="classes/commentcontrols.html" class="tsd-kind-icon">Comment<wbr>Controls</a></li>
+								<li class="tsd-kind-class"><a href="classes/postcontrols.html" class="tsd-kind-icon">Post<wbr>Controls</a></li>
 							</ul>
 							<h3>Other Classes</h3>
 							<ul class="tsd-index-list">
@@ -73,6 +74,7 @@
 								<li class="tsd-kind-class"><a href="classes/comment.html" class="tsd-kind-icon">Comment</a></li>
 								<li class="tsd-kind-class"><a href="classes/content.html" class="tsd-kind-icon">Content</a></li>
 								<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/listing.html" class="tsd-kind-icon">Listing</a></li>
+								<li class="tsd-kind-class"><a href="classes/post.html" class="tsd-kind-icon">Post</a></li>
 								<li class="tsd-kind-class"><a href="classes/votable.html" class="tsd-kind-icon">Votable</a></li>
 								<li class="tsd-kind-class"><a href="classes/voteablecontrols.html" class="tsd-kind-icon">Voteable<wbr>Controls</a></li>
 							</ul>
@@ -85,6 +87,7 @@
 								<li class="tsd-kind-interface"><a href="interfaces/contentdata.html" class="tsd-kind-icon">Content<wbr>Data</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/credentials.html" class="tsd-kind-icon">Credentials</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/gildings.html" class="tsd-kind-icon">Gildings</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/postdata.html" class="tsd-kind-icon">Post<wbr>Data</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/richtextflairemoji.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Emoji</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/richtextflairtext.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Text</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/tokenauth.html" class="tsd-kind-icon">Token<wbr>Auth</a></li>
@@ -96,8 +99,8 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias"><a href="modules.html#auth" class="tsd-kind-icon">Auth</a></li>
+								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#awaitable" class="tsd-kind-icon">Awaitable</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#data" class="tsd-kind-icon">Data</a></li>
-								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#eachfn" class="tsd-kind-icon">Each<wbr>Fn</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#query" class="tsd-kind-icon">Query</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#richtextflair" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#subreddittype" class="tsd-kind-icon">Subreddit<wbr>Type</a></li>
@@ -114,7 +117,7 @@
 					<div class="tsd-signature tsd-kind-icon">Auth<span class="tsd-signature-symbol">:</span> <a href="interfaces/usernameauth.html" class="tsd-signature-type" data-tsd-kind="Interface">UsernameAuth</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/tokenauth.html" class="tsd-signature-type" data-tsd-kind="Interface">TokenAuth</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/client.ts#L32">client.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/client.ts#L32">client.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -123,45 +126,27 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/helper/types.ts#L2">helper/types.ts:2</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A string-keyed object that can hold anything.</p>
-						</div>
-					</div>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
-					<a name="eachfn" class="tsd-anchor"></a>
-					<h3>Each<wbr>Fn</h3>
-					<div class="tsd-signature tsd-kind-icon">Each<wbr>Fn&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></div>
+					<a name="awaitable" class="tsd-anchor"></a>
+					<h3>Awaitable</h3>
+					<div class="tsd-signature tsd-kind-icon">Awaitable&lt;T, R&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">R</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/listings/listing.ts#L62">listings/listing.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/helper/types.ts#L5">helper/types.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A function to be executed for each element in a Listing.</p>
+							<p>A function that either returns a type or a promise of that type.</p>
 						</div>
-						<p>If this function returns or resolves to <code>false</code> the iteration will be halted.</p>
 					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
 							<h4>T</h4>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The type of data this will be passed.</p>
-								</div>
-							</div>
+						</li>
+						<li>
+							<h4>R</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -169,7 +154,7 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">R</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -179,11 +164,26 @@
 												<h5>t: <span class="tsd-signature-type">T</span></h5>
 											</li>
 										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></h4>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">R</span></h4>
 									</li>
 								</ul>
 							</li>
 						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/helper/types.ts#L2">helper/types.ts:2</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string-keyed object that can hold anything.</p>
+						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
@@ -192,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">Query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/helper/api/core.ts#L6">helper/api/core.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/helper/api/core.ts#L6">helper/api/core.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -207,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">Rich<wbr>Text<wbr>Flair<span class="tsd-signature-symbol">:</span> <a href="interfaces/richtextflairtext.html" class="tsd-signature-type" data-tsd-kind="Interface">RichTextFlairText</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/richtextflairemoji.html" class="tsd-signature-type" data-tsd-kind="Interface">RichTextFlairEmoji</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/objects/voteable.ts#L28">objects/voteable.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/objects/voteable.ts#L29">objects/voteable.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -222,7 +222,7 @@
 					<div class="tsd-signature tsd-kind-icon">Subreddit<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;gold_restricted&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;archived&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;restricted&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;employees_only&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;gold_only&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;private&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;user&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;public&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/aa2a199/src/helper/types.ts#L5">helper/types.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/afc89f6/src/helper/types.ts#L8">helper/types.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -262,6 +262,12 @@
 						<a href="classes/listing.html" class="tsd-kind-icon">Listing</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/post.html" class="tsd-kind-icon">Post</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/postcontrols.html" class="tsd-kind-icon">Post<wbr>Controls</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/votable.html" class="tsd-kind-icon">Votable</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -283,6 +289,9 @@
 						<a href="interfaces/gildings.html" class="tsd-kind-icon">Gildings</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/postdata.html" class="tsd-kind-icon">Post<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/richtextflairemoji.html" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair<wbr>Emoji</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -300,11 +309,11 @@
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#auth" class="tsd-kind-icon">Auth</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#awaitable" class="tsd-kind-icon">Awaitable</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#data" class="tsd-kind-icon">Data</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
-						<a href="modules.html#eachfn" class="tsd-kind-icon">Each<wbr>Fn</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#query" class="tsd-kind-icon">Query</a>
