@@ -42,7 +42,7 @@ export interface Gildings {
 /** The base for all content that you can vote on. */
 export interface VoteableData extends ContentData {
   /** Whether or not this item was approved. */
-  approved: boolean;
+  approved?: boolean;
 
   /**
    * The unix timestamp of when this was approved.
@@ -230,7 +230,7 @@ export interface VoteableData extends ContentData {
 
 /** The base for all content that you can vote on. */
 export default abstract class Voteable extends Content implements VoteableData {
-  approved: boolean;
+  approved?: boolean;
   approvedAtUtc: number | null;
   approvedBy: string | null;
   archived: boolean;
