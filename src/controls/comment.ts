@@ -1,4 +1,4 @@
-import type { _Listing } from "../listings/listing";
+import type { _Listing, ListingObject } from "../listings/listing";
 import type { CommentData } from "../objects/comment";
 import type { RedditObject } from "../helper/types";
 import type Client from "../client";
@@ -39,14 +39,14 @@ export default class CommentControls extends VoteableControls {
    */
   async fetch(id: string): Promise<Comment> {
     const req = { id: this.namespace(id) };
-    const res: RedditObject = await this.client.get("api/info", req);
+    const res: ListingObject = await this.client.get("api/info", req);
 
     if (res.kind !== "Listing") {
       // TODO: Use a custom error type.
       throw "Invalid";
     }
 
-    const list = res.data as _Listing;
+    const list = res.data;
     if (list.children.length < 1) {
       // TODO: Use a custom error type.
       throw "Not found";

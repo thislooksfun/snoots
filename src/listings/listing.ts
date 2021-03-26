@@ -19,6 +19,9 @@ export interface _Listing {
 }
 
 /** @internal */
+export type ListingObject = RedditObject<_Listing>;
+
+/** @internal */
 export interface RedditMore {
   count: number;
   name: string;
