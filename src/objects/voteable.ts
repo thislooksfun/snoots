@@ -1,6 +1,7 @@
 import type { ContentData } from "./content";
 import type { SubredditType } from "../helper/types";
-import Content from "./content";
+import Comment from "./comment";
+import Replyable from "./replyable";
 import VoteableControls from "../controls/voteable";
 
 /** A rich text flair containing text. */
@@ -229,7 +230,9 @@ export interface VoteableData extends ContentData {
 }
 
 /** The base for all content that you can vote on. */
-export default abstract class Voteable extends Content implements VoteableData {
+export default abstract class Voteable
+  extends Replyable
+  implements VoteableData {
   approved?: boolean;
   approvedAtUtc: number | null;
   approvedBy: string | null;
@@ -279,7 +282,7 @@ export default abstract class Voteable extends Content implements VoteableData {
 
   /** @internal */
   constructor(controls: VoteableControls, data: VoteableData) {
-    super(data);
+    super(controls, data);
     this.controls = controls;
 
     this.approved = data.approved;
@@ -371,6 +374,17 @@ export default abstract class Voteable extends Content implements VoteableData {
    */
   async downvote(): Promise<void> {
     return this.controls.downvote(this.id);
+  }
+
+  /**
+   * Reply to this item.
+   *
+   * @param text The text content of the reply to post.
+   *
+   * @returns A promise that resolves to the comment reply.
+   */
+  async reply(text: string): Promise<Comment> {
+    return this.controls.reply(this.id, text);
   }
 
   /**

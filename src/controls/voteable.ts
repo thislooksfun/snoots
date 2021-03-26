@@ -1,11 +1,13 @@
 import type Client from "../client";
-import BaseControls from "./base";
+import { Data, RedditObject } from "../helper/types";
+import Comment from "../objects/comment";
+import ReplyableControls from "./replyable";
 
 /** The vote types. 1 = upvote, 0 = no vote, -1 = downvote. */
 export type Vote = 1 | 0 | -1;
 
 /** The base controls for all content that you can vote on. */
-export default abstract class VoteableControls extends BaseControls {
+export default abstract class VoteableControls extends ReplyableControls {
   /** @internal */
   constructor(client: Client, type: string) {
     super(client, `${type}_`);
@@ -89,6 +91,21 @@ export default abstract class VoteableControls extends BaseControls {
    */
   async downvote(id: string): Promise<void> {
     return this.vote(id, -1);
+  }
+
+  /**
+   * Reply to an item.
+   *
+   * @param id The ID of the item to reply to.
+   * @param text The text content of the reply to post.
+   *
+   * @returns A promise that resolves to the comment reply.
+   */
+  async reply(id: string, text: string): Promise<Comment> {
+    const res: Data = await this.replyImpl(id, text);
+    const rc: RedditObject = res.things[0];
+    if (!rc) throw "oh yeah that's definitely not good.";
+    return this.client.comments.fromRaw(rc);
   }
 
   /**
