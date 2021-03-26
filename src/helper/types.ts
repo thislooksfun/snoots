@@ -13,4 +13,4 @@ export type SubredditType =
   | "public";
 
 /** @internal */
-export type RedditObject = { kind: string; data: Data };
+export type RedditObject<T = Data> = { kind: string; data: T };
