@@ -55,7 +55,6 @@ export abstract class Pager<T> implements Fetcher<T> {
   }
 }
 
-
 /**
  * A Listing of items.
  *
