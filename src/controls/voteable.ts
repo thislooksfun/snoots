@@ -159,6 +159,20 @@ export default abstract class VoteableControls extends ReplyableControls {
   }
 
   /**
+   * Approve an item.
+   *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
+   *
+   * @param id The ID of the item to approve.
+   *
+   * @returns A promise that resolves when the item has been approved.
+   */
+  async approve(id: string): Promise<void> {
+    return this.client.post("api/approve", { id: this.namespace(id) });
+  }
+
+  /**
    * Remove an item, optionally marking it as spam.
    *
    * @note This requires the authenticated user to be a moderator of the

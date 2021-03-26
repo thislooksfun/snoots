@@ -430,6 +430,18 @@ export default abstract class Voteable
   }
 
   /**
+   * Approve this item.
+   *
+   * @note This requires the authenticated user to be a moderator of the
+   * subreddit with the `posts` permission.
+   *
+   * @returns A promise that resolves when the item has been approved.
+   */
+  async approve(): Promise<void> {
+    return this.controls.approve(this.id);
+  }
+
+  /**
    * Remove this item, optionally marking it as spam.
    *
    * @note This requires the authenticated user to be a moderator of the
