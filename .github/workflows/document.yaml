@@ -31,7 +31,7 @@ jobs:
                 return `v${version}`;
               default:
                 console.log("Something went very wrong :(");
-                console.log(`Got unexpected event '${evnt}'`);
+                console.log(`Got unexpected event '${context.eventName}'`);
                 process.exit(1);
             }
 
