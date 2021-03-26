@@ -3,9 +3,9 @@ import type { Token } from "./helper/accessToken";
 import type { Data } from "./helper/types";
 import type { OauthOpts } from "./helper/api/oauth";
 import type { Query } from "./helper/api/core";
+import { CommentControls, PostControls } from "./controls";
 import * as anon from "./helper/api/anon";
 import * as oauth from "./helper/api/oauth";
-import CommentControls from "./controls/comment";
 import refreshToken from "./helper/accessToken";
 
 /** Username and password based authentication */
@@ -106,6 +106,8 @@ export interface ClientOptions {
 export default class Client {
   /** Controls for interacting with comments. */
   public comments: CommentControls;
+  /** Controls for interacting with posts. */
+  public posts: PostControls;
   protected auth?: Auth;
   protected creds?: Credentials;
   protected token: Token | null;
@@ -124,6 +126,7 @@ export default class Client {
 
     // Set up controls after we have initalized the internal state.
     this.comments = new CommentControls(this);
+    this.posts = new PostControls(this);
   }
 
   /**
