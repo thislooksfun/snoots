@@ -23,6 +23,6 @@ export default abstract class Replyable extends Content {
    * @returns A promise that resolves when this item has been reported.
    */
   async report(reason?: string): Promise<void> {
-    await this.controls.report(this.id, reason);
+    return this.controls.report(this.id, reason);
   }
 }
