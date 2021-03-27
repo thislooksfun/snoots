@@ -101,7 +101,7 @@ export default class PostControls extends VoteableControls {
    *
    * @returns A promise that resolves when the post has been hidden.
    */
-  async hide(id: string) {
+  async hide(id: string): Promise<void> {
     return this.client.post("api/hide", { id: this.namespace(id) });
   }
 
@@ -112,7 +112,7 @@ export default class PostControls extends VoteableControls {
    *
    * @returns A promise that resolves when the post has been hidden.
    */
-  async unhide(id: string) {
+  async unhide(id: string): Promise<void> {
     return this.client.post("api/unhide", { id: this.namespace(id) });
   }
 
@@ -123,7 +123,7 @@ export default class PostControls extends VoteableControls {
    *
    * @returns A promise that resolves when the post has been locked.
    */
-  async lock(id: string) {
+  async lock(id: string): Promise<void> {
     return this.client.post("api/lock", { id: this.namespace(id) });
   }
 
@@ -134,7 +134,7 @@ export default class PostControls extends VoteableControls {
    *
    * @returns A promise that resolves when the post has been unlocked.
    */
-  async unlock(id: string) {
+  async unlock(id: string): Promise<void> {
     return this.client.post("api/unlock", { id: this.namespace(id) });
   }
 
@@ -200,7 +200,7 @@ export default class PostControls extends VoteableControls {
    *
    * @returns A promise that resolves when the post has been stickied.
    */
-  async sticky(id: string, num: 1 | 2) {
+  async sticky(id: string, num: 1 | 2): Promise<void> {
     return this.setStickied(id, true, num);
   }
 
@@ -211,7 +211,7 @@ export default class PostControls extends VoteableControls {
    *
    * @returns A promise that resolves when the post has been unstickied.
    */
-  async unsticky(id: string) {
+  async unsticky(id: string): Promise<void> {
     return this.setStickied(id, false);
   }
 

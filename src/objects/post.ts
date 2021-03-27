@@ -411,7 +411,7 @@ export default class Post extends Voteable implements PostData {
    *
    * @returns A promise that resolves when the post has been hidden.
    */
-  async hide() {
+  async hide(): Promise<void> {
     return this.controls.hide(this.id);
   }
 
@@ -420,7 +420,7 @@ export default class Post extends Voteable implements PostData {
    *
    * @returns A promise that resolves when the post has been hidden.
    */
-  async unhide() {
+  async unhide(): Promise<void> {
     return this.controls.unhide(this.id);
   }
 
@@ -429,7 +429,7 @@ export default class Post extends Voteable implements PostData {
    *
    * @returns A promise that resolves when the post has been locked.
    */
-  async lock() {
+  async lock(): Promise<void> {
     return this.controls.lock(this.id);
   }
 
@@ -438,7 +438,7 @@ export default class Post extends Voteable implements PostData {
    *
    * @returns A promise that resolves when the post has been unlocked.
    */
-  async unlock() {
+  async unlock(): Promise<void> {
     return this.controls.unlock(this.id);
   }
 
@@ -485,7 +485,7 @@ export default class Post extends Voteable implements PostData {
    *
    * @returns A promise that resolves when the post has been stickied.
    */
-  async sticky(num: 1 | 2) {
+  async sticky(num: 1 | 2): Promise<void> {
     return this.controls.sticky(this.id, num);
   }
 
@@ -494,7 +494,7 @@ export default class Post extends Voteable implements PostData {
    *
    * @returns A promise that resolves when the post has been unstickied.
    */
-  async unsticky() {
+  async unsticky(): Promise<void> {
     return this.controls.unsticky(this.id);
   }
 
