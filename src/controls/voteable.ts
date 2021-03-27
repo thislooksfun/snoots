@@ -23,7 +23,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    */
   protected async inboxReplies(id: string, enabled: boolean): Promise<void> {
     const req = { id: this.namespace(id), state: enabled };
-    return this.client.post("api/sendreplies", req);
+    await this.client.post("api/sendreplies", req);
   }
 
   /**
@@ -34,7 +34,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when replies have been enabled.
    */
   async enableInboxReplies(id: string): Promise<void> {
-    return this.inboxReplies(id, true);
+    await this.inboxReplies(id, true);
   }
 
   /**
@@ -45,7 +45,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when replies have been disabled.
    */
   async disableInboxReplies(id: string): Promise<void> {
-    return this.inboxReplies(id, false);
+    await this.inboxReplies(id, false);
   }
 
   /**
@@ -57,7 +57,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the vote has been cast.
    */
   protected async vote(id: string, vote: Vote): Promise<void> {
-    return this.client.post("api/vote", { id: this.namespace(id), dir: vote });
+    await this.client.post("api/vote", { id: this.namespace(id), dir: vote });
   }
 
   /**
@@ -68,7 +68,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the vote has been cast.
    */
   async upvote(id: string): Promise<void> {
-    return this.vote(id, 1);
+    await this.vote(id, 1);
   }
 
   /**
@@ -79,7 +79,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the vote has been removed.
    */
   async unvote(id: string): Promise<void> {
-    return this.vote(id, 0);
+    await this.vote(id, 0);
   }
 
   /**
@@ -90,7 +90,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the vote has been cast.
    */
   async downvote(id: string): Promise<void> {
-    return this.vote(id, -1);
+    await this.vote(id, -1);
   }
 
   /**
@@ -118,7 +118,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns a promise that resolves when the item has been saved.
    */
   async save(id: string): Promise<void> {
-    return this.client.post("api/save", { id: this.namespace(id) });
+    await this.client.post("api/save", { id: this.namespace(id) });
   }
 
   /**
@@ -131,7 +131,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns a promise that resolves when the item has been unsaved.
    */
   async unsave(id: string): Promise<void> {
-    return this.client.post("api/unsave", { id: this.namespace(id) });
+    await this.client.post("api/unsave", { id: this.namespace(id) });
   }
 
   /**
@@ -144,7 +144,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    */
   async edit(id: string, newText: string): Promise<void> {
     const body = { thing_id: this.namespace(id), text: newText };
-    return this.client.post("api/editusertext", body);
+    await this.client.post("api/editusertext", body);
   }
 
   /**
@@ -155,7 +155,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the item has been deleted.
    */
   async delete(id: string): Promise<void> {
-    return this.client.post("api/del", { id: this.namespace(id) });
+    await this.client.post("api/del", { id: this.namespace(id) });
   }
 
   /**
@@ -169,7 +169,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the item has been approved.
    */
   async approve(id: string): Promise<void> {
-    return this.client.post("api/approve", { id: this.namespace(id) });
+    await this.client.post("api/approve", { id: this.namespace(id) });
   }
 
   /**
@@ -184,7 +184,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the item has been removed.
    */
   async remove(id: string, spam: boolean = false): Promise<void> {
-    return this.client.post("api/remove", { id: this.namespace(id), spam });
+    await this.client.post("api/remove", { id: this.namespace(id), spam });
   }
 
   /**
@@ -198,7 +198,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the setting has been changed.
    */
   async ignoreFutureReports(id: string): Promise<void> {
-    return this.client.post("api/ignore_reports", { id: this.namespace(id) });
+    await this.client.post("api/ignore_reports", { id: this.namespace(id) });
   }
 
   /**
@@ -212,7 +212,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the setting has been changed.
    */
   async unignoreFutureReports(id: string): Promise<void> {
-    return this.client.post("api/unignore_reports", { id: this.namespace(id) });
+    await this.client.post("api/unignore_reports", { id: this.namespace(id) });
   }
 
   /**
@@ -223,6 +223,6 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the item has been gilded.
    */
   async gild(id: string): Promise<void> {
-    return this.client.post(`api/v1/gold/gild/${this.namespace(id)}`, {});
+    await this.client.post(`api/v1/gold/gild/${this.namespace(id)}`, {});
   }
 }

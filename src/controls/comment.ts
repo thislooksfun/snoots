@@ -69,7 +69,7 @@ export default class CommentControls extends VoteableControls {
     const sticky = state === "sticky";
 
     const body = { how, sticky, id: this.namespace(id) };
-    return this.client.post("api/distinguish", body);
+    await this.client.post("api/distinguish", body);
   }
 
   /** @internal */
