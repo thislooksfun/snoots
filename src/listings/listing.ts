@@ -1,5 +1,5 @@
 import type { Query } from "../helper/api/core";
-import type { Awaitable, RedditObject } from "../helper/types";
+import type { AwaitableFn, RedditObject } from "../helper/types";
 import type Client from "../client";
 
 /** @internal */
@@ -120,7 +120,7 @@ export default class Listing<T> {
    *
    * @returns A promise that resolves when the listing has been exausted.
    */
-  async eachPage(fn: Awaitable<T[], boolean | void>): Promise<void> {
+  async eachPage(fn: AwaitableFn<T[], boolean | void>): Promise<void> {
     let page: Listing<T> | null = this;
 
     do {
@@ -146,7 +146,7 @@ export default class Listing<T> {
    *
    * @returns A promise that resolves when the listing has been exausted.
    */
-  async each(fn: Awaitable<T, boolean | void>): Promise<void> {
+  async each(fn: AwaitableFn<T, boolean | void>): Promise<void> {
     await this.eachPage(async page => {
       for (const el of page) {
         // If the function returns false at any point, we are done.
@@ -167,7 +167,7 @@ export default class Listing<T> {
    * @returns A promise that resolves to `true` if `fn` returned `true` for some
    * element in the listing, or `false` if it reached the end of the listing.
    */
-  async some(fn: Awaitable<T, boolean>): Promise<boolean> {
+  async some(fn: AwaitableFn<T, boolean>): Promise<boolean> {
     let found = false;
     await this.each(async el => !(found = await fn(el)));
     return found;
