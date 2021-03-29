@@ -90,7 +90,7 @@ Note: Node 14+ is required.
 For detailed instructions on how to use snoots, check out the
 [latest documentation][ld].
 
-# Contributing
+## Contributing
 
 If you want to help out, please read the [CONTRIBUTING.md][c.md].
 
