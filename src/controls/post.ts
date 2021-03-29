@@ -215,25 +215,6 @@ export default class PostControls extends VoteableControls {
     await this.setStickied(id, false);
   }
 
-  // /**
-  //  * @summary Stickies this Submission.
-  //  * @param {object} [options]
-  //  * @param {number} [options.num=1] The sticky slot to put this submission in; this should be either 1 or 2.
-  //  * @returns {Promise} The updated version of this Submission
-  //  * @example r.getSubmission('2np694').sticky({num: 2})
-  //  */
-  // sticky({ num = 1 } = {}) {
-  //   return this._setStickied({ state: true, num });
-  // }
-  // /**
-  //  * @summary Unstickies this Submission.
-  //  * @returns {Promise} The updated version of this Submission
-  //  * @example r.getSubmission('2np694').unsticky()
-  //  */
-  // unsticky() {
-  //   return this._setStickied({ state: false });
-  // }
-
   /** @internal */
   fromRaw(raw: RedditObject, comments?: _Listing): Post {
     // TODO: Use a custom error type.
