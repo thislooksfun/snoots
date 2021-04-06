@@ -103,7 +103,7 @@
 					<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <a href="../modules.html#auth" class="tsd-signature-type" data-tsd-kind="Type alias">Auth</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/6149c81/src/client.ts#L46">client.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/client.ts#L46">client.ts:46</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -120,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">creds<span class="tsd-signature-symbol">:</span> <a href="credentials.html" class="tsd-signature-type" data-tsd-kind="Interface">Credentials</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/6149c81/src/client.ts#L54">client.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/client.ts#L54">client.ts:54</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -137,15 +137,36 @@
 					<div class="tsd-signature tsd-kind-icon">user<wbr>Agent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/6149c81/src/client.ts#L62">client.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/client.ts#L81">client.ts:81</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The user agent for this client.</p>
 						</div>
-						<p>Every reddit application is required to have a unique user agent that
-						preferably includes the version number.</p>
+						<p>Every reddit application is required to have a unique user agent. From
+						Reddit&#39;s <a href="https://github.com/reddit-archive/reddit/wiki/api#rules">API rules</a>:</p>
+						<blockquote>
+							<ul>
+								<li>Change your client&#39;s User-Agent string to something unique and
+									descriptive, including the target platform, a unique application
+									identifier, a version string, and your username as contact information,
+									in the following format:
+									<code>&lt;platform&gt;:&lt;app ID&gt;:&lt;version string&gt; (by /u/&lt;reddit username&gt;)</code><ul>
+										<li>Example: <code>User-Agent: android:com.example.myredditapp:v1.2.3 (by /u/kemitche)</code></li>
+										<li>Many default User-Agents (like &quot;Python/urllib&quot; or &quot;Java&quot;) are
+											drastically limited to encourage unique and descriptive user-agent
+										strings.</li>
+										<li>Including the version number and updating it as you build your
+											application allows us to safely block old buggy/broken versions of
+										your app.</li>
+										<li><strong>NEVER lie about your user-agent.</strong> This includes spoofing popular
+											browsers and spoofing other bots. We will ban liars with extreme
+										prejudice.</li>
+									</ul>
+								</li>
+							</ul>
+						</blockquote>
 					</div>
 				</section>
 			</section>
