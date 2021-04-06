@@ -79,6 +79,6 @@ More examples will come as snoots evolves!
 
 <!-- Links -->
 
-[cd]: https://thislooks.fun/snoots/docs/latest/classes/client
-[ua]: https://thislooks.fun/snoots/interfaces/clientoptions#useragent
-[creds]: https://thislooks.fun/snoots/interfaces/credentials
+[cd]: ./classes/client.html
+[ua]: ./interfaces/clientoptions.html#useragent
+[creds]: ./interfaces/credentials.html
