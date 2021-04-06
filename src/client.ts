@@ -56,8 +56,27 @@ export interface ClientOptions {
   /**
    * The user agent for this client.
    *
-   * Every reddit application is required to have a unique user agent that
-   * preferably includes the version number.
+   * Every reddit application is required to have a unique user agent. From
+   * Reddit's [API rules][rls]:
+   *
+   * > * Change your client's User-Agent string to something unique and
+   * >   descriptive, including the target platform, a unique application
+   * >   identifier, a version string, and your username as contact information,
+   * >   in the following format:
+   * >   `<platform>:<app ID>:<version string> (by /u/<reddit username>)`
+   * >     * Example: `User-Agent: android:com.example.myredditapp:v1.2.3 (by
+   * >       /u/kemitche)`
+   * >     * Many default User-Agents (like "Python/urllib" or "Java") are
+   * >       drastically limited to encourage unique and descriptive user-agent
+   * >       strings.
+   * >     * Including the version number and updating it as you build your
+   * >       application allows us to safely block old buggy/broken versions of
+   * >       your app.
+   * >     * **NEVER lie about your user-agent.** This includes spoofing popular
+   * >       browsers and spoofing other bots. We will ban liars with extreme
+   * >       prejudice.
+   *
+   * [rls]: https://github.com/reddit-archive/reddit/wiki/api#rules
    */
   userAgent: string;
 }
