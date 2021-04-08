@@ -16,7 +16,6 @@ jobs:
         with:
           node-version: 14.x
       - run: npm ci
-      - run: npx husky uninstall
 
       - id: branch
         name: Extract branch

@@ -26,7 +26,6 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - run: npm run build
-      - run: npx husky uninstall
       - id: semrel
         uses: codfish/semantic-release-action@v1
         env:
@@ -44,7 +43,6 @@ jobs:
         with:
           node-version: 14.x
       - run: npm ci
-      - run: npx husky uninstall
       - name: Update dochome
         uses: actions/github-script@v3
         env:
