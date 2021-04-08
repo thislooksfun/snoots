@@ -63,15 +63,15 @@ without an application means you have a _much_ lower ratelimit.
 Print a comment tree to stdout.
 
 ```ts
-async function printChain(c: Comment, indent: string = "") {
+async function printTree(c: Comment, indent: string = "") {
   const body = c.body.replace(/\n/g, "\n" + indent);
   console.log(`${indent}(${c.id}) ${c.author}: ${body}`);
-  await c.replies.each(r => printChain(r, indent + "  "));
+  await c.replies.each(r => printTree(r, indent + "  "));
 }
 
 (async () => {
   const comment = await client.comments.fetch("gqe92yr");
-  await printChain(comment);
+  await printTree(comment);
 })();
 ```
 
