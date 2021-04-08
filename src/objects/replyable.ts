@@ -13,6 +13,18 @@ export default abstract class Replyable extends Content {
   }
 
   /**
+   * Block the author of this item.
+   *
+   * @note Apparently this only works if this item is in modmail or the user's
+   * inbox, and if it's not the request silently succeeds anyway.
+   *
+   * @returns A promise that resolves when the request is complete.
+   */
+  async blockAuthor(): Promise<void> {
+    return this.controls.blockAuthor(this.id);
+  }
+
+  /**
    * Report this item to the mods.
    *
    * The report will be anonymous if you are not a mod of the subreddit. If you

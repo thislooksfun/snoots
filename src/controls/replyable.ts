@@ -3,6 +3,20 @@ import BaseControls from "./base";
 /** The base controls for all content that you can reply to. */
 export default abstract class ReplyableControls extends BaseControls {
   /**
+   * Block the author of an item.
+   *
+   * @note Apparently this only works if the item is in modmail or the user's
+   * inbox, and if it's not the request silently succeeds anyway.
+   *
+   * @param id The ID of the item to block the author of.
+   *
+   * @returns A promise that resolves when the request is complete.
+   */
+  async blockAuthor(id: string): Promise<void> {
+    await this.client.post("api/block", { id: this.namespace(id) });
+  }
+
+  /**
    * Report an item to the mods.
    *
    * The report will be anonymous if you are not a mod of the subreddit. If you
