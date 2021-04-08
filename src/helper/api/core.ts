@@ -3,7 +3,7 @@ import type { OptionsOfTextResponseBody } from "got";
 import got from "got";
 
 /** A mapping of query parameters to add to a request. */
-export type Query = Record<string, string>;
+export type Query = Record<string, string | boolean>;
 
 export interface BasicAuth {
   user: string;

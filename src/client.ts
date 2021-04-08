@@ -3,7 +3,7 @@ import type { Data } from "./helper/types";
 import type { OauthOpts } from "./helper/api/oauth";
 import type { Query } from "./helper/api/core";
 import type { Token } from "./helper/accessToken";
-import { CommentControls, PostControls } from "./controls";
+import { CommentControls, PostControls, SubredditControls } from "./controls";
 import * as anon from "./helper/api/anon";
 import * as oauth from "./helper/api/oauth";
 import refreshToken from "./helper/accessToken";
@@ -127,6 +127,9 @@ export default class Client {
   public comments: CommentControls;
   /** Controls for interacting with posts. */
   public posts: PostControls;
+  /** Controls for interacting with subreddits. */
+  public subreddits: SubredditControls;
+
   protected auth?: Auth;
   protected creds?: Credentials;
   protected token: Token | null;
@@ -146,6 +149,7 @@ export default class Client {
     // Set up controls after we have initalized the internal state.
     this.comments = new CommentControls(this);
     this.posts = new PostControls(this);
+    this.subreddits = new SubredditControls(this);
   }
 
   /**

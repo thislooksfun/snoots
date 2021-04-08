@@ -7,6 +7,9 @@ export type Awaitable<T> = T | Promise<T>;
 /** A function that either returns a type or a promise of that type. */
 export type AwaitableFn<T, R> = (t: T) => Awaitable<R>;
 
+/** A size, in the form [width, height]. */
+export type Size = [number, number];
+
 /** The search sorting. */
 export type SearchSort = "relevance" | "hot" | "top" | "new" | "comments";
 
@@ -26,6 +29,9 @@ export type SubredditType =
   | "private"
   | "user"
   | "public";
+
+/** The ways to sort posts in a subreddit. */
+export type PostSort = "controversial" | "hot" | "new" | "rising" | "top";
 
 /** @internal */
 export type RedditObject<T = Data> = { kind: string; data: T };
