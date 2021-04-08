@@ -1,8 +1,8 @@
 import type { Credentials } from "./helper/api/creds";
-import type { Token } from "./helper/accessToken";
 import type { Data } from "./helper/types";
 import type { OauthOpts } from "./helper/api/oauth";
 import type { Query } from "./helper/api/core";
+import type { Token } from "./helper/accessToken";
 import { CommentControls, PostControls } from "./controls";
 import * as anon from "./helper/api/anon";
 import * as oauth from "./helper/api/oauth";
