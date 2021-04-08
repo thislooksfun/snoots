@@ -10,6 +10,9 @@ import Post from "../objects/post";
 import PostListing from "../listings/post";
 import VoteableControls from "./voteable";
 
+/** @internal */
+export type SplitRawPost = [ListingObject, ListingObject];
+
 /**
  * Various methods to allow you to interact with posts.
  *
@@ -32,8 +35,8 @@ export default class PostControls extends VoteableControls {
    */
   async fetch(id: string): Promise<Post> {
     const path = `comments/${id}`;
-    const res: [ListingObject, ListingObject] = await this.client.get(path);
-    return this.fromRaw(res[0].data.children[0], res[1].data);
+    const res: SplitRawPost = await this.client.get(path);
+    return this.fromSplitRaw(res);
   }
 
   /**
@@ -213,6 +216,11 @@ export default class PostControls extends VoteableControls {
    */
   async unsticky(id: string): Promise<void> {
     await this.setStickied(id, false);
+  }
+
+  /** @internal */
+  fromSplitRaw(raw: SplitRawPost): Post {
+    return this.fromRaw(raw[0].data.children[0], raw[1].data);
   }
 
   /** @internal */
