@@ -7,6 +7,15 @@ export type Awaitable<T> = T | Promise<T>;
 /** A function that either returns a type or a promise of that type. */
 export type AwaitableFn<T, R> = (t: T) => Awaitable<R>;
 
+/** The search sorting. */
+export type SearchSort = "relevance" | "hot" | "top" | "new" | "comments";
+
+/** The search syntax. */
+export type SearchSyntax = "cloudsearch" | "lucene" | "plain";
+
+/** A time range. */
+export type TimeRange = "hour" | "day" | "week" | "month" | "year" | "all";
+
 /** The type of subreddit. */
 export type SubredditType =
   | "gold_restricted"

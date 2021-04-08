@@ -1,5 +1,10 @@
 import type { _Listing, ListingObject } from "../listings/listing";
-import type { RedditObject } from "../helper/types";
+import type {
+  RedditObject,
+  SearchSort,
+  SearchSyntax,
+  TimeRange,
+} from "../helper/types";
 import type { PostData } from "../objects/post";
 import type Client from "../client";
 import { camelCaseKeys } from "../helper/util";
@@ -9,6 +14,7 @@ import Listing from "../listings/listing";
 import Post from "../objects/post";
 import PostListing from "../listings/post";
 import VoteableControls from "./voteable";
+import { Query } from "../helper/api/core";
 
 /** @internal */
 export type SplitRawPost = [ListingObject, ListingObject];
@@ -37,6 +43,44 @@ export default class PostControls extends VoteableControls {
     const path = `comments/${id}`;
     const res: SplitRawPost = await this.client.get(path);
     return this.fromSplitRaw(res);
+  }
+
+  /**
+   * Search Reddit.
+   *
+   * @param query The search query.
+   * @param subreddit The subreddit to search in.
+   * @param time The time range to search in.
+   * @param sort The way to sort the search results.
+   * @param syntax The search syntax to use.
+   * @param restrictSr Whether or not to restrict the search to the given
+   * subreddit. If this is `false` or if `subreddit` is `null` this will search
+   * all of Reddit.
+   *
+   * @returns A listing of posts.
+   */
+  search(
+    query: string,
+    subreddit: string | null,
+    time: TimeRange = "all",
+    sort: SearchSort = "new",
+    syntax: SearchSyntax = "plain",
+    restrictSr: boolean = false
+  ): Listing<Post> {
+    const opts: Query = {
+      t: time,
+      q: query,
+      sort,
+      syntax,
+      restrict_sr: restrictSr && subreddit != null,
+    };
+
+    if (subreddit) opts.subreddit = subreddit;
+
+    const url = subreddit ? `r/${subreddit}/` : "";
+    const req = { url: `${url}search`, query: opts };
+    const ctx = { req, client: this.client };
+    return new PostListing(fakeListingAfter(""), ctx);
   }
 
   /**
