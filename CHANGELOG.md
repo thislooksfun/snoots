@@ -1,3 +1,13 @@
+## [1.0.0-dev.4](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2021-04-08)
+
+
+### Features
+
+* add a helper function for crossposting ([19b7fc5](https://github.com/thislooksfun/snoots/commit/19b7fc57a76fb38047bd1f749560476d88a47f99))
+* add a way to search posts ([00c48ec](https://github.com/thislooksfun/snoots/commit/00c48ec7747f555dbc00065f5854e0cbf5dc82e3))
+* add blockAuthor() ([58feff1](https://github.com/thislooksfun/snoots/commit/58feff1f1ab3962a009c44efae8334805c9c4ccf))
+* add initial support for Subreddits ([b5f09ea](https://github.com/thislooksfun/snoots/commit/b5f09eafa1b1a3840a6d6b6864b82528a9c1893e))
+
 ## [1.0.0-dev.3](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2021-03-26)
 
 
