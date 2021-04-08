@@ -11,6 +11,11 @@ export default abstract class BaseControls {
     this.prefix = prefix;
   }
 
+  /** @internal */
+  getClient(): Client {
+    return this.client;
+  }
+
   /**
    * Namespace an id with the prefix.
    *
