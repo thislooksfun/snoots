@@ -48,6 +48,9 @@ export default class PostControls extends VoteableControls {
   /**
    * Search Reddit.
    *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 posts.
+   *
    * @param query The search query.
    * @param subreddit The subreddit to search in.
    * @param time The time range to search in.
