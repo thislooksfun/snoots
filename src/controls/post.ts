@@ -9,6 +9,7 @@ import type { PostData } from "../objects/post";
 import type Client from "../client";
 import { camelCaseKeys } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
+import { LinkPostOptions } from "./subreddit";
 import CommentListing from "../listings/comment";
 import Listing from "../listings/listing";
 import Post from "../objects/post";
@@ -108,6 +109,25 @@ export default class PostControls extends VoteableControls {
   async undistinguish(id: string): Promise<void> {
     const body = { how: "no", sticky: false, id: this.namespace(id) };
     await this.client.post("api/distinguish", body);
+  }
+
+  /**
+   * Crosspost a post.
+   *
+   * @param id The ID of the post to crosspost.
+   * @param subreddit The name of the subreddit to crosspost to.
+   * @param title The title of the crosspost.
+   * @param opts Any extra options.
+   *
+   * * @returns A promise that resolves to the ID of the newly created post.
+   */
+  async crosspostTo(
+    id: string,
+    subreddit: string,
+    title: string,
+    opts: LinkPostOptions = {}
+  ): Promise<string> {
+    return this.client.subreddits.postCrosspost(subreddit, title, id, opts);
   }
 
   /**

@@ -1,5 +1,6 @@
 import type { VoteableData } from "./voteable";
 // import type { VoteableData, RichTextFlair } from "./voteable";
+import { LinkPostOptions } from "../controls/subreddit";
 import Listing from "../listings/listing";
 import PostControls from "../controls/post";
 import Voteable from "./voteable";
@@ -380,6 +381,23 @@ export default class Post extends Voteable implements PostData {
    */
   async undistinguish(): Promise<void> {
     return this.controls.undistinguish(this.id);
+  }
+
+  /**
+   * Crosspost this post.
+   *
+   * @param subreddit The name of the subreddit to crosspost to.
+   * @param title The title of the crosspost.
+   * @param opts Any extra options.
+   *
+   * @returns A promise that resolves to the ID of the newly created post.
+   */
+  async crosspostTo(
+    subreddit: string,
+    title: string,
+    opts: LinkPostOptions = {}
+  ): Promise<string> {
+    return this.controls.crosspostTo(this.id, subreddit, title, opts);
   }
 
   /**
