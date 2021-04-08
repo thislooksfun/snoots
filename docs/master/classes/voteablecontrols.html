@@ -101,6 +101,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#approve" class="tsd-kind-icon">approve</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#blockauthor" class="tsd-kind-icon">block<wbr>Author</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#delete" class="tsd-kind-icon">delete</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#disableinboxreplies" class="tsd-kind-icon">disable<wbr>Inbox<wbr>Replies</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="voteablecontrols.html#downvote" class="tsd-kind-icon">downvote</a></li>
@@ -133,7 +134,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L171">controls/voteable.ts:171</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L171">controls/voteable.ts:171</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -162,6 +163,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="blockauthor" class="tsd-anchor"></a>
+					<h3>block<wbr>Author</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">block<wbr>Author<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/replyable.ts#L15">controls/replyable.ts:15</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Block the author of an item.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>note</dt>
+									<dd><p>Apparently this only works if the item is in modmail or the user&#39;s
+										inbox, and if it&#39;s not the request silently succeeds anyway.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ID of the item to block the author of.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise that resolves when the request is complete.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="delete" class="tsd-anchor"></a>
 					<h3>delete</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -171,7 +210,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L157">controls/voteable.ts:157</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L157">controls/voteable.ts:157</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,7 +242,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L47">controls/voteable.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L47">controls/voteable.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -235,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L92">controls/voteable.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L92">controls/voteable.ts:92</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -267,7 +306,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L145">controls/voteable.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L145">controls/voteable.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -305,7 +344,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L36">controls/voteable.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L36">controls/voteable.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -337,7 +376,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L225">controls/voteable.ts:225</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L225">controls/voteable.ts:225</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -369,7 +408,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L200">controls/voteable.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L200">controls/voteable.ts:200</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -407,7 +446,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L186">controls/voteable.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L186">controls/voteable.ts:186</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -451,7 +490,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L104">controls/voteable.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L104">controls/voteable.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -489,7 +528,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/replyable.ts#L16">controls/replyable.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/replyable.ts#L30">controls/replyable.ts:30</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,7 +568,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L120">controls/voteable.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L120">controls/voteable.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -562,7 +601,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L214">controls/voteable.ts:214</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L214">controls/voteable.ts:214</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -600,7 +639,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L133">controls/voteable.ts:133</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L133">controls/voteable.ts:133</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -633,7 +672,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L81">controls/voteable.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L81">controls/voteable.ts:81</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -665,7 +704,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/9bf6df9/src/controls/voteable.ts#L70">controls/voteable.ts:70</a></li>
+									<li>Defined in <a href="https://github.com/thislooksfun/snoots/blob/19b7fc5/src/controls/voteable.ts#L70">controls/voteable.ts:70</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -724,6 +763,9 @@
 						<a href="postcontrols.html" class="tsd-kind-icon">Post<wbr>Controls</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="subredditcontrols.html" class="tsd-kind-icon">Subreddit<wbr>Controls</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="votable.html" class="tsd-kind-icon">Votable</a>
 					</li>
 				</ul>
@@ -733,6 +775,9 @@
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="voteablecontrols.html#approve" class="tsd-kind-icon">approve</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="voteablecontrols.html#blockauthor" class="tsd-kind-icon">block<wbr>Author</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="voteablecontrols.html#delete" class="tsd-kind-icon">delete</a>
@@ -829,13 +874,28 @@
 						<a href="../modules.html#data" class="tsd-kind-icon">Data</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#postsort" class="tsd-kind-icon">Post<wbr>Sort</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#query" class="tsd-kind-icon">Query</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#richtextflair" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#searchsort" class="tsd-kind-icon">Search<wbr>Sort</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#searchsyntax" class="tsd-kind-icon">Search<wbr>Syntax</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#size" class="tsd-kind-icon">Size</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#subreddittype" class="tsd-kind-icon">Subreddit<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#timerange" class="tsd-kind-icon">Time<wbr>Range</a>
 					</li>
 				</ul>
 			</nav>

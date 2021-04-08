@@ -120,15 +120,15 @@
 					<h1>Examples</h1>
 				</a>
 				<p>Print a comment tree to stdout.</p>
-				<pre><code class="language-ts"><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">printChain</span><span style="color: #000000">(</span><span style="color: #001080">c</span><span style="color: #000000">: </span><span style="color: #267F99">Comment</span><span style="color: #000000">, </span><span style="color: #001080">indent</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">) {</span>
+				<pre><code class="language-ts"><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">printTree</span><span style="color: #000000">(</span><span style="color: #001080">c</span><span style="color: #000000">: </span><span style="color: #267F99">Comment</span><span style="color: #000000">, </span><span style="color: #001080">indent</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">) {</span>
 <span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">body</span><span style="color: #000000"> = </span><span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #795E26">replace</span><span style="color: #000000">(</span><span style="color: #811F3F">/\n/</span><span style="color: #0000FF">g</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;</span><span style="color: #EE0000">\n</span><span style="color: #A31515">&quot;</span><span style="color: #000000"> + </span><span style="color: #001080">indent</span><span style="color: #000000">);</span>
 <span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">indent</span><span style="color: #0000FF">}</span><span style="color: #A31515">(</span><span style="color: #0000FF">${</span><span style="color: #001080">c</span><span style="color: #000000FF">.</span><span style="color: #001080">id</span><span style="color: #0000FF">}</span><span style="color: #A31515">) </span><span style="color: #0000FF">${</span><span style="color: #001080">c</span><span style="color: #000000FF">.</span><span style="color: #001080">author</span><span style="color: #0000FF">}</span><span style="color: #A31515">: </span><span style="color: #0000FF">${</span><span style="color: #001080">body</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">);</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #001080">replies</span><span style="color: #000000">.</span><span style="color: #795E26">each</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">printChain</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">, </span><span style="color: #001080">indent</span><span style="color: #000000"> + </span><span style="color: #A31515">&quot;  &quot;</span><span style="color: #000000">));</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #001080">replies</span><span style="color: #000000">.</span><span style="color: #795E26">each</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">printTree</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">, </span><span style="color: #001080">indent</span><span style="color: #000000"> + </span><span style="color: #A31515">&quot;  &quot;</span><span style="color: #000000">));</span>
 <span style="color: #000000">}</span>
 
 <span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
 <span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">comment</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">comments</span><span style="color: #000000">.</span><span style="color: #795E26">fetch</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;gqe92yr&quot;</span><span style="color: #000000">);</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">printChain</span><span style="color: #000000">(</span><span style="color: #001080">comment</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">printTree</span><span style="color: #000000">(</span><span style="color: #001080">comment</span><span style="color: #000000">);</span>
 <span style="color: #000000">})();</span>
 </code></pre>
 				<p>More examples will come as snoots evolves!</p>
@@ -168,6 +168,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/postcontrols.html" class="tsd-kind-icon">Post<wbr>Controls</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/subredditcontrols.html" class="tsd-kind-icon">Subreddit<wbr>Controls</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/votable.html" class="tsd-kind-icon">Votable</a>
@@ -221,13 +224,28 @@
 						<a href="modules.html#data" class="tsd-kind-icon">Data</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#postsort" class="tsd-kind-icon">Post<wbr>Sort</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#query" class="tsd-kind-icon">Query</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#richtextflair" class="tsd-kind-icon">Rich<wbr>Text<wbr>Flair</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#searchsort" class="tsd-kind-icon">Search<wbr>Sort</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#searchsyntax" class="tsd-kind-icon">Search<wbr>Syntax</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#size" class="tsd-kind-icon">Size</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#subreddittype" class="tsd-kind-icon">Subreddit<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#timerange" class="tsd-kind-icon">Time<wbr>Range</a>
 					</li>
 				</ul>
 			</nav>
