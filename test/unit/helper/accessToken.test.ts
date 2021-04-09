@@ -2,7 +2,7 @@ import type { Token, TokenResponse } from "../../../src/helper/accessToken";
 import fc from "fast-check";
 import * as fcutil from "../_util/fcutil";
 import nock from "nock";
-import updateAccessToken from "../../../src/helper/accessToken";
+import { updateAccessToken } from "../../../src/helper/accessToken";
 
 // Mocking
 import * as creds from "../../../src/helper/api/creds";
