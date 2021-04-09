@@ -32,6 +32,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # Temporarily tag any prerelease builds as 'latest'
+      # TODO: Remove this as we move to release v1.0.0
+      - if: steps.semrel.outputs.new-release-published == 'true'
+        run: npm dist-tag add snoots@${{ steps.semrel.outputs.release-version }} latest
+
   document:
     name: Document new version
     needs: [release]
