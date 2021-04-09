@@ -103,6 +103,22 @@ export interface ClientOptions {
  * ```
  *
  *
+ * @example If you already have a refresh token from a previous session you can
+ * use that as well.
+ * ```ts
+ * const client = new Client({
+ *   userAgent: '<your user agent>',
+ *   auth: {
+ *     refreshToken: '<the token>`,
+ *   },
+ *   creds: {
+ *     clientId: '<your client id>',
+ *     clientSecret: '<your client secret>',
+ *   },
+ * })
+ * ```
+ *
+ *
  * @example If you want to make requests not on behalf of a user, you can leave
  * out the `auth` key. See {@link ClientOptions.auth} for more details.
  * ```ts
@@ -114,6 +130,7 @@ export interface ClientOptions {
  *   },
  * });
  * ```
+ *
  *
  * @example If you want to make completely unauthenticated requests, you can
  * leave out both the `auth` and `creds` keys. See {@link ClientOptions.creds}
@@ -213,6 +230,17 @@ export default class Client {
     this.auth = auth;
     this.token = null;
     await this.updateAccessToken();
+  }
+
+  /**
+   * Get the refresh token for the current session, if there is one.
+   *
+   * This can be stored and later passed to the constructor or {@link reAuth}.
+   *
+   * @returns The refresh token, or `null` if no token exists.
+   */
+  getRefreshToken(): String | null {
+    return this.token?.refresh ?? null;
   }
 
   /**
