@@ -4,9 +4,9 @@ import type { OauthOpts } from "./helper/api/oauth";
 import type { Query } from "./helper/api/core";
 import type { Token } from "./helper/accessToken";
 import { CommentControls, PostControls, SubredditControls } from "./controls";
+import { updateAccessToken, tokenFromCode } from "./helper/accessToken";
 import * as anon from "./helper/api/anon";
 import * as oauth from "./helper/api/oauth";
-import refreshToken from "./helper/accessToken";
 
 /** Username and password based authentication */
 export interface UsernameAuth {
@@ -153,6 +153,54 @@ export default class Client {
   }
 
   /**
+   * Get an OAuth login url.
+   *
+   * @param clientId The ID of the Reddit app.
+   * @param scopes The scopes to authorize with.
+   * @param redirectUri The uri to redirect to after authorization.
+   * @param state Some arbetrary state that will be passed back upon
+   * authorization. This is used as a CSRF token to prevent various attacks.
+   * @param temporary Whether the auth should be temporary (expires after 1hr),
+   * or permanent.
+   *
+   * @returns The URL to direct the user to for authorization.
+   */
+  static getAuthUrl(
+    clientId: string,
+    scopes: string[],
+    redirectUri: string,
+    state: string = "snoots",
+    temporary: boolean = false
+  ): string {
+    const q = new URLSearchParams();
+    q.append("client_id", clientId);
+    q.append("response_type", "code");
+    q.append("state", state);
+    q.append("redirect_uri", redirectUri);
+    q.append("duration", temporary ? "temporary" : "permanent");
+    q.append("scope", scopes.join(" "));
+
+    return `https://www.reddit.com/api/v1/authorize?${q}`;
+  }
+
+  /**
+   * Authorize this client from an OAuth code.
+   *
+   * @param code The OAuth code.
+   * @param redirectUri The redirect URI. This ***must*** be the same as the uri
+   * given to {@link OAuth.getAuthUrl}.
+   *
+   * @returns A promise that resolves when the authorization is complete.
+   */
+  async authFromCode(code: string, redirectUri: string): Promise<void> {
+    const creds = this.creds;
+    if (!creds) throw "No creds";
+
+    this.token = await tokenFromCode(code, creds, this.userAgent, redirectUri);
+    this.auth = { refreshToken: this.token.refresh! };
+  }
+
+  /**
    * (re)authorize this client.
    *
    * This can be used to
@@ -238,7 +286,7 @@ export default class Client {
   protected async updateAccessToken(): Promise<void> {
     if (!this.creds) throw "No creds";
 
-    this.token = await refreshToken(
+    this.token = await updateAccessToken(
       this.userAgent,
       this.token,
       this.creds,

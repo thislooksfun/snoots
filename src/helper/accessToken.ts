@@ -18,7 +18,16 @@ export interface TokenResponse {
   scope: string;
 }
 
-export default async function updateAccessToken(
+function rawToToken(raw: Data): Token {
+  const tkns: TokenResponse = camelCaseKeys(raw);
+  return {
+    access: tkns.accessToken,
+    expiration: Date.now() + tkns.expiresIn * 1000,
+    refresh: tkns.refreshToken,
+  };
+}
+
+export async function updateAccessToken(
   userAgent: string,
   token: Token | null,
   creds: Credentials,
@@ -53,10 +62,20 @@ export default async function updateAccessToken(
     {}
   );
 
-  const tkns: TokenResponse = camelCaseKeys(raw);
-  return {
-    access: tkns.accessToken,
-    expiration: Date.now() + tkns.expiresIn * 1000,
-    refresh: tkns.refreshToken,
-  };
+  return rawToToken(raw);
+}
+
+export async function tokenFromCode(
+  code: string,
+  creds: Credentials,
+  userAgent: string,
+  redirectUri: string
+): Promise<Token> {
+  const raw: Data = await post(creds, userAgent, "api/v1/access_token", {
+    grant_type: "authorization_code",
+    code,
+    redirect_uri: redirectUri,
+  });
+
+  return rawToToken(raw);
 }
