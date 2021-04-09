@@ -35,7 +35,12 @@ jobs:
       # Temporarily tag any prerelease builds as 'latest'
       # TODO: Remove this as we move to release v1.0.0
       - if: steps.semrel.outputs.new-release-published == 'true'
-        run: npm dist-tag add snoots@${{ steps.semrel.outputs.release-version }} latest
+        run: |
+          npm config set registry=https://registry.npmjs.org/
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm dist-tag add snoots@${{ steps.semrel.outputs.release-version }} latest
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   document:
     name: Document new version
