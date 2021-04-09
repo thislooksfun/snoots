@@ -1,3 +1,12 @@
+## [1.0.0-dev.5](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2021-04-09)
+
+
+### Features
+
+* add a method to (re)authorize a client ([d86550d](https://github.com/thislooksfun/snoots/commit/d86550d0e7aef8cfbdaa8333d45207119cf9c2e5))
+* add a way to get the refresh token ([e55b9e2](https://github.com/thislooksfun/snoots/commit/e55b9e2088b780d7b05fb5ac1360a7616b980741))
+* add OAuth flow ([7029a16](https://github.com/thislooksfun/snoots/commit/7029a16f3c0cf1af2face6baf8b9c0e1423606c5))
+
 ## [1.0.0-dev.4](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2021-04-08)
 
 
