@@ -153,6 +153,21 @@ export default class Client {
   }
 
   /**
+   * (re)authorize this client.
+   *
+   * This can be used to
+   *
+   * @param auth The new authorization.
+   *
+   * @returns A promise that resolves when the reauthorization is complete.
+   */
+  async reAuth(auth: Auth): Promise<void> {
+    this.auth = auth;
+    this.token = null;
+    await this.updateAccessToken();
+  }
+
+  /**
    * Perform a GET request to the reddit api.
    *
    * You shouldn't ever have to use this directly.
