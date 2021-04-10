@@ -1,6 +1,9 @@
 export { default as Content } from "./content";
 export * from "./content";
 
+export { default as Subreddit } from "./subreddit";
+export * from "./subreddit";
+
 export { default as Votable } from "./voteable";
 export * from "./voteable";
 
