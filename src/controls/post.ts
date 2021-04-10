@@ -10,12 +10,12 @@ import type Client from "../client";
 import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
 import { LinkPostOptions } from "./subreddit";
+import { Query } from "../helper/api/core";
 import CommentListing from "../listings/comment";
 import Listing from "../listings/listing";
 import Post from "../objects/post";
 import PostListing from "../listings/post";
 import VoteableControls from "./voteable";
-import { Query } from "../helper/api/core";
 
 /** @internal */
 export type SplitRawPost = [ListingObject, ListingObject];

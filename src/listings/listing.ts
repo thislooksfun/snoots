@@ -1,5 +1,5 @@
-import type { Query } from "../helper/api/core";
 import type { AwaitableFn, RedditObject } from "../helper/types";
+import type { Query } from "../helper/api/core";
 import type Client from "../client";
 import { assertKind } from "../helper/util";
 
