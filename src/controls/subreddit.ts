@@ -13,7 +13,7 @@ import type { SplitRawPost } from "./post";
 import type { SubredditData } from "../objects/subreddit";
 import type Client from "../client";
 import type Listing from "../listings/listing";
-import { camelCaseKeys } from "../helper/util";
+import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
 import BaseControls from "./base";
 import CommentListing from "../listings/comment";
@@ -491,8 +491,7 @@ export default class SubredditControls extends BaseControls {
   }
 
   protected fromRaw(raw: RedditObject): Subreddit {
-    // TODO: Use a custom error type.
-    if (raw.kind != "t5") throw `Invalid (expected t5, got ${raw.kind})`;
+    assertKind("t5", raw);
 
     const rDat = raw.data;
     rDat.sidebar = rDat.description;

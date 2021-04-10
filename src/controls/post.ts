@@ -7,7 +7,7 @@ import type {
 } from "../helper/types";
 import type { PostData } from "../objects/post";
 import type Client from "../client";
-import { camelCaseKeys } from "../helper/util";
+import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
 import { LinkPostOptions } from "./subreddit";
 import CommentListing from "../listings/comment";
@@ -158,7 +158,7 @@ export default class PostControls extends VoteableControls {
     const path = `duplicates/${id}`;
     const res: [ListingObject, ListingObject] = await this.client.get(path);
 
-    if (res[1].kind !== "Listing") throw "whoops.";
+    assertKind("Listing", res[1]);
 
     const ctx = { client: this.client };
     return new PostListing(res[1].data, ctx);
@@ -292,8 +292,7 @@ export default class PostControls extends VoteableControls {
 
   /** @internal */
   fromRaw(raw: RedditObject, comments?: _Listing): Post {
-    // TODO: Use a custom error type.
-    if (raw.kind != "t3") throw `Invalid (expected t3, got ${raw.kind})`;
+    assertKind("t3", raw);
 
     const rDat = raw.data;
     const cmts = comments ?? fakeListingAfter("");

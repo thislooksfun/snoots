@@ -1,5 +1,6 @@
 import type { _Listing, Context, Fetcher } from "./listing";
 import type Post from "../objects/post";
+import { assertKind } from "../helper/util";
 import Listing, { Pager } from "./listing";
 
 class PostPager extends Pager<Post> {
@@ -20,7 +21,7 @@ export default class PostListing extends Listing<Post> {
 
     const arr: Post[] = [];
     for (const c of l.children) {
-      if (c.kind !== "t3") throw "Oh deary me, something's gone a bit off.";
+      assertKind("t3", c);
       arr.push(ctx.client.posts.fromRaw(c));
     }
 

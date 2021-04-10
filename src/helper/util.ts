@@ -1,4 +1,5 @@
-import type { Data } from "./types";
+import type { Data, RedditObject } from "./types";
+import { InvalidKindError } from "./errors";
 import camelCase from "camelcase";
 
 export function camelCaseKeys<T>(obj: Data): T {
@@ -17,4 +18,8 @@ export function group<T>(arr: T[], size: number): T[][] {
   }
 
   return groups;
+}
+
+export function assertKind(kind: string, obj: RedditObject) {
+  if (obj.kind !== kind) throw new InvalidKindError(kind, obj.kind);
 }

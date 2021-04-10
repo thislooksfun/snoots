@@ -2,7 +2,7 @@ import type { _Listing, ListingObject } from "../listings/listing";
 import type { CommentData } from "../objects/comment";
 import type { RedditObject } from "../helper/types";
 import type Client from "../client";
-import { camelCaseKeys } from "../helper/util";
+import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeMoreListing } from "../listings/util";
 import Comment from "../objects/comment";
 import CommentListing from "../listings/comment";
@@ -41,10 +41,7 @@ export default class CommentControls extends VoteableControls {
     const req = { id: this.namespace(id) };
     const res: ListingObject = await this.client.get("api/info", req);
 
-    if (res.kind !== "Listing") {
-      // TODO: Use a custom error type.
-      throw "Invalid";
-    }
+    assertKind("Listing", res);
 
     const list = res.data;
     if (list.children.length < 1) {
@@ -74,8 +71,7 @@ export default class CommentControls extends VoteableControls {
 
   /** @internal */
   fromRaw(raw: RedditObject): Comment {
-    // TODO: Use a custom error type.
-    if (raw.kind != "t1") throw `Invalid (expected t1, got ${raw.kind})`;
+    assertKind("t1", raw);
 
     const rDat = raw.data;
     const postId = rDat.link_id.slice(3);
