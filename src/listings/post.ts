@@ -1,5 +1,5 @@
 import type { _Listing, Context, Fetcher } from "./listing";
-import type Post from "../objects/post";
+import type { Post } from "../objects/post";
 import { assertKind } from "../helper/util";
 import { Listing, Pager } from "./listing";
 
