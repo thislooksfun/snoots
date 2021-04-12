@@ -1,3 +1,10 @@
+## [1.0.0-dev.7](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2021-04-12)
+
+
+### Bug Fixes
+
+* make tslib a runtime dependency ([239a415](https://github.com/thislooksfun/snoots/commit/239a4152a87525b1b5a72e17e0fcc6cc4c075934))
+
 ## [1.0.0-dev.6](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2021-04-12)
 
 
