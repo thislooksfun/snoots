@@ -1,3 +1,15 @@
+## [1.0.0-dev.6](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2021-04-12)
+
+
+### Features
+
+* add getters for moderation listings ([1c3876e](https://github.com/thislooksfun/snoots/commit/1c3876e56cc5b8816354392f8e7bbdf601ee272f))
+
+
+### Bug Fixes
+
+* export Subreddit ([1f6041d](https://github.com/thislooksfun/snoots/commit/1f6041da5bf1f36c68a14bc4419740d767ef2619))
+
 ## [1.0.0-dev.5](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2021-04-09)
 
 
