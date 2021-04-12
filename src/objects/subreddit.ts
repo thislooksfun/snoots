@@ -596,6 +596,141 @@ export default class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Get the list of items that have been removed from this subreddit.
+   *
+   * @returns A listing of items that have been removed.
+   */
+  getSpam(): Listing<Post | Comment> {
+    return this.controls.getSpam(this.displayName);
+  }
+
+  /**
+   * Get the list of comments that have been removed from this subreddit.
+   *
+   * @returns A listing of comments that have been removed.
+   */
+  getSpamComments(): Listing<Comment> {
+    return this.controls.getSpamComments(this.displayName);
+  }
+
+  /**
+   * Get the list of posts that have been removed from this subreddit.
+   *
+   * @returns A listing of posts that have been removed.
+   */
+  getSpamPosts(): Listing<Post> {
+    return this.controls.getSpamPosts(this.displayName);
+  }
+
+  /**
+   * Get the list of items that have been edited from this subreddit.
+   *
+   * @returns A listing of items that have been edited.
+   */
+  getEdited(): Listing<Post | Comment> {
+    return this.controls.getEdited(this.displayName);
+  }
+
+  /**
+   * Get the list of comments that have been edited from this subreddit.
+   *
+   * @returns A listing of comments that have been edited.
+   */
+  getEditedComments(): Listing<Comment> {
+    return this.controls.getEditedComments(this.displayName);
+  }
+
+  /**
+   * Get the list of posts that have been edited from this subreddit.
+   *
+   * @returns A listing of posts that have been edited.
+   */
+  getEditedPosts(): Listing<Post> {
+    return this.controls.getEditedPosts(this.displayName);
+  }
+
+  /**
+   * Get the list of items that have been reported from this subreddit.
+   *
+   * @returns A listing of items that have been reported.
+   */
+  getReported(): Listing<Post | Comment> {
+    return this.controls.getReported(this.displayName);
+  }
+
+  /**
+   * Get the list of comments that have been reported from this subreddit.
+   *
+   * @returns A listing of comments that have been reported.
+   */
+  getReportedComments(): Listing<Comment> {
+    return this.controls.getReportedComments(this.displayName);
+  }
+
+  /**
+   * Get the list of posts that have been reported from this subreddit.
+   *
+   * @returns A listing of posts that have been reported.
+   */
+  getReportedPosts(): Listing<Post> {
+    return this.controls.getReportedPosts(this.displayName);
+  }
+
+  /**
+   * Get the list of items that have not been moderated from this subreddit.
+   *
+   * @returns A listing of items that have not been moderated.
+   */
+  getUnmoderated(): Listing<Post | Comment> {
+    return this.controls.getUnmoderated(this.displayName);
+  }
+
+  /**
+   * Get the list of comments that have not been moderated from this subreddit.
+   *
+   * @returns A listing of comments that have not been moderated.
+   */
+  getUnmoderatedComments(): Listing<Comment> {
+    return this.controls.getUnmoderatedComments(this.displayName);
+  }
+
+  /**
+   * Get the list of posts that have not been moderated from this subreddit.
+   *
+   * @returns A listing of posts that have not been moderated.
+   */
+  getUnmoderatedPosts(): Listing<Post> {
+    return this.controls.getUnmoderatedPosts(this.displayName);
+  }
+
+  /**
+   * Get the list of items that are in the modqueue of this subreddit.
+   *
+   * @returns A listing of items that are in the modqueue.
+   */
+  getModqueue(): Listing<Post | Comment> {
+    return this.controls.getModqueue(this.displayName);
+  }
+
+  /**
+   * Get the list of comments that are in the modqueue of this subreddit.
+   *
+   * @returns A listing of comments that are in the modqueue.
+   */
+  getModqueueComments(): Listing<Comment> {
+    return this.controls.getModqueueComments(this.displayName);
+  }
+
+  /**
+   * Get the list of posts that are in the modqueue of this subreddit.
+   *
+   * @returns A listing of posts that are in the modqueue.
+   */
+  getModqueuePosts(): Listing<Post> {
+    return this.controls.getModqueuePosts(this.displayName);
+  }
+
+  /**
    * Get a random post from this subreddit.
    *
    * @returns A promise that resolves to a random post.

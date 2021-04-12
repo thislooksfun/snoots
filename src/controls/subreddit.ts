@@ -19,6 +19,7 @@ import BaseControls from "./base";
 import CommentListing from "../listings/comment";
 import PostListing from "../listings/post";
 import Subreddit from "../objects/subreddit";
+import PostOrCommentListing from "../listings/postOrComment";
 
 /** A single capcha identifier and response. */
 export interface Capcha {
@@ -300,6 +301,192 @@ export default class SubredditControls extends BaseControls {
     time: TimeRange = "all"
   ): Listing<Post> {
     return this.getSortedPosts(subreddit, "controversial", { time });
+  }
+
+  /** @internal */
+  protected getAboutListing(sr: string, ext: string): Listing<Comment | Post> {
+    const req = { url: `r/${sr}/about/${ext}`, query: {} };
+    const ctx = { req, client: this.client };
+    return new PostOrCommentListing(fakeListingAfter(""), ctx);
+  }
+
+  /** @internal */
+  protected getAboutListingComments(sr: string, ext: string): Listing<Comment> {
+    const req = { url: `r/${sr}/about/${ext}`, query: { only: "comments" } };
+    const ctx = { req, client: this.client };
+    return new CommentListing(fakeListingAfter(""), ctx);
+  }
+
+  /** @internal */
+  protected getAboutListingPosts(sr: string, ext: string): Listing<Post> {
+    const req = { url: `r/${sr}/about/${ext}`, query: { only: "links" } };
+    const ctx = { req, client: this.client };
+    return new PostListing(fakeListingAfter(""), ctx);
+  }
+
+  /**
+   * Get the list of items that have been removed from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of items that have been removed.
+   */
+  getSpam(subreddit: string): Listing<Post | Comment> {
+    return this.getAboutListing(subreddit, "spam");
+  }
+
+  /**
+   * Get the list of comments that have been removed from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of comments that have been removed.
+   */
+  getSpamComments(subreddit: string): Listing<Comment> {
+    return this.getAboutListingComments(subreddit, "spam");
+  }
+
+  /**
+   * Get the list of posts that have been removed from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of posts that have been removed.
+   */
+  getSpamPosts(subreddit: string): Listing<Post> {
+    return this.getAboutListingPosts(subreddit, "spam");
+  }
+
+  /**
+   * Get the list of items that have been edited from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of items that have been edited.
+   */
+  getEdited(subreddit: string): Listing<Post | Comment> {
+    return this.getAboutListing(subreddit, "edited");
+  }
+
+  /**
+   * Get the list of comments that have been edited from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of comments that have been edited.
+   */
+  getEditedComments(subreddit: string): Listing<Comment> {
+    return this.getAboutListingComments(subreddit, "edited");
+  }
+
+  /**
+   * Get the list of posts that have been edited from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of posts that have been edited.
+   */
+  getEditedPosts(subreddit: string): Listing<Post> {
+    return this.getAboutListingPosts(subreddit, "edited");
+  }
+
+  /**
+   * Get the list of items that have been reported from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of items that have been reported.
+   */
+  getReported(subreddit: string): Listing<Post | Comment> {
+    return this.getAboutListing(subreddit, "reports");
+  }
+
+  /**
+   * Get the list of comments that have been reported from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of comments that have been reported.
+   */
+  getReportedComments(subreddit: string): Listing<Comment> {
+    return this.getAboutListingComments(subreddit, "reports");
+  }
+
+  /**
+   * Get the list of posts that have been reported from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of posts that have been reported.
+   */
+  getReportedPosts(subreddit: string): Listing<Post> {
+    return this.getAboutListingPosts(subreddit, "reports");
+  }
+
+  /**
+   * Get the list of items that have not been moderated from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of items that have not been moderated.
+   */
+  getUnmoderated(subreddit: string): Listing<Post | Comment> {
+    return this.getAboutListing(subreddit, "unmoderated");
+  }
+
+  /**
+   * Get the list of comments that have not been moderated from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of comments that have not been moderated.
+   */
+  getUnmoderatedComments(subreddit: string): Listing<Comment> {
+    return this.getAboutListingComments(subreddit, "unmoderated");
+  }
+
+  /**
+   * Get the list of posts that have not been moderated from a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of posts that have not been moderated.
+   */
+  getUnmoderatedPosts(subreddit: string): Listing<Post> {
+    return this.getAboutListingPosts(subreddit, "unmoderated");
+  }
+
+  /**
+   * Get the list of items that are in the modqueue of a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of items that are in the modqueue.
+   */
+  getModqueue(subreddit: string): Listing<Post | Comment> {
+    return this.getAboutListing(subreddit, "modqueue");
+  }
+
+  /**
+   * Get the list of comments that are in the modqueue of a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of comments that are in the modqueue.
+   */
+  getModqueueComments(subreddit: string): Listing<Comment> {
+    return this.getAboutListingComments(subreddit, "modqueue");
+  }
+
+  /**
+   * Get the list of posts that are in the modqueue of a subreddit.
+   *
+   * @param subreddit The name of the subreddit.
+   *
+   * @returns A listing of posts that are in the modqueue.
+   */
+  getModqueuePosts(subreddit: string): Listing<Post> {
+    return this.getAboutListingPosts(subreddit, "modqueue");
   }
 
   /**
