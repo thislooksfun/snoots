@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "is-ci || husky install",
-    "build": "tsup ./src/index.ts --dts",
+    "build": "tsup ./src/index.ts --dts --format esm,cjs",
     "test": "jest",
     "clean": "del-cli dist docs types",
     "lint": "prettier -c '**/*'",
