@@ -1,12 +1,12 @@
 import type { _Listing, ListingObject } from "../listings/listing";
 import type { CommentData } from "../objects/comment";
 import type { RedditObject } from "../helper/types";
-import type Client from "../client";
+import type { Client } from "../client";
 import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeMoreListing } from "../listings/util";
-import Comment from "../objects/comment";
-import CommentListing from "../listings/comment";
-import VoteableControls from "./voteable";
+import { Comment } from "../objects/comment";
+import { CommentListing } from "../listings/comment";
+import { VoteableControls } from "./voteable";
 
 /**
  * The ways to distinguish a comment.
@@ -22,7 +22,7 @@ export type DistinguishStates = "none" | "mod" | "sticky";
  *
  * @category Controls
  */
-export default class CommentControls extends VoteableControls {
+export class CommentControls extends VoteableControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "t1");

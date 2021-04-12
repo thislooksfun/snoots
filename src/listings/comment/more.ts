@@ -3,8 +3,8 @@ import type { _Listing, Context, Fetcher, RedditMore } from "../listing";
 import type Comment from "../../objects/comment";
 import { emptyRedditListing, wrapChildren } from "./../util";
 import { group } from "../../helper/util";
-import Listing from "../listing";
-import CommentListing from "./commentListing";
+import { Listing } from "../listing";
+import { CommentListing } from "./commentListing";
 
 function fixCommentTree(objects: RedditObject[]) {
   // Map the items by their name.
@@ -35,7 +35,7 @@ function fixCommentTree(objects: RedditObject[]) {
 }
 
 /** @internal */
-export default class MoreComments implements Fetcher<Comment> {
+export class MoreComments implements Fetcher<Comment> {
   protected data: RedditMore;
 
   constructor(data: RedditMore) {

@@ -1,6 +1,6 @@
 import type { AwaitableFn, RedditObject } from "../helper/types";
 import type { Query } from "../helper/api/core";
-import type Client from "../client";
+import type { Client } from "../client";
 import { assertKind } from "../helper/util";
 
 /** @internal */
@@ -65,7 +65,7 @@ export abstract class Pager<T> implements Fetcher<T> {
  *
  * @template T The type of items this Listing holds.
  */
-export default class Listing<T> {
+export class Listing<T> {
   protected ctx: Context;
   protected arr: T[];
   protected fetcher?: Fetcher<T>;

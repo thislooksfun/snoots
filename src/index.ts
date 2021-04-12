@@ -1,7 +1,6 @@
-export { default as default } from "./client";
 export * from "./client";
 
-export { default as Listing } from "./listings/listing";
+export { Listing } from "./listings/listing";
 export * from "./controls";
 export * from "./objects";
 

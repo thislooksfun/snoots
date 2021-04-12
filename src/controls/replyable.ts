@@ -1,7 +1,7 @@
-import BaseControls from "./base";
+import { BaseControls } from "./base";
 
 /** The base controls for all content that you can reply to. */
-export default abstract class ReplyableControls extends BaseControls {
+export abstract class ReplyableControls extends BaseControls {
   /**
    * Block the author of an item.
    *

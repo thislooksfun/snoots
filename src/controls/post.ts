@@ -6,16 +6,16 @@ import type {
   TimeRange,
 } from "../helper/types";
 import type { PostData } from "../objects/post";
-import type Client from "../client";
+import type { Client } from "../client";
 import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
 import { LinkPostOptions } from "./subreddit";
 import { Query } from "../helper/api/core";
-import CommentListing from "../listings/comment";
-import Listing from "../listings/listing";
-import Post from "../objects/post";
-import PostListing from "../listings/post";
-import VoteableControls from "./voteable";
+import { CommentListing } from "../listings/comment";
+import { Listing } from "../listings/listing";
+import { Post } from "../objects/post";
+import { PostListing } from "../listings/post";
+import { VoteableControls } from "./voteable";
 
 /** @internal */
 export type SplitRawPost = [ListingObject, ListingObject];
@@ -25,7 +25,7 @@ export type SplitRawPost = [ListingObject, ListingObject];
  *
  * @category Controls
  */
-export default class PostControls extends VoteableControls {
+export class PostControls extends VoteableControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "t3");

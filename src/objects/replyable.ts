@@ -1,9 +1,9 @@
 import type { ContentData } from "./content";
-import Content from "./content";
-import ReplyableControls from "../controls/replyable";
+import { Content } from "./content";
+import { ReplyableControls } from "../controls/replyable";
 
 /** The base for all content that you can reply to. */
-export default abstract class Replyable extends Content {
+export abstract class Replyable extends Content {
   protected controls: ReplyableControls;
 
   /** @internal */

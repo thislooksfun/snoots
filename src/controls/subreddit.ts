@@ -11,15 +11,15 @@ import type {
 import type { Query } from "../helper/api/core";
 import type { SplitRawPost } from "./post";
 import type { SubredditData } from "../objects/subreddit";
-import type Client from "../client";
-import type Listing from "../listings/listing";
+import type { Client } from "../client";
+import type { Listing } from "../listings/listing";
 import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
-import BaseControls from "./base";
-import CommentListing from "../listings/comment";
-import PostListing from "../listings/post";
-import Subreddit from "../objects/subreddit";
-import PostOrCommentListing from "../listings/postOrComment";
+import { BaseControls } from "./base";
+import { CommentListing } from "../listings/comment";
+import { PostListing } from "../listings/post";
+import { Subreddit } from "../objects/subreddit";
+import { PostOrCommentListing } from "../listings/postOrComment";
 
 /** A single capcha identifier and response. */
 export interface Capcha {
@@ -99,7 +99,7 @@ interface PostOpts {
  *
  * @category Controls
  */
-export default class SubredditControls extends BaseControls {
+export class SubredditControls extends BaseControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "r/");

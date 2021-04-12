@@ -1,7 +1,7 @@
-import type Client from "../client";
+import type { Client } from "../client";
 
 /** The base class for all controls. */
-export default abstract class BaseControls {
+export abstract class BaseControls {
   protected client: Client;
   protected prefix: string;
 

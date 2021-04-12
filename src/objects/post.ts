@@ -1,9 +1,9 @@
 import type { VoteableData } from "./voteable";
 // import type { VoteableData, RichTextFlair } from "./voteable";
 import { LinkPostOptions } from "../controls/subreddit";
-import Listing from "../listings/listing";
-import PostControls from "../controls/post";
-import Voteable from "./voteable";
+import { Listing } from "../listings/listing";
+import { PostControls } from "../controls/post";
+import { Voteable } from "./voteable";
 // import { Sort } from "../helper/types";
 
 // TODO: Fully document Media
@@ -237,7 +237,7 @@ export interface PostData extends VoteableData {
 }
 
 /** A single post. */
-export default class Post extends Voteable implements PostData {
+export class Post extends Voteable implements PostData {
   body: string;
   bodyHtml: string | null;
   // clicked: boolean;

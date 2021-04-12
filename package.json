@@ -2,15 +2,15 @@
   "name": "snoots",
   "version": "1.0.0-dev.6",
   "description": "A modern, fully-featured, strongly-typed reddit api.",
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
-  "types": "./types/index.d.ts",
+  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "license": "MIT",
   "scripts": {
     "prepare": "is-ci || husky install",
-    "build": "tsc",
+    "build": "tsup ./src/index.ts --dts",
     "test": "jest",
-    "clean": "rm -rf dist docs types",
+    "clean": "del-cli dist docs types",
     "lint": "prettier -c '**/*'",
     "gendoc": "typedoc src/index.ts",
     "prepublishOnly": "npm run clean && npm run lint && npm run build"
@@ -30,6 +30,7 @@
     "@semantic-release/release-notes-generator": "^9.0.2",
     "@types/jest": "^26.0.22",
     "codecov": "^3.8.1",
+    "del-cli": "^3.0.1",
     "fast-check": "^2.14.0",
     "husky": "^6.0.0",
     "is-ci": "^3.0.0",
@@ -38,7 +39,7 @@
     "prettier": "2.2.1",
     "semantic-release": "^17.4.2",
     "ts-jest": "^26.5.4",
-    "tslib": "^2.2.0",
+    "tsup": "^4.8.21",
     "typedoc": "~0.20.35",
     "typedoc-plugin-rename-defaults": "^0.1.0",
     "typescript": "^4.2.4"
@@ -52,8 +53,7 @@
     "snoowrap"
   ],
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "repository": {
     "type": "git",
