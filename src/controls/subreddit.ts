@@ -490,7 +490,8 @@ export default class SubredditControls extends BaseControls {
     await this.client.post(`r/${sr}/api/unfriend`, { ...opts, name, type });
   }
 
-  protected fromRaw(raw: RedditObject): Subreddit {
+  /** @internal */
+  fromRaw(raw: RedditObject): Subreddit {
     assertKind("t5", raw);
 
     const rDat = raw.data;
