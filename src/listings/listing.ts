@@ -222,6 +222,7 @@ export default class Listing<T> {
     }
   }
 
+  /** @internal */
   [Symbol.asyncIterator]() {
     return {
       page: this as Listing<T>,
