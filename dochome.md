@@ -103,7 +103,7 @@ const sub = await client.subreddits.fetch("funny");
 const post = await sub.getRandomPost();
 const title = post.title;
 
-// snoots (preferred method)
+// snoots (preferred method, 1 fewer api call)
 const post = await client.subreddits.getRandomPost("funny");
 const title = post.title;
 ```
@@ -118,7 +118,7 @@ const sub = await client.subreddits.fetch("funny");
 const posts = sub.getNewPosts();
 await posts.each(p => console.log(p.author));
 
-// snoots (preferred method)
+// snoots (preferred method, 1 fewer api call)
 const posts = client.subreddits.getNewPosts("funny");
 await posts.each(p => console.log(p.author));
 ```
