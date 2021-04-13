@@ -8,8 +8,7 @@ while IFS= read -r line; do
   old="${parts[3]}"
   new="${parts[1]}"
 
-  commits=$(git log --pretty=format:%s "$old...$new")
-  git log -z --pretty=format:%B "$old...$new" | xargs -0 npx commitlint
+  npx commitlint -f "$old" -t "$new"
 done < /dev/stdin
 
 echo "All commits matched enforced style!"
