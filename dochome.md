@@ -64,10 +64,12 @@ without an application means you have a _much_ lower ratelimit.
 Print a comment tree to stdout.
 
 ```ts
-async function printTree(c: Comment, indent: string = "") {
-  const body = c.body.replace(/\n/g, "\n" + indent);
-  console.log(`${indent}(${c.id}) ${c.author}: ${body}`);
-  await c.replies.each(r => printTree(r, indent + "  "));
+async function printTree(cmt: Comment, indent: string = "") {
+  const body = cmt.body.replace(/\n/g, "\n" + indent);
+  console.log(`${indent}(${cmt.id}) ${cmt.author}: ${body}`);
+  for await (const reply of cmt.replies) {
+    await printTree(reply, index + "  ");
+  }
 }
 
 (async () => {
@@ -86,8 +88,7 @@ the largest:
 1. Objects are not lazy loaded.
 1. Promise chaining properties is not allowed.
 1. All parameters are camelCase, not snake_case.
-1. Listings are not arrays. Instead use [.each()][l-each] to iterate through a
-   listing.
+1. Listings are not arrays, but they can be iterated using `for await`.
 1. Sub-objects are not auto-populated (like `Post` and `Comment`'s `author`). In
    snoowrap the `author` field is a user object, but in snoots it's just a
    username.
@@ -111,57 +112,22 @@ const title = post.title;
 ```ts
 // snoowrap
 const posts = await client.getSubreddit("funny").getNew().fetchAll();
-posts.map(p => console.log(p.author.name));
+for (const post of posts) {
+  console.log(post.author.name);
+}
 
 // snoots (literal translation)
 const sub = await client.subreddits.fetch("funny");
 const posts = sub.getNewPosts();
-await posts.each(p => console.log(p.author));
+for await (const post of posts) {
+  console.log(p.author);
+}
 
 // snoots (preferred method, 1 fewer api call)
 const posts = client.subreddits.getNewPosts("funny");
-await posts.each(p => console.log(p.author));
-```
-
-### Listings
-
-[Listings][listing] in snoots are _not_ iterables. This is by design. Reddit's
-listings come in many forms, ranging from fully-populated arrays to completely
-empty lists with instructions on where to look for more items. Trying to expose
-this as an array or other iterable leaves only two options: fetch the entirety
-of every listing before giving it back to you, or make you responsible for
-fetching more. Both solutions suck. In the former case you are forced to deal
-with dozens or even hundreds of extra api calls that eat up your ratelimit, and
-in the latter it's really easy to forget to fetch more and make your code run
-perfectly but skip most of the items.
-
-Rather than deal with all this mess, snoots' Listing class is an opqaue wrapper
-around the implementation details of the actual data population, instead only
-exposing clean, easy to understand methods to interact with the data as a whole.
-The main way you'll likely interact with a Listing is via the [.each()][l-each]
-method. If you want to run your logic on a whole page at a time you can use
-[.eachPage()][l-eachpage]. Both of these take in functions that allow for early
-breaking of the loop. If the callback returns or resolves to (returns a Promise
-that then becomes) `false`, the iteration will be stopped and no more fetching
-will occur. For example, to print out all the comments on a post until one of
-them is too old, you can use the following:
-
-```ts
-const post = await client.posts.fetch("<post id>");
-const timestamp = some old timestamp;
-await post.comments.each(c => {
-  console.log(c.body);
-  return c.createdUtc > timestamp;
-});
-```
-
-There are times when you only need to know if _something_ matches some criteria
-in a Listing. For that we have [.some()][l-some]. This behaves just like the
-array method of the same name, except that it is fully asynchronous.
-
-```ts
-const post = await client.posts.fetch("<post id>");
-const autoModDidComment = await post.comments.some(c => c.author === "AutoModerator"));
+for await (const post of posts) {
+  console.log(p.author);
+}
 ```
 
 <!-- Links -->
@@ -170,6 +136,6 @@ const autoModDidComment = await post.comments.some(c => c.author === "AutoModera
 [ua]: ./interfaces/clientoptions.html#useragent
 [creds]: ./interfaces/credentials.html
 [listing]: https://thislooks.fun/snoots/docs/latest/classes/listing.html
-[l-each]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#each
+[l-foreach]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#foreach
 [l-eachpage]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#eachpage
 [l-some]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#some

@@ -63,6 +63,27 @@ export abstract class Pager<T> implements Fetcher<T> {
  * intentionally exposes as little as possible about the internal workings to
  * minimize the amount of boilerplate needed to interact with them.
  *
+ * @note Since Reddit's responses are paged, Listings only implement asyncInterator.
+ * This means that if you want to loop over it you have to use `for await`:
+ * ```ts
+ * const posts = await client.subreddits.getNewPosts("funny");
+ * for await (const post of posts) {
+ *   console.log(post.title);
+ * }
+ * ```
+ *
+ * @note If you want to iterate using callbacks, you can use {@link forEach}:
+ * ```ts
+ * const posts = await client.subreddits.getNewPosts("funny");
+ * await posts.forEach(post => console.log(post.title));
+ * ```
+ *
+ * @note If you want to get an entire page at a time, use {@link eachPage}:
+ * ```ts
+ * const posts = await client.subreddits.getNewPosts("funny");
+ * await posts.eachPage(page => console.log(page.length));
+ * ```
+ *
  * @template T The type of items this Listing holds.
  */
 export default class Listing<T> {
@@ -129,33 +150,46 @@ export default class Listing<T> {
       const res = await fn(page.arr);
       if (res === false) return;
 
-      if (page.next) {
-        page = page.next;
-      } else if (page.fetcher) {
-        page = await page.fetcher.fetch(this.ctx);
-      } else {
-        page = null;
-      }
+      page = await Listing.nextPage(page, this.ctx);
     } while (page != null);
   }
 
   /**
    * Execute a function on each element of the listing.
    *
+   * @note This is an enhanced version of the default Array.forEach. It allows
+   * for asynchronous callbacks and breaking.
+   *
+   * @example Async
+   * ```ts
+   * async function slowAsync(post: Post): Promise<void> {
+   *   // do something slow
+   * }
+   *
+   * const posts = await client.subreddits.getNewPosts("funny");
+   * await posts.forEach(post => slowAsync(post));
+   * ```
+   *
+   * @example Breaking
+   * ```ts
+   * const posts = await client.subreddits.getNewPosts("funny");
+   * await posts.forEach(post => {
+   *   console.log(post.title);
+   *   // Break if the post was more than 5 minutes old.
+   *   return post.createdUtc >= Date.now() - 5 * 60 * 1000;
+   * });
+   * ```
+   *
    * @param fn The function to execute. If this returns or resolves to `false`
    * the execution will be halted.
    *
-   * @returns A promise that resolves when the listing has been exausted.
+   * @returns A promise that resolves when the iteration is complete.
    */
-  async each(fn: AwaitableFn<T, boolean | void>): Promise<void> {
-    await this.eachPage(async page => {
-      for (const el of page) {
-        // If the function returns false at any point, we are done.
-        const res = await fn(el);
-        if (res === false) return false;
-      }
-      return true;
-    });
+  async forEach(fn: AwaitableFn<T, boolean | void>): Promise<void> {
+    for await (const el of this) {
+      const res = await fn(el);
+      if (res === false) break;
+    }
   }
 
   /**
@@ -169,8 +203,41 @@ export default class Listing<T> {
    * element in the listing, or `false` if it reached the end of the listing.
    */
   async some(fn: AwaitableFn<T, boolean>): Promise<boolean> {
-    let found = false;
-    await this.each(async el => !(found = await fn(el)));
-    return found;
+    for await (const el of this) {
+      if (await fn(el)) return true;
+    }
+    return false;
+  }
+
+  private static async nextPage<T>(
+    page: Listing<T>,
+    ctx: Context
+  ): Promise<Listing<T> | null> {
+    if (page.next) {
+      return page.next;
+    } else if (page.fetcher) {
+      return await page.fetcher.fetch(ctx);
+    } else {
+      return null;
+    }
+  }
+
+  [Symbol.asyncIterator]() {
+    return {
+      page: this as Listing<T>,
+      ctx: this.ctx,
+      index: 0,
+
+      async next(): Promise<IteratorResult<T>> {
+        if (this.index >= this.page.arr.length) {
+          const nextPage = await Listing.nextPage(this.page, this.ctx);
+          if (!nextPage) return { done: true, value: undefined };
+          this.page = nextPage;
+          this.index = 0;
+        }
+
+        return { done: false, value: this.page.arr[this.index++] };
+      },
+    };
   }
 }
