@@ -1,3 +1,10 @@
+## [1.0.0-dev.8](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.7...v1.0.0-dev.8) (2021-04-13)
+
+
+### Bug Fixes
+
+* use the correct kind of Comment ([6e88c7e](https://github.com/thislooksfun/snoots/commit/6e88c7efe6eb4cbc46ea0e7980c64a0dc6739530))
+
 ## [1.0.0-dev.7](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2021-04-12)
 
 
