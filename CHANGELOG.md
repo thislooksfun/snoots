@@ -1,3 +1,16 @@
+## [1.0.0-dev.9](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.8...v1.0.0-dev.9) (2021-04-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* This renames Listing.each to Listing.forEach, and
+it is now no longer the preferred method of iteration. Instead you
+should probably use `for await` loops.
+
+### Features
+
+* make Listings iterable ([868d58d](https://github.com/thislooksfun/snoots/commit/868d58d06d5a38dd94e7d293d722d89f649e8b53))
+
 ## [1.0.0-dev.8](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.7...v1.0.0-dev.8) (2021-04-13)
 
 
