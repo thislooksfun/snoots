@@ -1,3 +1,10 @@
+## [1.0.0-dev.10](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.9...v1.0.0-dev.10) (2021-04-14)
+
+
+### Performance Improvements
+
+* fetch extra comments one page at a time ([d80b32a](https://github.com/thislooksfun/snoots/commit/d80b32a1079a0d5fed18d19102168c7167099e5d))
+
 ## [1.0.0-dev.9](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.8...v1.0.0-dev.9) (2021-04-13)
 
 
