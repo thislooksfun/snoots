@@ -68,7 +68,7 @@ async function printTree(cmt: Comment, indent: string = "") {
   const body = cmt.body.replace(/\n/g, "\n" + indent);
   console.log(`${indent}(${cmt.id}) ${cmt.author}: ${body}`);
   for await (const reply of cmt.replies) {
-    await printTree(reply, index + "  ");
+    await printTree(reply, indent + "  ");
   }
 }
 
