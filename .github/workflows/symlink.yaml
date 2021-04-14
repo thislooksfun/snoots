@@ -2,6 +2,8 @@ name: Update Documentation Symlinks
 
 on:
   push:
+    # TODO: This doesn't seem to be working, but I don't know why.
+    # BODY: It runs fine on workflow_run, but not on branch push.
     branches: ["gh-pages"]
   workflow_run:
     workflows: ["Publish Documentation", "Release"]
