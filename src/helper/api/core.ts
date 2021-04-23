@@ -2,8 +2,10 @@ import type { Data } from "../types";
 import type { OptionsOfTextResponseBody } from "got";
 import got from "got";
 
+/** The types of values that are allowed in a query. */
+export type QueryValue = string | number | boolean | null | undefined;
 /** A mapping of query parameters to add to a request. */
-export type Query = Record<string, string | boolean>;
+export type Query = Record<string, QueryValue>;
 
 export interface BasicAuth {
   user: string;
