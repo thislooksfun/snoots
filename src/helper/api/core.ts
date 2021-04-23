@@ -40,11 +40,8 @@ function errWrap<T>(res: SomeResponse<T>): T {
     const { errors, data } = res.json;
     if (errors.length > 0) {
       handleError(errors[0]);
-    } else if (!data) {
-      // TODO: Use custom error type
-      throw "No data!";
     } else {
-      return data;
+      return data!;
     }
   } else {
     if ("error" in res) {
