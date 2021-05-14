@@ -230,7 +230,8 @@ export default class Listing<T> {
     if (page.next) {
       return page.next;
     } else if (page.fetcher) {
-      return await page.fetcher.fetch(ctx);
+      const next = await page.fetcher.fetch(ctx);
+      return next.arr.length > 0 ? next : null;
     } else {
       return null;
     }
