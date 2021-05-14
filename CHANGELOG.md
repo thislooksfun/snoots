@@ -1,3 +1,10 @@
+## [1.0.0-dev.11](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.10...v1.0.0-dev.11) (2021-05-14)
+
+
+### Features
+
+* add initial support for interacting with users ([bd0fc8b](https://github.com/thislooksfun/snoots/commit/bd0fc8b01140aaab1b0b47eb6cdedb96a79c2b22))
+
 ## [1.0.0-dev.10](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.9...v1.0.0-dev.10) (2021-04-14)
 
 
