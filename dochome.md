@@ -95,40 +95,44 @@ the largest:
 
 What does this mean in practice? Here are some examples:
 
-```ts
-// snoowrap
-const title = await client.getSubreddit("funny").getRandomSubmission().title;
+1. Reading the title of a random post from r/funny:
 
-// snoots (literal translation)
-const sub = await client.subreddits.fetch("funny");
-const post = await sub.getRandomPost();
-const title = post.title;
+   ```ts
+   // snoowrap
+   const title = await client.getSubreddit("funny").getRandomSubmission().title;
 
-// snoots (preferred method, 1 fewer api call)
-const post = await client.subreddits.getRandomPost("funny");
-const title = post.title;
-```
+   // snoots (literal translation)
+   const sub = await client.subreddits.fetch("funny");
+   const post = await sub.getRandomPost();
+   const title = post.title;
 
-```ts
-// snoowrap
-const posts = await client.getSubreddit("funny").getNew().fetchAll();
-for (const post of posts) {
-  console.log(post.author.name);
-}
+   // snoots (preferred method, 1 fewer api call)
+   const post = await client.subreddits.getRandomPost("funny");
+   const title = post.title;
+   ```
 
-// snoots (literal translation)
-const sub = await client.subreddits.fetch("funny");
-const posts = sub.getNewPosts();
-for await (const post of posts) {
-  console.log(p.author);
-}
+1. Listing the authors of the newest posts in r/funny:
 
-// snoots (preferred method, 1 fewer api call)
-const posts = client.subreddits.getNewPosts("funny");
-for await (const post of posts) {
-  console.log(p.author);
-}
-```
+   ```ts
+   // snoowrap
+   const posts = await client.getSubreddit("funny").getNew().fetchAll();
+   for (const post of posts) {
+     console.log(post.author.name);
+   }
+
+   // snoots (literal translation)
+   const sub = await client.subreddits.fetch("funny");
+   const posts = sub.getNewPosts();
+   for await (const post of posts) {
+     console.log(p.author);
+   }
+
+   // snoots (preferred method, 1 fewer api call)
+   const posts = client.subreddits.getNewPosts("funny");
+   for await (const post of posts) {
+     console.log(p.author);
+   }
+   ```
 
 <!-- Links -->
 
