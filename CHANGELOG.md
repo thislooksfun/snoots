@@ -1,3 +1,10 @@
+## [1.0.0-dev.13](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.12...v1.0.0-dev.13) (2021-05-14)
+
+
+### Bug Fixes
+
+* make empty listings actually empty ([f8467ca](https://github.com/thislooksfun/snoots/commit/f8467ca2d8f1f12e80daf5ff0c30202eba44a48f))
+
 ## [1.0.0-dev.12](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.11...v1.0.0-dev.12) (2021-05-14)
 
 
