@@ -235,7 +235,8 @@ export interface VoteableData extends ContentData {
 /** The base for all content that you can vote on. */
 export default abstract class Voteable
   extends Replyable
-  implements VoteableData {
+  implements VoteableData
+{
   approved?: boolean;
   approvedAtUtc: number | null;
   approvedBy: string | null;
