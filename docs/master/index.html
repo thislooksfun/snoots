@@ -150,8 +150,10 @@
 					username.</li>
 				</ol>
 				<p>What does this mean in practice? Here are some examples:</p>
-				<pre><code class="language-ts"><span style="color: #008000">// snoowrap</span>
-<span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getSubreddit</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;funny&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">getRandomSubmission</span><span style="color: #000000">().</span><span style="color: #001080">title</span><span style="color: #000000">; </span><span style="color: #008000">// Promise&lt;string&gt;</span>
+				<ol>
+					<li><p>Reading the title of a random post from r/funny:</p>
+						<pre><code class="language-ts"><span style="color: #008000">// snoowrap</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">title</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getSubreddit</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;funny&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">getRandomSubmission</span><span style="color: #000000">().</span><span style="color: #001080">title</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// snoots (literal translation)</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sub</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">subreddits</span><span style="color: #000000">.</span><span style="color: #795E26">fetch</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;funny&quot;</span><span style="color: #000000">);</span>
@@ -162,7 +164,9 @@
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">post</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">subreddits</span><span style="color: #000000">.</span><span style="color: #795E26">getRandomPost</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;funny&quot;</span><span style="color: #000000">);</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">title</span><span style="color: #000000"> = </span><span style="color: #001080">post</span><span style="color: #000000">.</span><span style="color: #001080">title</span><span style="color: #000000">;</span>
 </code></pre>
-				<pre><code class="language-ts"><span style="color: #008000">// snoowrap</span>
+					</li>
+					<li><p>Listing the authors of the newest posts in r/funny:</p>
+						<pre><code class="language-ts"><span style="color: #008000">// snoowrap</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">posts</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getSubreddit</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;funny&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">getNew</span><span style="color: #000000">().</span><span style="color: #795E26">fetchAll</span><span style="color: #000000">();</span>
 <span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">post</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #001080">posts</span><span style="color: #000000">) {</span>
 <span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">post</span><span style="color: #000000">.</span><span style="color: #001080">author</span><span style="color: #000000">.</span><span style="color: #001080">name</span><span style="color: #000000">);</span>
@@ -181,6 +185,8 @@
 <span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">p</span><span style="color: #000000">.</span><span style="color: #001080">author</span><span style="color: #000000">);</span>
 <span style="color: #000000">}</span>
 </code></pre>
+					</li>
+				</ol>
 				<!-- Links -->
 			</div>
 		</div>
