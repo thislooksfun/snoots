@@ -58,7 +58,7 @@ export default class UserControls extends BaseControls {
    *
    * @returns A sorted Listing of posts.
    */
-  getPosts(user: string, sort: PostSort): Listing<Post> {
+  getPosts(user: string, sort: PostSort = "new"): Listing<Post> {
     const req = { url: `user/${user}/submitted`, query: { sort } };
     const ctx = { req, client: this.client };
     return new PostListing(fakeListingAfter(""), ctx);

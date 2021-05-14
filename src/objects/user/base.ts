@@ -144,7 +144,7 @@ export abstract class User extends Content implements UserData {
    *
    * @returns A sorted Listing of posts.
    */
-  getPosts(sort: PostSort): Listing<Post> {
+  getPosts(sort: PostSort = "new"): Listing<Post> {
     return this.controls.getPosts(this.name, sort);
   }
 
