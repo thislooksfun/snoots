@@ -19,4 +19,4 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR"
 
 # For each folder in this directory, execute the clean sequence
-find . -maxdepth 1 -type d -print0 | xargs -0L1 ./clean
+find . -maxdepth 1 -type d \( ! -name . \) -print0 | xargs -0L1 ./clean
