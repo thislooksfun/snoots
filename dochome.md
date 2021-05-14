@@ -97,7 +97,7 @@ What does this mean in practice? Here are some examples:
 
 ```ts
 // snoowrap
-client.getSubreddit("funny").getRandomSubmission().title; // Promise<string>
+const title = await client.getSubreddit("funny").getRandomSubmission().title;
 
 // snoots (literal translation)
 const sub = await client.subreddits.fetch("funny");
