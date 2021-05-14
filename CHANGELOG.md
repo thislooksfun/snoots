@@ -1,3 +1,15 @@
+## [1.0.0-dev.12](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.11...v1.0.0-dev.12) (2021-05-14)
+
+
+### Features
+
+* add a helper to get the first item from a Listing ([61e8e35](https://github.com/thislooksfun/snoots/commit/61e8e35b99a05a590101262ba276b704afa5b915))
+
+
+### Bug Fixes
+
+* add a default sort to User(Controls).getPosts() ([7a20a03](https://github.com/thislooksfun/snoots/commit/7a20a03194756955562f05e3fd5e7eeff63ad39f))
+
 ## [1.0.0-dev.11](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.10...v1.0.0-dev.11) (2021-05-14)
 
 
