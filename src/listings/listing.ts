@@ -209,6 +209,20 @@ export default class Listing<T> {
     return false;
   }
 
+  /**
+   * Get the first item of this listing.
+   *
+   * @returns A promise that resolves to either the first item of the listing,
+   * or `null` if the listing is empty.
+   */
+  async first(): Promise<T | null> {
+    for await (const el of this) {
+      return el;
+    }
+
+    return null;
+  }
+
   private static async nextPage<T>(
     page: Listing<T>,
     ctx: Context
