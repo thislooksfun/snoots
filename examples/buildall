@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This is a helper script to automatically build all the example projects for
+# testing. You don't need to worry about this file unless you are actively
+# working on snoots.
+
+set -e
+
+# Find the directory where this script is located
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
+# Change to that directory
+cd "$DIR"
+
+# For each folder in this directory, execute the build sequence
+find . -maxdepth 1 -type d -print0 | xargs -0L1 ./build

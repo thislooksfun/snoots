@@ -9,8 +9,10 @@
   "scripts": {
     "prepare": "is-ci || husky install",
     "build": "tsc",
+    "build-examples": "npm run build && ./examples/buildall",
     "test": "jest",
     "clean": "del-cli dist docs types",
+    "clean-examples": "npm run build && ./examples/cleanall",
     "lint": "prettier -c '**/*'",
     "gendoc": "typedoc src/index.ts",
     "prepublishOnly": "npm run clean && npm run lint && npm run build"

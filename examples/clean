@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+cd "$1"
+
+echo "# Cleaning example at '$(pwd)'"
+echo "####################"
+echo
+
+npm ci
+npm run clean
