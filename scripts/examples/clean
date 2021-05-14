@@ -2,6 +2,11 @@
 
 set -e
 
+if [ -z "$1" ]; then
+  echo "You must provide a path."
+  exit 1
+fi
+
 cd "$1"
 
 echo "# Cleaning example at '$(pwd)'"

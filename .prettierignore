@@ -41,7 +41,4 @@ LICENSE
 /.husky
 
 # Scripts
-examples/build
-examples/buildall
-examples/clean
-examples/cleanall
+/scripts

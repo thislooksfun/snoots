@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# This is a helper script to automatically build all the example projects for
-# testing. You don't need to worry about this file unless you are actively
-# working on snoots.
-
 set -e
 
 # Find the directory where this script is located
@@ -18,5 +14,5 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # Change to that directory
 cd "$DIR"
 
-# For each folder in this directory, execute the build sequence
-find . -maxdepth 1 -type d \( ! -name . \) -print0 | xargs -0L1 ./build
+# For each folder in the examples directory, execute the clean sequence
+find ../../examples -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0L1 ./clean
