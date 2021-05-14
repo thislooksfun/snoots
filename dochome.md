@@ -78,6 +78,8 @@ async function printTree(cmt: Comment, indent: string = "") {
 })();
 ```
 
+For full project examples check out the [examples directory][exdir]
+
 More examples will come as snoots evolves!
 
 ## Migrating from Snoowrap
@@ -139,6 +141,7 @@ What does this mean in practice? Here are some examples:
 [cd]: ./classes/client.html
 [ua]: ./interfaces/clientoptions.html#useragent
 [creds]: ./interfaces/credentials.html
+[exdir]: https://github.com/thislooksfun/snoots/blob/master/examples
 [listing]: https://thislooks.fun/snoots/docs/latest/classes/listing.html
 [l-foreach]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#foreach
 [l-eachpage]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#eachpage
