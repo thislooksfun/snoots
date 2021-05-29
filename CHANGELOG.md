@@ -1,3 +1,10 @@
+## [1.0.0-dev.14](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.13...v1.0.0-dev.14) (2021-05-29)
+
+
+### Bug Fixes
+
+* populate Post.removed when missing ([#32](https://github.com/thislooksfun/snoots/issues/32)) ([4c7ba39](https://github.com/thislooksfun/snoots/commit/4c7ba394b4c84e942879d26421c405bff9640966))
+
 ## [1.0.0-dev.13](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.12...v1.0.0-dev.13) (2021-05-14)
 
 
