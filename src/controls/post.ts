@@ -17,6 +17,11 @@ import Post from "../objects/post";
 import PostListing from "../listings/post";
 import VoteableControls from "./voteable";
 
+function isRemoved(dat: any) {
+  if (dat.removed != null) return dat.removed;
+  return !!dat.removal_reason || !!dat.removed_by || !!dat.removed_by_category;
+}
+
 /** @internal */
 export type SplitRawPost = [ListingObject, ListingObject];
 
@@ -301,6 +306,8 @@ export default class PostControls extends VoteableControls {
 
     rDat.body = rDat.selftext;
     rDat.bodyHtml = rDat.selftextHtml;
+
+    rDat.removed = isRemoved(rDat);
 
     const data: PostData = camelCaseKeys(rDat);
 
