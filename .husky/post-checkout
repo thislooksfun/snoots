@@ -5,6 +5,6 @@ set -e
 
 pkgdiff=$(git diff "$1".."$2" -- package.json)
 if [[ $(echo "$pkgdiff" | wc -l) -gt 0 ]]; then
-  npm run clean
   npm ci
+  npm run clean
 fi
