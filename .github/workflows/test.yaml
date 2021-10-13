@@ -20,4 +20,4 @@ jobs:
       - run: npm run build
       - run: ./scripts/examples/buildall
       - run: npm test
-      - run: npx codecov
+      - uses: codecov/codecov-action@v2
