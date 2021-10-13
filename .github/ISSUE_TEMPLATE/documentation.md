@@ -8,8 +8,8 @@ assignees: ""
 
 <!--
 Before submitting an issue with the documentation, check the latest docs,
-available here: https://thislooks.fun/snoots/docs, to make sure it hasn't been
-fixed already.
+available here: https://thislooks.fun/snoots/docs/latest, to make sure it hasn't
+been fixed already.
 -->
 
 **Describe the issue**
