@@ -64,13 +64,13 @@ export default class UserControls extends BaseControls {
   /**
    * Get a Listing of all the posts a user has made.
    *
-   * @param user The user to get posts from.
+   * @param username The user to get posts from.
    * @param sort How to sort the posts.
    *
    * @returns A sorted Listing of posts.
    */
-  getPosts(user: string, sort: PostSort = "new"): Listing<Post> {
-    const req = { url: `user/${user}/submitted`, query: { sort } };
+  getPosts(username: string, sort: PostSort = "new"): Listing<Post> {
+    const req = { url: `user/${username}/submitted`, query: { sort } };
     const ctx = { req, client: this.client };
     return new PostListing(fakeListingAfter(""), ctx);
   }
@@ -78,13 +78,13 @@ export default class UserControls extends BaseControls {
   /**
    * Get a Listing of all the comments a user has made.
    *
-   * @param user The user to get comments from.
+   * @param username The user to get comments from.
    * @param sort How to sort the comments.
    *
    * @returns A sorted Listing of comments.
    */
-  getSortedComments(user: string, sort: string = "new"): Listing<Comment> {
-    const req = { url: `user/${user}/comments`, query: { sort } };
+  getSortedComments(username: string, sort: string = "new"): Listing<Comment> {
+    const req = { url: `user/${username}/comments`, query: { sort } };
     const ctx = { req, client: this.client };
     return new CommentListing(fakeListingAfter(""), ctx);
   }
