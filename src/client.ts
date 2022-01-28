@@ -209,20 +209,34 @@ export default class Client {
   }
 
   /**
-   * Authorize this client from an OAuth code.
+   * Create a client from an OAuth code.
    *
+   * @param opts The Client options.
    * @param code The OAuth code.
    * @param redirectUri The redirect URI. This ***must*** be the same as the uri
-   * given to {@link OAuth.getAuthUrl}.
+   * given to {@link makeAuthUrl}.
    *
    * @returns A promise that resolves when the authorization is complete.
    */
-  async authFromCode(code: string, redirectUri: string): Promise<void> {
-    const creds = this.creds;
+  static async fromAuthCode<Self extends typeof Client>(
+    this: Self,
+    opts: Required<Omit<ClientOptions, "auth">>,
+    code: string,
+    redirectUri: string
+  ): Promise<InstanceType<Self>> {
+    const creds = opts.creds;
     if (!creds) throw "No creds";
 
-    this.token = await tokenFromCode(code, creds, this.userAgent, redirectUri);
-    this.auth = { refreshToken: this.token.refresh! };
+    const client = new this(opts);
+    client.token = await tokenFromCode(
+      code,
+      creds,
+      client.userAgent,
+      redirectUri
+    );
+    client.auth = { refreshToken: client.token.refresh! };
+
+    return client as InstanceType<Self>;
   }
 
   /**

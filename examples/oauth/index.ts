@@ -50,13 +50,14 @@ app.get("/auth", async (req, res) => {
     return;
   }
 
-  // Create a new Reddit client.
-  const client = new Client({ userAgent, creds });
-
   try {
-    // Authenticate with the code we were given. Note that the redirectUri here
-    // MUST match the uri given to `getAuthUrl`, or else this will fail.
-    await client.authFromCode(code, redirectUri);
+    // Create a new Client from the given auth code. Note that the redirectUri
+    // here MUST match the uri given to `getAuthUrl`, or else this will fail.
+    const client = await Client.fromAuthCode(
+      { userAgent, creds },
+      code,
+      redirectUri
+    );
 
     // Get and display the user's information so we know it worked!
     const user = await client.users.fetchMe();
