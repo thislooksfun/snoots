@@ -134,7 +134,7 @@ export abstract class User extends Content implements UserData {
     // TODO: The user fetch does return some info about this subreddit, just not
     // enough to populate a full Subreddit instance. Is there some way we could
     // make use of that partial data?
-    return this.controls.getClient().subreddits.fetch(`u_${this.name}`);
+    return this.controls.fetchSubreddit(this.name);
   }
 
   /**

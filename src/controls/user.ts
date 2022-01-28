@@ -1,5 +1,5 @@
 import type { _Listing } from "../listings/listing";
-import type { Comment, Post } from "..";
+import type { Comment, Post, Subreddit } from "..";
 import type { Data, PostSort, RedditObject } from "../helper/types";
 import type { MyUserData, OtherUserData, UserData } from "../objects/user";
 import type Client from "../client";
@@ -48,6 +48,17 @@ export default class UserControls extends BaseControls {
     // /me doesn't return a wrapped object, so we have to make it ourselves.
     const raw: RedditObject = { kind: "t2", data: res };
     return this.fromRaw(raw) as MyUser;
+  }
+
+  /**
+   * Fetch a user's subreddit.
+   *
+   * @param username The user who's subreddit to fetch.
+   *
+   * @returns A promise that resolves to the user's subreddit.
+   */
+  async fetchSubreddit(username: string): Promise<Subreddit> {
+    return this.client.subreddits.fetch(`u_${username}`);
   }
 
   /**

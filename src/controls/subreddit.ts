@@ -152,6 +152,11 @@ export default class SubredditControls extends BaseControls {
     await this.unfriend(sr, name, "contributor");
   }
 
+  /** @internal */
+  async leaveContributor(srId: string): Promise<void> {
+    await this.client.post("api/leavecontributor", { id: srId });
+  }
+
   /**
    * Add a user to the list of approved wiki editors.
    *

@@ -855,13 +855,12 @@ export default class Subreddit extends Content implements SubredditData {
   }
 
   /**
-   * Remove yourself from the list of approved posters.
+   * Remove yourself (the authorized user) from the list of approved posters.
    *
    * @returns A promise that resolves when you have been sucessfully removed.
    */
   async leaveContributor(): Promise<void> {
-    const body = { id: `t5_${this.id};` };
-    await this.controls.getClient().post("api/leavecontributor", body);
+    await this.controls.leaveContributor(`t5_${this.id}`);
   }
 
   /**
