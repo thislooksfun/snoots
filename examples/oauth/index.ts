@@ -21,7 +21,7 @@ app.get("/", (_req, res) => res.send("Hello world!"));
 
 // When the user navigates to /login redirect them to the Reddit OAuth url.
 app.get("/login", (_req, res) => {
-  const uri = Client.getAuthUrl(
+  const uri = Client.makeAuthUrl(
     creds.clientId,
     ["identity"],
     redirectUri,

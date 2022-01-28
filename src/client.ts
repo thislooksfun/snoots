@@ -178,7 +178,7 @@ export default class Client {
   }
 
   /**
-   * Get an OAuth login url.
+   * Make an OAuth login url.
    *
    * @param clientId The ID of the Reddit app.
    * @param scopes The scopes to authorize with.
@@ -190,7 +190,7 @@ export default class Client {
    *
    * @returns The URL to direct the user to for authorization.
    */
-  static getAuthUrl(
+  static makeAuthUrl(
     clientId: string,
     scopes: string[],
     redirectUri: string,
