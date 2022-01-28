@@ -146,13 +146,13 @@ export interface ClientOptions {
  */
 export default class Client {
   /** Controls for interacting with comments. */
-  public comments: CommentControls;
+  public readonly comments: CommentControls;
   /** Controls for interacting with posts. */
-  public posts: PostControls;
+  public readonly posts: PostControls;
   /** Controls for interacting with subreddits. */
-  public subreddits: SubredditControls;
+  public readonly subreddits: SubredditControls;
   /** Controls for interacting with users. */
-  public users: UserControls;
+  public readonly users: UserControls;
 
   protected auth?: Auth;
   protected creds?: Credentials;
