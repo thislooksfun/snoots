@@ -4,7 +4,7 @@ import type Client from "../client";
 import { assertKind } from "../helper/util";
 
 /** @internal */
-export interface Context {
+export interface ListingContext {
   client: Client;
   post?: string;
   req?: { url: string; query: Query };
@@ -34,7 +34,7 @@ export interface RedditMore {
 
 /** @internal */
 export interface Fetcher<T> {
-  fetch(ctx: Context): Promise<Listing<T>>;
+  fetch(ctx: ListingContext): Promise<Listing<T>>;
 }
 
 /** @internal */
@@ -45,9 +45,9 @@ export abstract class Pager<T> implements Fetcher<T> {
     this.after = after;
   }
 
-  abstract fetch(ctx: Context): Promise<Listing<T>>;
+  abstract fetch(ctx: ListingContext): Promise<Listing<T>>;
 
-  protected async nextPage(ctx: Context): Promise<RedditListing> {
+  protected async nextPage(ctx: ListingContext): Promise<RedditListing> {
     if (!ctx.req) throw "Unable to fetch next page";
     const query = { limit: "100", after: this.after, ...ctx.req.query };
     const res: RedditObject = await ctx.client.get(ctx.req.url, query);
@@ -87,13 +87,13 @@ export abstract class Pager<T> implements Fetcher<T> {
  * @template T The type of items this Listing holds.
  */
 export default class Listing<T> {
-  protected ctx: Context;
+  protected ctx: ListingContext;
   protected arr: T[];
   protected fetcher?: Fetcher<T>;
   protected next?: Listing<T>;
 
   /** @internal */
-  constructor(ctx: Context, arr: T[], fetcher?: Fetcher<T>) {
+  constructor(ctx: ListingContext, arr: T[], fetcher?: Fetcher<T>) {
     this.ctx = ctx;
     this.arr = arr;
     this.fetcher = fetcher;
@@ -225,7 +225,7 @@ export default class Listing<T> {
 
   private static async nextPage<T>(
     page: Listing<T>,
-    ctx: Context
+    ctx: ListingContext
   ): Promise<Listing<T> | null> {
     if (page.next) {
       return page.next;

@@ -1,17 +1,17 @@
 import { InvalidKindError } from "../helper/errors";
 import type { Comment, Post } from "../objects";
-import type { RedditListing, Context, Fetcher } from "./listing";
+import type { RedditListing, ListingContext, Fetcher } from "./listing";
 import Listing, { Pager } from "./listing";
 
 export class PostOrCommentPager extends Pager<Post | Comment> {
-  async fetch(ctx: Context): Promise<PostOrCommentListing> {
+  async fetch(ctx: ListingContext): Promise<PostOrCommentListing> {
     const pg = await this.nextPage(ctx);
     return new PostOrCommentListing(pg, ctx);
   }
 }
 
 export default class PostOrCommentListing extends Listing<Post | Comment> {
-  constructor(l: RedditListing, ctx: Context) {
+  constructor(l: RedditListing, ctx: ListingContext) {
     let fetcher: Fetcher<Post | Comment> | undefined;
 
     if (l.after != null) {

@@ -1,9 +1,9 @@
-import type { RedditListing, Context, Fetcher } from "./listing";
+import type { RedditListing, ListingContext, Fetcher } from "./listing";
 import type Post from "../objects/post";
 import Listing, { Pager } from "./listing";
 
 class PostPager extends Pager<Post> {
-  async fetch(ctx: Context): Promise<PostListing> {
+  async fetch(ctx: ListingContext): Promise<PostListing> {
     const pg = await this.nextPage(ctx);
     return new PostListing(pg, ctx);
   }
@@ -11,7 +11,7 @@ class PostPager extends Pager<Post> {
 
 /** @internal */
 export default class PostListing extends Listing<Post> {
-  constructor(l: RedditListing, ctx: Context) {
+  constructor(l: RedditListing, ctx: ListingContext) {
     let fetcher: Fetcher<Post> | undefined;
 
     if (l.after != null) {

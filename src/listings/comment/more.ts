@@ -1,8 +1,7 @@
 import type { Data, RedditObject } from "../../helper/types";
-import type { Fetcher, Context, RedditMore } from "../listing";
+import type { Fetcher, ListingContext, RedditMore } from "../listing";
 import type Comment from "../../objects/comment";
 import { emptyRedditListing, wrapChildren } from "./../util";
-import Listing from "../listing";
 import CommentListing from "./commentListing";
 
 function fixCommentTree(objects: RedditObject[]) {
@@ -41,7 +40,7 @@ export default class MoreComments implements Fetcher<Comment> {
     this.data = data;
   }
 
-  async fetch(ctx: Context): Promise<Listing<Comment>> {
+  async fetch(ctx: ListingContext): Promise<CommentListing> {
     if (this.data.name === "t1__") {
       const id = this.data.parent_id.slice(3);
       const pth = `comments/${ctx.post}`;
