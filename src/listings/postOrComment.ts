@@ -1,6 +1,6 @@
 import { InvalidKindError } from "../helper/errors";
 import type { Comment, Post } from "../objects";
-import type { _Listing, Context, Fetcher } from "./listing";
+import type { RedditListing, Context, Fetcher } from "./listing";
 import Listing, { Pager } from "./listing";
 
 export class PostOrCommentPager extends Pager<Post | Comment> {
@@ -11,7 +11,7 @@ export class PostOrCommentPager extends Pager<Post | Comment> {
 }
 
 export default class PostOrCommentListing extends Listing<Post | Comment> {
-  constructor(l: _Listing, ctx: Context) {
+  constructor(l: RedditListing, ctx: Context) {
     let fetcher: Fetcher<Post | Comment> | undefined;
 
     if (l.after != null) {

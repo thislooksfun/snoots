@@ -1,4 +1,4 @@
-import type { _Listing, ListingObject } from "../listings/listing";
+import type { ListingObject } from "../listings/listing";
 import type { CommentData } from "../objects/comment";
 import type { RedditObject } from "../helper/types";
 import type Client from "../client";

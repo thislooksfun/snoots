@@ -1,7 +1,7 @@
-import type { _Listing, RedditMore } from "./listing";
+import type { RedditListing, RedditMore } from "./listing";
 import type { RedditObject } from "../helper/types";
 
-export const emptyRedditListing: _Listing = {
+export const emptyRedditListing: RedditListing = {
   after: null,
   before: null,
   children: [],
@@ -9,15 +9,15 @@ export const emptyRedditListing: _Listing = {
   modhash: null,
 };
 
-export function wrapChildren(children: RedditObject[]): _Listing {
+export function wrapChildren(children: RedditObject[]): RedditListing {
   return { after: null, before: null, children, dist: null, modhash: null };
 }
 
-export function fakeListingAfter(after: string): _Listing {
+export function fakeListingAfter(after: string): RedditListing {
   return { after, before: null, children: [], dist: null, modhash: null };
 }
 
-export function fakeMoreListing(name: string): _Listing {
+export function fakeMoreListing(name: string): RedditListing {
   const more: RedditMore = {
     count: 0, // TODO
     name: `${name.slice(0, 2)}__`,

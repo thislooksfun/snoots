@@ -1,4 +1,4 @@
-import type { _Listing, ListingObject } from "../listings/listing";
+import type { RedditListing, ListingObject } from "../listings/listing";
 import type {
   RedditObject,
   SearchSort,
@@ -296,7 +296,7 @@ export default class PostControls extends VoteableControls {
   }
 
   /** @internal */
-  fromRaw(raw: RedditObject, comments?: _Listing): Post {
+  fromRaw(raw: RedditObject, comments?: RedditListing): Post {
     assertKind("t3", raw);
 
     const rDat = raw.data;

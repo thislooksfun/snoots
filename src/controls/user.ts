@@ -1,4 +1,3 @@
-import type { _Listing } from "../listings/listing";
 import type { Comment, Post, Subreddit } from "..";
 import type { Data, PostSort, RedditObject } from "../helper/types";
 import type { MyUserData, OtherUserData, UserData } from "../objects/user";

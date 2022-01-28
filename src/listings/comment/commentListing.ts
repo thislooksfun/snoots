@@ -1,4 +1,4 @@
-import type { _Listing, Context, Fetcher, RedditMore } from "../listing";
+import type { RedditListing, Context, Fetcher, RedditMore } from "../listing";
 import type Comment from "../../objects/comment";
 import CommentPager from "./pager";
 import Listing from "../listing";
@@ -6,7 +6,7 @@ import MoreComments from "./more";
 
 /** @internal */
 export default class CommentListing extends Listing<Comment> {
-  constructor(l: _Listing, ctx: Context) {
+  constructor(l: RedditListing, ctx: Context) {
     let fetcher: Fetcher<Comment> | undefined;
 
     if (l.after != null) {

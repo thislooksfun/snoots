@@ -1,4 +1,3 @@
-import type { _Listing } from "../listings/listing";
 import type { Comment, Post } from "../objects";
 import type {
   Data,
