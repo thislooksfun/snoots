@@ -3,7 +3,7 @@ import type { Comment, Post } from "../objects";
 import type { RedditListing, ListingContext, Fetcher } from "./listing";
 import Listing, { Pager } from "./listing";
 
-export class PostOrCommentPager extends Pager<Post | Comment> {
+class PostOrCommentPager extends Pager<Post | Comment> {
   async fetch(ctx: ListingContext): Promise<PostOrCommentListing> {
     const pg = await this.nextPage(ctx);
     return new PostOrCommentListing(pg, ctx);
