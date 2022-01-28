@@ -176,7 +176,7 @@ export default class Listing<T> {
    * await posts.forEach(post => {
    *   console.log(post.title);
    *   // Break if the post was more than 5 minutes old.
-   *   return post.createdUtc >= Date.now() - 5 * 60 * 1000;
+   *   return post.createdUtc >= (Date.now() / 1000) - 5 * 60;
    * });
    * ```
    *
