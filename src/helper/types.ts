@@ -35,3 +35,6 @@ export type PostSort = "controversial" | "hot" | "new" | "rising" | "top";
 
 /** @internal */
 export type RedditObject<T = Data> = { kind: string; data: T };
+
+/** A value that may or may not be `undefined`. */
+export type Maybe<T> = T | undefined;

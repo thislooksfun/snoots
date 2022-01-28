@@ -1,4 +1,5 @@
 import type Client from "../client";
+import type { Gateway } from "../gateway/gateway";
 
 /** The base class for all controls. */
 export default abstract class BaseControls {
@@ -9,6 +10,11 @@ export default abstract class BaseControls {
   constructor(client: Client, prefix: string) {
     this.client = client;
     this.prefix = prefix;
+  }
+
+  /** @internal */
+  public get gateway(): Gateway {
+    return this.client.gateway;
   }
 
   /**

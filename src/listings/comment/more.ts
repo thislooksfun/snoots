@@ -44,7 +44,7 @@ export default class MoreComments implements Fetcher<Comment> {
     if (this.data.name === "t1__") {
       const id = this.data.parent_id.slice(3);
       const pth = `comments/${ctx.post}`;
-      const res: Data = await ctx.client.get(pth, { comment: id });
+      const res: Data = await ctx.client.gateway.get(pth, { comment: id });
       const obj: RedditObject = res[1].data.children[0];
       if (!obj) {
         return new CommentListing(emptyRedditListing, ctx);
@@ -60,7 +60,7 @@ export default class MoreComments implements Fetcher<Comment> {
       const rest = this.data.children.slice(75);
 
       const query = { children: page.join(","), link_id: `t3_${ctx.post}` };
-      const res: Data = await ctx.client.get("api/morechildren", query);
+      const res: Data = await ctx.client.gateway.get("api/morechildren", query);
 
       const children = fixCommentTree(res.things);
 

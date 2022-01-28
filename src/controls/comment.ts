@@ -39,7 +39,7 @@ export default class CommentControls extends VoteableControls {
    */
   async fetch(id: string): Promise<Comment> {
     const req = { id: this.namespace(id) };
-    const res: ListingObject = await this.client.get("api/info", req);
+    const res: ListingObject = await this.gateway.get("api/info", req);
 
     assertKind("Listing", res);
 
@@ -66,7 +66,7 @@ export default class CommentControls extends VoteableControls {
     const sticky = state === "sticky";
 
     const body = { how, sticky, id: this.namespace(id) };
-    await this.client.post("api/distinguish", body);
+    await this.gateway.post("api/distinguish", body);
   }
 
   /** @internal */

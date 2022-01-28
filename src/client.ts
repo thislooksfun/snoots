@@ -1,40 +1,13 @@
-import type { Credentials } from "./helper/api/creds";
-import type { Data } from "./helper/types";
-import type { OauthOpts } from "./helper/api/oauth";
-import type { Query } from "./helper/api/core";
-import type { Token } from "./helper/accessToken";
+import type { Credentials } from "./gateway/creds";
+import type { Gateway } from "./gateway/gateway";
 import {
   CommentControls,
   PostControls,
   SubredditControls,
   UserControls,
 } from "./controls";
-import { updateAccessToken, tokenFromCode } from "./helper/accessToken";
-import * as anon from "./helper/api/anon";
-import * as oauth from "./helper/api/oauth";
-
-/** Username and password based authentication */
-export interface UsernameAuth {
-  /** The username of the reddit account to control. */
-  username: string;
-
-  /** The password of the reddit account to control. */
-  password: string;
-}
-
-/** OAuth token based authentication */
-export interface TokenAuth {
-  /**
-   * An OAuth refresh token.
-   *
-   * Snoots does not provide any way to get a refresh token. If you want to use
-   * this code path you have to go through the oauth flow yourself.
-   */
-  refreshToken: string;
-}
-
-/** Some kind of authorization */
-export type Auth = UsernameAuth | TokenAuth;
+import { ClientAuth, OauthGateway } from "./gateway/oauth";
+import { AnonGateway } from "./gateway/anon";
 
 /**
  * Options for instantiating a Client
@@ -48,7 +21,7 @@ export interface ClientOptions {
    *
    * [aoa]: https://github.com/reddit-archive/reddit/wiki/OAuth2#application-only-oauth
    */
-  auth?: Auth;
+  auth?: ClientAuth;
 
   /**
    * The authorization information for this client to log in with.
@@ -154,10 +127,20 @@ export default class Client {
   /** Controls for interacting with users. */
   public readonly users: UserControls;
 
-  protected auth?: Auth;
-  protected creds?: Credentials;
-  protected token: Token | null;
-  protected userAgent: string;
+  private _gateway: Gateway;
+
+  /**
+   * The Gateway to the Reddit API.
+   *
+   * You can use this directly, but you most likely don't want to. If you end up
+   * needing this in order to interact with the Reddit API please open an issue
+   * or submit a pull request so we can add official support for your use case.
+   *
+   * @internal
+   */
+  public get gateway(): Gateway {
+    return this._gateway;
+  }
 
   /**
    * Make a new snoots Client.
@@ -165,10 +148,11 @@ export default class Client {
    * @param opts The options to configure this client with.
    */
   constructor(opts: ClientOptions) {
-    this.auth = opts.auth;
-    this.creds = opts.creds;
-    this.token = null;
-    this.userAgent = opts.userAgent;
+    if (opts.creds) {
+      this._gateway = new OauthGateway(opts.auth, opts.creds, opts.userAgent);
+    } else {
+      this._gateway = new AnonGateway(opts.userAgent);
+    }
 
     // Set up controls after we have initalized the internal state.
     this.comments = new CommentControls(this);
@@ -224,131 +208,29 @@ export default class Client {
     code: string,
     redirectUri: string
   ): Promise<InstanceType<Self>> {
-    const creds = opts.creds;
-    if (!creds) throw "No creds";
+    if (!opts.creds) throw "No creds";
+
+    const gateway = await OauthGateway.fromAuthCode(
+      code,
+      redirectUri,
+      opts.creds,
+      opts.userAgent
+    );
 
     const client = new this(opts);
-    client.token = await tokenFromCode(
-      code,
-      creds,
-      client.userAgent,
-      redirectUri
-    );
-    client.auth = { refreshToken: client.token.refresh! };
-
+    client._gateway = gateway;
     return client as InstanceType<Self>;
-  }
-
-  /**
-   * (re)authorize this client.
-   *
-   * This can be used to
-   *
-   * @param auth The new authorization.
-   *
-   * @returns A promise that resolves when the reauthorization is complete.
-   */
-  async reAuth(auth: Auth): Promise<void> {
-    this.auth = auth;
-    this.token = null;
-    await this.updateAccessToken();
   }
 
   /**
    * Get the refresh token for the current session, if there is one.
    *
-   * This can be stored and later passed to the constructor or {@link reAuth}.
-   *
    * @returns The refresh token, or `null` if no token exists.
    */
   getRefreshToken(): String | null {
-    return this.token?.refresh ?? null;
-  }
-
-  /**
-   * Perform a GET request to the reddit api.
-   *
-   * You shouldn't ever have to use this directly.
-   *
-   * @template T The type to cast the response to.
-   *
-   * @param path The path of the endpoint.
-   * @param query Any query parameters to pass to the endpoint.
-   *
-   * @returns The JSON response from the endpoint.
-   *
-   * @throws If the endpoint returns an error.
-   */
-  async get<T>(path: string, query: Query = {}): Promise<T> {
-    if (this.creds) {
-      return oauth.get(await this.oAuth(), path, query);
-    } else {
-      return anon.get(this.userAgent, path, query);
+    if (this.gateway instanceof OauthGateway) {
+      return this.gateway.getRefreshToken();
     }
-  }
-
-  /**
-   * Perform a POST request to the reddit api.
-   *
-   * You shouldn't ever have to use this directly.
-   *
-   * @template T The type to cast the response to.
-   *
-   * @param path The path of the endpoint.
-   * @param data The data to POST.
-   * @param query Any query parameters to pass to the endpoint.
-   *
-   * @returns The JSON response from the endpoint.
-   *
-   * @throws If the endpoint returns an error.
-   */
-  async post<T>(path: string, data: Data, query: Query = {}): Promise<T> {
-    if (this.creds) {
-      return oauth.post(await this.oAuth(), path, data, query);
-    } else {
-      return anon.post(this.userAgent, path, data, query);
-    }
-  }
-
-  /**
-   * Perform a json-formatted POST request to the reddit api.
-   *
-   * You shouldn't ever have to use this directly.
-   *
-   * @template T The type to cast the response to.
-   *
-   * @param path The path of the endpoint.
-   * @param data The data to POST.
-   * @param query Any query parameters to pass to the endpoint.
-   *
-   * @returns The JSON response from the endpoint.
-   *
-   * @throws If the endpoint returns an error.
-   */
-  async postJson<T>(path: string, data: Data, query: Query = {}): Promise<T> {
-    if (this.creds) {
-      return oauth.postJson(await this.oAuth(), path, data, query);
-    } else {
-      return anon.postJson(this.userAgent, path, data, query);
-    }
-  }
-
-  protected async updateAccessToken(): Promise<void> {
-    if (!this.creds) throw "No creds";
-
-    this.token = await updateAccessToken(
-      this.userAgent,
-      this.token,
-      this.creds,
-      this.auth
-    );
-  }
-
-  protected async oAuth(): Promise<OauthOpts> {
-    await this.updateAccessToken();
-    return {
-      token: this.token!.access,
-      userAgent: this.userAgent,
-    };
+    return null;
   }
 }

@@ -6,11 +6,11 @@ import type {
   TimeRange,
 } from "../helper/types";
 import type { PostData } from "../objects/post";
+import type { Query } from "../gateway/types";
 import type Client from "../client";
 import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
 import { LinkPostOptions } from "./subreddit";
-import { Query } from "../helper/api/core";
 import CommentListing from "../listings/comment";
 import Listing from "../listings/listing";
 import Post from "../objects/post";
@@ -47,7 +47,7 @@ export default class PostControls extends VoteableControls {
    */
   async fetch(id: string): Promise<Post> {
     const path = `comments/${id}`;
-    const res: SplitRawPost = await this.client.get(path);
+    const res: SplitRawPost = await this.gateway.get(path);
     return this.fromSplitRaw(res);
   }
 
@@ -101,7 +101,7 @@ export default class PostControls extends VoteableControls {
    */
   async distinguish(id: string): Promise<void> {
     const body = { how: "yes", sticky: false, id: this.namespace(id) };
-    await this.client.post("api/distinguish", body);
+    await this.gateway.post("api/distinguish", body);
   }
 
   /**
@@ -113,7 +113,7 @@ export default class PostControls extends VoteableControls {
    */
   async undistinguish(id: string): Promise<void> {
     const body = { how: "no", sticky: false, id: this.namespace(id) };
-    await this.client.post("api/distinguish", body);
+    await this.gateway.post("api/distinguish", body);
   }
 
   /**
@@ -146,7 +146,7 @@ export default class PostControls extends VoteableControls {
    */
   async setContestMode(id: string, enabled: boolean): Promise<void> {
     const body = { state: enabled, id: this.namespace(id) };
-    await this.client.post("api/set_contest_mode", body);
+    await this.gateway.post("api/set_contest_mode", body);
   }
 
   /**
@@ -161,7 +161,7 @@ export default class PostControls extends VoteableControls {
    */
   async getDuplicates(id: string): Promise<Listing<Post>> {
     const path = `duplicates/${id}`;
-    const res: [ListingObject, ListingObject] = await this.client.get(path);
+    const res: [ListingObject, ListingObject] = await this.gateway.get(path);
 
     assertKind("Listing", res[1]);
 
@@ -177,7 +177,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been hidden.
    */
   async hide(id: string): Promise<void> {
-    await this.client.post("api/hide", { id: this.namespace(id) });
+    await this.gateway.post("api/hide", { id: this.namespace(id) });
   }
 
   /**
@@ -188,7 +188,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been hidden.
    */
   async unhide(id: string): Promise<void> {
-    await this.client.post("api/unhide", { id: this.namespace(id) });
+    await this.gateway.post("api/unhide", { id: this.namespace(id) });
   }
 
   /**
@@ -199,7 +199,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been locked.
    */
   async lock(id: string): Promise<void> {
-    await this.client.post("api/lock", { id: this.namespace(id) });
+    await this.gateway.post("api/lock", { id: this.namespace(id) });
   }
 
   /**
@@ -210,7 +210,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been unlocked.
    */
   async unlock(id: string): Promise<void> {
-    await this.client.post("api/unlock", { id: this.namespace(id) });
+    await this.gateway.post("api/unlock", { id: this.namespace(id) });
   }
 
   /**
@@ -221,7 +221,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been marked as NSFW.
    */
   async markNsfw(id: string): Promise<void> {
-    await this.client.post("api/marknsfw", { id: this.namespace(id) });
+    await this.gateway.post("api/marknsfw", { id: this.namespace(id) });
   }
 
   /**
@@ -232,7 +232,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been umarked.
    */
   async unmarkNsfw(id: string): Promise<void> {
-    await this.client.post("api/unmarknsfw", { id: this.namespace(id) });
+    await this.gateway.post("api/unmarknsfw", { id: this.namespace(id) });
   }
 
   /**
@@ -243,7 +243,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been marked.
    */
   async markSpoiler(id: string): Promise<void> {
-    await this.client.post("api/spoiler", { id: this.namespace(id) });
+    await this.gateway.post("api/spoiler", { id: this.namespace(id) });
   }
 
   /**
@@ -254,7 +254,7 @@ export default class PostControls extends VoteableControls {
    * @returns A promise that resolves when the post has been umarked.
    */
   async unmarkSpoiler(id: string): Promise<void> {
-    await this.client.post("api/unspoiler", { id: this.namespace(id) });
+    await this.gateway.post("api/unspoiler", { id: this.namespace(id) });
   }
 
   /** @internal */
@@ -264,7 +264,7 @@ export default class PostControls extends VoteableControls {
     num?: 1 | 2
   ): Promise<void> {
     const body = { state, num, id: this.namespace(id) };
-    await this.client.post("api/set_subreddit_sticky", body);
+    await this.gateway.post("api/set_subreddit_sticky", body);
   }
 
   /**

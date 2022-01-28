@@ -13,7 +13,7 @@ export default abstract class ReplyableControls extends BaseControls {
    * @returns A promise that resolves when the request is complete.
    */
   async blockAuthor(id: string): Promise<void> {
-    await this.client.post("api/block", { id: this.namespace(id) });
+    await this.gateway.post("api/block", { id: this.namespace(id) });
   }
 
   /**
@@ -28,7 +28,7 @@ export default abstract class ReplyableControls extends BaseControls {
    * @returns A promise that resolves when the item has been reported.
    */
   async report(id: string, reason?: string): Promise<void> {
-    await this.client.post("api/report", {
+    await this.gateway.post("api/report", {
       reason: "other",
       other_reason: reason,
       thing_id: this.namespace(id),
@@ -38,6 +38,6 @@ export default abstract class ReplyableControls extends BaseControls {
   /** @internal */
   async replyImpl<T>(id: string, text: string): Promise<T> {
     const body = { text, thing_id: this.namespace(id) };
-    return await this.client.post("api/comment", body);
+    return await this.gateway.post("api/comment", body);
   }
 }

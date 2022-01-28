@@ -1,5 +1,5 @@
 import type { AwaitableFn, RedditObject } from "../helper/types";
-import type { Query } from "../helper/api/core";
+import type { Query } from "../gateway/types";
 import type Client from "../client";
 import { assertKind } from "../helper/util";
 
@@ -50,7 +50,7 @@ export abstract class Pager<T> implements Fetcher<T> {
   protected async nextPage(ctx: ListingContext): Promise<RedditListing> {
     if (!ctx.req) throw "Unable to fetch next page";
     const query = { limit: "100", after: this.after, ...ctx.req.query };
-    const res: RedditObject = await ctx.client.get(ctx.req.url, query);
+    const res: RedditObject = await ctx.client.gateway.get(ctx.req.url, query);
     assertKind("Listing", res);
     return res.data as RedditListing;
   }

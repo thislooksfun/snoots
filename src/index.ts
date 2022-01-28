@@ -6,5 +6,7 @@ export * from "./controls";
 export * from "./objects";
 
 export * from "./helper/types";
-export { Query, QueryValue } from "./helper/api/core";
-export { Credentials } from "./helper/api/creds";
+export type { Gateway } from "./gateway/gateway";
+export type { ClientAuth, TokenAuth, UsernameAuth } from "./gateway/oauth";
+export type { Query, QueryValue } from "./gateway/types";
+export type { Credentials } from "./gateway/creds";

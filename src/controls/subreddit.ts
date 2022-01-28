@@ -7,11 +7,11 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../helper/types";
-import type { Query } from "../helper/api/core";
 import type { SplitRawPost } from "./post";
 import type { SubredditData } from "../objects/subreddit";
 import type Client from "../client";
 import type Listing from "../listings/listing";
+import type { Query } from "../gateway/types";
 import { camelCaseKeys, assertKind } from "../helper/util";
 import { fakeListingAfter } from "../listings/util";
 import BaseControls from "./base";
@@ -112,7 +112,7 @@ export default class SubredditControls extends BaseControls {
    * @returns A promise that resolves to the requested subreddit.
    */
   async fetch(subreddit: string): Promise<Subreddit> {
-    const res: RedditObject = await this.client.get(`r/${subreddit}/about`);
+    const res: RedditObject = await this.gateway.get(`r/${subreddit}/about`);
     return this.fromRaw(res);
   }
 
@@ -124,7 +124,7 @@ export default class SubredditControls extends BaseControls {
    * @returns A promise that resolves when the invite has been accepted.
    */
   async acceptModeratorInvite(sr: string): Promise<void> {
-    await this.client.post(`r/${sr}/api/accept_moderator_invite`, {});
+    await this.gateway.post(`r/${sr}/api/accept_moderator_invite`, {});
   }
 
   /**
@@ -153,7 +153,7 @@ export default class SubredditControls extends BaseControls {
 
   /** @internal */
   async leaveContributor(srId: string): Promise<void> {
-    await this.client.post("api/leavecontributor", { id: srId });
+    await this.gateway.post("api/leavecontributor", { id: srId });
   }
 
   /**
@@ -504,7 +504,7 @@ export default class SubredditControls extends BaseControls {
   async getRandomPost(subreddit?: string): Promise<Post> {
     const base = subreddit ? `r/${subreddit}/` : "";
     const url = `${base}random`;
-    const res: SplitRawPost = await this.client.get(url);
+    const res: SplitRawPost = await this.gateway.get(url);
     return this.client.posts.fromSplitRaw(res);
   }
 
@@ -657,7 +657,7 @@ export default class SubredditControls extends BaseControls {
       req.iden = opts.captcha.iden;
     }
 
-    const res: Data = await this.client.post("api/submit", req);
+    const res: Data = await this.gateway.post("api/submit", req);
     return res.id;
   }
 
@@ -668,7 +668,11 @@ export default class SubredditControls extends BaseControls {
     type: string,
     opts: Query = {}
   ) {
-    await this.client.post(`r/${sr}/api/friend`, { ...opts, name, type });
+    await this.gateway.post(`r/${sr}/api/friend`, {
+      ...opts,
+      name,
+      type,
+    });
   }
 
   /** @internal */
@@ -678,7 +682,11 @@ export default class SubredditControls extends BaseControls {
     type: string,
     opts: Query = {}
   ) {
-    await this.client.post(`r/${sr}/api/unfriend`, { ...opts, name, type });
+    await this.gateway.post(`r/${sr}/api/unfriend`, {
+      ...opts,
+      name,
+      type,
+    });
   }
 
   /** @internal */
