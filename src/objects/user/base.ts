@@ -1,7 +1,8 @@
-import type { PostSort, UserItemsSort } from "../../helper/types";
 import type { UserControls } from "../../controls";
-import { Comment, Content, ContentData, Post, Subreddit } from "..";
+import type { PostSort, UserItemsSort } from "../../helper/types";
+
 import Listing from "../../listings/listing";
+import { Comment, Content, ContentData, Post, Subreddit } from "..";
 
 // TODO: Suspended users give back a very minimal response.
 // BODY: Fetching a suspended user gives back very minimal data, meaning that

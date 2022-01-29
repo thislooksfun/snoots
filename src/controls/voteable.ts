@@ -1,4 +1,5 @@
 import type Client from "../client";
+
 import { Data, RedditObject } from "../helper/types";
 import Comment from "../objects/comment";
 import ReplyableControls from "./replyable";

@@ -40,6 +40,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^26.0.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "fast-check": "^2.14.0",
     "husky": "^6.0.0",
     "is-ci": "^3.0.0",

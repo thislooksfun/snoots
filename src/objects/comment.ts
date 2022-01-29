@@ -1,5 +1,6 @@
 import type { DistinguishStates } from "../controls/comment";
 import type { VoteableData } from "./voteable";
+
 import CommentControls from "../controls/comment";
 import Listing from "../listings/listing";
 import Voteable from "./voteable";

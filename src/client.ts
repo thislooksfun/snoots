@@ -1,13 +1,14 @@
 import type { Credentials } from "./gateway/creds";
 import type { Gateway } from "./gateway/gateway";
+
 import {
   CommentControls,
   PostControls,
   SubredditControls,
   UserControls,
 } from "./controls";
-import { ClientAuth, OauthGateway } from "./gateway/oauth";
 import { AnonGateway } from "./gateway/anon";
+import { ClientAuth, OauthGateway } from "./gateway/oauth";
 
 /**
  * Options for instantiating a Client

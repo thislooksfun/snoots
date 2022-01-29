@@ -1,6 +1,7 @@
-import type { AwaitableFn, RedditObject } from "../helper/types";
-import type { Query } from "../gateway/types";
 import type Client from "../client";
+import type { Query } from "../gateway/types";
+import type { AwaitableFn, RedditObject } from "../helper/types";
+
 import { assertKind } from "../helper/util";
 
 /** @internal */

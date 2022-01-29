@@ -1,4 +1,5 @@
-import type { Comment, Post } from "../objects";
+import type Client from "../client";
+import type { Query } from "../gateway/types";
 import type {
   Data,
   PostSort,
@@ -7,18 +8,18 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../helper/types";
-import type { SplitRawPost } from "./post";
-import type { SubredditData } from "../objects/subreddit";
-import type Client from "../client";
 import type Listing from "../listings/listing";
-import type { Query } from "../gateway/types";
-import { camelCaseKeys, assertKind } from "../helper/util";
-import { fakeListingAfter } from "../listings/util";
-import BaseControls from "./base";
+import type { Comment, Post } from "../objects";
+import type { SubredditData } from "../objects/subreddit";
+import type { SplitRawPost } from "./post";
+
+import { assertKind, camelCaseKeys } from "../helper/util";
 import CommentListing from "../listings/comment";
 import PostListing from "../listings/post";
-import Subreddit from "../objects/subreddit";
 import PostOrCommentListing from "../listings/postOrComment";
+import { fakeListingAfter } from "../listings/util";
+import Subreddit from "../objects/subreddit";
+import BaseControls from "./base";
 
 /** A single capcha identifier and response. */
 export interface Capcha {

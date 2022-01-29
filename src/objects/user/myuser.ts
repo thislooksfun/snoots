@@ -1,4 +1,5 @@
 import type { UserControls } from "../../controls";
+
 import { User, UserData } from "./base";
 
 /** The data for the authorized user. */

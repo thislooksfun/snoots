@@ -1,6 +1,7 @@
 import type { Data, RedditObject } from "../../helper/types";
-import type { Fetcher, ListingContext, RedditMore } from "../listing";
 import type Comment from "../../objects/comment";
+import type { Fetcher, ListingContext, RedditMore } from "../listing";
+
 import { emptyRedditListing, wrapChildren } from "./../util";
 import CommentListing from "./commentListing";
 

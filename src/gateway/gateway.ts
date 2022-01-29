@@ -1,12 +1,13 @@
+import type { Data, Maybe } from "../helper/types";
 import type {
   Auth,
   GotOptions,
+  GotResponse,
   Query,
   RateLimit,
-  GotResponse,
   SomeResponse,
 } from "./types";
-import type { Data, Maybe } from "../helper/types";
+
 import got from "got";
 
 /**

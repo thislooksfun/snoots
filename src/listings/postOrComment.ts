@@ -1,6 +1,7 @@
-import { InvalidKindError } from "../helper/errors";
 import type { Comment, Post } from "../objects";
-import type { RedditListing, ListingContext, Fetcher } from "./listing";
+import type { Fetcher, ListingContext, RedditListing } from "./listing";
+
+import { InvalidKindError } from "../helper/errors";
 import Listing, { Pager } from "./listing";
 
 class PostOrCommentPager extends Pager<Post | Comment> {

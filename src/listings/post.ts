@@ -1,5 +1,6 @@
-import type { RedditListing, ListingContext, Fetcher } from "./listing";
 import type Post from "../objects/post";
+import type { Fetcher, ListingContext, RedditListing } from "./listing";
+
 import Listing, { Pager } from "./listing";
 
 class PostPager extends Pager<Post> {

@@ -1,8 +1,10 @@
 import type { ClientAuth, Token, TokenResponse } from "../../oauth";
-import nock from "nock";
-import { OauthGateway } from "../../oauth";
+
 import fc from "fast-check";
+import nock from "nock";
+
 import { Maybe } from "../../..";
+import { OauthGateway } from "../../oauth";
 
 const fcUsernameAuth = () =>
   fc.record({ username: fc.string(), password: fc.string() });

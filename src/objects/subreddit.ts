@@ -1,10 +1,10 @@
+import type { Listing } from "..";
+import type { SubredditControls } from "../controls";
 import type {
   BanOptions,
   LinkPostOptions,
   TextPostOptions,
 } from "../controls/subreddit";
-import type { Comment, Post } from ".";
-import type { Listing } from "..";
 import type {
   SearchSort,
   SearchSyntax,
@@ -12,7 +12,8 @@ import type {
   SubredditType,
   TimeRange,
 } from "../helper/types";
-import type { SubredditControls } from "../controls";
+import type { Comment, Post } from ".";
+
 import Content, { ContentData } from "./content";
 
 export interface SubredditData extends ContentData {

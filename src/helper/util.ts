@@ -1,6 +1,8 @@
 import type { Data, RedditObject } from "./types";
-import { InvalidKindError } from "./errors";
+
 import camelCase from "camelcase";
+
+import { InvalidKindError } from "./errors";
 
 export function camelCaseKeys<T>(obj: Data): T {
   const out: Data = {};

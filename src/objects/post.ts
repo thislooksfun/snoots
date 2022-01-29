@@ -1,9 +1,10 @@
 import type { VoteableData } from "./voteable";
+
+import PostControls from "../controls/post";
 // import type { VoteableData, RichTextFlair } from "./voteable";
 import { LinkPostOptions } from "../controls/subreddit";
-import Comment from "../objects/comment";
 import Listing from "../listings/listing";
-import PostControls from "../controls/post";
+import Comment from "../objects/comment";
 import Voteable from "./voteable";
 // import { Sort } from "../helper/types";
 

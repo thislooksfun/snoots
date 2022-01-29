@@ -1,19 +1,20 @@
 import type { Comment, Post, Subreddit } from "..";
+import type Client from "../client";
 import type {
   Data,
   PostSort,
   RedditObject,
   UserItemsSort,
 } from "../helper/types";
-import type { MyUserData, OtherUserData, UserData } from "../objects/user";
-import type Client from "../client";
 import type Listing from "../listings/listing";
-import { camelCaseKeys, assertKind } from "../helper/util";
+import type { MyUserData, OtherUserData, UserData } from "../objects/user";
+
+import { assertKind, camelCaseKeys } from "../helper/util";
+import CommentListing from "../listings/comment";
+import PostListing from "../listings/post";
 import { fakeListingAfter } from "../listings/util";
 import { MyUser, OtherUser, User } from "../objects/user";
 import BaseControls from "./base";
-import CommentListing from "../listings/comment";
-import PostListing from "../listings/post";
 
 /**
  * Various methods to allow you to interact with users.

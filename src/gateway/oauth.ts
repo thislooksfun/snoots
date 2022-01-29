@@ -1,9 +1,10 @@
-import type { Credentials } from "./creds";
 import type { Data, Maybe } from "../helper/types";
+import type { Credentials } from "./creds";
 import type { BearerAuth } from "./types";
+
+import { camelCaseKeys } from "../helper/util";
 import { CredsGateway } from "./creds";
 import { Gateway } from "./gateway";
-import { camelCaseKeys } from "../helper/util";
 
 /** Username and password based authentication */
 export interface UsernameAuth {

@@ -12,6 +12,7 @@ parserOptions:
 plugins:
   - "@typescript-eslint"
   - prettier
+  - simple-import-sort
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
@@ -20,6 +21,15 @@ extends:
 rules:
   "@typescript-eslint/no-inferrable-types": "off"
   "@typescript-eslint/no-non-null-assertion": "off"
+  simple-import-sort/exports: error
+  simple-import-sort/imports:
+    - error
+    - groups:
+        - ["\\u0000$"] # Types
+        - ["^\\u0000"] # Side-effects
+        - ["^@?\\w"] # Packages
+        - ["^"] # All other packages
+        - ["^\\."] # Relative imports
 
 overrides:
   - files: ["**/__tests__/**/*.ts"]

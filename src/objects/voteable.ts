@@ -1,8 +1,9 @@
-import type { ContentData } from "./content";
 import type { SubredditType } from "../helper/types";
+import type { ContentData } from "./content";
+
+import VoteableControls from "../controls/voteable";
 import Comment from "./comment";
 import Replyable from "./replyable";
-import VoteableControls from "../controls/voteable";
 
 /** A rich text flair containing text. */
 export interface RichTextFlairText {

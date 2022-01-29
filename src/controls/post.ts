@@ -1,4 +1,5 @@
-import type { RedditListing, ListingObject } from "../listings/listing";
+import type Client from "../client";
+import type { Query } from "../gateway/types";
 import type {
   Data,
   RedditObject,
@@ -6,16 +7,16 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../helper/types";
+import type { ListingObject, RedditListing } from "../listings/listing";
 import type { PostData } from "../objects/post";
-import type { Query } from "../gateway/types";
-import type Client from "../client";
-import { camelCaseKeys, assertKind } from "../helper/util";
-import { fakeListingAfter } from "../listings/util";
-import { LinkPostOptions } from "./subreddit";
+
+import { assertKind, camelCaseKeys } from "../helper/util";
 import CommentListing from "../listings/comment";
 import Listing from "../listings/listing";
-import Post from "../objects/post";
 import PostListing from "../listings/post";
+import { fakeListingAfter } from "../listings/util";
+import Post from "../objects/post";
+import { LinkPostOptions } from "./subreddit";
 import VoteableControls from "./voteable";
 
 function isRemoved(dat: Data) {

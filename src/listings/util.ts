@@ -1,5 +1,5 @@
-import type { RedditListing, RedditMore } from "./listing";
 import type { RedditObject } from "../helper/types";
+import type { RedditListing, RedditMore } from "./listing";
 
 export const emptyRedditListing: RedditListing = {
   after: null,
