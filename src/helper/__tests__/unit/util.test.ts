@@ -1,4 +1,4 @@
-import * as util from "../../../src/helper/util";
+import * as util from "../../util";
 
 describe("camelCaseKeys()", () => {
   it("should convert keys to camel case", () => {

@@ -13,6 +13,7 @@
     "clean": "del-cli dist docs types",
     "lint": "prettier -c '**/*'",
     "gendoc": "typedoc src/index.ts",
+    "prepack": "del-cli \"{dist,types}/**/__types__\"",
     "prepublishOnly": "npm run clean && npm run lint && npm run build"
   },
   "dependencies": {

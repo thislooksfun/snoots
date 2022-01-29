@@ -1,12 +1,12 @@
-import type { Token, TokenResponse } from "../../../src/helper/accessToken";
+import type { Token, TokenResponse } from "../../accessToken";
 import fc from "fast-check";
-import * as fcutil from "../_util/fcutil";
+import * as fcutil from "./_util/fcutil";
 import nock from "nock";
-import { updateAccessToken } from "../../../src/helper/accessToken";
+import { updateAccessToken } from "../../accessToken";
 
 // Mocking
-import * as creds from "../../../src/helper/api/creds";
-jest.mock("../../../src/helper/api/creds");
+import * as creds from "../../api/creds";
+jest.mock("../../api/creds");
 const post = creds.post as jest.Mock;
 
 // Just in case something slips through, don't actually ping reddit.

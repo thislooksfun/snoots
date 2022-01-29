@@ -1,5 +1,5 @@
 import nock from "nock";
-import * as core from "../../../../src/helper/api/core";
+import * as oauth from "../../oauth";
 
 beforeAll(() => nock.disableNetConnect());
 afterEach(() => nock.cleanAll());
@@ -8,26 +8,37 @@ afterAll(() => {
   nock.enableNetConnect();
 });
 
-const domain = "https://example.com";
 describe("get()", () => {
   it("should pass common values", async () => {
-    const opts = { reqheaders: { "user-agent": "baz" } };
-    const n = nock(domain, opts)
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .get("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
-    await core.get(domain, "foo/bar", {}, "baz");
+    const oo = { token: "sometkn", userAgent: "baz" };
+    await oauth.get(oo, "foo/bar", {});
 
     n.done();
   });
 
   it("should give back json data", async () => {
-    const opts = { reqheaders: { "user-agent": "baz" } };
-    const n = nock(domain, opts)
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .get("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
-    const req = core.get(domain, "foo/bar", {}, "baz");
+    const oo = { token: "sometkn", userAgent: "baz" };
+    const req = oauth.get(oo, "foo/bar", {});
     await expect(req).resolves.toStrictEqual({ bim: "bom" });
 
     n.done();
@@ -35,12 +46,18 @@ describe("get()", () => {
 
   describe("when given an api error", () => {
     it("should throw", async () => {
-      const opts = { reqheaders: { "user-agent": "baz" } };
-      const n = nock(domain, opts)
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .get("/foo/bar?api_type=json&raw_json=1")
         .reply(200, { error: "whoops" });
 
-      const req = core.get(domain, "foo/bar", {}, "baz");
+      const oo = { token: "sometkn", userAgent: "baz" };
+      const req = oauth.get(oo, "foo/bar", {});
       const err = new Error("Reddit returned an error: whoops");
       await expect(req).rejects.toStrictEqual(err);
 
@@ -48,15 +65,21 @@ describe("get()", () => {
     });
 
     it("should use the description if available", async () => {
-      const opts = { reqheaders: { "user-agent": "baz" } };
-      const n = nock(domain, opts)
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .get("/foo/bar?api_type=json&raw_json=1")
         .reply(200, {
           error: "whoops",
           error_description: "something went wrong :(",
         });
 
-      const req = core.get(domain, "foo/bar", {}, "baz");
+      const oo = { token: "sometkn", userAgent: "baz" };
+      const req = oauth.get(oo, "foo/bar", {});
       const err = new Error(
         "Reddit returned an error: whoops: something went wrong :("
       );
@@ -69,24 +92,36 @@ describe("get()", () => {
 
 describe("post()", () => {
   it("should pass common values", async () => {
-    const opts = { reqheaders: { "user-agent": "baz" } };
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
     const expectedBody = { api_type: "json", bar: "foo" };
-    const n = nock(domain, opts)
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
-    await core.post(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+    const oo = { token: "sometkn", userAgent: "baz" };
+    await oauth.post(oo, "foo/bar", { bar: "foo" }, {});
 
     n.done();
   });
 
   it("should give back json data", async () => {
-    const opts = { reqheaders: { "user-agent": "baz" } };
-    const n = nock(domain, opts)
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
-    const req = core.post(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+    const oo = { token: "sometkn", userAgent: "baz" };
+    const req = oauth.post(oo, "foo/bar", { bar: "foo" }, {});
     await expect(req).resolves.toStrictEqual({ bim: "bom" });
 
     n.done();
@@ -94,12 +129,18 @@ describe("post()", () => {
 
   describe("when given an api error", () => {
     it("should throw", async () => {
-      const opts = { reqheaders: { "user-agent": "baz" } };
-      const n = nock(domain, opts)
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, { error: "whoops" });
 
-      const req = core.post(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+      const oo = { token: "sometkn", userAgent: "baz" };
+      const req = oauth.post(oo, "foo/bar", { bar: "foo" }, {});
       const err = new Error("Reddit returned an error: whoops");
       await expect(req).rejects.toStrictEqual(err);
 
@@ -107,15 +148,21 @@ describe("post()", () => {
     });
 
     it("should use the description if available", async () => {
-      const opts = { reqheaders: { "user-agent": "baz" } };
-      const n = nock(domain, opts)
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, {
           error: "whoops",
           error_description: "something went wrong :(",
         });
 
-      const req = core.post(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+      const oo = { token: "sometkn", userAgent: "baz" };
+      const req = oauth.post(oo, "foo/bar", { bar: "foo" }, {});
       const err = new Error(
         "Reddit returned an error: whoops: something went wrong :("
       );
@@ -128,24 +175,36 @@ describe("post()", () => {
 
 describe("postJson()", () => {
   it("should pass common values", async () => {
-    const opts = { reqheaders: { "user-agent": "baz" } };
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
     const expectedBody = { api_type: "json", bar: "foo" };
-    const n = nock(domain, opts)
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
       .reply(200, { bim: "bom" });
 
-    await core.postJson(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+    const oo = { token: "sometkn", userAgent: "baz" };
+    await oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
 
     n.done();
   });
 
   it("should give back json data", async () => {
-    const opts = { reqheaders: { "user-agent": "baz" } };
-    const n = nock(domain, opts)
+    const opts = {
+      reqheaders: {
+        "user-agent": "baz",
+        authorization: "bearer sometkn",
+      },
+    };
+    const n = nock("https://oauth.reddit.com", opts)
       .post("/foo/bar?api_type=json&raw_json=1")
       .reply(200, { bim: "bom" });
 
-    const req = core.postJson(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+    const oo = { token: "sometkn", userAgent: "baz" };
+    const req = oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
     await expect(req).resolves.toStrictEqual({ bim: "bom" });
 
     n.done();
@@ -153,12 +212,18 @@ describe("postJson()", () => {
 
   describe("when given an api error", () => {
     it("should throw", async () => {
-      const opts = { reqheaders: { "user-agent": "baz" } };
-      const n = nock(domain, opts)
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, { error: "whoops" });
 
-      const req = core.postJson(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+      const oo = { token: "sometkn", userAgent: "baz" };
+      const req = oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
       const err = new Error("Reddit returned an error: whoops");
       await expect(req).rejects.toStrictEqual(err);
 
@@ -166,15 +231,21 @@ describe("postJson()", () => {
     });
 
     it("should use the description if available", async () => {
-      const opts = { reqheaders: { "user-agent": "baz" } };
-      const n = nock(domain, opts)
+      const opts = {
+        reqheaders: {
+          "user-agent": "baz",
+          authorization: "bearer sometkn",
+        },
+      };
+      const n = nock("https://oauth.reddit.com", opts)
         .post("/foo/bar?api_type=json&raw_json=1")
         .reply(200, {
           error: "whoops",
           error_description: "something went wrong :(",
         });
 
-      const req = core.postJson(domain, "foo/bar", { bar: "foo" }, {}, "baz");
+      const oo = { token: "sometkn", userAgent: "baz" };
+      const req = oauth.postJson(oo, "foo/bar", { bar: "foo" }, {});
       const err = new Error(
         "Reddit returned an error: whoops: something went wrong :("
       );
