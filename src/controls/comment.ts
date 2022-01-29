@@ -82,7 +82,7 @@ export default class CommentControls extends VoteableControls {
 
   /** @internal */
   protected listingifyReplies(
-    replies: any,
+    replies: unknown,
     cmtName: string,
     postId: string
   ): CommentListing {
@@ -91,13 +91,14 @@ export default class CommentControls extends VoteableControls {
       // Comments with no fetched replies have the replies key set to an empty
       // string. Convert it to a listing anyway.
       return new CommentListing(fakeMoreListing(cmtName), ctx);
-    } else if ("kind" in replies) {
-      switch (replies.kind) {
+    } else if (replies && typeof replies === "object" && "kind" in replies) {
+      const rObj = replies as RedditObject;
+      switch (rObj.kind) {
         case "Listing":
-          return new CommentListing(replies.data, ctx);
+          return new CommentListing((rObj as ListingObject).data, ctx);
         default:
           console.dir(replies);
-          throw `Unknown type '${replies.kind}'`;
+          throw `Unknown type '${rObj.kind}'`;
       }
     } else {
       console.dir(replies);

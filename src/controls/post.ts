@@ -1,5 +1,6 @@
 import type { RedditListing, ListingObject } from "../listings/listing";
 import type {
+  Data,
   RedditObject,
   SearchSort,
   SearchSyntax,
@@ -17,7 +18,7 @@ import Post from "../objects/post";
 import PostListing from "../listings/post";
 import VoteableControls from "./voteable";
 
-function isRemoved(dat: any) {
+function isRemoved(dat: Data) {
   if (dat.removed != null) return dat.removed;
   return !!dat.removal_reason || !!dat.removed_by || !!dat.removed_by_category;
 }

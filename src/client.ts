@@ -227,7 +227,7 @@ export default class Client {
    *
    * @returns The refresh token, or `null` if no token exists.
    */
-  getRefreshToken(): String | null {
+  getRefreshToken(): string | null {
     if (this.gateway instanceof OauthGateway) {
       return this.gateway.getRefreshToken();
     }

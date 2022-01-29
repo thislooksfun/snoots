@@ -1,5 +1,10 @@
 import type { Comment, Post, Subreddit } from "..";
-import type { Data, PostSort, RedditObject } from "../helper/types";
+import type {
+  Data,
+  PostSort,
+  RedditObject,
+  UserItemsSort,
+} from "../helper/types";
 import type { MyUserData, OtherUserData, UserData } from "../objects/user";
 import type Client from "../client";
 import type Listing from "../listings/listing";
@@ -82,7 +87,10 @@ export default class UserControls extends BaseControls {
    *
    * @returns A sorted Listing of comments.
    */
-  getSortedComments(username: string, sort: string = "new"): Listing<Comment> {
+  getSortedComments(
+    username: string,
+    sort: UserItemsSort = "new"
+  ): Listing<Comment> {
     const req = { url: `user/${username}/comments`, query: { sort } };
     const ctx = { req, client: this.client };
     return new CommentListing(fakeListingAfter(""), ctx);

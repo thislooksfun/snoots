@@ -1,4 +1,5 @@
 /** A string-keyed object that can hold anything. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Data = Record<string, any>;
 
 /** Either a type or a promise that resolves to that type. */
@@ -32,6 +33,9 @@ export type SubredditType =
 
 /** The ways to sort posts in a subreddit. */
 export type PostSort = "controversial" | "hot" | "new" | "rising" | "top";
+
+/** The ways to sort a user's items (comments, up/downvoted posts, etc.). */
+export type UserItemsSort = "controversial" | "hot" | "new" | "rising" | "top";
 
 /** @internal */
 export type RedditObject<T = Data> = { kind: string; data: T };

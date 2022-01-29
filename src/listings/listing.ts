@@ -143,6 +143,7 @@ export default class Listing<T> {
    * @returns A promise that resolves when the listing has been exausted.
    */
   async eachPage(fn: AwaitableFn<T[], boolean | void>): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     let page: Listing<T> | null = this;
 
     do {

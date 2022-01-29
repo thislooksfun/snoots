@@ -1,0 +1,9 @@
+/coverage
+/dist
+/docs
+/examples
+/types
+.DS_Store
+node_modules
+.env
+*.tgz

@@ -1,4 +1,4 @@
-import type { PostSort } from "../../helper/types";
+import type { PostSort, UserItemsSort } from "../../helper/types";
 import type { UserControls } from "../../controls";
 import { Comment, Content, ContentData, Post, Subreddit } from "..";
 import Listing from "../../listings/listing";
@@ -155,7 +155,7 @@ export abstract class User extends Content implements UserData {
    *
    * @returns A sorted Listing of comments.
    */
-  getSortedComments(sort: string = "new"): Listing<Comment> {
+  getSortedComments(sort: UserItemsSort = "new"): Listing<Comment> {
     return this.controls.getSortedComments(this.name, sort);
   }
 }

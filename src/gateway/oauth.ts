@@ -101,13 +101,14 @@ export class OauthGateway extends Gateway {
   }
 
   /** @internal */
-  public getRefreshToken(): String | null {
+  public getRefreshToken(): string | null {
     return this.token?.refresh ?? null;
   }
 
   protected async auth(): Promise<BearerAuth> {
     await this.ensureTokenValid();
-    return { bearer: this.token!.access };
+    if (!this.token) throw new Error("Something has gone horribly wrong.");
+    return { bearer: this.token.access };
   }
 
   protected mapPath(path: string): string {
