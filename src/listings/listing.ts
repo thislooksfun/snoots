@@ -190,8 +190,8 @@ export default class Listing<T> {
    * @returns A promise that resolves when the iteration is complete.
    */
   async forEach(handler: AwaitableFunction<T, boolean | void>): Promise<void> {
-    for await (const el of this) {
-      const res = await handler(el);
+    for await (const item of this) {
+      const res = await handler(item);
       if (res === false) break;
     }
   }
@@ -208,8 +208,8 @@ export default class Listing<T> {
    * listing without finding a match.
    */
   async some(handler: AwaitableFunction<T, boolean>): Promise<boolean> {
-    for await (const el of this) {
-      if (await handler(el)) return true;
+    for await (const item of this) {
+      if (await handler(item)) return true;
     }
     return false;
   }
@@ -221,8 +221,8 @@ export default class Listing<T> {
    * or `undefined` if the listing is empty.
    */
   async first(): Promise<Maybe<T>> {
-    for await (const el of this) {
-      return el;
+    for await (const item of this) {
+      return item;
     }
     return undefined;
   }
