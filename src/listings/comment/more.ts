@@ -46,11 +46,11 @@ export default class MoreComments implements Fetcher<Comment> {
       const id = this.data.parent_id.slice(3);
       const pth = `comments/${ctx.post}`;
       const res: Data = await ctx.client.gateway.get(pth, { comment: id });
-      const obj: RedditObject = res[1].data.children[0];
-      if (!obj) {
+      const child: RedditObject = res[1].data.children[0];
+      if (!child) {
         return new CommentListing(emptyRedditListing, ctx);
       } else {
-        const lst = obj.data.replies.data ?? emptyRedditListing;
+        const lst = child.data.replies.data ?? emptyRedditListing;
         return new CommentListing(lst, ctx);
       }
     } else {

@@ -19,6 +19,7 @@ export function fromRedditData<T>(data: Data): T {
   return out as T;
 }
 
-export function assertKind(kind: string, obj: RedditObject) {
-  if (obj.kind !== kind) throw new InvalidKindError(kind, obj.kind);
+export function assertKind(kind: string, redditObject: RedditObject) {
+  if (redditObject.kind !== kind)
+    throw new InvalidKindError(kind, redditObject.kind);
 }
