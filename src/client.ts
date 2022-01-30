@@ -147,13 +147,17 @@ export default class Client {
   /**
    * Make a new snoots Client.
    *
-   * @param opts The options to configure this client with.
+   * @param options The options to configure this client with.
    */
-  constructor(opts: ClientOptions) {
-    if (opts.creds) {
-      this._gateway = new OauthGateway(opts.auth, opts.creds, opts.userAgent);
+  constructor(options: ClientOptions) {
+    if (options.creds) {
+      this._gateway = new OauthGateway(
+        options.auth,
+        options.creds,
+        options.userAgent
+      );
     } else {
-      this._gateway = new AnonGateway(opts.userAgent);
+      this._gateway = new AnonGateway(options.userAgent);
     }
 
     // Set up controls after we have initalized the internal state.
@@ -197,7 +201,7 @@ export default class Client {
   /**
    * Create a client from an OAuth code.
    *
-   * @param opts The Client options.
+   * @param options The Client options.
    * @param code The OAuth code.
    * @param redirectUri The redirect URI. This ***must*** be the same as the uri
    * given to {@link makeAuthUrl}.
@@ -206,20 +210,20 @@ export default class Client {
    */
   static async fromAuthCode<Self extends typeof Client>(
     this: Self,
-    opts: Required<Omit<ClientOptions, "auth">>,
+    options: Required<Omit<ClientOptions, "auth">>,
     code: string,
     redirectUri: string
   ): Promise<InstanceType<Self>> {
-    if (!opts.creds) throw "No creds";
+    if (!options.creds) throw "No creds";
 
     const gateway = await OauthGateway.fromAuthCode(
       code,
       redirectUri,
-      opts.creds,
-      opts.userAgent
+      options.creds,
+      options.userAgent
     );
 
-    const client = new this(opts);
+    const client = new this(options);
     client._gateway = gateway;
     return client as InstanceType<Self>;
   }

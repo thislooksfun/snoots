@@ -779,16 +779,16 @@ export default class Subreddit extends Content implements SubredditData {
    *
    * @param title The title of the post.
    * @param body The body of the post.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * @returns A promise that resolves to the ID of the new post.
    */
   async postText(
     title: string,
     body?: string,
-    opts: TextPostOptions = {}
+    options: TextPostOptions = {}
   ): Promise<string> {
-    return this.controls.postText(this.displayName, title, body, opts);
+    return this.controls.postText(this.displayName, title, body, options);
   }
 
   /**
@@ -796,16 +796,16 @@ export default class Subreddit extends Content implements SubredditData {
    *
    * @param title The title of the post.
    * @param url The url to link to.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * @returns A promise that resolves to the ID of the new post.
    */
   async postLink(
     title: string,
     url: string,
-    opts: LinkPostOptions = {}
+    options: LinkPostOptions = {}
   ): Promise<string> {
-    return this.controls.postLink(this.displayName, title, url, opts);
+    return this.controls.postLink(this.displayName, title, url, options);
   }
 
   /**
@@ -813,16 +813,21 @@ export default class Subreddit extends Content implements SubredditData {
    *
    * @param title The title of the post.
    * @param postID The ID of the post to crosspost.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * @returns A promise that resolves to the ID of the new post.
    */
   async postCrosspost(
     title: string,
     postID: string,
-    opts: LinkPostOptions = {}
+    options: LinkPostOptions = {}
   ): Promise<string> {
-    return this.controls.postCrosspost(this.displayName, title, postID, opts);
+    return this.controls.postCrosspost(
+      this.displayName,
+      title,
+      postID,
+      options
+    );
   }
 
   /**

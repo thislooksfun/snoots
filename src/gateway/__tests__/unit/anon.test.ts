@@ -16,12 +16,12 @@ afterAll(() => {
   nock.enableNetConnect();
 });
 
-const commonNockOpts = { reqheaders: { "user-agent": "fake-user-agent" } };
+const commonNockOptions = { reqheaders: { "user-agent": "fake-user-agent" } };
 
 describe("AnonGateway", () => {
   describe(".get()", () => {
     it("should pass common values", async () => {
-      const n = nock("https://www.reddit.com", commonNockOpts)
+      const n = nock("https://www.reddit.com", commonNockOptions)
         .get("/foo/bar.json?api_type=json&raw_json=1")
         .reply(200, { bim: "bom" });
 
@@ -31,7 +31,7 @@ describe("AnonGateway", () => {
     });
 
     it("should give back json data", async () => {
-      const n = nock("https://www.reddit.com", commonNockOpts)
+      const n = nock("https://www.reddit.com", commonNockOptions)
         .get("/foo/bar.json?api_type=json&raw_json=1")
         .reply(200, { bim: "bom" });
 
@@ -43,7 +43,7 @@ describe("AnonGateway", () => {
 
     describe("when given an api error", () => {
       it("should throw", async () => {
-        const n = nock("https://www.reddit.com", commonNockOpts)
+        const n = nock("https://www.reddit.com", commonNockOptions)
           .get("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, { error: "whoops" });
 
@@ -55,7 +55,7 @@ describe("AnonGateway", () => {
       });
 
       it("should use the description if available", async () => {
-        const n = nock("https://www.reddit.com", commonNockOpts)
+        const n = nock("https://www.reddit.com", commonNockOptions)
           .get("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, {
             error: "whoops",
@@ -76,7 +76,7 @@ describe("AnonGateway", () => {
   describe(".post()", () => {
     it("should pass common values", async () => {
       const expectedBody = { api_type: "json", bar: "foo" };
-      const n = nock("https://www.reddit.com", commonNockOpts)
+      const n = nock("https://www.reddit.com", commonNockOptions)
         .post("/foo/bar.json?api_type=json&raw_json=1", expectedBody)
         .reply(200, { bim: "bom" });
 
@@ -86,7 +86,7 @@ describe("AnonGateway", () => {
     });
 
     it("should give back json data", async () => {
-      const n = nock("https://www.reddit.com", commonNockOpts)
+      const n = nock("https://www.reddit.com", commonNockOptions)
         .post("/foo/bar.json?api_type=json&raw_json=1")
         .reply(200, { bim: "bom" });
 
@@ -98,7 +98,7 @@ describe("AnonGateway", () => {
 
     describe("when given an api error", () => {
       it("should throw", async () => {
-        const n = nock("https://www.reddit.com", commonNockOpts)
+        const n = nock("https://www.reddit.com", commonNockOptions)
           .post("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, { error: "whoops" });
 
@@ -110,7 +110,7 @@ describe("AnonGateway", () => {
       });
 
       it("should use the description if available", async () => {
-        const n = nock("https://www.reddit.com", commonNockOpts)
+        const n = nock("https://www.reddit.com", commonNockOptions)
           .post("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, {
             error: "whoops",
@@ -131,7 +131,7 @@ describe("AnonGateway", () => {
   describe(".postJson()", () => {
     it("should pass common values", async () => {
       const expectedBody = { api_type: "json", bar: "foo" };
-      const n = nock("https://www.reddit.com", commonNockOpts)
+      const n = nock("https://www.reddit.com", commonNockOptions)
         .post("/foo/bar.json?api_type=json&raw_json=1", expectedBody)
         .reply(200, { bim: "bom" });
 
@@ -141,7 +141,7 @@ describe("AnonGateway", () => {
     });
 
     it("should give back json data", async () => {
-      const n = nock("https://www.reddit.com", commonNockOpts)
+      const n = nock("https://www.reddit.com", commonNockOptions)
         .post("/foo/bar.json?api_type=json&raw_json=1")
         .reply(200, { bim: "bom" });
 
@@ -153,7 +153,7 @@ describe("AnonGateway", () => {
 
     describe("when given an api error", () => {
       it("should throw", async () => {
-        const n = nock("https://www.reddit.com", commonNockOpts)
+        const n = nock("https://www.reddit.com", commonNockOptions)
           .post("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, { error: "whoops" });
 
@@ -165,7 +165,7 @@ describe("AnonGateway", () => {
       });
 
       it("should use the description if available", async () => {
-        const n = nock("https://www.reddit.com", commonNockOpts)
+        const n = nock("https://www.reddit.com", commonNockOptions)
           .post("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, {
             error: "whoops",

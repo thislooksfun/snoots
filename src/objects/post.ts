@@ -391,16 +391,16 @@ export default class Post extends Voteable implements PostData {
    *
    * @param subreddit The name of the subreddit to crosspost to.
    * @param title The title of the crosspost.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * @returns A promise that resolves to the ID of the newly created post.
    */
   async crosspostTo(
     subreddit: string,
     title: string,
-    opts: LinkPostOptions = {}
+    options: LinkPostOptions = {}
   ): Promise<string> {
-    return this.controls.crosspostTo(this.id, subreddit, title, opts);
+    return this.controls.crosspostTo(this.id, subreddit, title, options);
   }
 
   /**

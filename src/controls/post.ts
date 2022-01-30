@@ -79,7 +79,7 @@ export default class PostControls extends VoteableControls {
     syntax: SearchSyntax = "plain",
     restrictSr: boolean = false
   ): Listing<Post> {
-    const opts: Query = {
+    const options: Query = {
       t: time,
       q: query,
       sort,
@@ -87,10 +87,10 @@ export default class PostControls extends VoteableControls {
       restrict_sr: restrictSr && !!subreddit,
     };
 
-    if (subreddit) opts.subreddit = subreddit;
+    if (subreddit) options.subreddit = subreddit;
 
     const url = subreddit ? `r/${subreddit}/` : "";
-    const req = { url: `${url}search`, query: opts };
+    const req = { url: `${url}search`, query: options };
     const ctx = { req, client: this.client };
     return new PostListing(fakeListingAfter(""), ctx);
   }
@@ -125,7 +125,7 @@ export default class PostControls extends VoteableControls {
    * @param id The ID of the post to crosspost.
    * @param subreddit The name of the subreddit to crosspost to.
    * @param title The title of the crosspost.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * * @returns A promise that resolves to the ID of the newly created post.
    */
@@ -133,9 +133,9 @@ export default class PostControls extends VoteableControls {
     id: string,
     subreddit: string,
     title: string,
-    opts: LinkPostOptions = {}
+    options: LinkPostOptions = {}
   ): Promise<string> {
-    return this.client.subreddits.postCrosspost(subreddit, title, id, opts);
+    return this.client.subreddits.postCrosspost(subreddit, title, id, options);
   }
 
   /**

@@ -43,8 +43,8 @@ export abstract class Gateway {
    * @returns The result.
    */
   public async get<T>(path: string, query: Query = {}): Promise<T> {
-    const opts = await this.buildOpts(query);
-    const res: T = await got.get(this.mapPath(path), opts).json();
+    const options = await this.buildOptions(query);
+    const res: T = await got.get(this.mapPath(path), options).json();
     return this.unwrap(res);
   }
 
@@ -68,8 +68,8 @@ export abstract class Gateway {
     form: Data,
     query: Query = {}
   ): Promise<T> {
-    const formOpts = { form: { api_type: "json", ...form } };
-    return await this.doPost(path, formOpts, query);
+    const formOptions = { form: { api_type: "json", ...form } };
+    return await this.doPost(path, formOptions, query);
   }
 
   /**
@@ -92,20 +92,20 @@ export abstract class Gateway {
     json: Data,
     query: Query = {}
   ): Promise<T> {
-    const jsonOpts = { json: { api_type: "json", ...json } };
-    return await this.doPost(path, jsonOpts, query);
+    const jsonOptions = { json: { api_type: "json", ...json } };
+    return await this.doPost(path, jsonOptions, query);
   }
 
   protected abstract auth(): Promise<Maybe<Auth>>;
 
   protected async doPost<T>(
     path: string,
-    opts: GotOptions,
+    options: GotOptions,
     query: Query
   ): Promise<T> {
-    const baseOpts = await this.buildOpts(query);
+    const baseOptions = await this.buildOptions(query);
     const res: T = await got
-      .post(this.mapPath(path), { ...baseOpts, ...opts })
+      .post(this.mapPath(path), { ...baseOptions, ...options })
       .json();
     return this.unwrap(res);
   }
@@ -137,8 +137,8 @@ export abstract class Gateway {
     }
   }
 
-  protected async buildOpts(query: Query): Promise<GotOptions> {
-    const opts: GotOptions = {
+  protected async buildOptions(query: Query): Promise<GotOptions> {
+    const options: GotOptions = {
       prefixUrl: this.endpoint,
       headers: { "user-agent": this.userAgent },
       searchParams: { ...query, raw_json: 1, api_type: "json" },
@@ -148,14 +148,14 @@ export abstract class Gateway {
     const auth = await this.auth();
     if (auth) {
       if ("bearer" in auth) {
-        opts.headers!["Authorization"] = `bearer ${auth.bearer}`;
+        options.headers!["Authorization"] = `bearer ${auth.bearer}`;
       } else {
-        opts.username = auth.user;
-        opts.password = auth.pass;
+        options.username = auth.user;
+        options.password = auth.pass;
       }
     }
 
-    return opts;
+    return options;
   }
 
   protected updateRatelimit(res: GotResponse): GotResponse {

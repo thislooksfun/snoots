@@ -84,7 +84,7 @@ describe("OauthGateway", () => {
   });
 
   describe(".updateAccessToken()", () => {
-    const commonNockOpts = {
+    const commonNockOptions = {
       reqheaders: {
         "user-agent": "fake-user-agent",
         authorization: "Basic Y0lkOmNTZWNyZXQ=",
@@ -101,7 +101,7 @@ describe("OauthGateway", () => {
             grant_type: "refresh_token",
             refresh_token: token.refresh,
           };
-          const n = nock("https://www.reddit.com", commonNockOpts)
+          const n = nock("https://www.reddit.com", commonNockOptions)
             .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
             .reply(200, { bim: "bom" });
 
@@ -130,7 +130,7 @@ describe("OauthGateway", () => {
                   }
                 : { grant_type: "password", ...auth }),
             };
-            const n = nock("https://www.reddit.com", commonNockOpts)
+            const n = nock("https://www.reddit.com", commonNockOptions)
               .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
               .reply(200, { bim: "bom" });
 
@@ -149,7 +149,7 @@ describe("OauthGateway", () => {
           gateway.setInitialAuth(undefined);
 
           const body = { api_type: "json", grant_type: "client_credentials" };
-          const n = nock("https://www.reddit.com", commonNockOpts)
+          const n = nock("https://www.reddit.com", commonNockOptions)
             .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
             .reply(200, { bim: "bom" });
 
@@ -170,7 +170,7 @@ describe("OauthGateway", () => {
             gateway.setToken(token);
             gateway.setInitialAuth(auth);
 
-            const n = nock("https://www.reddit.com", commonNockOpts)
+            const n = nock("https://www.reddit.com", commonNockOptions)
               .post("/api/v1/access_token.json?raw_json=1&api_type=json")
               .reply(200, tokenResponse);
 
@@ -245,7 +245,7 @@ describe("OauthGateway", () => {
   });
 
   describe("When authenticated", () => {
-    const commonNockOpts = {
+    const commonNockOptions = {
       reqheaders: {
         "user-agent": "fake-user-agent",
         authorization: "bearer accessTkn",
@@ -258,7 +258,7 @@ describe("OauthGateway", () => {
 
     describe(".get()", () => {
       it("should pass common values", async () => {
-        const n = nock("https://oauth.reddit.com", commonNockOpts)
+        const n = nock("https://oauth.reddit.com", commonNockOptions)
           .get("/foo/bar?api_type=json&raw_json=1")
           .reply(200, { bim: "bom" });
 
@@ -268,7 +268,7 @@ describe("OauthGateway", () => {
       });
 
       it("should give back json data", async () => {
-        const n = nock("https://oauth.reddit.com", commonNockOpts)
+        const n = nock("https://oauth.reddit.com", commonNockOptions)
           .get("/foo/bar?api_type=json&raw_json=1")
           .reply(200, { bim: "bom" });
 
@@ -286,7 +286,7 @@ describe("OauthGateway", () => {
 
       describe("when given an api error", () => {
         it("should throw", async () => {
-          const n = nock("https://oauth.reddit.com", commonNockOpts)
+          const n = nock("https://oauth.reddit.com", commonNockOptions)
             .get("/foo/bar?api_type=json&raw_json=1")
             .reply(200, { error: "whoops" });
 
@@ -298,7 +298,7 @@ describe("OauthGateway", () => {
         });
 
         it("should use the description if available", async () => {
-          const n = nock("https://oauth.reddit.com", commonNockOpts)
+          const n = nock("https://oauth.reddit.com", commonNockOptions)
             .get("/foo/bar?api_type=json&raw_json=1")
             .reply(200, {
               error: "whoops",
@@ -319,7 +319,7 @@ describe("OauthGateway", () => {
     describe(".post()", () => {
       it("should pass common values", async () => {
         const expectedBody = { api_type: "json", bar: "foo" };
-        const n = nock("https://oauth.reddit.com", commonNockOpts)
+        const n = nock("https://oauth.reddit.com", commonNockOptions)
           .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
           .reply(200, { bim: "bom" });
 
@@ -329,7 +329,7 @@ describe("OauthGateway", () => {
       });
 
       it("should give back json data", async () => {
-        const n = nock("https://oauth.reddit.com", commonNockOpts)
+        const n = nock("https://oauth.reddit.com", commonNockOptions)
           .post("/foo/bar?api_type=json&raw_json=1")
           .reply(200, { bim: "bom" });
 
@@ -347,7 +347,7 @@ describe("OauthGateway", () => {
 
       describe("when given an api error", () => {
         it("should throw", async () => {
-          const n = nock("https://oauth.reddit.com", commonNockOpts)
+          const n = nock("https://oauth.reddit.com", commonNockOptions)
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, { error: "whoops" });
 
@@ -359,7 +359,7 @@ describe("OauthGateway", () => {
         });
 
         it("should use the description if available", async () => {
-          const n = nock("https://oauth.reddit.com", commonNockOpts)
+          const n = nock("https://oauth.reddit.com", commonNockOptions)
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, {
               error: "whoops",
@@ -380,7 +380,7 @@ describe("OauthGateway", () => {
     describe(".postJson()", () => {
       it("should pass common values", async () => {
         const expectedBody = { api_type: "json", bar: "foo" };
-        const n = nock("https://oauth.reddit.com", commonNockOpts)
+        const n = nock("https://oauth.reddit.com", commonNockOptions)
           .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
           .reply(200, { bim: "bom" });
 
@@ -390,7 +390,7 @@ describe("OauthGateway", () => {
       });
 
       it("should give back json data", async () => {
-        const n = nock("https://oauth.reddit.com", commonNockOpts)
+        const n = nock("https://oauth.reddit.com", commonNockOptions)
           .post("/foo/bar?api_type=json&raw_json=1")
           .reply(200, { bim: "bom" });
 
@@ -408,7 +408,7 @@ describe("OauthGateway", () => {
 
       describe("when given an api error", () => {
         it("should throw", async () => {
-          const n = nock("https://oauth.reddit.com", commonNockOpts)
+          const n = nock("https://oauth.reddit.com", commonNockOptions)
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, { error: "whoops" });
 
@@ -420,7 +420,7 @@ describe("OauthGateway", () => {
         });
 
         it("should use the description if available", async () => {
-          const n = nock("https://oauth.reddit.com", commonNockOpts)
+          const n = nock("https://oauth.reddit.com", commonNockOptions)
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, {
               error: "whoops",

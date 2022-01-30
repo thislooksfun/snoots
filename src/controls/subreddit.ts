@@ -80,7 +80,7 @@ export interface LinkPostOptions extends TextPostOptions {
 }
 
 type PostTypes = "self" | "link" | "crosspost";
-interface PostOpts {
+interface PostOptions {
   kind: PostTypes;
   title: string;
   text?: string;
@@ -195,13 +195,15 @@ export default class SubredditControls extends BaseControls {
     name: string,
     options: BanOptions = {}
   ): Promise<void> {
-    const opts: Query = {};
-    if (options.duration != undefined) opts.duration = "" + options.duration;
-    if (options.message != undefined) opts.ban_message = options.message;
-    if (options.note != undefined) opts.note = options.note;
-    if (options.reason != undefined) opts.ban_reason = options.reason;
+    const friendOptions: Query = {};
+    if (options.duration != undefined)
+      friendOptions.duration = "" + options.duration;
+    if (options.message != undefined)
+      friendOptions.ban_message = options.message;
+    if (options.note != undefined) friendOptions.note = options.note;
+    if (options.reason != undefined) friendOptions.ban_reason = options.reason;
 
-    await this.friend(sr, name, "banned", opts);
+    await this.friend(sr, name, "banned", friendOptions);
   }
 
   /**
@@ -559,7 +561,7 @@ export default class SubredditControls extends BaseControls {
    * @param subreddit The subreddit to submit the post to.
    * @param title The title of the post.
    * @param body The body of the post.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * @returns A promise that resolves to the ID of the new post.
    */
@@ -567,17 +569,17 @@ export default class SubredditControls extends BaseControls {
     subreddit: string,
     title: string,
     body?: string,
-    opts: TextPostOptions = {}
+    options: TextPostOptions = {}
   ): Promise<string> {
     return this.post(subreddit, {
       kind: "self",
       title,
       text: body,
-      sendReplies: opts.sendReplies ?? false,
+      sendReplies: options.sendReplies ?? false,
       resubmit: true,
-      captcha: opts.captcha,
-      nsfw: opts.nsfw ?? false,
-      spoiler: opts.spoiler ?? false,
+      captcha: options.captcha,
+      nsfw: options.nsfw ?? false,
+      spoiler: options.spoiler ?? false,
     });
   }
 
@@ -587,7 +589,7 @@ export default class SubredditControls extends BaseControls {
    * @param subreddit The subreddit to submit the post to.
    * @param title The title of the post.
    * @param url The url to link to.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * @returns A promise that resolves to the ID of the new post.
    */
@@ -595,17 +597,17 @@ export default class SubredditControls extends BaseControls {
     subreddit: string,
     title: string,
     url: string,
-    opts: LinkPostOptions = {}
+    options: LinkPostOptions = {}
   ): Promise<string> {
     return this.post(subreddit, {
       kind: "link",
       title,
       url,
-      sendReplies: opts.sendReplies ?? false,
-      resubmit: !opts.unique,
-      captcha: opts.captcha,
-      nsfw: opts.nsfw ?? false,
-      spoiler: opts.spoiler ?? false,
+      sendReplies: options.sendReplies ?? false,
+      resubmit: !options.unique,
+      captcha: options.captcha,
+      nsfw: options.nsfw ?? false,
+      spoiler: options.spoiler ?? false,
     });
   }
 
@@ -615,7 +617,7 @@ export default class SubredditControls extends BaseControls {
    * @param subreddit The subreddit to submit the post to.
    * @param title The title of the post.
    * @param postID The ID of the post to crosspost.
-   * @param opts Any extra options.
+   * @param options Any extra options.
    *
    * @returns A promise that resolves to the ID of the new post.
    */
@@ -623,39 +625,42 @@ export default class SubredditControls extends BaseControls {
     subreddit: string,
     title: string,
     postID: string,
-    opts: LinkPostOptions = {}
+    options: LinkPostOptions = {}
   ): Promise<string> {
     return this.post(subreddit, {
       kind: "crosspost",
       title,
       crosspostFullname: `t3_${postID}`,
-      sendReplies: opts.sendReplies ?? false,
-      resubmit: !opts.unique,
-      captcha: opts.captcha,
-      nsfw: opts.nsfw ?? false,
-      spoiler: opts.spoiler ?? false,
+      sendReplies: options.sendReplies ?? false,
+      resubmit: !options.unique,
+      captcha: options.captcha,
+      nsfw: options.nsfw ?? false,
+      spoiler: options.spoiler ?? false,
     });
   }
 
   // TODO: Support 'oc' and flairs.
-  protected async post(subreddit: string, opts: PostOpts): Promise<string> {
+  protected async post(
+    subreddit: string,
+    options: PostOptions
+  ): Promise<string> {
     const req: Data = {
       sr: subreddit,
-      kind: opts.kind,
-      title: opts.title,
-      sendreplies: opts.sendReplies,
-      resubmit: opts.resubmit,
-      nsfw: opts.nsfw,
-      spoiler: opts.spoiler,
+      kind: options.kind,
+      title: options.title,
+      sendreplies: options.sendReplies,
+      resubmit: options.resubmit,
+      nsfw: options.nsfw,
+      spoiler: options.spoiler,
     };
 
-    if (opts.text != undefined) req.text = opts.text;
-    if (opts.url != undefined) req.url = opts.url;
-    if (opts.crosspostFullname != undefined)
-      req.crosspost_fullname = opts.crosspostFullname;
-    if (opts.captcha != undefined) {
-      req.captcha = opts.captcha.response;
-      req.iden = opts.captcha.iden;
+    if (options.text != undefined) req.text = options.text;
+    if (options.url != undefined) req.url = options.url;
+    if (options.crosspostFullname != undefined)
+      req.crosspost_fullname = options.crosspostFullname;
+    if (options.captcha != undefined) {
+      req.captcha = options.captcha.response;
+      req.iden = options.captcha.iden;
     }
 
     const res: Data = await this.gateway.post("api/submit", req);
@@ -667,13 +672,9 @@ export default class SubredditControls extends BaseControls {
     sr: string,
     name: string,
     type: string,
-    opts: Query = {}
+    options: Query = {}
   ) {
-    await this.gateway.post(`r/${sr}/api/friend`, {
-      ...opts,
-      name,
-      type,
-    });
+    await this.gateway.post(`r/${sr}/api/friend`, { ...options, name, type });
   }
 
   /** @internal */
@@ -681,13 +682,9 @@ export default class SubredditControls extends BaseControls {
     sr: string,
     name: string,
     type: string,
-    opts: Query = {}
+    options: Query = {}
   ) {
-    await this.gateway.post(`r/${sr}/api/unfriend`, {
-      ...opts,
-      name,
-      type,
-    });
+    await this.gateway.post(`r/${sr}/api/unfriend`, { ...options, name, type });
   }
 
   /** @internal */
