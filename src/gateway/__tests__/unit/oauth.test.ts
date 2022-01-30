@@ -77,10 +77,10 @@ afterAll(() => {
 });
 
 describe("OauthGateway", () => {
-  let updateAccessTokenFn: jest.SpyInstance;
+  let updateAccessTokenSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    updateAccessTokenFn = jest.spyOn(gateway, "updateAccessToken");
+    updateAccessTokenSpy = jest.spyOn(gateway, "updateAccessToken");
   });
 
   describe(".updateAccessToken()", () => {
@@ -199,7 +199,7 @@ describe("OauthGateway", () => {
   ])("When %s", (_msg, token) => {
     beforeEach(() => {
       gateway.setToken(token);
-      updateAccessTokenFn.mockImplementation(async () => {
+      updateAccessTokenSpy.mockImplementation(async () => {
         gateway.setToken({ access: "accessTkn", expiration: 0 });
       });
     });
@@ -213,7 +213,7 @@ describe("OauthGateway", () => {
         await gateway.get("foo/bar");
 
         n.done();
-        expect(updateAccessTokenFn).toHaveBeenCalledTimes(1);
+        expect(updateAccessTokenSpy).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -226,7 +226,7 @@ describe("OauthGateway", () => {
         await gateway.post("foo/bar", {});
 
         n.done();
-        expect(updateAccessTokenFn).toHaveBeenCalledTimes(1);
+        expect(updateAccessTokenSpy).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -239,7 +239,7 @@ describe("OauthGateway", () => {
         await gateway.postJson("foo/bar", {});
 
         n.done();
-        expect(updateAccessTokenFn).toHaveBeenCalledTimes(1);
+        expect(updateAccessTokenSpy).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -281,7 +281,7 @@ describe("OauthGateway", () => {
       it("should not call .updateAccessToken()", async () => {
         nock("https://oauth.reddit.com").get(/.*/).reply(200);
         await gateway.get("foo/bar");
-        expect(updateAccessTokenFn).not.toHaveBeenCalled();
+        expect(updateAccessTokenSpy).not.toHaveBeenCalled();
       });
 
       describe("when given an api error", () => {
@@ -342,7 +342,7 @@ describe("OauthGateway", () => {
       it("should not call .updateAccessToken()", async () => {
         nock("https://oauth.reddit.com").post(/.*/).reply(200);
         await gateway.post("foo/bar", {});
-        expect(updateAccessTokenFn).not.toHaveBeenCalled();
+        expect(updateAccessTokenSpy).not.toHaveBeenCalled();
       });
 
       describe("when given an api error", () => {
@@ -403,7 +403,7 @@ describe("OauthGateway", () => {
       it("should not call .updateAccessToken()", async () => {
         nock("https://oauth.reddit.com").post(/.*/).reply(200);
         await gateway.postJson("foo/bar", {});
-        expect(updateAccessTokenFn).not.toHaveBeenCalled();
+        expect(updateAccessTokenSpy).not.toHaveBeenCalled();
       });
 
       describe("when given an api error", () => {
