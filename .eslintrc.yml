@@ -11,16 +11,20 @@ parserOptions:
 
 plugins:
   - "@typescript-eslint"
+  - import
   - prettier
   - simple-import-sort
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
+  - plugin:import/recommended
+  - plugin:import/typescript
   - prettier
 
 rules:
   "@typescript-eslint/no-inferrable-types": "off"
   "@typescript-eslint/no-non-null-assertion": "off"
+  import/first: error
   simple-import-sort/exports: error
   simple-import-sort/imports:
     - error
