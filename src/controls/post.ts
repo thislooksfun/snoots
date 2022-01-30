@@ -264,9 +264,9 @@ export default class PostControls extends VoteableControls {
   protected async setStickied(
     id: string,
     state: boolean,
-    num?: 1 | 2
+    slot?: 1 | 2
   ): Promise<void> {
-    const body = { state, num, id: this.namespace(id) };
+    const body = { state, num: slot, id: this.namespace(id) };
     await this.gateway.post("api/set_subreddit_sticky", body);
   }
 
@@ -274,12 +274,12 @@ export default class PostControls extends VoteableControls {
    * Sticky a post.
    *
    * @param id The ID of the post to sticky.
-   * @param num The slot to sticky the post to.
+   * @param slot The slot to sticky the post to.
    *
    * @returns A promise that resolves when the post has been stickied.
    */
-  async sticky(id: string, num: 1 | 2): Promise<void> {
-    await this.setStickied(id, true, num);
+  async sticky(id: string, slot: 1 | 2): Promise<void> {
+    await this.setStickied(id, true, slot);
   }
 
   /**

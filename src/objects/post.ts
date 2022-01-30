@@ -502,12 +502,12 @@ export default class Post extends Voteable implements PostData {
   /**
    * Sticky this post.
    *
-   * @param num The slot to sticky this post to.
+   * @param slot The slot to sticky this post to.
    *
    * @returns A promise that resolves when the post has been stickied.
    */
-  async sticky(num: 1 | 2): Promise<void> {
-    return this.controls.sticky(this.id, num);
+  async sticky(slot: 1 | 2): Promise<void> {
+    return this.controls.sticky(this.id, slot);
   }
 
   /**
