@@ -16,12 +16,14 @@ plugins:
   - prettier
   - promise
   - simple-import-sort
+  - sonarjs
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
   - plugin:eslint-comments/recommended
   - plugin:import/recommended
   - plugin:import/typescript
+  - plugin:sonarjs/recommended
   - prettier
 
 rules:
@@ -52,3 +54,4 @@ overrides:
         - assertFunctionNames:
             - expect
             - n.done
+      sonarjs/no-duplicate-string: off

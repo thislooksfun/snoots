@@ -94,13 +94,11 @@ export default class CommentControls extends VoteableControls {
       return new CommentListing(fakeMoreListing(cmtName), ctx);
     } else if (replies && typeof replies === "object" && "kind" in replies) {
       const rObj = replies as RedditObject;
-      switch (rObj.kind) {
-        case "Listing":
-          return new CommentListing((rObj as ListingObject).data, ctx);
-        default:
-          console.dir(replies);
-          throw `Unknown type '${rObj.kind}'`;
+      if (rObj.kind !== "Listing") {
+        console.dir(replies);
+        throw `Unknown type '${rObj.kind}'`;
       }
+      return new CommentListing((rObj as ListingObject).data, ctx);
     } else {
       console.dir(replies);
       throw "Unsupported reply type!";
