@@ -222,10 +222,10 @@ export default class SubredditControls extends BaseControls {
   protected getSortedPosts(
     subreddit: string | undefined,
     sort: PostSort,
-    query: Query = {}
+    options: Query = {}
   ): Listing<Post> {
     const url = subreddit ? `r/${subreddit}/` : "";
-    const req = { url: `${url}${sort}`, query: { show: "all", ...query } };
+    const req = { url: `${url}${sort}`, query: { show: "all", ...options } };
     const ctx = { req, client: this.client };
     return new PostListing(fakeListingAfter(""), ctx);
   }
