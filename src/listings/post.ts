@@ -19,11 +19,11 @@ export default class PostListing extends Listing<Post> {
       fetcher = new PostPager(l.after);
     }
 
-    const arr: Post[] = [];
+    const posts: Post[] = [];
     for (const c of l.children) {
-      arr.push(ctx.client.posts.fromRaw(c));
+      posts.push(ctx.client.posts.fromRaw(c));
     }
 
-    super(ctx, arr, fetcher);
+    super(ctx, posts, fetcher);
   }
 }

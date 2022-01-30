@@ -89,14 +89,14 @@ export abstract class Pager<T> implements Fetcher<T> {
  */
 export default class Listing<T> {
   protected ctx: ListingContext;
-  protected arr: T[];
+  protected items: T[];
   protected fetcher?: Fetcher<T>;
   protected next?: Listing<T>;
 
   /** @internal */
-  constructor(ctx: ListingContext, arr: T[], fetcher?: Fetcher<T>) {
+  constructor(ctx: ListingContext, items: T[], fetcher?: Fetcher<T>) {
     this.ctx = ctx;
-    this.arr = arr;
+    this.items = items;
     this.fetcher = fetcher;
   }
 
@@ -108,7 +108,7 @@ export default class Listing<T> {
    */
   async empty(): Promise<boolean> {
     // If we have elements on hand, it's not empty.
-    if (this.arr.length > 0) return false;
+    if (this.items.length > 0) return false;
 
     // If arr is empty with no way to get more, it's empty.
     if (!this.fetcher) return true;
@@ -118,7 +118,7 @@ export default class Listing<T> {
     if (!this.next) {
       this.next = await this.fetcher.fetch(this.ctx);
     }
-    return this.next.arr.length > 0;
+    return this.next.items.length > 0;
   }
 
   /**
@@ -151,7 +151,7 @@ export default class Listing<T> {
 
     do {
       // If the function returns false at any point, we are done.
-      const res = await handler(page.arr);
+      const res = await handler(page.items);
       if (res === false) return;
 
       page = await Listing.nextPage(page, this.ctx);
@@ -235,7 +235,7 @@ export default class Listing<T> {
       return page.next;
     } else if (page.fetcher) {
       const next = await page.fetcher.fetch(ctx);
-      return next.arr.length > 0 ? next : undefined;
+      return next.items.length > 0 ? next : undefined;
     }
     return undefined;
   }
@@ -248,14 +248,14 @@ export default class Listing<T> {
       index: 0,
 
       async next(): Promise<IteratorResult<T>> {
-        if (this.index >= this.page.arr.length) {
+        if (this.index >= this.page.items.length) {
           const nextPage = await Listing.nextPage(this.page, this.ctx);
           if (!nextPage) return { done: true, value: undefined };
           this.page = nextPage;
           this.index = 0;
         }
 
-        return { done: false, value: this.page.arr[this.index++] };
+        return { done: false, value: this.page.items[this.index++] };
       },
     };
   }

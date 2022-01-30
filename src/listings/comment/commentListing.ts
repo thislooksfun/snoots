@@ -19,11 +19,11 @@ export default class CommentListing extends Listing<Comment> {
       fetcher = new CommentPager(l.after);
     }
 
-    const arr: Comment[] = [];
+    const comments: Comment[] = [];
     for (const c of l.children) {
       switch (c.kind) {
         case "t1":
-          arr.push(ctx.client.comments.fromRaw(c));
+          comments.push(ctx.client.comments.fromRaw(c));
           break;
         case "more":
           fetcher = new MoreComments(c.data as RedditMore);
@@ -34,6 +34,6 @@ export default class CommentListing extends Listing<Comment> {
       }
     }
 
-    super(ctx, arr, fetcher);
+    super(ctx, comments, fetcher);
   }
 }

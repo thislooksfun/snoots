@@ -19,20 +19,20 @@ export default class PostOrCommentListing extends Listing<Post | Comment> {
       fetcher = new PostOrCommentPager(l.after);
     }
 
-    const arr: (Post | Comment)[] = [];
+    const items: (Post | Comment)[] = [];
     for (const c of l.children) {
       switch (c.kind) {
         case "t1":
-          arr.push(ctx.client.comments.fromRaw(c));
+          items.push(ctx.client.comments.fromRaw(c));
           break;
         case "t3":
-          arr.push(ctx.client.posts.fromRaw(c));
+          items.push(ctx.client.posts.fromRaw(c));
           break;
         default:
           throw new InvalidKindError("t1 or t3", c.kind);
       }
     }
 
-    super(ctx, arr, fetcher);
+    super(ctx, items, fetcher);
   }
 }
