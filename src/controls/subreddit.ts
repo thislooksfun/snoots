@@ -311,22 +311,25 @@ export default class SubredditControls extends BaseControls {
   }
 
   /** @internal */
-  protected getAboutListing(sr: string, ext: string): Listing<Comment | Post> {
-    const req = { url: `r/${sr}/about/${ext}`, query: {} };
+  protected getAboutListing(sr: string, type: string): Listing<Comment | Post> {
+    const req = { url: `r/${sr}/about/${type}`, query: {} };
     const ctx = { req, client: this.client };
     return new PostOrCommentListing(fakeListingAfter(""), ctx);
   }
 
   /** @internal */
-  protected getAboutListingComments(sr: string, ext: string): Listing<Comment> {
-    const req = { url: `r/${sr}/about/${ext}`, query: { only: "comments" } };
+  protected getAboutListingComments(
+    sr: string,
+    type: string
+  ): Listing<Comment> {
+    const req = { url: `r/${sr}/about/${type}`, query: { only: "comments" } };
     const ctx = { req, client: this.client };
     return new CommentListing(fakeListingAfter(""), ctx);
   }
 
   /** @internal */
-  protected getAboutListingPosts(sr: string, ext: string): Listing<Post> {
-    const req = { url: `r/${sr}/about/${ext}`, query: { only: "links" } };
+  protected getAboutListingPosts(sr: string, type: string): Listing<Post> {
+    const req = { url: `r/${sr}/about/${type}`, query: { only: "links" } };
     const ctx = { req, client: this.client };
     return new PostListing(fakeListingAfter(""), ctx);
   }
