@@ -196,7 +196,7 @@ describe("OauthGateway", () => {
       "access has expired",
       { access: "accessTkn", expiration: Date.now() - 9000 },
     ],
-  ])("When %s", (_msg, token) => {
+  ])("When %s", (_condition, token) => {
     beforeEach(() => {
       gateway.setToken(token);
       updateAccessTokenSpy.mockImplementation(async () => {

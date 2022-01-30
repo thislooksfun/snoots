@@ -112,10 +112,10 @@ export abstract class Gateway {
 
   protected abstract mapPath(path: string): string;
 
-  protected handleError(msg: string, desc?: string): never {
-    let errMsg = `Reddit returned an error: ${msg}`;
-    if (desc) errMsg += `: ${desc}`;
-    throw new Error(errMsg);
+  protected handleError(message: string, desc?: string): never {
+    let errorMessage = `Reddit returned an error: ${message}`;
+    if (desc) errorMessage += `: ${desc}`;
+    throw new Error(errorMessage);
   }
 
   protected unwrap<T>(res: SomeResponse<T>): T {
