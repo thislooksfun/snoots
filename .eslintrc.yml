@@ -13,6 +13,7 @@ plugins:
   - "@typescript-eslint"
   - import
   - prettier
+  - promise
   - simple-import-sort
 extends:
   - eslint:recommended
@@ -25,6 +26,8 @@ rules:
   "@typescript-eslint/no-inferrable-types": "off"
   "@typescript-eslint/no-non-null-assertion": "off"
   import/first: error
+  promise/prefer-await-to-callbacks: error
+  promise/prefer-await-to-then: error
   simple-import-sort/exports: error
   simple-import-sort/imports:
     - error
