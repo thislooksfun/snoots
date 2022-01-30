@@ -48,8 +48,9 @@ describe("AnonGateway", () => {
           .reply(200, { error: "whoops" });
 
         const req = gateway.get("foo/bar", {});
-        const err = new Error("Reddit returned an error: whoops");
-        await expect(req).rejects.toStrictEqual(err);
+        await expect(req).rejects.toStrictEqual(
+          new Error("Reddit returned an error: whoops")
+        );
 
         n.done();
       });
@@ -63,10 +64,9 @@ describe("AnonGateway", () => {
           });
 
         const req = gateway.get("foo/bar", {});
-        const err = new Error(
-          "Reddit returned an error: whoops: something went wrong :("
+        await expect(req).rejects.toStrictEqual(
+          new Error("Reddit returned an error: whoops: something went wrong :(")
         );
-        await expect(req).rejects.toStrictEqual(err);
 
         n.done();
       });
@@ -103,8 +103,9 @@ describe("AnonGateway", () => {
           .reply(200, { error: "whoops" });
 
         const req = gateway.post("foo/bar", { bar: "foo" }, {});
-        const err = new Error("Reddit returned an error: whoops");
-        await expect(req).rejects.toStrictEqual(err);
+        await expect(req).rejects.toStrictEqual(
+          new Error("Reddit returned an error: whoops")
+        );
 
         n.done();
       });
@@ -118,10 +119,9 @@ describe("AnonGateway", () => {
           });
 
         const req = gateway.post("foo/bar", { bar: "foo" }, {});
-        const err = new Error(
-          "Reddit returned an error: whoops: something went wrong :("
+        await expect(req).rejects.toStrictEqual(
+          new Error("Reddit returned an error: whoops: something went wrong :(")
         );
-        await expect(req).rejects.toStrictEqual(err);
 
         n.done();
       });
@@ -158,8 +158,9 @@ describe("AnonGateway", () => {
           .reply(200, { error: "whoops" });
 
         const req = gateway.postJson("foo/bar", { bar: "foo" }, {});
-        const err = new Error("Reddit returned an error: whoops");
-        await expect(req).rejects.toStrictEqual(err);
+        await expect(req).rejects.toStrictEqual(
+          new Error("Reddit returned an error: whoops")
+        );
 
         n.done();
       });
@@ -173,10 +174,9 @@ describe("AnonGateway", () => {
           });
 
         const req = gateway.postJson("foo/bar", { bar: "foo" }, {});
-        const err = new Error(
-          "Reddit returned an error: whoops: something went wrong :("
+        await expect(req).rejects.toStrictEqual(
+          new Error("Reddit returned an error: whoops: something went wrong :(")
         );
-        await expect(req).rejects.toStrictEqual(err);
 
         n.done();
       });
