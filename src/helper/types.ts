@@ -6,7 +6,7 @@ export type Data = Record<string, any>;
 export type Awaitable<T> = T | Promise<T>;
 
 /** A function that either returns a type or a promise of that type. */
-export type AwaitableFn<T, R> = (t: T) => Awaitable<R>;
+export type AwaitableFunction<T, R> = (t: T) => Awaitable<R>;
 
 /** A size, in the form [width, height]. */
 export type Size = [number, number];

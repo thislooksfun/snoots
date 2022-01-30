@@ -1,6 +1,6 @@
 import type Client from "../client";
 import type { Query } from "../gateway/types";
-import type { AwaitableFn, Maybe, RedditObject } from "../helper/types";
+import type { AwaitableFunction, Maybe, RedditObject } from "../helper/types";
 
 import { assertKind } from "../helper/util";
 
@@ -143,7 +143,9 @@ export default class Listing<T> {
    *
    * @returns A promise that resolves when the listing has been exhausted.
    */
-  async eachPage(handler: AwaitableFn<T[], boolean | void>): Promise<void> {
+  async eachPage(
+    handler: AwaitableFunction<T[], boolean | void>
+  ): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     let page: Maybe<Listing<T>> = this;
 
@@ -187,7 +189,7 @@ export default class Listing<T> {
    *
    * @returns A promise that resolves when the iteration is complete.
    */
-  async forEach(handler: AwaitableFn<T, boolean | void>): Promise<void> {
+  async forEach(handler: AwaitableFunction<T, boolean | void>): Promise<void> {
     for await (const el of this) {
       const res = await handler(el);
       if (res === false) break;
@@ -205,7 +207,7 @@ export default class Listing<T> {
    * some element in the listing, or `false` if it reached the end of the
    * listing without finding a match.
    */
-  async some(handler: AwaitableFn<T, boolean>): Promise<boolean> {
+  async some(handler: AwaitableFunction<T, boolean>): Promise<boolean> {
     for await (const el of this) {
       if (await handler(el)) return true;
     }
