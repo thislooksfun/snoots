@@ -13,7 +13,7 @@ const fcClientAuth = () => fc.oneof(fcUsernameAuth(), fcTokenAuth());
 
 function fcToken(withRefresh?: boolean): fc.Arbitrary<Token> {
   const access = fc.string();
-  const expiration = fc.integer().map(i => i + Date.now());
+  const expiration = fc.integer().map(v => v + Date.now());
   const refresh = fc.string({ minLength: 1 });
 
   if (withRefresh === true) {
