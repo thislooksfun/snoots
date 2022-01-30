@@ -9,6 +9,7 @@ import {
 } from "./controls";
 import { AnonGateway } from "./gateway/anon";
 import { ClientAuth, OauthGateway } from "./gateway/oauth";
+import { Maybe } from "./helper/types";
 
 /**
  * Options for instantiating a Client
@@ -226,12 +227,12 @@ export default class Client {
   /**
    * Get the refresh token for the current session, if there is one.
    *
-   * @returns The refresh token, or `null` if no token exists.
+   * @returns The refresh token, or `undefined` if no token exists.
    */
-  getRefreshToken(): string | null {
+  getRefreshToken(): Maybe<string> {
     if (this.gateway instanceof OauthGateway) {
       return this.gateway.getRefreshToken();
     }
-    return null;
+    return undefined;
   }
 }

@@ -1,3 +1,4 @@
+import type { Maybe } from "../helper/types";
 import type { VoteableData } from "./voteable";
 
 import PostControls from "../controls/post";
@@ -84,11 +85,11 @@ export interface PostData extends VoteableData {
   body: string;
 
   /**
-   * The HTML body of the post, or `null` if the body is empty.
+   * The HTML body of the post, or `undefined` if the body is empty.
    *
    * @note The Reddit API calls this parameter `selftextHtml`.
    */
-  bodyHtml: string | null;
+  bodyHtml: Maybe<string>;
 
   // TODO: Document or remove PostData.clicked
   // How is this different from `visited`?
@@ -99,7 +100,7 @@ export interface PostData extends VoteableData {
 
   // TODO: Document or remove PostData.contentCategories
   // /** Categories for original content, e.g. "comics", "drawing_and_painting" */
-  // contentCategories: string[] | null;
+  // contentCategories: Maybe<string[]>;
 
   /** Whether or not this post is in contest mode. */
   contestMode: boolean;
@@ -136,10 +137,10 @@ export interface PostData extends VoteableData {
 
   // TODO: Document or remove PostData.linkFlair*
   // linkFlairBackgroundColor: string;
-  // linkFlairCssClass: string | null;
+  // linkFlairCssClass: Maybe<string>;
   // linkFlairRichtext: RichTextFlair[];
-  // linkFlairTemplateId: string | null;
-  // linkFlairText: string | null;
+  // linkFlairTemplateId: Maybe<string>;
+  // linkFlairText: Maybe<string>;
   // linkFlairTextColor: "dark" | "light";
   // linkFlairType: "text" | "richtext";
 
@@ -147,7 +148,7 @@ export interface PostData extends VoteableData {
   locked: boolean;
 
   // TODO: Document or remove PostData.media*
-  // media: Media | null;     // seems to always be null
+  // media: Maybe<Media>;     // seems to always be undefined
   // mediaEmbed: MediaEmbed;  // seems to always be {}
   // mediaMetadata?: unknown[];
   // mediaOnly: boolean;
@@ -180,11 +181,11 @@ export interface PostData extends VoteableData {
 
   // TODO: Document or remove PostData.removedByCategory
   // This should maybe be moved to Voteable?
-  // removedByCategory: string | null;
+  // removedByCategory: Maybe<string>;
 
   // TODO: Document or remove PostData.secureMedia*
   // /** Same content as {@link media}, except HTTPS */
-  // secureMedia: Media | null;
+  // secureMedia: Maybe<Media>;
   // secureMediaEmbed: SecureMediaEmbed;
 
   /** Whether or not this post was marked as being a spoiler. */
@@ -195,15 +196,15 @@ export interface PostData extends VoteableData {
 
   // TODO: Document or remove PostData.suggestedSort
   /**
-   * The suggested way to sort the comments of this post, or null if no such
-   * suggestion has been given.
+   * The suggested way to sort the comments of this post, or undefined if no
+   * such suggestion has been given.
    */
-  // suggestedSort: Sort | null;
+  // suggestedSort: Maybe<Sort>;
 
   // TODO: Document or remove PostData.thumbnail*
   // thumbnail: 'self' | string;
-  // thumbnailHeight?: number | null;
-  // thumbnailWidth?: number | null;
+  // thumbnailHeight?: number;
+  // thumbnailWidth?: number;
 
   /** The title of this post. */
   title: string;
@@ -224,8 +225,8 @@ export interface PostData extends VoteableData {
   url: string;
 
   // TODO: Document or remove PostData.viewCount
-  // This seems to always be null.
-  // viewCount: number | null;
+  // This seems to always be undefined.
+  // viewCount: Maybe<number>;
 
   // TODO: Document or remove PostData.visited
   // How is this different from `clicked`?
@@ -241,10 +242,10 @@ export interface PostData extends VoteableData {
 /** A single post. */
 export default class Post extends Voteable implements PostData {
   body: string;
-  bodyHtml: string | null;
+  bodyHtml: Maybe<string>;
   // clicked: boolean;
   comments: Listing<Comment>;
-  // contentCategories: string[] | null;
+  // contentCategories: Maybe<string[]>;
   contestMode: boolean;
   domain: string;
   hidden: boolean;
@@ -257,14 +258,14 @@ export default class Post extends Voteable implements PostData {
   isSelf: boolean;
   isVideo: boolean;
   // linkFlairBackgroundColor: string;
-  // linkFlairCssClass: string | null;
+  // linkFlairCssClass: Maybe<string>;
   // linkFlairRichtext: RichTextFlair[];
-  // linkFlairTemplateId: string | null;
-  // linkFlairText: string | null;
+  // linkFlairTemplateId: Maybe<string>;
+  // linkFlairText: Maybe<string>;
   // linkFlairTextColor: "dark" | "light";
   // linkFlairType: "text" | "richtext";
   locked: boolean;
-  // media: Media | null;
+  // media: Maybe<Media>;
   // mediaEmbed: MediaEmbed;
   // mediaOnly: boolean;
   numComments: number;
@@ -277,19 +278,19 @@ export default class Post extends Voteable implements PostData {
   // previousVisits: number[];
   // pwls: number;
   // quarantine: boolean;
-  // removedByCategory: string | null;
-  // secureMedia: Media | null;
+  // removedByCategory: Maybe<string>;
+  // secureMedia: Maybe<Media>;
   // secureMediaEmbed: SecureMediaEmbed;
   spoiler: boolean;
   subredditSubscribers: number;
-  // suggestedSort: Sort | null;
+  // suggestedSort: Maybe<Sort>;
   // thumbnail: string;
-  thumbnailHeight?: number | null;
-  thumbnailWidth?: number | null;
+  thumbnailHeight?: number;
+  thumbnailWidth?: number;
   title: string;
   upvoteRatio: number;
   url: string;
-  // viewCount: number | null;
+  // viewCount: Maybe<number>;
   // visited: boolean;
   // whitelistStatus: string;
   // wls: number;

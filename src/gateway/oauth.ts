@@ -2,7 +2,7 @@ import type { Data, Maybe } from "../helper/types";
 import type { Credentials } from "./creds";
 import type { BearerAuth } from "./types";
 
-import { camelCaseKeys } from "../helper/util";
+import { fromRedditData } from "../helper/util";
 import { CredsGateway } from "./creds";
 import { Gateway } from "./gateway";
 
@@ -74,7 +74,7 @@ type Grant =
 export class OauthGateway extends Gateway {
   protected initialAuth: Maybe<ClientAuth>;
   protected creds: Credentials;
-  protected token: Token | null;
+  protected token: Maybe<Token>;
 
   /** @internal */
   static async fromAuthCode(
@@ -98,12 +98,11 @@ export class OauthGateway extends Gateway {
     super("https://oauth.reddit.com", userAgent);
     this.initialAuth = auth;
     this.creds = creds;
-    this.token = null;
   }
 
   /** @internal */
-  public getRefreshToken(): string | null {
-    return this.token?.refresh ?? null;
+  public getRefreshToken(): Maybe<string> {
+    return this.token?.refresh;
   }
 
   protected async auth(): Promise<BearerAuth> {
@@ -126,7 +125,7 @@ export class OauthGateway extends Gateway {
 
   protected async updateAccessToken(): Promise<void> {
     let grant: Grant;
-    if (this.token?.refresh != null) {
+    if (this.token?.refresh) {
       grant = {
         grant_type: "refresh_token",
         refresh_token: this.token.refresh,
@@ -151,7 +150,7 @@ export class OauthGateway extends Gateway {
   private async updateTokenFromGrant(grant: Grant) {
     const credGate = new CredsGateway(this.creds, this.userAgent);
     const raw: Data = await credGate.post("api/v1/access_token", grant);
-    const tkns: TokenResponse = camelCaseKeys(raw);
+    const tkns: TokenResponse = fromRedditData(raw);
     this.token = {
       access: tkns.accessToken,
       expiration: Date.now() + tkns.expiresIn * 1000,

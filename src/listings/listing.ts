@@ -1,6 +1,6 @@
 import type Client from "../client";
 import type { Query } from "../gateway/types";
-import type { AwaitableFn, RedditObject } from "../helper/types";
+import type { AwaitableFn, Maybe, RedditObject } from "../helper/types";
 
 import { assertKind } from "../helper/util";
 
@@ -13,11 +13,11 @@ export interface ListingContext {
 
 /** @internal */
 export interface RedditListing {
-  after: string | null;
-  before: string | null;
+  after?: string;
+  before?: string;
   children: RedditObject[];
-  dist: number | null;
-  modhash: string | null;
+  dist?: number;
+  modhash?: string;
 }
 
 /** @internal */
@@ -145,7 +145,7 @@ export default class Listing<T> {
    */
   async eachPage(fn: AwaitableFn<T[], boolean | void>): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let page: Listing<T> | null = this;
+    let page: Maybe<Listing<T>> = this;
 
     do {
       // If the function returns false at any point, we are done.
@@ -153,7 +153,7 @@ export default class Listing<T> {
       if (res === false) return;
 
       page = await Listing.nextPage(page, this.ctx);
-    } while (page != null);
+    } while (page);
   }
 
   /**
@@ -215,28 +215,26 @@ export default class Listing<T> {
    * Get the first item of this listing.
    *
    * @returns A promise that resolves to either the first item of the listing,
-   * or `null` if the listing is empty.
+   * or `undefined` if the listing is empty.
    */
-  async first(): Promise<T | null> {
+  async first(): Promise<Maybe<T>> {
     for await (const el of this) {
       return el;
     }
-
-    return null;
+    return undefined;
   }
 
   private static async nextPage<T>(
     page: Listing<T>,
     ctx: ListingContext
-  ): Promise<Listing<T> | null> {
+  ): Promise<Maybe<Listing<T>>> {
     if (page.next) {
       return page.next;
     } else if (page.fetcher) {
       const next = await page.fetcher.fetch(ctx);
-      return next.arr.length > 0 ? next : null;
-    } else {
-      return null;
+      return next.arr.length > 0 ? next : undefined;
     }
+    return undefined;
   }
 
   /** @internal */

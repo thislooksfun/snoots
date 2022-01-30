@@ -114,7 +114,7 @@ export abstract class Gateway {
 
   protected handleError(msg: string, desc?: string): never {
     let errMsg = `Reddit returned an error: ${msg}`;
-    if (desc != null) errMsg += `: ${desc}`;
+    if (desc) errMsg += `: ${desc}`;
     throw new Error(errMsg);
   }
 

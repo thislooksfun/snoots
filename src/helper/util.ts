@@ -4,10 +4,17 @@ import camelCase from "camelcase";
 
 import { InvalidKindError } from "./errors";
 
-export function camelCaseKeys<T>(obj: Data): T {
+/**
+ * Convert a value from a reddit API response to a snoots data structure.
+ *
+ * This performs two steps:
+ * 1. Replace `null` with `undefined`
+ * 2. Convert the key from snake_case to camelCase
+ */
+export function fromRedditData<T>(data: Data): T {
   const out: Data = {};
-  for (const key in obj) {
-    out[camelCase(key)] = obj[key];
+  for (const key in data) {
+    out[camelCase(key)] = data[key] === null ? undefined : data[key];
   }
   return out as T;
 }

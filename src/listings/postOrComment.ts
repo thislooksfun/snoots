@@ -15,7 +15,7 @@ export default class PostOrCommentListing extends Listing<Post | Comment> {
   constructor(l: RedditListing, ctx: ListingContext) {
     let fetcher: Fetcher<Post | Comment> | undefined;
 
-    if (l.after != null) {
+    if (l.after) {
       fetcher = new PostOrCommentPager(l.after);
     }
 

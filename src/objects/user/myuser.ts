@@ -1,5 +1,6 @@
 import type { UserControls } from "../../controls";
 
+import { Maybe } from "../../helper/types";
 import { User, UserData } from "./base";
 
 /** The data for the authorized user. */
@@ -20,9 +21,9 @@ export interface MyUserData extends UserData {
 
   /**
    * The unix timestamp at which this user's Premium subscription will expire,
-   * or `null` if the user does not have Premium.
+   * or `undefined` if the user does not have Premium.
    */
-  goldExpiration: number | null;
+  goldExpiration: Maybe<number>;
 
   /** Whether or not this user has subscribed via Android. */
   hasAndroidSubscription: boolean;
@@ -154,10 +155,10 @@ export interface MyUserData extends UserData {
   seenSubredditChatFtux?: boolean;
 
   /**
-   * The unix timestamp of when the suspension will exipire, or `null` if this
-   * user is not suspended.
+   * The unix timestamp of when the suspension will expire, or `undefined` if
+   * this user is not suspended.
    */
-  suspensionExpirationUtc: number | null;
+  suspensionExpirationUtc: Maybe<number>;
 }
 
 /** The authorized user. */
@@ -168,7 +169,7 @@ export class MyUser extends User implements MyUserData {
   canEditName: boolean;
   coins: number;
   forcePasswordReset: boolean;
-  goldExpiration: number | null;
+  goldExpiration: Maybe<number>;
   hasAndroidSubscription: boolean;
   hasExternalAccount: boolean;
   hasIosSubscription: boolean;
@@ -198,7 +199,7 @@ export class MyUser extends User implements MyUserData {
   seenPremiumAdblockModal?: boolean;
   seenRedesignModal?: boolean;
   seenSubredditChatFtux?: boolean;
-  suspensionExpirationUtc: number | null;
+  suspensionExpirationUtc: Maybe<number>;
 
   /** @internal */
   constructor(controls: UserControls, data: MyUserData) {

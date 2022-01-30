@@ -9,7 +9,7 @@ import type {
 import type Listing from "../listings/listing";
 import type { MyUserData, OtherUserData, UserData } from "../objects/user";
 
-import { assertKind, camelCaseKeys } from "../helper/util";
+import { assertKind, fromRedditData } from "../helper/util";
 import CommentListing from "../listings/comment";
 import PostListing from "../listings/post";
 import { fakeListingAfter } from "../listings/util";
@@ -102,7 +102,7 @@ export default class UserControls extends BaseControls {
     assertKind("t2", raw);
 
     const rDat = raw.data;
-    const data: UserData = camelCaseKeys(rDat);
+    const data: UserData = fromRedditData(rDat);
 
     if ("coins" in rDat) {
       return new MyUser(this, data as MyUserData);

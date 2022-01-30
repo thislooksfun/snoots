@@ -3,7 +3,7 @@ import type { RedditObject } from "../helper/types";
 import type { ListingObject } from "../listings/listing";
 import type { CommentData } from "../objects/comment";
 
-import { assertKind, camelCaseKeys } from "../helper/util";
+import { assertKind, fromRedditData } from "../helper/util";
 import CommentListing from "../listings/comment";
 import { fakeMoreListing } from "../listings/util";
 import Comment from "../objects/comment";
@@ -77,7 +77,7 @@ export default class CommentControls extends VoteableControls {
     const rDat = raw.data;
     const postId = rDat.link_id.slice(3);
     rDat.replies = this.listingifyReplies(rDat.replies, rDat.name, postId);
-    const data: CommentData = camelCaseKeys(rDat);
+    const data: CommentData = fromRedditData(rDat);
     return new Comment(this, data);
   }
 

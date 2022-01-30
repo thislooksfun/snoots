@@ -1,4 +1,4 @@
-import type { SubredditType } from "../helper/types";
+import type { Maybe, SubredditType } from "../helper/types";
 import type { ContentData } from "./content";
 
 import VoteableControls from "../controls/voteable";
@@ -49,18 +49,18 @@ export interface VoteableData extends ContentData {
   /**
    * The unix timestamp of when this was approved.
    *
-   * This can be null if the item either hasn't been approved or you don't have
-   * permission to know (i.e. you're not a mod on that subreddit).
+   * This can be undefined if the item either hasn't been approved or you don't
+   * have permission to know (i.e. you're not a mod on that subreddit).
    */
-  approvedAtUtc: number | null;
+  approvedAtUtc: Maybe<number>;
 
   /**
    * The username of the mod who approved this post.
    *
-   * This can be null if the item either hasn't been approved or you don't have
-   * permission to know (i.e. you're not a mod on that subreddit).
+   * This can be undefined if the item either hasn't been approved or you don't
+   * have permission to know (i.e. you're not a mod on that subreddit).
    */
-  approvedBy: string | null;
+  approvedBy: Maybe<string>;
 
   /** Whether or not this post is archived. */
   archived: boolean;
@@ -69,12 +69,12 @@ export interface VoteableData extends ContentData {
   author: string;
 
   // TODO: Document or remove VoteableData.authorFlair*
-  // authorFlairBackgroundColor: string | null;
-  // authorFlairCssClass: string | null;
+  // authorFlairBackgroundColor: Maybe<string>;
+  // authorFlairCssClass: Maybe<string>;
   // authorFlairRichtext: RichTextFlair[];
-  // authorFlairTemplateId: string | null;
-  // authorFlairText: string | null;
-  // authorFlairTextColor: string | null;
+  // authorFlairTemplateId: Maybe<string>;
+  // authorFlairText: Maybe<string>;
+  // authorFlairTextColor: Maybe<string>;
   // authorFlairType: "text" | "richtext";
 
   /** Whether or not the author has a Patreon flair. */
@@ -86,18 +86,18 @@ export interface VoteableData extends ContentData {
   /**
    * The unix timestamp of when this item was banned (removed).
    *
-   * This can be null if the item either hasn't been banned or you don't have
-   * permission to know (i.e. you're not a mod on that subreddit).
+   * This can be undefined if the item either hasn't been banned or you don't
+   * have permission to know (i.e. you're not a mod on that subreddit).
    */
-  bannedAtUtc: number | null;
+  bannedAtUtc: Maybe<number>;
 
   /**
    * The username of the mod who banned (removed) this item.
    *
-   * This can be null if the item either hasn't been banned or you don't have
-   * permission to know (i.e. you're not a mod on that subreddit).
+   * This can be undefined if the item either hasn't been banned or you don't
+   * have permission to know (i.e. you're not a mod on that subreddit).
    */
-  bannedBy: string | null;
+  bannedBy: Maybe<string>;
 
   /** The note of why this item was banned (removed). */
   banNote?: string;
@@ -112,7 +112,7 @@ export interface VoteableData extends ContentData {
   dismissedUserReports?: string[];
 
   /** Whether or not this item was distinguished, and by whom. */
-  distinguished: "admin" | "moderator" | null;
+  distinguished: Maybe<"admin" | "moderator">;
 
   /** The unix timestamp when this item was edited, or `false` if it wasn't. */
   edited: number | false;
@@ -129,31 +129,31 @@ export interface VoteableData extends ContentData {
   /**
    * Whether and how you voted on this item.
    *
-   * | Value   | Meaning                          |
-   * |---------|----------------------------------|
-   * | `true`  | You upvoted this item.           |
-   * | `false` | You downvoted this item.         |
-   * | `null`  | You have not voted on this item. |
+   * | Value        | Meaning                          |
+   * |--------------|----------------------------------|
+   * | `true`       | You upvoted this item.           |
+   * | `false`      | You downvoted this item.         |
+   * | `undefined`  | You have not voted on this item. |
    */
-  likes: boolean | null;
+  likes: Maybe<boolean>;
 
   /**
    * A note about why this item was removed that only the moderators can see, or
-   * null if no note was added or this item hasn't been removed.
+   * undefined if no note was added or this item hasn't been removed.
    */
-  modNote: string | null;
+  modNote: Maybe<string>;
 
   /**
-   * The username of the mod who added a removal reason to this item, or null if
-   * no reason was given or this item hasn't been removed.
+   * The username of the mod who added a removal reason to this item, or
+   * undefined if no reason was given or this item hasn't been removed.
    */
-  modReasonBy: string | null;
+  modReasonBy: Maybe<string>;
 
   /**
-   * The reason this item was removed, or null if no reason was given or this
-   * item hasn't been removed.
+   * The reason this item was removed, or undefined if no reason was given or
+   * this item hasn't been removed.
    */
-  modReasonTitle: string | null;
+  modReasonTitle: Maybe<string>;
 
   /**
    * The current reports on this item that were made by mods.
@@ -239,34 +239,34 @@ export default abstract class Voteable
   implements VoteableData
 {
   approved?: boolean;
-  approvedAtUtc: number | null;
-  approvedBy: string | null;
+  approvedAtUtc: Maybe<number>;
+  approvedBy: Maybe<string>;
   archived: boolean;
   author: string;
-  // authorFlairBackgroundColor: string | null;
-  // authorFlairCssClass: string | null;
+  // authorFlairBackgroundColor: Maybe<string>;
+  // authorFlairCssClass: Maybe<string>;
   // authorFlairRichtext: RichTextFlair[];
-  // authorFlairTemplateId: string | null;
-  // authorFlairText: string | null;
-  // authorFlairTextColor: string | null;
+  // authorFlairTemplateId: Maybe<string>;
+  // authorFlairText: Maybe<string>;
+  // authorFlairTextColor: Maybe<string>;
   // authorFlairType: "text" | "richtext";
   authorPatreonFlair: boolean;
   authorPremium: boolean;
-  bannedAtUtc: number | null;
-  bannedBy: string | null;
+  bannedAtUtc: Maybe<number>;
+  bannedBy: Maybe<string>;
   banNote?: string;
   canGild: boolean;
   canModPost: boolean;
   dismissedUserReports?: string[];
-  distinguished: "admin" | "moderator" | null;
+  distinguished: Maybe<"admin" | "moderator">;
   edited: number | false;
   gilded: number;
   gildings: Gildings;
   ignoreReports: boolean;
-  likes: boolean | null;
-  modNote: string | null;
-  modReasonBy: string | null;
-  modReasonTitle: string | null;
+  likes: Maybe<boolean>;
+  modNote: Maybe<string>;
+  modReasonBy: Maybe<string>;
+  modReasonTitle: Maybe<string>;
   modReports: [string, string][];
   modReportsDismissed?: [string, string][];
   // noFollow: boolean;

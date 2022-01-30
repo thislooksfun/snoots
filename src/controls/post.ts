@@ -2,6 +2,7 @@ import type Client from "../client";
 import type { Query } from "../gateway/types";
 import type {
   Data,
+  Maybe,
   RedditObject,
   SearchSort,
   SearchSyntax,
@@ -10,7 +11,7 @@ import type {
 import type { ListingObject, RedditListing } from "../listings/listing";
 import type { PostData } from "../objects/post";
 
-import { assertKind, camelCaseKeys } from "../helper/util";
+import { assertKind, fromRedditData } from "../helper/util";
 import CommentListing from "../listings/comment";
 import Listing from "../listings/listing";
 import PostListing from "../listings/post";
@@ -20,7 +21,7 @@ import { LinkPostOptions } from "./subreddit";
 import VoteableControls from "./voteable";
 
 function isRemoved(dat: Data) {
-  if (dat.removed != null) return dat.removed;
+  if (dat.removed != undefined) return dat.removed;
   return !!dat.removal_reason || !!dat.removed_by || !!dat.removed_by_category;
 }
 
@@ -65,14 +66,14 @@ export default class PostControls extends VoteableControls {
    * @param sort The way to sort the search results.
    * @param syntax The search syntax to use.
    * @param restrictSr Whether or not to restrict the search to the given
-   * subreddit. If this is `false` or if `subreddit` is `null` this will search
+   * subreddit. If this is `false` or if `subreddit` is falsy this will search
    * all of Reddit.
    *
    * @returns A listing of posts.
    */
   search(
     query: string,
-    subreddit: string | null,
+    subreddit: Maybe<string>,
     time: TimeRange = "all",
     sort: SearchSort = "new",
     syntax: SearchSyntax = "plain",
@@ -83,7 +84,7 @@ export default class PostControls extends VoteableControls {
       q: query,
       sort,
       syntax,
-      restrict_sr: restrictSr && subreddit != null,
+      restrict_sr: restrictSr && !!subreddit,
     };
 
     if (subreddit) opts.subreddit = subreddit;
@@ -311,7 +312,7 @@ export default class PostControls extends VoteableControls {
 
     rDat.removed = isRemoved(rDat);
 
-    const data: PostData = camelCaseKeys(rDat);
+    const data: PostData = fromRedditData(rDat);
 
     return new Post(this, data);
   }

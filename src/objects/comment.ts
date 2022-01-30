@@ -1,4 +1,5 @@
 import type { DistinguishStates } from "../controls/comment";
+import type { Maybe } from "../helper/types";
 import type { VoteableData } from "./voteable";
 
 import CommentControls from "../controls/comment";
@@ -17,16 +18,16 @@ export interface CommentData extends VoteableData {
   collapsed: boolean;
 
   // TODO: Document or remove CommentData.collapsedBecauseCrowdControl
-  // This seems to always be null.
-  // collapsedBecauseCrowdControl: null;
+  // This seems to always be undefined.
+  // collapsedBecauseCrowdControl: undefined;
 
   // TODO: Document or remove CommentData.collapsedReason
-  // This seems to always be null.
-  // collapsedReason: null;
+  // This seems to always be undefined.
+  // collapsedReason: undefined;
 
   // TODO: Document or remove CommentData.commentType
-  // This seems to always be null.
-  // commentType: null;
+  // This seems to always be undefined.
+  // commentType: undefined;
 
   // TODO: Document or remove CommentData.controversiality
   // This seems to always be 0.
@@ -65,7 +66,7 @@ export default class Comment extends Voteable implements CommentData {
   bodyHtml: string;
   body: string;
   collapsed: boolean;
-  // collapsedReason: null;
+  // collapsedReason: undefined;
   // controversiality: number;
   // ignoreReports: boolean;
   isSubmitter: boolean;
@@ -108,13 +109,13 @@ export default class Comment extends Voteable implements CommentData {
   /**
    * Get the ID of the parent of this comment.
    *
-   * @returns The ID of the parent, or null if this is a top-level comment.
+   * @returns The ID of the parent, or undefined if this is a top-level comment.
    */
-  parentCommentId(): string | null {
+  parentCommentId(): Maybe<string> {
     if (this.parentId.startsWith("t1_")) {
       return this.parentId.slice(3);
     } else {
-      return null;
+      return undefined;
     }
   }
 
@@ -122,11 +123,11 @@ export default class Comment extends Voteable implements CommentData {
    * Fetch the parent of this comment.
    *
    * @returns A promise that either resolves the the parent of this comment, or
-   * null if this is a top-level comment.
+   * undefined if this is a top-level comment.
    */
-  async fetchParent(): Promise<Comment | null> {
+  async fetchParent(): Promise<Maybe<Comment>> {
     const id = this.parentCommentId();
-    if (!id) return null;
+    if (!id) return undefined;
     return this.controls.fetch(id);
   }
 

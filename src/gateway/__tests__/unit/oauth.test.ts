@@ -11,22 +11,21 @@ const fcUsernameAuth = () =>
 const fcTokenAuth = () => fc.record({ refreshToken: fc.string() });
 const fcClientAuth = () => fc.oneof(fcUsernameAuth(), fcTokenAuth());
 
-function fcToken(refresh?: boolean): fc.Arbitrary<Token> {
+function fcToken(withRefresh?: boolean): fc.Arbitrary<Token> {
   const access = fc.string();
   const expiration = fc.integer().map(i => i + Date.now());
+  const refresh = fc.string({ minLength: 1 });
 
-  if (refresh == null) {
+  if (withRefresh === true) {
+    return fc.record({ access, expiration, refresh });
+  } else if (withRefresh === false) {
+    return fc.record({ access, expiration });
+  } else {
     // No preference given, randomize whether or not there is a refresh token.
     return fc.record(
-      { access, expiration, refresh: fc.string() },
+      { access, expiration, refresh },
       { requiredKeys: ["access", "expiration"] }
     );
-  }
-
-  if (refresh) {
-    return fc.record({ access, expiration, refresh: fc.string() });
-  } else {
-    return fc.record({ access, expiration });
   }
 }
 
@@ -41,10 +40,10 @@ function fcTokenResponse(): fc.Arbitrary<TokenResponse> {
 
 // Test class to make protected methods public.
 class PublicOauthGateway extends OauthGateway {
-  public getToken(): Token | null {
+  public getToken(): Maybe<Token> {
     return this.token;
   }
-  public setToken(token: Token | null) {
+  public setToken(token: Maybe<Token>) {
     this.token = token;
   }
 
@@ -192,7 +191,7 @@ describe("OauthGateway", () => {
   });
 
   describe.each([
-    ["not authenticated", null],
+    ["not authenticated", undefined],
     [
       "access has expired",
       { access: "accessTkn", expiration: Date.now() - 9000 },

@@ -13,7 +13,7 @@ import type { Comment, Post } from "../objects";
 import type { SubredditData } from "../objects/subreddit";
 import type { SplitRawPost } from "./post";
 
-import { assertKind, camelCaseKeys } from "../helper/util";
+import { assertKind, fromRedditData } from "../helper/util";
 import CommentListing from "../listings/comment";
 import PostListing from "../listings/post";
 import PostOrCommentListing from "../listings/postOrComment";
@@ -196,10 +196,10 @@ export default class SubredditControls extends BaseControls {
     options: BanOptions = {}
   ): Promise<void> {
     const opts: Query = {};
-    if (options.duration != null) opts.duration = "" + options.duration;
-    if (options.message != null) opts.ban_message = options.message;
-    if (options.note != null) opts.note = options.note;
-    if (options.reason != null) opts.ban_reason = options.reason;
+    if (options.duration != undefined) opts.duration = "" + options.duration;
+    if (options.message != undefined) opts.ban_message = options.message;
+    if (options.note != undefined) opts.note = options.note;
+    if (options.reason != undefined) opts.ban_reason = options.reason;
 
     await this.friend(sr, name, "banned", opts);
   }
@@ -649,11 +649,11 @@ export default class SubredditControls extends BaseControls {
       spoiler: opts.spoiler,
     };
 
-    if (opts.text != null) req.text = opts.text;
-    if (opts.url != null) req.url = opts.url;
-    if (opts.crosspostFullname != null)
+    if (opts.text != undefined) req.text = opts.text;
+    if (opts.url != undefined) req.url = opts.url;
+    if (opts.crosspostFullname != undefined)
       req.crosspost_fullname = opts.crosspostFullname;
-    if (opts.captcha != null) {
+    if (opts.captcha != undefined) {
       req.captcha = opts.captcha.response;
       req.iden = opts.captcha.iden;
     }
@@ -699,7 +699,7 @@ export default class SubredditControls extends BaseControls {
     rDat.sidebar_html = rDat.description_html;
     rDat.description = rDat.public_description;
     rDat.description_html = rDat.public_description_html;
-    const data: SubredditData = camelCaseKeys(rDat);
+    const data: SubredditData = fromRedditData(rDat);
     return new Subreddit(this, data);
   }
 }

@@ -2,7 +2,7 @@ import type { Data, RedditObject } from "../../helper/types";
 import type Comment from "../../objects/comment";
 import type { Fetcher, ListingContext, RedditMore } from "../listing";
 
-import { emptyRedditListing, wrapChildren } from "./../util";
+import { emptyRedditListing } from "./../util";
 import CommentListing from "./commentListing";
 
 function fixCommentTree(objects: RedditObject[]) {
@@ -15,7 +15,7 @@ function fixCommentTree(objects: RedditObject[]) {
     // Ensure that all the comments have a replies listing.
     if (item.kind === "t1") {
       if (item.data.replies !== "") throw "?????";
-      item.data.replies = { kind: "Listing", data: wrapChildren([]) };
+      item.data.replies = { kind: "Listing", data: { children: [] } };
     }
   }
 
@@ -84,7 +84,7 @@ export default class MoreComments implements Fetcher<Comment> {
         children.push(more);
       }
 
-      return new CommentListing(wrapChildren(children), ctx);
+      return new CommentListing({ children }, ctx);
     }
   }
 }

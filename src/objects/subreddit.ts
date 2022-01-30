@@ -6,6 +6,7 @@ import type {
   TextPostOptions,
 } from "../controls/subreddit";
 import type {
+  Maybe,
   SearchSort,
   SearchSyntax,
   Size,
@@ -31,7 +32,7 @@ export interface SubredditData extends ContentData {
   activeUserCount: number;
 
   // TODO: Document or remove SubredditData.advertiserCategory
-  // advertiserCategory: string | null;
+  // advertiserCategory: Maybe<string>;
 
   /** Whether or not all posts on this subreddit will be marked as OC. */
   allOriginalContent: boolean;
@@ -57,7 +58,7 @@ export interface SubredditData extends ContentData {
   bannerImg: string;
 
   /** The size of the banner. */
-  bannerSize: Size | null;
+  bannerSize: Maybe<Size>;
 
   /** Whether or not users can assign flairs to posts. */
   canAssignLinkFlair: boolean;
@@ -88,12 +89,12 @@ export interface SubredditData extends ContentData {
   description: string;
 
   /**
-   * The description of this subreddit rendered as HTML, or `null` if this
+   * The description of this subreddit rendered as HTML, or `undefined` if this
    * subreddit does not have a description.
    *
    * @note Reddit's API calls this `public_description_html`
    */
-  descriptionHtml: string | null;
+  descriptionHtml: Maybe<string>;
 
   // TODO: Document or remove SubredditData.disableContributorRequests
   // disableContributorRequests: boolean;
@@ -113,9 +114,9 @@ export interface SubredditData extends ContentData {
 
   /**
    * The custom emoji size if 'Custom sized emojis' has been configured for this
-   * subreddit, or `null` if no custom size was set.
+   * subreddit, or `undefined` if no custom size was set.
    */
-  emojisCustomSize: Size | null;
+  emojisCustomSize: Maybe<Size>;
 
   /** Whether or not emojis are enabled in this subreddit. */
   emojisEnabled: boolean;
@@ -131,18 +132,18 @@ export interface SubredditData extends ContentData {
 
   /**
    * The URL of the image that will be displayed in place of the Snoo on old
-   * reddit, or `null` if no such image has been set.
+   * reddit, or `undefined` if no such image has been set.
    */
-  headerImg: string | null;
+  headerImg: Maybe<string>;
 
-  /** The size of {@link headerImg}, or `null` if no image was set. */
-  headerSize: Size | null;
+  /** The size of {@link headerImg}, or `undefined` if no image was set. */
+  headerSize: Maybe<Size>;
 
   /**
-   * The text to display when hovering over {@link headerImg}, or `null` if no
-   * such title has been set.
+   * The text to display when hovering over {@link headerImg}, or `undefined` if
+   * no such title has been set.
    */
-  headerTitle: string | null;
+  headerTitle: Maybe<string>;
 
   /** Whether or not ads are hidden in this subreddit. */
   hideAds: boolean;
@@ -150,7 +151,7 @@ export interface SubredditData extends ContentData {
   // TODO: Document or remove SubredditData.icon*
   // Are these redundant due to communityIcon, or are they actually different?
   // iconImg: string;
-  // iconSize: Size | null;
+  // iconSize: Maybe<Size>;
 
   // TODO: Document or remove SubredditData.is*
   // isChatPostFeatureEnabled: boolean,
@@ -171,7 +172,7 @@ export interface SubredditData extends ContentData {
   // mobileBannerImage: string;
 
   // TODO: Document or remove SubredditData.notificationLevel
-  // notificationLevel: string | null;
+  // notificationLevel: Maybe<string>;
 
   /** Whether or not the `OC` tag is enabled in this subreddit. */
   originalContentTagEnabled: boolean;
@@ -234,19 +235,19 @@ export interface SubredditData extends ContentData {
   submissionType: "any" | "link" | "self";
 
   /**
-   * The custom text to display in the 'submit link' button, or `null` if no
-   * custom text has been configured.
+   * The custom text to display in the 'submit link' button, or `undefined` if
+   * no custom text has been configured.
    */
-  submitLinkLabel: string | null;
+  submitLinkLabel: Maybe<string>;
 
   /** Custom text to show on the old reddit text post form. */
   submitText: string;
 
   /**
-   * The custom submit text rendered as HTML, or `null` if no such text was
+   * The custom submit text rendered as HTML, or `undefined` if no such text was
    * configured.
    */
-  submitTextHtml: string | null;
+  submitTextHtml: Maybe<string>;
 
   /** The custom text to display in the 'submit text post' button. */
   submitTextLabel: string;
@@ -258,11 +259,11 @@ export interface SubredditData extends ContentData {
   subscribers: number;
 
   /**
-   * The suggested way to sort the comments, or `null` if no suggestion has been
-   * configured.
+   * The suggested way to sort the comments, or `undefined` if no suggestion has
+   * been configured.
    */
   // TODO:
-  // suggestedCommentSort: Sort | null;
+  // suggestedCommentSort: Maybe<Sort>;
 
   /** The title of this subreddit. */
   title: string;
@@ -274,14 +275,14 @@ export interface SubredditData extends ContentData {
   // userCanFlairInSr: boolean;
 
   // TODO: Document or remove SubredditData.userFlair*
-  // userFlairBackgroundColor: string | null;
-  // userFlairCssClass: string | null;
+  // userFlairBackgroundColor: Maybe<string>;
+  // userFlairCssClass: Maybe<string>;
   // userFlairEnabledInSr: boolean;
   // userFlairPosition: "" | "left" | "right";
   // userFlairRichtext: RichTextFlair[];
-  // userFlairTemplateId: string | null;
-  // userFlairText: string | null;
-  // userFlairTextColor: "dark" | "light" | null;
+  // userFlairTemplateId: Maybe<string>;
+  // userFlairText: Maybe<string>;
+  // userFlairTextColor: Maybe<"dark" | "light">;
   // userFlairType: string;
 
   /** Whether or not the authorized user has favorited this subreddit. */
@@ -329,7 +330,7 @@ export interface SubredditData extends ContentData {
 export default class Subreddit extends Content implements SubredditData {
   accountsActiveIsFuzzed: boolean;
   activeUserCount: number;
-  // advertiserCategory: string | null;
+  // advertiserCategory: Maybe<string>;
   allOriginalContent: boolean;
   // allowChatPostCreation: boolean,
   // allowDiscovery: boolean,
@@ -343,7 +344,7 @@ export default class Subreddit extends Content implements SubredditData {
   bannerBackgroundColor: string;
   bannerBackgroundImage: string;
   bannerImg: string;
-  bannerSize: Size | null;
+  bannerSize: Maybe<Size>;
   canAssignLinkFlair: boolean;
   canAssignUserFlair: boolean;
   coins: number;
@@ -352,20 +353,20 @@ export default class Subreddit extends Content implements SubredditData {
   communityIcon: string;
   // contentReviewed: boolean;
   description: string;
-  descriptionHtml: string | null;
+  descriptionHtml: Maybe<string>;
   // disableContributorRequests: boolean;
   displayName: string;
   displayNamePrefixed: string;
-  emojisCustomSize: Size | null;
+  emojisCustomSize: Maybe<Size>;
   emojisEnabled: boolean;
   freeFormReports: boolean;
   // hasMenuWidget: boolean;
-  headerImg: string | null;
-  headerSize: Size | null;
-  headerTitle: string | null;
+  headerImg: Maybe<string>;
+  headerSize: Maybe<Size>;
+  headerTitle: Maybe<string>;
   hideAds: boolean;
   // iconImg: string;
-  // iconSize: Size | null;
+  // iconSize: Maybe<Size>;
   // isChatPostFeatureEnabled: boolean,
   // isCrosspostableSubreddit: boolean,
   // isEnrolledInNewModmail: boolean,
@@ -374,7 +375,7 @@ export default class Subreddit extends Content implements SubredditData {
   // linkFlairEnabled: boolean;
   // linkFlairPosition: "" | "left" | "right";
   // mobileBannerImage: string;
-  // notificationLevel: string | null;
+  // notificationLevel: Maybe<string>;
   originalContentTagEnabled: boolean;
   over18: boolean;
   // predictionLeaderboardEntryType: "IN_FEED",
@@ -389,24 +390,24 @@ export default class Subreddit extends Content implements SubredditData {
   sidebarHtml: string;
   spoilersEnabled: boolean;
   submissionType: "any" | "link" | "self";
-  submitLinkLabel: string | null;
+  submitLinkLabel: Maybe<string>;
   submitText: string;
-  submitTextHtml: string | null;
+  submitTextHtml: Maybe<string>;
   submitTextLabel: string;
   subredditType: SubredditType;
   subscribers: number;
-  // suggestedCommentSort: Sort | null;
+  // suggestedCommentSort: Maybe<Sort>;
   title: string;
   url: string;
   // userCanFlairInSr: boolean;
-  // userFlairBackgroundColor: string | null;
-  // userFlairCssClass: string | null;
+  // userFlairBackgroundColor: Maybe<string>;
+  // userFlairCssClass: Maybe<string>;
   // userFlairEnabledInSr: boolean;
   // userFlairPosition: "" | "left" | "right";
   // userFlairRichtext: RichTextFlair[];
-  // userFlairTemplateId: string | null;
-  // userFlairText: string | null;
-  // userFlairTextColor: "dark" | "light" | null;
+  // userFlairTemplateId: Maybe<string>;
+  // userFlairText: Maybe<string>;
+  // userFlairTextColor: Maybe<"dark" | "light">;
   // userFlairType: string;
   userHasFavorited: boolean;
   userIsBanned: boolean;

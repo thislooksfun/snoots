@@ -15,7 +15,7 @@ export default class PostListing extends Listing<Post> {
   constructor(l: RedditListing, ctx: ListingContext) {
     let fetcher: Fetcher<Post> | undefined;
 
-    if (l.after != null) {
+    if (l.after) {
       fetcher = new PostPager(l.after);
     }
 
