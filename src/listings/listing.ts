@@ -141,7 +141,7 @@ export default class Listing<T> {
    * @param fn The function to execute. If this returns or resolves to `false`
    * the execution will be halted.
    *
-   * @returns A promise that resolves when the listing has been exausted.
+   * @returns A promise that resolves when the listing has been exhausted.
    */
   async eachPage(fn: AwaitableFn<T[], boolean | void>): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
