@@ -138,18 +138,18 @@ export default class Listing<T> {
   /**
    * Execute a function on pages of the listing.
    *
-   * @param fn The function to execute. If this returns or resolves to `false`
-   * the execution will be halted.
+   * @param handler The function to execute on each page. If this returns or
+   * resolves to `false` the execution will be halted.
    *
    * @returns A promise that resolves when the listing has been exhausted.
    */
-  async eachPage(fn: AwaitableFn<T[], boolean | void>): Promise<void> {
+  async eachPage(handler: AwaitableFn<T[], boolean | void>): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     let page: Maybe<Listing<T>> = this;
 
     do {
       // If the function returns false at any point, we are done.
-      const res = await fn(page.arr);
+      const res = await handler(page.arr);
       if (res === false) return;
 
       page = await Listing.nextPage(page, this.ctx);
@@ -182,14 +182,14 @@ export default class Listing<T> {
    * });
    * ```
    *
-   * @param fn The function to execute. If this returns or resolves to `false`
-   * the execution will be halted.
+   * @param handler The function to execute on each item in the listing. If this
+   * returns or resolves to `false` the execution will be halted.
    *
    * @returns A promise that resolves when the iteration is complete.
    */
-  async forEach(fn: AwaitableFn<T, boolean | void>): Promise<void> {
+  async forEach(handler: AwaitableFn<T, boolean | void>): Promise<void> {
     for await (const el of this) {
-      const res = await fn(el);
+      const res = await handler(el);
       if (res === false) break;
     }
   }
@@ -198,15 +198,16 @@ export default class Listing<T> {
    * Determines whether the specified callback function returns true for any
    * element of the listing.
    *
-   * @param fn The matcher to run on each element. If this returns `true` at any
-   * point the searching is stopped.
+   * @param handler The matcher to run on each element in the listing. If this
+   * returns `true` at any point the searching is stopped.
    *
-   * @returns A promise that resolves to `true` if `fn` returned `true` for some
-   * element in the listing, or `false` if it reached the end of the listing.
+   * @returns A promise that resolves to `true` if `handler` returned `true` for
+   * some element in the listing, or `false` if it reached the end of the
+   * listing without finding a match.
    */
-  async some(fn: AwaitableFn<T, boolean>): Promise<boolean> {
+  async some(handler: AwaitableFn<T, boolean>): Promise<boolean> {
     for await (const el of this) {
-      if (await fn(el)) return true;
+      if (await handler(el)) return true;
     }
     return false;
   }
