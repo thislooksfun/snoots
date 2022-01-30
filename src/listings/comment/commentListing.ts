@@ -12,7 +12,7 @@ import CommentPager from "./pager";
 
 /** @internal */
 export default class CommentListing extends Listing<Comment> {
-  constructor(l: RedditListing, ctx: ListingContext) {
+  constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Comment> | undefined;
 
     if (l.after) {
@@ -23,7 +23,7 @@ export default class CommentListing extends Listing<Comment> {
     for (const c of l.children) {
       switch (c.kind) {
         case "t1":
-          comments.push(ctx.client.comments.fromRaw(c));
+          comments.push(context.client.comments.fromRaw(c));
           break;
         case "more":
           fetcher = new MoreComments(c.data as RedditMore);
@@ -34,6 +34,6 @@ export default class CommentListing extends Listing<Comment> {
       }
     }
 
-    super(ctx, comments, fetcher);
+    super(context, comments, fetcher);
   }
 }

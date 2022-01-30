@@ -41,17 +41,17 @@ export default class MoreComments implements Fetcher<Comment> {
     this.data = data;
   }
 
-  async fetch(ctx: ListingContext): Promise<CommentListing> {
+  async fetch(context: ListingContext): Promise<CommentListing> {
     if (this.data.name === "t1__") {
       const id = this.data.parent_id.slice(3);
-      const pth = `comments/${ctx.post}`;
-      const res: Data = await ctx.client.gateway.get(pth, { comment: id });
+      const pth = `comments/${context.post}`;
+      const res: Data = await context.client.gateway.get(pth, { comment: id });
       const child: RedditObject = res[1].data.children[0];
       if (!child) {
-        return new CommentListing(emptyRedditListing, ctx);
+        return new CommentListing(emptyRedditListing, context);
       } else {
         const lst = child.data.replies.data ?? emptyRedditListing;
-        return new CommentListing(lst, ctx);
+        return new CommentListing(lst, context);
       }
     } else {
       // api/morechildren can't handle more than ~75 items at a time, so we have
@@ -60,8 +60,11 @@ export default class MoreComments implements Fetcher<Comment> {
       const page = this.data.children.slice(0, 75);
       const rest = this.data.children.slice(75);
 
-      const query = { children: page.join(","), link_id: `t3_${ctx.post}` };
-      const res: Data = await ctx.client.gateway.get("api/morechildren", query);
+      const query = { children: page.join(","), link_id: `t3_${context.post}` };
+      const res: Data = await context.client.gateway.get(
+        "api/morechildren",
+        query
+      );
 
       const children = fixCommentTree(res.things);
 
@@ -84,7 +87,7 @@ export default class MoreComments implements Fetcher<Comment> {
         children.push(more);
       }
 
-      return new CommentListing({ children }, ctx);
+      return new CommentListing({ children }, context);
     }
   }
 }

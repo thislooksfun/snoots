@@ -91,8 +91,8 @@ export default class PostControls extends VoteableControls {
 
     const url = subreddit ? `r/${subreddit}/` : "";
     const req = { url: `${url}search`, query: options };
-    const ctx = { req, client: this.client };
-    return new PostListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new PostListing(fakeListingAfter(""), context);
   }
 
   /**
@@ -168,8 +168,8 @@ export default class PostControls extends VoteableControls {
 
     assertKind("Listing", res[1]);
 
-    const ctx = { client: this.client };
-    return new PostListing(res[1].data, ctx);
+    const context = { client: this.client };
+    return new PostListing(res[1].data, context);
   }
 
   /**
@@ -304,8 +304,8 @@ export default class PostControls extends VoteableControls {
 
     const rDat = raw.data;
     const cmts = comments ?? fakeListingAfter("");
-    const ctx = { post: rDat.id, client: this.client };
-    rDat.comments = new CommentListing(cmts, ctx);
+    const context = { post: rDat.id, client: this.client };
+    rDat.comments = new CommentListing(cmts, context);
 
     rDat.body = rDat.selftext;
     rDat.bodyHtml = rDat.selftextHtml;

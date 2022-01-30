@@ -35,7 +35,7 @@ export interface RedditMore {
 
 /** @internal */
 export interface Fetcher<T> {
-  fetch(ctx: ListingContext): Promise<Listing<T>>;
+  fetch(context: ListingContext): Promise<Listing<T>>;
 }
 
 /** @internal */
@@ -46,12 +46,15 @@ export abstract class Pager<T> implements Fetcher<T> {
     this.after = after;
   }
 
-  abstract fetch(ctx: ListingContext): Promise<Listing<T>>;
+  abstract fetch(context: ListingContext): Promise<Listing<T>>;
 
-  protected async nextPage(ctx: ListingContext): Promise<RedditListing> {
-    if (!ctx.req) throw "Unable to fetch next page";
-    const query = { limit: "100", after: this.after, ...ctx.req.query };
-    const res: RedditObject = await ctx.client.gateway.get(ctx.req.url, query);
+  protected async nextPage(context: ListingContext): Promise<RedditListing> {
+    if (!context.req) throw "Unable to fetch next page";
+    const query = { limit: "100", after: this.after, ...context.req.query };
+    const res: RedditObject = await context.client.gateway.get(
+      context.req.url,
+      query
+    );
     assertKind("Listing", res);
     return res.data as RedditListing;
   }
@@ -88,14 +91,14 @@ export abstract class Pager<T> implements Fetcher<T> {
  * @template T The type of items this Listing holds.
  */
 export default class Listing<T> {
-  protected ctx: ListingContext;
+  protected context: ListingContext;
   protected items: T[];
   protected fetcher?: Fetcher<T>;
   protected next?: Listing<T>;
 
   /** @internal */
-  constructor(ctx: ListingContext, items: T[], fetcher?: Fetcher<T>) {
-    this.ctx = ctx;
+  constructor(context: ListingContext, items: T[], fetcher?: Fetcher<T>) {
+    this.context = context;
     this.items = items;
     this.fetcher = fetcher;
   }
@@ -116,7 +119,7 @@ export default class Listing<T> {
     // This listing is empty but can fetch more. Do so, and if it was
     // successful, it's not empty.
     if (!this.next) {
-      this.next = await this.fetcher.fetch(this.ctx);
+      this.next = await this.fetcher.fetch(this.context);
     }
     return this.next.items.length > 0;
   }
@@ -154,7 +157,7 @@ export default class Listing<T> {
       const res = await handler(page.items);
       if (res === false) return;
 
-      page = await Listing.nextPage(page, this.ctx);
+      page = await Listing.nextPage(page, this.context);
     } while (page);
   }
 
@@ -229,12 +232,12 @@ export default class Listing<T> {
 
   private static async nextPage<T>(
     page: Listing<T>,
-    ctx: ListingContext
+    context: ListingContext
   ): Promise<Maybe<Listing<T>>> {
     if (page.next) {
       return page.next;
     } else if (page.fetcher) {
-      const next = await page.fetcher.fetch(ctx);
+      const next = await page.fetcher.fetch(context);
       return next.items.length > 0 ? next : undefined;
     }
     return undefined;
@@ -244,12 +247,12 @@ export default class Listing<T> {
   [Symbol.asyncIterator]() {
     return {
       page: this as Listing<T>,
-      ctx: this.ctx,
+      context: this.context,
       index: 0,
 
       async next(): Promise<IteratorResult<T>> {
         if (this.index >= this.page.items.length) {
-          const nextPage = await Listing.nextPage(this.page, this.ctx);
+          const nextPage = await Listing.nextPage(this.page, this.context);
           if (!nextPage) return { done: true, value: undefined };
           this.page = nextPage;
           this.index = 0;

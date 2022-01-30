@@ -87,18 +87,18 @@ export default class CommentControls extends VoteableControls {
     cmtName: string,
     postId: string
   ): CommentListing {
-    const ctx = { post: postId, client: this.client };
+    const context = { post: postId, client: this.client };
     if (replies === "") {
       // Comments with no fetched replies have the replies key set to an empty
       // string. Convert it to a listing anyway.
-      return new CommentListing(fakeMoreListing(cmtName), ctx);
+      return new CommentListing(fakeMoreListing(cmtName), context);
     } else if (replies && typeof replies === "object" && "kind" in replies) {
       const repliesObject = replies as RedditObject;
       if (repliesObject.kind !== "Listing") {
         console.dir(replies);
         throw `Unknown type '${repliesObject.kind}'`;
       }
-      return new CommentListing((repliesObject as ListingObject).data, ctx);
+      return new CommentListing((repliesObject as ListingObject).data, context);
     } else {
       console.dir(replies);
       throw "Unsupported reply type!";

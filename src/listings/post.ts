@@ -4,15 +4,15 @@ import type { Fetcher, ListingContext, RedditListing } from "./listing";
 import Listing, { Pager } from "./listing";
 
 class PostPager extends Pager<Post> {
-  async fetch(ctx: ListingContext): Promise<PostListing> {
-    const pg = await this.nextPage(ctx);
-    return new PostListing(pg, ctx);
+  async fetch(context: ListingContext): Promise<PostListing> {
+    const pg = await this.nextPage(context);
+    return new PostListing(pg, context);
   }
 }
 
 /** @internal */
 export default class PostListing extends Listing<Post> {
-  constructor(l: RedditListing, ctx: ListingContext) {
+  constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Post> | undefined;
 
     if (l.after) {
@@ -21,9 +21,9 @@ export default class PostListing extends Listing<Post> {
 
     const posts: Post[] = [];
     for (const c of l.children) {
-      posts.push(ctx.client.posts.fromRaw(c));
+      posts.push(context.client.posts.fromRaw(c));
     }
 
-    super(ctx, posts, fetcher);
+    super(context, posts, fetcher);
   }
 }

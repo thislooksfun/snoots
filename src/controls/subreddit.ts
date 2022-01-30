@@ -226,8 +226,8 @@ export default class SubredditControls extends BaseControls {
   ): Listing<Post> {
     const url = subreddit ? `r/${subreddit}/` : "";
     const req = { url: `${url}${sort}`, query: { show: "all", ...options } };
-    const ctx = { req, client: this.client };
-    return new PostListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new PostListing(fakeListingAfter(""), context);
   }
 
   /**
@@ -313,8 +313,8 @@ export default class SubredditControls extends BaseControls {
   /** @internal */
   protected getAboutListing(sr: string, type: string): Listing<Comment | Post> {
     const req = { url: `r/${sr}/about/${type}`, query: {} };
-    const ctx = { req, client: this.client };
-    return new PostOrCommentListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new PostOrCommentListing(fakeListingAfter(""), context);
   }
 
   /** @internal */
@@ -323,15 +323,15 @@ export default class SubredditControls extends BaseControls {
     type: string
   ): Listing<Comment> {
     const req = { url: `r/${sr}/about/${type}`, query: { only: "comments" } };
-    const ctx = { req, client: this.client };
-    return new CommentListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new CommentListing(fakeListingAfter(""), context);
   }
 
   /** @internal */
   protected getAboutListingPosts(sr: string, type: string): Listing<Post> {
     const req = { url: `r/${sr}/about/${type}`, query: { only: "links" } };
-    const ctx = { req, client: this.client };
-    return new PostListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new PostListing(fakeListingAfter(""), context);
   }
 
   /**
@@ -554,8 +554,8 @@ export default class SubredditControls extends BaseControls {
   getSortedComments(subreddit: string, sort: "new" = "new"): Listing<Comment> {
     const url = subreddit ? `r/${subreddit}/` : "";
     const req = { url: `${url}${sort}`, query: { sort } };
-    const ctx = { req, client: this.client };
-    return new CommentListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new CommentListing(fakeListingAfter(""), context);
   }
 
   /**

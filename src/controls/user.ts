@@ -76,8 +76,8 @@ export default class UserControls extends BaseControls {
    */
   getPosts(username: string, sort: PostSort = "new"): Listing<Post> {
     const req = { url: `user/${username}/submitted`, query: { sort } };
-    const ctx = { req, client: this.client };
-    return new PostListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new PostListing(fakeListingAfter(""), context);
   }
 
   /**
@@ -93,8 +93,8 @@ export default class UserControls extends BaseControls {
     sort: UserItemsSort = "new"
   ): Listing<Comment> {
     const req = { url: `user/${username}/comments`, query: { sort } };
-    const ctx = { req, client: this.client };
-    return new CommentListing(fakeListingAfter(""), ctx);
+    const context = { req, client: this.client };
+    return new CommentListing(fakeListingAfter(""), context);
   }
 
   /** @internal */
