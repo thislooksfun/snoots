@@ -11,6 +11,7 @@ parserOptions:
 
 plugins:
   - "@typescript-eslint"
+  - eslint-comments
   - import
   - prettier
   - promise
@@ -18,6 +19,7 @@ plugins:
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
+  - plugin:eslint-comments/recommended
   - plugin:import/recommended
   - plugin:import/typescript
   - prettier
