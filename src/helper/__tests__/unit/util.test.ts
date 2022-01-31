@@ -16,6 +16,7 @@ describe("fromRedditData()", () => {
   });
 
   it("should replace null with undefined", () => {
+    // eslint-disable-next-line unicorn/no-null
     const a = { fooBar: null, barFoo: undefined };
     const b = { fooBar: undefined, barFoo: undefined };
 

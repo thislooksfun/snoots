@@ -146,6 +146,7 @@ describe("OauthGateway", () => {
       await fc.assert(
         fc.asyncProperty(fcToken(false), async token => {
           gateway.setToken(token);
+          // eslint-disable-next-line unicorn/no-useless-undefined
           gateway.setInitialAuth(undefined);
 
           const body = { api_type: "json", grant_type: "client_credentials" };

@@ -17,6 +17,8 @@ plugins:
   - promise
   - simple-import-sort
   - sonarjs
+  - unicorn
+
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
@@ -24,6 +26,7 @@ extends:
   - plugin:import/recommended
   - plugin:import/typescript
   - plugin:sonarjs/recommended
+  - plugin:unicorn/recommended
   - prettier
 
 rules:
@@ -41,6 +44,20 @@ rules:
         - ["^@?\\w"] # Packages
         - ["^"] # All other packages
         - ["^\\."] # Relative imports
+  unicorn/filename-case:
+    - error
+    - case: camelCase
+  # This is already covered by @typescript-eslint/no-this-alias.
+  unicorn/no-this-assignment: "off"
+  # The node: protocol is only supported in node 16+, and snoots currently
+  # supports node 14+. Once node 14 support has been dropped this rule should be
+  # re-enabled.
+  unicorn/prefer-node-protocol: "off"
+  unicorn/prevent-abbreviations:
+    - error
+    - replacements:
+        desc:
+          description: true
 
 overrides:
   - files: ["**/__tests__/**/*.ts"]
