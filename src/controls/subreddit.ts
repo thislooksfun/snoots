@@ -197,7 +197,7 @@ export default class SubredditControls extends BaseControls {
   ): Promise<void> {
     const friendOptions: Query = {};
     if (options.duration != undefined)
-      friendOptions.duration = "" + options.duration;
+      friendOptions.duration = `${options.duration}`;
     if (options.message != undefined)
       friendOptions.ban_message = options.message;
     if (options.note != undefined) friendOptions.note = options.note;
@@ -673,7 +673,7 @@ export default class SubredditControls extends BaseControls {
     }
 
     const submitResponse: Data = await this.gateway.post("api/submit", request);
-    return submitResponse.id;
+    return submitResponse.id as string;
   }
 
   /** @internal */
@@ -701,10 +701,13 @@ export default class SubredditControls extends BaseControls {
     assertKind("t5", raw);
 
     const rDat = raw.data;
-    rDat.sidebar = rDat.description;
-    rDat.sidebar_html = rDat.description_html;
-    rDat.description = rDat.public_description;
-    rDat.description_html = rDat.public_description_html;
+
+    // Rename properties.
+    rDat.sidebar = rDat.description as string;
+    rDat.sidebar_html = rDat.description_html as string;
+    rDat.description = rDat.public_description as string;
+    rDat.description_html = rDat.public_description_html as string;
+
     const data: SubredditData = fromRedditData(rDat);
     return new Subreddit(this, data);
   }

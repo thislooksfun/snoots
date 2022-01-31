@@ -1,6 +1,11 @@
 import type { Data, RedditObject } from "../../helper/types";
 import type Comment from "../../objects/comment";
-import type { Fetcher, ListingContext, RedditMore } from "../listing";
+import type {
+  Fetcher,
+  ListingContext,
+  ListingObject,
+  RedditMore,
+} from "../listing";
 
 import { emptyRedditListing } from "./../util";
 import CommentListing from "./commentListing";
@@ -10,7 +15,7 @@ function fixCommentTree(objects: RedditObject[]) {
   const map: Record<string, RedditObject> = {};
   for (const item of objects) {
     if (!item.data.name) throw "Hmm...";
-    map[item.data.name] = item;
+    map[item.data.name as string] = item;
 
     // Ensure that all the comments have a replies listing.
     if (item.kind === "t1") {
@@ -22,9 +27,10 @@ function fixCommentTree(objects: RedditObject[]) {
   // Build up the tree.
   const tree: RedditObject[] = [];
   for (const item of objects) {
-    const parent = map[item.data.parent_id];
+    const parent = map[item.data.parent_id as string];
     if (parent) {
-      parent.data.replies.data.children.push(item);
+      const parentReplies = parent.data.replies as ListingObject;
+      parentReplies.data.children.push(item);
     } else if (item.kind === "t1") {
       tree.push(item);
     }
@@ -42,18 +48,25 @@ export default class MoreComments implements Fetcher<Comment> {
   }
 
   async fetch(context: ListingContext): Promise<CommentListing> {
+    if (!context.post) {
+      // This should never happen, but just in case...
+      throw new Error("Precondition failed: context.post is falsy");
+    }
+
     if (this.data.name === "t1__") {
       const id = this.data.parent_id.slice(3);
       const pth = `comments/${context.post}`;
-      const childrenResponse: Data = await context.client.gateway.get(pth, {
-        comment: id,
-      });
-      const child: RedditObject = childrenResponse[1].data.children[0];
+      const childrenResponse: [unknown, ListingObject] =
+        await context.client.gateway.get(pth, {
+          comment: id,
+        });
+
+      const child = childrenResponse[1].data.children[0];
       if (!child) {
         return new CommentListing(emptyRedditListing, context);
       } else {
-        const lst = child.data.replies.data ?? emptyRedditListing;
-        return new CommentListing(lst, context);
+        const replies = child.data.replies as ListingObject;
+        return new CommentListing(replies.data ?? emptyRedditListing, context);
       }
     } else {
       // api/morechildren can't handle more than ~75 items at a time, so we have
@@ -68,7 +81,8 @@ export default class MoreComments implements Fetcher<Comment> {
         query
       );
 
-      const children = fixCommentTree(childrenResponse.things);
+      const rawChildren = childrenResponse.things as RedditObject[];
+      const children = fixCommentTree(rawChildren);
 
       // If there are more children, put another More at the end of the list.
       if (rest.length > 0) {
@@ -77,7 +91,7 @@ export default class MoreComments implements Fetcher<Comment> {
           data: {
             // I have no clue if this count calculation is correct, but it's not
             // currently being used anyway, so... ¯\_(ツ)_/¯
-            count: this.data.count - childrenResponse.things.length,
+            count: this.data.count - rawChildren.length,
             depth: this.data.depth,
             children: rest,
             id: rest[0],

@@ -21,7 +21,7 @@ import Post from "../objects/post";
 import VoteableControls from "./voteable";
 
 function isRemoved(dat: Data) {
-  if (dat.removed != undefined) return dat.removed;
+  if (dat.removed != undefined) return dat.removed as boolean;
   return !!dat.removal_reason || !!dat.removed_by || !!dat.removed_by_category;
 }
 
@@ -304,12 +304,14 @@ export default class PostControls extends VoteableControls {
 
     const rDat = raw.data;
     const cmts = comments ?? fakeListingAfter("");
-    const context = { post: rDat.id, client: this.client };
+    const context = { post: rDat.id as string, client: this.client };
     rDat.comments = new CommentListing(cmts, context);
 
-    rDat.body = rDat.selftext;
-    rDat.bodyHtml = rDat.selftextHtml;
+    // Rename properties.
+    rDat.body = rDat.selftext as string;
+    rDat.bodyHtml = rDat.selftextHtml as string;
 
+    // Ensure 'removed' is set and is a boolean.
     rDat.removed = isRemoved(rDat);
 
     const data: PostData = fromRedditData(rDat);

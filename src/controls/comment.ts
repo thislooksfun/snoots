@@ -76,8 +76,9 @@ export default class CommentControls extends VoteableControls {
     assertKind("t1", raw);
 
     const rDat = raw.data;
-    const postId = rDat.link_id.slice(3);
-    rDat.replies = this.listingifyReplies(rDat.replies, rDat.name, postId);
+    const postId = (rDat.link_id as string).slice(3);
+    const postName = rDat.name as string;
+    rDat.replies = this.listingifyReplies(rDat.replies, postName, postId);
     const data: CommentData = fromRedditData(rDat);
     return new Comment(this, data);
   }

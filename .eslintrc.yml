@@ -22,6 +22,7 @@ plugins:
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-requiring-type-checking
   - plugin:eslint-comments/recommended
   - plugin:import/recommended
   - plugin:import/typescript
@@ -33,6 +34,7 @@ rules:
   "@typescript-eslint/consistent-type-imports": error
   "@typescript-eslint/no-inferrable-types": "off"
   "@typescript-eslint/no-non-null-assertion": "off"
+  "@typescript-eslint/require-await": "off"
   import/first: error
   promise/prefer-await-to-callbacks: error
   promise/prefer-await-to-then: error

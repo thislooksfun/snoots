@@ -190,7 +190,7 @@ export default class Client {
     q.append("duration", temporary ? "temporary" : "permanent");
     q.append("scope", scopes.join(" "));
 
-    return `https://www.reddit.com/api/v1/authorize?${q}`;
+    return `https://www.reddit.com/api/v1/authorize?${q.toString()}`;
   }
 
   /**

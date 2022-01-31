@@ -14,6 +14,7 @@ import { InvalidKindError } from "./errors";
 export function fromRedditData<T>(data: Data): T {
   const out: Data = {};
   for (const key in data) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     out[camelCase(key)] = data[key] === null ? undefined : data[key];
   }
   return out as T;

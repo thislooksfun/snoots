@@ -107,7 +107,7 @@ export default abstract class VoteableControls extends ReplyableControls {
    */
   async reply(id: string, text: string): Promise<Comment> {
     const rawResponse: Data = await this.replyImpl(id, text);
-    const replyComment: RedditObject = rawResponse.things[0];
+    const replyComment = (rawResponse.things as RedditObject[])[0];
     if (!replyComment) throw "oh yeah that's definitely not good.";
     return this.client.comments.fromRaw(replyComment);
   }
