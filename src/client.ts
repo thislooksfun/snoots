@@ -150,15 +150,9 @@ export default class Client {
    * @param options The options to configure this client with.
    */
   constructor(options: ClientOptions) {
-    if (options.creds) {
-      this._gateway = new OauthGateway(
-        options.auth,
-        options.creds,
-        options.userAgent
-      );
-    } else {
-      this._gateway = new AnonGateway(options.userAgent);
-    }
+    this._gateway = options.creds
+      ? new OauthGateway(options.auth, options.creds, options.userAgent)
+      : new AnonGateway(options.userAgent);
 
     // Set up controls after we have initalized the internal state.
     this.comments = new CommentControls(this);

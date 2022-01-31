@@ -112,11 +112,7 @@ export default class Comment extends Voteable implements CommentData {
    * @returns The ID of the parent, or undefined if this is a top-level comment.
    */
   parentCommentId(): Maybe<string> {
-    if (this.parentId.startsWith("t1_")) {
-      return this.parentId.slice(3);
-    } else {
-      return undefined;
-    }
+    return this.parentId.startsWith("t1_") ? this.parentId.slice(3) : undefined;
   }
 
   /**

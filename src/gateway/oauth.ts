@@ -132,14 +132,10 @@ export class OauthGateway extends Gateway {
       };
     } else if (this.initialAuth) {
       const auth = this.initialAuth;
-      if ("refreshToken" in auth) {
-        grant = {
-          grant_type: "refresh_token",
-          refresh_token: auth.refreshToken,
-        };
-      } else {
-        grant = { grant_type: "password", ...auth };
-      }
+      grant =
+        "refreshToken" in auth
+          ? { grant_type: "refresh_token", refresh_token: auth.refreshToken }
+          : { grant_type: "password", ...auth };
     } else {
       grant = { grant_type: "client_credentials" };
     }

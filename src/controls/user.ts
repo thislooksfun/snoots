@@ -104,10 +104,9 @@ export default class UserControls extends BaseControls {
     const rDat = raw.data;
     const data: UserData = fromRedditData(rDat);
 
-    if ("coins" in rDat) {
-      return new MyUser(this, data as MyUserData);
-    } else {
-      return new OtherUser(this, data as OtherUserData);
-    }
+    // "coins" is only set in the personal user response.
+    return "coins" in rDat
+      ? new MyUser(this, data as MyUserData)
+      : new OtherUser(this, data as OtherUserData);
   }
 }
