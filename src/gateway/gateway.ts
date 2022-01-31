@@ -44,8 +44,8 @@ export abstract class Gateway {
    */
   public async get<T>(path: string, query: Query = {}): Promise<T> {
     const options = await this.buildOptions(query);
-    const res: T = await got.get(this.mapPath(path), options).json();
-    return this.unwrap(res);
+    const response: T = await got.get(this.mapPath(path), options).json();
+    return this.unwrap(response);
   }
 
   /**
@@ -104,10 +104,10 @@ export abstract class Gateway {
     query: Query
   ): Promise<T> {
     const baseOptions = await this.buildOptions(query);
-    const res: T = await got
+    const response: T = await got
       .post(this.mapPath(path), { ...baseOptions, ...options })
       .json();
-    return this.unwrap(res);
+    return this.unwrap(response);
   }
 
   protected abstract mapPath(path: string): string;
@@ -118,21 +118,21 @@ export abstract class Gateway {
     throw new Error(errorMessage);
   }
 
-  protected unwrap<T>(res: SomeResponse<T>): T {
-    if (typeof res !== "object") {
-      return res;
-    } else if ("json" in res) {
-      const { errors, data } = res.json;
+  protected unwrap<T>(response: SomeResponse<T>): T {
+    if (typeof response !== "object") {
+      return response;
+    } else if ("json" in response) {
+      const { errors, data } = response.json;
       if (errors.length > 0) {
         this.handleError(errors[0]);
       } else {
         return data!;
       }
     } else {
-      if ("error" in res) {
-        this.handleError(res.error, res.error_description);
+      if ("error" in response) {
+        this.handleError(response.error, response.error_description);
       } else {
-        return res;
+        return response;
       }
     }
   }
@@ -158,10 +158,11 @@ export abstract class Gateway {
     return options;
   }
 
-  protected updateRatelimit(res: GotResponse): GotResponse {
-    const remain = parseInt(res.headers["x-ratelimit-remaining"] as string);
-    const reset = parseInt(res.headers["x-ratelimit-reset"] as string) * 1000;
+  protected updateRatelimit(response: GotResponse): GotResponse {
+    const { headers } = response;
+    const remain = parseInt(headers["x-ratelimit-remaining"] as string);
+    const reset = parseInt(headers["x-ratelimit-reset"] as string) * 1000;
     this.rateLimit = { remaining: remain, reset: Date.now() + reset };
-    return res;
+    return response;
   }
 }

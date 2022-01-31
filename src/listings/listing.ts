@@ -51,12 +51,12 @@ export abstract class Pager<T> implements Fetcher<T> {
   protected async nextPage(context: ListingContext): Promise<RedditListing> {
     if (!context.req) throw "Unable to fetch next page";
     const query = { limit: "100", after: this.after, ...context.req.query };
-    const res: RedditObject = await context.client.gateway.get(
+    const nextListingObject: RedditObject = await context.client.gateway.get(
       context.req.url,
       query
     );
-    assertKind("Listing", res);
-    return res.data as RedditListing;
+    assertKind("Listing", nextListingObject);
+    return nextListingObject.data as RedditListing;
   }
 }
 
@@ -154,8 +154,8 @@ export default class Listing<T> {
 
     do {
       // If the function returns false at any point, we are done.
-      const res = await handler(page.items);
-      if (res === false) return;
+      const result = await handler(page.items);
+      if (result === false) return;
 
       page = await Listing.nextPage(page, this.context);
     } while (page);
@@ -194,8 +194,8 @@ export default class Listing<T> {
    */
   async forEach(handler: AwaitableFunction<T, boolean | void>): Promise<void> {
     for await (const item of this) {
-      const res = await handler(item);
-      if (res === false) break;
+      const result = await handler(item);
+      if (result === false) break;
     }
   }
 

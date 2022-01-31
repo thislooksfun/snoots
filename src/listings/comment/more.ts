@@ -45,8 +45,10 @@ export default class MoreComments implements Fetcher<Comment> {
     if (this.data.name === "t1__") {
       const id = this.data.parent_id.slice(3);
       const pth = `comments/${context.post}`;
-      const res: Data = await context.client.gateway.get(pth, { comment: id });
-      const child: RedditObject = res[1].data.children[0];
+      const childrenResponse: Data = await context.client.gateway.get(pth, {
+        comment: id,
+      });
+      const child: RedditObject = childrenResponse[1].data.children[0];
       if (!child) {
         return new CommentListing(emptyRedditListing, context);
       } else {
@@ -61,12 +63,12 @@ export default class MoreComments implements Fetcher<Comment> {
       const rest = this.data.children.slice(75);
 
       const query = { children: page.join(","), link_id: `t3_${context.post}` };
-      const res: Data = await context.client.gateway.get(
+      const childrenResponse: Data = await context.client.gateway.get(
         "api/morechildren",
         query
       );
 
-      const children = fixCommentTree(res.things);
+      const children = fixCommentTree(childrenResponse.things);
 
       // If there are more children, put another More at the end of the list.
       if (rest.length > 0) {
@@ -75,7 +77,7 @@ export default class MoreComments implements Fetcher<Comment> {
           data: {
             // I have no clue if this count calculation is correct, but it's not
             // currently being used anyway, so... ¯\_(ツ)_/¯
-            count: this.data.count - res.things.length,
+            count: this.data.count - childrenResponse.things.length,
             depth: this.data.depth,
             children: rest,
             id: rest[0],

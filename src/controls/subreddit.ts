@@ -113,8 +113,8 @@ export default class SubredditControls extends BaseControls {
    * @returns A promise that resolves to the requested subreddit.
    */
   async fetch(subreddit: string): Promise<Subreddit> {
-    const res: RedditObject = await this.gateway.get(`r/${subreddit}/about`);
-    return this.fromRaw(res);
+    const raw: RedditObject = await this.gateway.get(`r/${subreddit}/about`);
+    return this.fromRaw(raw);
   }
 
   /**
@@ -510,8 +510,8 @@ export default class SubredditControls extends BaseControls {
   async getRandomPost(subreddit?: string): Promise<Post> {
     const base = subreddit ? `r/${subreddit}/` : "";
     const url = `${base}random`;
-    const res: SplitRawPost = await this.gateway.get(url);
-    return this.client.posts.fromSplitRaw(res);
+    const splitRaw: SplitRawPost = await this.gateway.get(url);
+    return this.client.posts.fromSplitRaw(splitRaw);
   }
 
   /**
@@ -666,8 +666,8 @@ export default class SubredditControls extends BaseControls {
       req.iden = options.captcha.iden;
     }
 
-    const res: Data = await this.gateway.post("api/submit", req);
-    return res.id;
+    const submitResponse: Data = await this.gateway.post("api/submit", req);
+    return submitResponse.id;
   }
 
   /** @internal */

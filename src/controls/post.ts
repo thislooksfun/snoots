@@ -50,8 +50,8 @@ export default class PostControls extends VoteableControls {
    */
   async fetch(id: string): Promise<Post> {
     const path = `comments/${id}`;
-    const res: SplitRawPost = await this.gateway.get(path);
-    return this.fromSplitRaw(res);
+    const splitRaw: SplitRawPost = await this.gateway.get(path);
+    return this.fromSplitRaw(splitRaw);
   }
 
   /**
@@ -164,12 +164,12 @@ export default class PostControls extends VoteableControls {
    */
   async getDuplicates(id: string): Promise<Listing<Post>> {
     const path = `duplicates/${id}`;
-    const res: [ListingObject, ListingObject] = await this.gateway.get(path);
+    const splitRaw: SplitRawPost = await this.gateway.get(path);
 
-    assertKind("Listing", res[1]);
+    assertKind("Listing", splitRaw[1]);
 
     const context = { client: this.client };
-    return new PostListing(res[1].data, context);
+    return new PostListing(splitRaw[1].data, context);
   }
 
   /**

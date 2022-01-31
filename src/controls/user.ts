@@ -39,8 +39,8 @@ export default class UserControls extends BaseControls {
    * @returns The user.
    */
   async fetch(username: string): Promise<User> {
-    const res: RedditObject = await this.gateway.get(`user/${username}/about`);
-    return this.fromRaw(res);
+    const raw: RedditObject = await this.gateway.get(`user/${username}/about`);
+    return this.fromRaw(raw);
   }
 
   /**
@@ -49,9 +49,9 @@ export default class UserControls extends BaseControls {
    * @returns The user.
    */
   async fetchMe(): Promise<MyUser> {
-    const res: Data = await this.gateway.get("api/v1/me");
+    const userData: Data = await this.gateway.get("api/v1/me");
     // /me doesn't return a wrapped object, so we have to make it ourselves.
-    const raw: RedditObject = { kind: "t2", data: res };
+    const raw: RedditObject = { kind: "t2", data: userData };
     return this.fromRaw(raw) as MyUser;
   }
 

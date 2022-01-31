@@ -106,10 +106,10 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves to the comment reply.
    */
   async reply(id: string, text: string): Promise<Comment> {
-    const res: Data = await this.replyImpl(id, text);
-    const rc: RedditObject = res.things[0];
-    if (!rc) throw "oh yeah that's definitely not good.";
-    return this.client.comments.fromRaw(rc);
+    const rawResponse: Data = await this.replyImpl(id, text);
+    const replyComment: RedditObject = rawResponse.things[0];
+    if (!replyComment) throw "oh yeah that's definitely not good.";
+    return this.client.comments.fromRaw(replyComment);
   }
 
   /**
