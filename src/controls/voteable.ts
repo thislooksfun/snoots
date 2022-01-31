@@ -23,8 +23,8 @@ export default abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the change has been made.
    */
   protected async inboxReplies(id: string, enabled: boolean): Promise<void> {
-    const req = { id: this.namespace(id), state: enabled };
-    await this.gateway.post("api/sendreplies", req);
+    const request = { id: this.namespace(id), state: enabled };
+    await this.gateway.post("api/sendreplies", request);
   }
 
   /**

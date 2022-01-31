@@ -90,8 +90,8 @@ export default class PostControls extends VoteableControls {
     if (subreddit) options.subreddit = subreddit;
 
     const url = subreddit ? `r/${subreddit}/` : "";
-    const req = { url: `${url}search`, query: options };
-    const context = { req, client: this.client };
+    const request = { url: `${url}search`, query: options };
+    const context = { request, client: this.client };
     return new PostListing(fakeListingAfter(""), context);
   }
 

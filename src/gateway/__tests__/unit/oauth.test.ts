@@ -272,8 +272,8 @@ describe("OauthGateway", () => {
           .get("/foo/bar?api_type=json&raw_json=1")
           .reply(200, { bim: "bom" });
 
-        const req = gateway.get("foo/bar", {});
-        await expect(req).resolves.toStrictEqual({ bim: "bom" });
+        const request = gateway.get("foo/bar", {});
+        await expect(request).resolves.toStrictEqual({ bim: "bom" });
 
         n.done();
       });
@@ -290,8 +290,8 @@ describe("OauthGateway", () => {
             .get("/foo/bar?api_type=json&raw_json=1")
             .reply(200, { error: "whoops" });
 
-          const req = gateway.get("foo/bar", {});
-          await expect(req).rejects.toStrictEqual(
+          const request = gateway.get("foo/bar", {});
+          await expect(request).rejects.toStrictEqual(
             new Error("Reddit returned an error: whoops")
           );
 
@@ -306,8 +306,8 @@ describe("OauthGateway", () => {
               error_description: "something went wrong :(",
             });
 
-          const req = gateway.get("foo/bar", {});
-          await expect(req).rejects.toStrictEqual(
+          const request = gateway.get("foo/bar", {});
+          await expect(request).rejects.toStrictEqual(
             new Error(
               "Reddit returned an error: whoops: something went wrong :("
             )
@@ -335,8 +335,8 @@ describe("OauthGateway", () => {
           .post("/foo/bar?api_type=json&raw_json=1")
           .reply(200, { bim: "bom" });
 
-        const req = gateway.post("foo/bar", { bar: "foo" }, {});
-        await expect(req).resolves.toStrictEqual({ bim: "bom" });
+        const request = gateway.post("foo/bar", { bar: "foo" }, {});
+        await expect(request).resolves.toStrictEqual({ bim: "bom" });
 
         n.done();
       });
@@ -353,8 +353,8 @@ describe("OauthGateway", () => {
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, { error: "whoops" });
 
-          const req = gateway.post("foo/bar", { bar: "foo" }, {});
-          await expect(req).rejects.toStrictEqual(
+          const request = gateway.post("foo/bar", { bar: "foo" }, {});
+          await expect(request).rejects.toStrictEqual(
             new Error("Reddit returned an error: whoops")
           );
 
@@ -369,8 +369,8 @@ describe("OauthGateway", () => {
               error_description: "something went wrong :(",
             });
 
-          const req = gateway.post("foo/bar", { bar: "foo" }, {});
-          await expect(req).rejects.toStrictEqual(
+          const request = gateway.post("foo/bar", { bar: "foo" }, {});
+          await expect(request).rejects.toStrictEqual(
             new Error(
               "Reddit returned an error: whoops: something went wrong :("
             )
@@ -398,8 +398,8 @@ describe("OauthGateway", () => {
           .post("/foo/bar?api_type=json&raw_json=1")
           .reply(200, { bim: "bom" });
 
-        const req = gateway.postJson("foo/bar", { bar: "foo" }, {});
-        await expect(req).resolves.toStrictEqual({ bim: "bom" });
+        const request = gateway.postJson("foo/bar", { bar: "foo" }, {});
+        await expect(request).resolves.toStrictEqual({ bim: "bom" });
 
         n.done();
       });
@@ -416,8 +416,8 @@ describe("OauthGateway", () => {
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, { error: "whoops" });
 
-          const req = gateway.postJson("foo/bar", { bar: "foo" }, {});
-          await expect(req).rejects.toStrictEqual(
+          const request = gateway.postJson("foo/bar", { bar: "foo" }, {});
+          await expect(request).rejects.toStrictEqual(
             new Error("Reddit returned an error: whoops")
           );
 
@@ -432,8 +432,8 @@ describe("OauthGateway", () => {
               error_description: "something went wrong :(",
             });
 
-          const req = gateway.postJson("foo/bar", { bar: "foo" }, {});
-          await expect(req).rejects.toStrictEqual(
+          const request = gateway.postJson("foo/bar", { bar: "foo" }, {});
+          await expect(request).rejects.toStrictEqual(
             new Error(
               "Reddit returned an error: whoops: something went wrong :("
             )

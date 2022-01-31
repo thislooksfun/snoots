@@ -225,8 +225,11 @@ export default class SubredditControls extends BaseControls {
     options: Query = {}
   ): Listing<Post> {
     const url = subreddit ? `r/${subreddit}/` : "";
-    const req = { url: `${url}${sort}`, query: { show: "all", ...options } };
-    const context = { req, client: this.client };
+    const request = {
+      url: `${url}${sort}`,
+      query: { show: "all", ...options },
+    };
+    const context = { request, client: this.client };
     return new PostListing(fakeListingAfter(""), context);
   }
 
@@ -312,8 +315,8 @@ export default class SubredditControls extends BaseControls {
 
   /** @internal */
   protected getAboutListing(sr: string, type: string): Listing<Comment | Post> {
-    const req = { url: `r/${sr}/about/${type}`, query: {} };
-    const context = { req, client: this.client };
+    const request = { url: `r/${sr}/about/${type}`, query: {} };
+    const context = { request, client: this.client };
     return new PostOrCommentListing(fakeListingAfter(""), context);
   }
 
@@ -322,15 +325,18 @@ export default class SubredditControls extends BaseControls {
     sr: string,
     type: string
   ): Listing<Comment> {
-    const req = { url: `r/${sr}/about/${type}`, query: { only: "comments" } };
-    const context = { req, client: this.client };
+    const request = {
+      url: `r/${sr}/about/${type}`,
+      query: { only: "comments" },
+    };
+    const context = { request, client: this.client };
     return new CommentListing(fakeListingAfter(""), context);
   }
 
   /** @internal */
   protected getAboutListingPosts(sr: string, type: string): Listing<Post> {
-    const req = { url: `r/${sr}/about/${type}`, query: { only: "links" } };
-    const context = { req, client: this.client };
+    const request = { url: `r/${sr}/about/${type}`, query: { only: "links" } };
+    const context = { request, client: this.client };
     return new PostListing(fakeListingAfter(""), context);
   }
 
@@ -553,8 +559,8 @@ export default class SubredditControls extends BaseControls {
    */
   getSortedComments(subreddit: string, sort: "new" = "new"): Listing<Comment> {
     const url = subreddit ? `r/${subreddit}/` : "";
-    const req = { url: `${url}${sort}`, query: { sort } };
-    const context = { req, client: this.client };
+    const request = { url: `${url}${sort}`, query: { sort } };
+    const context = { request, client: this.client };
     return new CommentListing(fakeListingAfter(""), context);
   }
 
@@ -647,7 +653,7 @@ export default class SubredditControls extends BaseControls {
     subreddit: string,
     options: PostOptions
   ): Promise<string> {
-    const req: Data = {
+    const request: Data = {
       sr: subreddit,
       kind: options.kind,
       title: options.title,
@@ -657,16 +663,16 @@ export default class SubredditControls extends BaseControls {
       spoiler: options.spoiler,
     };
 
-    if (options.text != undefined) req.text = options.text;
-    if (options.url != undefined) req.url = options.url;
+    if (options.text != undefined) request.text = options.text;
+    if (options.url != undefined) request.url = options.url;
     if (options.crosspostFullname != undefined)
-      req.crosspost_fullname = options.crosspostFullname;
+      request.crosspost_fullname = options.crosspostFullname;
     if (options.captcha != undefined) {
-      req.captcha = options.captcha.response;
-      req.iden = options.captcha.iden;
+      request.captcha = options.captcha.response;
+      request.iden = options.captcha.iden;
     }
 
-    const submitResponse: Data = await this.gateway.post("api/submit", req);
+    const submitResponse: Data = await this.gateway.post("api/submit", request);
     return submitResponse.id;
   }
 

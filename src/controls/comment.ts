@@ -39,11 +39,9 @@ export default class CommentControls extends VoteableControls {
    * @throws If the comment couldn't be found.
    */
   async fetch(id: string): Promise<Comment> {
-    const req = { id: this.namespace(id) };
-    const listingObject: ListingObject = await this.gateway.get(
-      "api/info",
-      req
-    );
+    const listingObject: ListingObject = await this.gateway.get("api/info", {
+      id: this.namespace(id),
+    });
 
     assertKind("Listing", listingObject);
 

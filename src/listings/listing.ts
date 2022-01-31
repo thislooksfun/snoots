@@ -8,7 +8,7 @@ import { assertKind } from "../helper/util";
 export interface ListingContext {
   client: Client;
   post?: string;
-  req?: { url: string; query: Query };
+  request?: { url: string; query: Query };
 }
 
 /** @internal */
@@ -49,10 +49,10 @@ export abstract class Pager<T> implements Fetcher<T> {
   abstract fetch(context: ListingContext): Promise<Listing<T>>;
 
   protected async nextPage(context: ListingContext): Promise<RedditListing> {
-    if (!context.req) throw "Unable to fetch next page";
-    const query = { limit: "100", after: this.after, ...context.req.query };
+    if (!context.request) throw "Unable to fetch next page";
+    const query = { limit: "100", after: this.after, ...context.request.query };
     const nextListingObject: RedditObject = await context.client.gateway.get(
-      context.req.url,
+      context.request.url,
       query
     );
     assertKind("Listing", nextListingObject);
