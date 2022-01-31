@@ -46,7 +46,7 @@ export default class CommentControls extends VoteableControls {
     assertKind("Listing", listingObject);
 
     const list = listingObject.data;
-    if (list.children.length < 1) {
+    if (list.children.length === 0) {
       // TODO: Use a custom error type.
       throw "Not found";
     }
