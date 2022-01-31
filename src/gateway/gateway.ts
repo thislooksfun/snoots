@@ -160,9 +160,9 @@ export abstract class Gateway {
 
   protected updateRatelimit(response: GotResponse): GotResponse {
     const { headers } = response;
-    const remain = parseInt(headers["x-ratelimit-remaining"] as string);
-    const reset = parseInt(headers["x-ratelimit-reset"] as string) * 1000;
-    this.rateLimit = { remaining: remain, reset: Date.now() + reset };
+    const remain = Number.parseInt(headers["x-ratelimit-remaining"] as string);
+    const reset = Number.parseInt(headers["x-ratelimit-reset"] as string);
+    this.rateLimit = { remaining: remain, reset: Date.now() + reset * 1000 };
     return response;
   }
 }

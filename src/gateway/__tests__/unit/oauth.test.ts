@@ -33,7 +33,7 @@ function fcTokenResponse(): fc.Arbitrary<TokenResponse> {
   return fc.record({
     accessToken: fc.string(),
     tokenType: fc.string(),
-    expiresIn: fc.integer({ min: 1000, max: 10000 }),
+    expiresIn: fc.integer({ min: 1000, max: 10_000 }),
     scope: fc.string(),
   });
 }
