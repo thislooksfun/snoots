@@ -1,7 +1,7 @@
 import type Client from "../client";
+import type { Data, RedditObject } from "../helper/types";
+import type Comment from "../objects/comment";
 
-import { Data, RedditObject } from "../helper/types";
-import Comment from "../objects/comment";
 import ReplyableControls from "./replyable";
 
 /** The vote types. 1 = upvote, 0 = no vote, -1 = downvote. */

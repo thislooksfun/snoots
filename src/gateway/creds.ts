@@ -1,5 +1,6 @@
+import type { BasicAuth } from "./types";
+
 import { Gateway } from "./gateway";
-import { BasicAuth } from "./types";
 
 /**
  * Reddit API application credentials

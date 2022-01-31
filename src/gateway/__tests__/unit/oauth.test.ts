@@ -1,9 +1,9 @@
+import type { Maybe } from "../../..";
 import type { ClientAuth, Token, TokenResponse } from "../../oauth";
 
 import fc from "fast-check";
 import nock from "nock";
 
-import { Maybe } from "../../..";
 import { OauthGateway } from "../../oauth";
 
 const fcUsernameAuth = () =>

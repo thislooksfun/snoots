@@ -1,13 +1,11 @@
+import type PostControls from "../controls/post";
+import type { LinkPostOptions } from "../controls/subreddit";
 import type { Maybe } from "../helper/types";
+import type Listing from "../listings/listing";
+import type Comment from "../objects/comment";
 import type { VoteableData } from "./voteable";
 
-import PostControls from "../controls/post";
-// import type { VoteableData, RichTextFlair } from "./voteable";
-import { LinkPostOptions } from "../controls/subreddit";
-import Listing from "../listings/listing";
-import Comment from "../objects/comment";
 import Voteable from "./voteable";
-// import { Sort } from "../helper/types";
 
 // TODO: Fully document Media
 // This looks like it can be split into two interfaces?

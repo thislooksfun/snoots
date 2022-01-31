@@ -1,7 +1,8 @@
 import type { UserControls } from "../../controls";
+import type { Maybe } from "../../helper/types";
+import type { UserData } from "./base";
 
-import { Maybe } from "../../helper/types";
-import { User, UserData } from "./base";
+import { User } from "./base";
 
 /** The data for the authorized user. */
 export interface MyUserData extends UserData {

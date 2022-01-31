@@ -1,6 +1,7 @@
 import type { Comment } from "../../objects";
+import type { ListingContext } from "../listing";
 
-import { ListingContext, Pager } from "../listing";
+import { Pager } from "../listing";
 import CommentListing from "./commentListing";
 
 export default class CommentPager extends Pager<Comment> {

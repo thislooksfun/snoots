@@ -7,13 +7,18 @@ import type {
   UserItemsSort,
 } from "../helper/types";
 import type Listing from "../listings/listing";
-import type { MyUserData, OtherUserData, UserData } from "../objects/user";
+import type {
+  MyUserData,
+  OtherUserData,
+  User,
+  UserData,
+} from "../objects/user";
 
 import { assertKind, fromRedditData } from "../helper/util";
 import CommentListing from "../listings/comment";
 import PostListing from "../listings/post";
 import { fakeListingAfter } from "../listings/util";
-import { MyUser, OtherUser, User } from "../objects/user";
+import { MyUser, OtherUser } from "../objects/user";
 import BaseControls from "./base";
 
 /**

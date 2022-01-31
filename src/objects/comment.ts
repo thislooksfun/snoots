@@ -1,9 +1,9 @@
 import type { DistinguishStates } from "../controls/comment";
+import type CommentControls from "../controls/comment";
 import type { Maybe } from "../helper/types";
+import type Listing from "../listings/listing";
 import type { VoteableData } from "./voteable";
 
-import CommentControls from "../controls/comment";
-import Listing from "../listings/listing";
 import Voteable from "./voteable";
 
 /** The attributes specific to Comment objects. */

@@ -1,5 +1,7 @@
 import type { Credentials } from "./gateway/creds";
 import type { Gateway } from "./gateway/gateway";
+import type { ClientAuth } from "./gateway/oauth";
+import type { Maybe } from "./helper/types";
 
 import {
   CommentControls,
@@ -8,8 +10,7 @@ import {
   UserControls,
 } from "./controls";
 import { AnonGateway } from "./gateway/anon";
-import { ClientAuth, OauthGateway } from "./gateway/oauth";
-import { Maybe } from "./helper/types";
+import { OauthGateway } from "./gateway/oauth";
 
 /**
  * Options for instantiating a Client

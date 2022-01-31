@@ -9,15 +9,15 @@ import type {
   TimeRange,
 } from "../helper/types";
 import type { ListingObject, RedditListing } from "../listings/listing";
+import type Listing from "../listings/listing";
 import type { PostData } from "../objects/post";
+import type { LinkPostOptions } from "./subreddit";
 
 import { assertKind, fromRedditData } from "../helper/util";
 import CommentListing from "../listings/comment";
-import Listing from "../listings/listing";
 import PostListing from "../listings/post";
 import { fakeListingAfter } from "../listings/util";
 import Post from "../objects/post";
-import { LinkPostOptions } from "./subreddit";
 import VoteableControls from "./voteable";
 
 function isRemoved(dat: Data) {

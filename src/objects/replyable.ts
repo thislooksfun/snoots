@@ -1,6 +1,6 @@
+import type ReplyableControls from "../controls/replyable";
 import type { ContentData } from "./content";
 
-import ReplyableControls from "../controls/replyable";
 import Content from "./content";
 
 /** The base for all content that you can reply to. */

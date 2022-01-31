@@ -1,6 +1,7 @@
 import type { UserControls } from "../../controls";
+import type { UserData } from "./base";
 
-import { User, UserData } from "./base";
+import { User } from "./base";
 
 /** The data for a user other than the authorized user. */
 export interface OtherUserData extends UserData {

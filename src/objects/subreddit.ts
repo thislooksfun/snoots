@@ -14,8 +14,9 @@ import type {
   TimeRange,
 } from "../helper/types";
 import type { Comment, Post } from ".";
+import type { ContentData } from "./content";
 
-import Content, { ContentData } from "./content";
+import Content from "./content";
 
 export interface SubredditData extends ContentData {
   /** Whether or not {@link activeUserCount} is intentionally slightly wrong. */

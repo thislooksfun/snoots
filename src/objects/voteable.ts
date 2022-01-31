@@ -1,8 +1,8 @@
+import type VoteableControls from "../controls/voteable";
 import type { Maybe, SubredditType } from "../helper/types";
+import type Comment from "./comment";
 import type { ContentData } from "./content";
 
-import VoteableControls from "../controls/voteable";
-import Comment from "./comment";
 import Replyable from "./replyable";
 
 /** A rich text flair containing text. */
