@@ -62,7 +62,6 @@
     "semantic-release": "^19.0.2",
     "ts-jest": "^27.1.3",
     "typedoc": "~0.20.36",
-    "typedoc-plugin-rename-defaults": "^0.1.0",
     "typescript": "^4.2.4"
   },
   "engines": {
