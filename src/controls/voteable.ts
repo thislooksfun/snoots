@@ -4,9 +4,6 @@ import type { Comment } from "../objects/comment";
 
 import { ReplyableControls } from "./replyable";
 
-/** The vote types. 1 = upvote, 0 = no vote, -1 = downvote. */
-export type Vote = 1 | 0 | -1;
-
 /** The base controls for all content that you can vote on. */
 export abstract class VoteableControls extends ReplyableControls {
   /** @internal */
@@ -53,11 +50,11 @@ export abstract class VoteableControls extends ReplyableControls {
    * Cast a vote.
    *
    * @param id The ID of the item to vote on.
-   * @param vote The vote to cast.
+   * @param vote The vote to cast. 1 = upvote, 0 = no vote, -1 = downvote.
    *
    * @returns A promise that resolves when the vote has been cast.
    */
-  protected async vote(id: string, vote: Vote): Promise<void> {
+  protected async vote(id: string, vote: 1 | 0 | -1): Promise<void> {
     await this.gateway.post("api/vote", {
       id: this.namespace(id),
       dir: vote,
