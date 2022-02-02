@@ -4,6 +4,7 @@ export { default as Content } from "./content";
 export * from "./content";
 export { default as Post } from "./post";
 export * from "./post";
+export { default as Replyable } from "./replyable";
 export { default as Subreddit } from "./subreddit";
 export * from "./subreddit";
 export * from "./user";
