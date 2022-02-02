@@ -11,7 +11,6 @@ import type {
 import type { Listing } from "../listings/listing";
 import type { Comment, Post } from "../objects";
 import type { SubredditData } from "../objects/subreddit";
-import type { SplitRawPost } from "./post";
 
 import { assertKind, fromRedditData } from "../helper/util";
 import { CommentListing } from "../listings/comment";
@@ -515,9 +514,7 @@ export class SubredditControls extends BaseControls {
    */
   async getRandomPost(subreddit?: string): Promise<Post> {
     const base = subreddit ? `r/${subreddit}/` : "";
-    const url = `${base}random`;
-    const splitRaw: SplitRawPost = await this.gateway.get(url);
-    return this.client.posts.fromSplitRaw(splitRaw);
+    return this.client.posts.fetchPath(`${base}random`);
   }
 
   /**
