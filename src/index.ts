@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-default-export
-export { Client as default } from "./client";
 export * from "./client";
 export * from "./controls";
 export type { Credentials } from "./gateway/creds";
