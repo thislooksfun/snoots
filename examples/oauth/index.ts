@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import express from "express";
-import Client, { Credentials } from "snoots";
+import { Client, Credentials } from "snoots";
 
 const port = 8080;
 const redirectUri = `http://127.0.0.1:${port}/auth`;

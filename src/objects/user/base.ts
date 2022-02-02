@@ -1,6 +1,6 @@
 import type { UserControls } from "../../controls";
 import type { PostSort, UserItemsSort } from "../../helper/types";
-import type Listing from "../../listings/listing";
+import type { Listing } from "../../listings/listing";
 import type { Comment, ContentData, Post, Subreddit } from "..";
 
 import { Content } from "..";

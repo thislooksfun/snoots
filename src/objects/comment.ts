@@ -1,10 +1,9 @@
-import type { DistinguishStates } from "../controls/comment";
-import type CommentControls from "../controls/comment";
+import type { CommentControls, DistinguishStates } from "../controls/comment";
 import type { Maybe } from "../helper/types";
-import type Listing from "../listings/listing";
+import type { Listing } from "../listings/listing";
 import type { VoteableData } from "./voteable";
 
-import Voteable from "./voteable";
+import { Voteable } from "./voteable";
 
 /** The attributes specific to Comment objects. */
 export interface CommentData extends VoteableData {
@@ -62,7 +61,7 @@ export interface CommentData extends VoteableData {
 }
 
 /** A single comment. */
-export default class Comment extends Voteable implements CommentData {
+export class Comment extends Voteable implements CommentData {
   bodyHtml: string;
   body: string;
   collapsed: boolean;

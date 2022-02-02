@@ -1,12 +1,12 @@
 import type { Comment, Post, Subreddit } from "..";
-import type Client from "../client";
+import type { Client } from "../client";
 import type {
   Data,
   PostSort,
   RedditObject,
   UserItemsSort,
 } from "../helper/types";
-import type Listing from "../listings/listing";
+import type { Listing } from "../listings/listing";
 import type {
   MyUserData,
   OtherUserData,
@@ -15,18 +15,18 @@ import type {
 } from "../objects/user";
 
 import { assertKind, fromRedditData } from "../helper/util";
-import CommentListing from "../listings/comment";
-import PostListing from "../listings/post";
+import { CommentListing } from "../listings/comment";
+import { PostListing } from "../listings/post";
 import { fakeListingAfter } from "../listings/util";
 import { MyUser, OtherUser } from "../objects/user";
-import BaseControls from "./base";
+import { BaseControls } from "./base";
 
 /**
  * Various methods to allow you to interact with users.
  *
  * @category Controls
  */
-export default class UserControls extends BaseControls {
+export class UserControls extends BaseControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "u/");

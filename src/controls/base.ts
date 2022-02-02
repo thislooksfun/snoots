@@ -1,8 +1,8 @@
-import type Client from "../client";
+import type { Client } from "../client";
 import type { Gateway } from "../gateway/gateway";
 
 /** The base class for all controls. */
-export default abstract class BaseControls {
+export abstract class BaseControls {
   protected client: Client;
   protected prefix: string;
 

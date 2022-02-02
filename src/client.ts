@@ -120,7 +120,7 @@ export interface ClientOptions {
  * const client = new Client({ userAgent: '<your user agent>' })
  * ```
  */
-export default class Client {
+export class Client {
   /** Controls for interacting with comments. */
   public readonly comments: CommentControls;
   /** Controls for interacting with posts. */

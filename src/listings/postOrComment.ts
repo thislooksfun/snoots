@@ -2,7 +2,7 @@ import type { Comment, Post } from "../objects";
 import type { Fetcher, ListingContext, RedditListing } from "./listing";
 
 import { InvalidKindError } from "../helper/errors";
-import Listing, { Pager } from "./listing";
+import { Listing, Pager } from "./listing";
 
 class PostOrCommentPager extends Pager<Post | Comment> {
   async fetch(context: ListingContext): Promise<PostOrCommentListing> {
@@ -11,7 +11,7 @@ class PostOrCommentPager extends Pager<Post | Comment> {
   }
 }
 
-export default class PostOrCommentListing extends Listing<Post | Comment> {
+export class PostOrCommentListing extends Listing<Post | Comment> {
   constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Post | Comment> | undefined;
 

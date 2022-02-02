@@ -1,11 +1,11 @@
-import type PostControls from "../controls/post";
+import type { PostControls } from "../controls/post";
 import type { LinkPostOptions } from "../controls/subreddit";
 import type { Maybe } from "../helper/types";
-import type Listing from "../listings/listing";
-import type Comment from "../objects/comment";
+import type { Listing } from "../listings/listing";
+import type { Comment } from "../objects/comment";
 import type { VoteableData } from "./voteable";
 
-import Voteable from "./voteable";
+import { Voteable } from "./voteable";
 
 // TODO: Fully document Media
 // This looks like it can be split into two interfaces?
@@ -238,7 +238,7 @@ export interface PostData extends VoteableData {
 }
 
 /** A single post. */
-export default class Post extends Voteable implements PostData {
+export class Post extends Voteable implements PostData {
   body: string;
   bodyHtml: Maybe<string>;
   // clicked: boolean;

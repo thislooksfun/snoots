@@ -16,7 +16,7 @@ import type {
 import type { Comment, Post } from ".";
 import type { ContentData } from "./content";
 
-import Content from "./content";
+import { Content } from "./content";
 
 export interface SubredditData extends ContentData {
   /** Whether or not {@link activeUserCount} is intentionally slightly wrong. */
@@ -328,7 +328,7 @@ export interface SubredditData extends ContentData {
   // wls: number;
 }
 
-export default class Subreddit extends Content implements SubredditData {
+export class Subreddit extends Content implements SubredditData {
   accountsActiveIsFuzzed: boolean;
   activeUserCount: number;
   // advertiserCategory: Maybe<string>;

@@ -1,4 +1,5 @@
-export { default as default } from "./client";
+// eslint-disable-next-line import/no-default-export
+export { Client as default } from "./client";
 export * from "./client";
 export * from "./controls";
 export type { Credentials } from "./gateway/creds";
@@ -6,5 +7,5 @@ export type { Gateway } from "./gateway/gateway";
 export type { ClientAuth, TokenAuth, UsernameAuth } from "./gateway/oauth";
 export type { Query, QueryValue } from "./gateway/types";
 export * from "./helper/types";
-export { default as Listing } from "./listings/listing";
+export { Listing } from "./listings/listing";
 export * from "./objects";

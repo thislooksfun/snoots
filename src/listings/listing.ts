@@ -1,4 +1,4 @@
-import type Client from "../client";
+import type { Client } from "../client";
 import type { Query } from "../gateway/types";
 import type { AwaitableFunction, Maybe, RedditObject } from "../helper/types";
 
@@ -90,7 +90,7 @@ export abstract class Pager<T> implements Fetcher<T> {
  *
  * @template T The type of items this Listing holds.
  */
-export default class Listing<T> {
+export class Listing<T> {
   protected context: ListingContext;
   protected items: T[];
   protected fetcher?: Fetcher<T>;

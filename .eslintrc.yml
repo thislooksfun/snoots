@@ -37,6 +37,7 @@ rules:
   "@typescript-eslint/no-non-null-assertion": "off"
   "@typescript-eslint/require-await": "off"
   import/first: error
+  import/no-default-export: error
   promise/prefer-await-to-callbacks: error
   promise/prefer-await-to-then: error
   simple-import-sort/exports: error

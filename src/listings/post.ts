@@ -1,7 +1,7 @@
-import type Post from "../objects/post";
+import type { Post } from "../objects/post";
 import type { Fetcher, ListingContext, RedditListing } from "./listing";
 
-import Listing, { Pager } from "./listing";
+import { Listing, Pager } from "./listing";
 
 class PostPager extends Pager<Post> {
   async fetch(context: ListingContext): Promise<PostListing> {
@@ -11,7 +11,7 @@ class PostPager extends Pager<Post> {
 }
 
 /** @internal */
-export default class PostListing extends Listing<Post> {
+export class PostListing extends Listing<Post> {
   constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Post> | undefined;
 

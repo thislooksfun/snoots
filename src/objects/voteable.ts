@@ -1,9 +1,9 @@
-import type VoteableControls from "../controls/voteable";
+import type { VoteableControls } from "../controls/voteable";
 import type { Maybe, SubredditType } from "../helper/types";
-import type Comment from "./comment";
+import type { Comment } from "./comment";
 import type { ContentData } from "./content";
 
-import Replyable from "./replyable";
+import { Replyable } from "./replyable";
 
 /** A rich text flair containing text. */
 export interface RichTextFlairText {
@@ -234,10 +234,7 @@ export interface VoteableData extends ContentData {
 }
 
 /** The base for all content that you can vote on. */
-export default abstract class Voteable
-  extends Replyable
-  implements VoteableData
-{
+export abstract class Voteable extends Replyable implements VoteableData {
   approved?: boolean;
   approvedAtUtc: Maybe<number>;
   approvedBy: Maybe<string>;

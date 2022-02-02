@@ -1,1 +1,1 @@
-export { default as InvalidKindError } from "./invalidKind";
+export * from "./invalidKind";

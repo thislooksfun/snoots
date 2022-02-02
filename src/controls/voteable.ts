@@ -1,14 +1,14 @@
-import type Client from "../client";
+import type { Client } from "../client";
 import type { Data, RedditObject } from "../helper/types";
-import type Comment from "../objects/comment";
+import type { Comment } from "../objects/comment";
 
-import ReplyableControls from "./replyable";
+import { ReplyableControls } from "./replyable";
 
 /** The vote types. 1 = upvote, 0 = no vote, -1 = downvote. */
 export type Vote = 1 | 0 | -1;
 
 /** The base controls for all content that you can vote on. */
-export default abstract class VoteableControls extends ReplyableControls {
+export abstract class VoteableControls extends ReplyableControls {
   /** @internal */
   constructor(client: Client, type: string) {
     super(client, `${type}_`);

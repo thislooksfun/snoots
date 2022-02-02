@@ -1,4 +1,4 @@
-import type Client from "../client";
+import type { Client } from "../client";
 import type { Query } from "../gateway/types";
 import type {
   Data,
@@ -8,18 +8,18 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../helper/types";
-import type Listing from "../listings/listing";
+import type { Listing } from "../listings/listing";
 import type { Comment, Post } from "../objects";
 import type { SubredditData } from "../objects/subreddit";
 import type { SplitRawPost } from "./post";
 
 import { assertKind, fromRedditData } from "../helper/util";
-import CommentListing from "../listings/comment";
-import PostListing from "../listings/post";
-import PostOrCommentListing from "../listings/postOrComment";
+import { CommentListing } from "../listings/comment";
+import { PostListing } from "../listings/post";
+import { PostOrCommentListing } from "../listings/postOrComment";
 import { fakeListingAfter } from "../listings/util";
-import Subreddit from "../objects/subreddit";
-import BaseControls from "./base";
+import { Subreddit } from "../objects/subreddit";
+import { BaseControls } from "./base";
 
 /** A single capcha identifier and response. */
 export interface Capcha {
@@ -99,7 +99,7 @@ interface PostOptions {
  *
  * @category Controls
  */
-export default class SubredditControls extends BaseControls {
+export class SubredditControls extends BaseControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "r/");

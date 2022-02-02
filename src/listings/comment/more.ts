@@ -1,5 +1,5 @@
 import type { Data, RedditObject } from "../../helper/types";
-import type Comment from "../../objects/comment";
+import type { Comment } from "../../objects/comment";
 import type {
   Fetcher,
   ListingContext,
@@ -8,7 +8,7 @@ import type {
 } from "../listing";
 
 import { emptyRedditListing } from "./../util";
-import CommentListing from "./commentListing";
+import { CommentListing } from "./commentListing";
 
 function fixCommentTree(objects: RedditObject[]) {
   // Map the items by their name.
@@ -40,7 +40,7 @@ function fixCommentTree(objects: RedditObject[]) {
 }
 
 /** @internal */
-export default class MoreComments implements Fetcher<Comment> {
+export class MoreComments implements Fetcher<Comment> {
   protected data: RedditMore;
 
   constructor(data: RedditMore) {

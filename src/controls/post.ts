@@ -1,4 +1,4 @@
-import type Client from "../client";
+import type { Client } from "../client";
 import type { Query } from "../gateway/types";
 import type {
   Data,
@@ -8,17 +8,20 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../helper/types";
-import type { ListingObject, RedditListing } from "../listings/listing";
-import type Listing from "../listings/listing";
+import type {
+  Listing,
+  ListingObject,
+  RedditListing,
+} from "../listings/listing";
 import type { PostData } from "../objects/post";
 import type { LinkPostOptions } from "./subreddit";
 
 import { assertKind, fromRedditData } from "../helper/util";
-import CommentListing from "../listings/comment";
-import PostListing from "../listings/post";
+import { CommentListing } from "../listings/comment";
+import { PostListing } from "../listings/post";
 import { fakeListingAfter } from "../listings/util";
-import Post from "../objects/post";
-import VoteableControls from "./voteable";
+import { Post } from "../objects/post";
+import { VoteableControls } from "./voteable";
 
 function isRemoved(dat: Data) {
   if (dat.removed != undefined) return dat.removed as boolean;
@@ -33,7 +36,7 @@ export type SplitRawPost = [ListingObject, ListingObject];
  *
  * @category Controls
  */
-export default class PostControls extends VoteableControls {
+export class PostControls extends VoteableControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "t3");
