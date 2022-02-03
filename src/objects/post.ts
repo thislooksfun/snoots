@@ -283,8 +283,8 @@ export class Post extends Voteable implements PostData {
   subredditSubscribers: number;
   // suggestedSort: Maybe<Sort>;
   // thumbnail: string;
-  thumbnailHeight?: number;
-  thumbnailWidth?: number;
+  // thumbnailHeight?: number;
+  // thumbnailWidth?: number;
   title: string;
   upvoteRatio: number;
   url: string;
