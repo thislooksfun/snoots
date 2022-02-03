@@ -206,7 +206,7 @@ export class SubredditControls extends BaseControls {
   }
 
   /**
-   * Unan a user from a subreddit.
+   * Unban a user from a subreddit.
    *
    * @param subreddit The name of the subreddit to unban the user from.
    * @param name The username of the user to unban.

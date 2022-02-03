@@ -906,7 +906,7 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
-   * Unan a user from this subreddit.
+   * Unban a user from this subreddit.
    *
    * @param name The username of the user to unban.
    *
