@@ -69,7 +69,9 @@ export class Comment extends Voteable implements CommentData {
   // controversiality: number;
   // ignoreReports: boolean;
   isSubmitter: boolean;
+  /** @internal */
   linkId: string;
+  /** @internal */
   parentId: string;
   replies: Listing<Comment>;
   scoreHidden: boolean;
