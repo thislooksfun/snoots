@@ -4,6 +4,11 @@ import camelCase from "camelcase";
 
 import { InvalidKindError } from "./errors";
 
+export function assertKind(kind: string, redditObject: RedditObject) {
+  if (redditObject.kind !== kind)
+    throw new InvalidKindError(kind, redditObject.kind);
+}
+
 /**
  * Convert a value from a reddit API response to a snoots data structure.
  *
@@ -18,9 +23,4 @@ export function fromRedditData<T>(data: Data): T {
     out[camelCase(key)] = data[key] === null ? undefined : data[key];
   }
   return out as T;
-}
-
-export function assertKind(kind: string, redditObject: RedditObject) {
-  if (redditObject.kind !== kind)
-    throw new InvalidKindError(kind, redditObject.kind);
 }
