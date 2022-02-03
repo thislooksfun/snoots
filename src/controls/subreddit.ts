@@ -119,78 +119,78 @@ export class SubredditControls extends BaseControls {
   /**
    * Accept a moderator invite.
    *
-   * @param sr The name of the subreddit to accept the invite for.
+   * @param subreddit The name of the subreddit to accept the invite for.
    *
    * @returns A promise that resolves when the invite has been accepted.
    */
-  async acceptModeratorInvite(sr: string): Promise<void> {
-    await this.gateway.post(`r/${sr}/api/accept_moderator_invite`, {});
+  async acceptModeratorInvite(subreddit: string): Promise<void> {
+    await this.gateway.post(`r/${subreddit}/api/accept_moderator_invite`, {});
   }
 
   /**
    * Add an approved poster.
    *
-   * @param sr The name of the subreddit to add the contributor to.
+   * @param subreddit The name of the subreddit to add the contributor to.
    * @param name The username of the user to add.
    *
    * @returns A promise that resolves when the contributor has been added.
    */
-  async addContributor(sr: string, name: string): Promise<void> {
-    await this.friend(sr, name, "contributor");
+  async addContributor(subreddit: string, name: string): Promise<void> {
+    await this.friend(subreddit, name, "contributor");
   }
 
   /**
    * Remove an approved poster.
    *
-   * @param sr The name of the subreddit to remove the contributor from.
+   * @param subreddit The name of the subreddit to remove the contributor from.
    * @param name The username of the user to remove.
    *
    * @returns A promise that resolves when the contributor has been removed.
    */
-  async removeContributor(sr: string, name: string): Promise<void> {
-    await this.unfriend(sr, name, "contributor");
+  async removeContributor(subreddit: string, name: string): Promise<void> {
+    await this.unfriend(subreddit, name, "contributor");
   }
 
   /** @internal */
-  async leaveContributor(srId: string): Promise<void> {
-    await this.gateway.post("api/leavecontributor", { id: srId });
+  async leaveContributor(subredditId: string): Promise<void> {
+    await this.gateway.post("api/leavecontributor", { id: subredditId });
   }
 
   /**
    * Add a user to the list of approved wiki editors.
    *
-   * @param sr The name of the subreddit to add the user to.
+   * @param subreddit The name of the subreddit to add the user to.
    * @param name The username of the user to add.
    *
    * @returns A promise that resolves when the wiki editor has been added.
    */
-  async addWikiContributor(sr: string, name: string): Promise<void> {
-    await this.friend(sr, name, "wikicontributor");
+  async addWikiContributor(subreddit: string, name: string): Promise<void> {
+    await this.friend(subreddit, name, "wikicontributor");
   }
 
   /**
    * Remove a user from the list of approved wiki editors.
    *
-   * @param sr The name of the subreddit to remove the user from.
+   * @param subreddit The name of the subreddit to remove the user from.
    * @param name The username of the user to remove.
    *
    * @returns A promise that resolves when the wiki editor has been removed.
    */
-  async removeWikiContributor(sr: string, name: string): Promise<void> {
-    await this.unfriend(sr, name, "wikicontributor");
+  async removeWikiContributor(subreddit: string, name: string): Promise<void> {
+    await this.unfriend(subreddit, name, "wikicontributor");
   }
 
   /**
    * Ban a user from a subreddit.
    *
-   * @param sr The name of the subreddit to ban the user from.
+   * @param subreddit The name of the subreddit to ban the user from.
    * @param name The username of the user to ban.
    * @param options Any additional options for the ban.
    *
    * @returns A promise that resolves when the user has been banned.
    */
   async banUser(
-    sr: string,
+    subreddit: string,
     name: string,
     options: BanOptions = {}
   ): Promise<void> {
@@ -202,19 +202,19 @@ export class SubredditControls extends BaseControls {
     if (options.note != undefined) friendOptions.note = options.note;
     if (options.reason != undefined) friendOptions.ban_reason = options.reason;
 
-    await this.friend(sr, name, "banned", friendOptions);
+    await this.friend(subreddit, name, "banned", friendOptions);
   }
 
   /**
    * Unan a user from a subreddit.
    *
-   * @param sr The name of the subreddit to unban the user from.
+   * @param subreddit The name of the subreddit to unban the user from.
    * @param name The username of the user to unban.
    *
    * @returns A promise that resolves when the user has been unbanned.
    */
-  async unbanUser(sr: string, name: string): Promise<void> {
-    await this.unfriend(sr, name, "banned");
+  async unbanUser(subreddit: string, name: string): Promise<void> {
+    await this.unfriend(subreddit, name, "banned");
   }
 
   /** @internal */
@@ -313,19 +313,22 @@ export class SubredditControls extends BaseControls {
   }
 
   /** @internal */
-  protected getAboutListing(sr: string, type: string): Listing<Comment | Post> {
-    const request = { url: `r/${sr}/about/${type}`, query: {} };
+  protected getAboutListing(
+    subreddit: string,
+    type: string
+  ): Listing<Comment | Post> {
+    const request = { url: `r/${subreddit}/about/${type}`, query: {} };
     const context = { request, client: this.client };
     return new PostOrCommentListing(fakeListingAfter(""), context);
   }
 
   /** @internal */
   protected getAboutListingComments(
-    sr: string,
+    subreddit: string,
     type: string
   ): Listing<Comment> {
     const request = {
-      url: `r/${sr}/about/${type}`,
+      url: `r/${subreddit}/about/${type}`,
       query: { only: "comments" },
     };
     const context = { request, client: this.client };
@@ -333,8 +336,14 @@ export class SubredditControls extends BaseControls {
   }
 
   /** @internal */
-  protected getAboutListingPosts(sr: string, type: string): Listing<Post> {
-    const request = { url: `r/${sr}/about/${type}`, query: { only: "links" } };
+  protected getAboutListingPosts(
+    subreddit: string,
+    type: string
+  ): Listing<Post> {
+    const request = {
+      url: `r/${subreddit}/about/${type}`,
+      query: { only: "links" },
+    };
     const context = { request, client: this.client };
     return new PostListing(fakeListingAfter(""), context);
   }
@@ -675,22 +684,30 @@ export class SubredditControls extends BaseControls {
 
   /** @internal */
   protected async friend(
-    sr: string,
+    subreddit: string,
     name: string,
     type: string,
     options: Query = {}
   ) {
-    await this.gateway.post(`r/${sr}/api/friend`, { ...options, name, type });
+    await this.gateway.post(`r/${subreddit}/api/friend`, {
+      ...options,
+      name,
+      type,
+    });
   }
 
   /** @internal */
   protected async unfriend(
-    sr: string,
+    subreddit: string,
     name: string,
     type: string,
     options: Query = {}
   ) {
-    await this.gateway.post(`r/${sr}/api/unfriend`, { ...options, name, type });
+    await this.gateway.post(`r/${subreddit}/api/unfriend`, {
+      ...options,
+      name,
+      type,
+    });
   }
 
   /** @internal */

@@ -87,9 +87,9 @@ export class PostControls extends VoteableControls {
    * @param time The time range to search in.
    * @param sort The way to sort the search results.
    * @param syntax The search syntax to use.
-   * @param restrictSr Whether or not to restrict the search to the given
-   * subreddit. If this is `false` or if `subreddit` is falsy this will search
-   * all of Reddit.
+   * @param searchSubredditOnly Whether or not to restrict the search to the
+   * given subreddit. If this is `false` or if `subreddit` is falsy this will
+   * search all of Reddit.
    *
    * @returns A listing of posts.
    */
@@ -99,7 +99,7 @@ export class PostControls extends VoteableControls {
     time: TimeRange = "all",
     sort: SearchSort = "new",
     syntax: SearchSyntax = "plain",
-    restrictSr: boolean = false
+    searchSubredditOnly: boolean = false
   ): Listing<Post> {
     const options: Query = {
       t: time,
@@ -107,7 +107,7 @@ export class PostControls extends VoteableControls {
       sort,
       syntax,
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      restrict_sr: restrictSr && !!subreddit,
+      restrict_sr: searchSubredditOnly && !!subreddit,
     };
 
     if (subreddit) options.subreddit = subreddit;

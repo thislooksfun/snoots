@@ -72,6 +72,8 @@ rules:
     - replacements:
         desc:
           description: true
+        sr:
+          subreddit: true
 
 overrides:
   - files: ["**/__tests__/**/*.ts"]
