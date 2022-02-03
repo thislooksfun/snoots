@@ -4,17 +4,26 @@ import camelCase from "camelcase";
 
 import { InvalidKindError } from "./errors";
 
+/**
+ * Ensure that a RedditObject is of the correct type.
+ *
+ * @param kind The expected kind.
+ * @param redditObject The RedditObject to check.
+ */
 export function assertKind(kind: string, redditObject: RedditObject) {
   if (redditObject.kind !== kind)
     throw new InvalidKindError(kind, redditObject.kind);
 }
 
 /**
- * Convert a value from a reddit API response to a snoots data structure.
+ * Convert a value from a Reddit API response to a snoots data structure.
  *
  * This performs two steps:
  * 1. Replace `null` with `undefined`
  * 2. Convert the key from snake_case to camelCase
+ *
+ * @param data The data to convert.
+ * @returns The converted object.
  */
 export function fromRedditData<T>(data: Data): T {
   const out: Data = {};
