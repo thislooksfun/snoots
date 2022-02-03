@@ -17,12 +17,7 @@ export interface UsernameAuth {
 
 /** OAuth token based authentication */
 export interface TokenAuth {
-  /**
-   * An OAuth refresh token.
-   *
-   * Snoots does not provide any way to get a refresh token. If you want to use
-   * this code path you have to go through the oauth flow yourself.
-   */
+  /** An OAuth refresh token. */
   refreshToken: string;
 }
 
