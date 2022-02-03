@@ -68,6 +68,7 @@ export abstract class Gateway {
     form: Data,
     query: Query = {}
   ): Promise<T> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const formOptions = { form: { api_type: "json", ...form } };
     return await this.doPost(path, formOptions, query);
   }
@@ -92,6 +93,7 @@ export abstract class Gateway {
     json: Data,
     query: Query = {}
   ): Promise<T> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const jsonOptions = { json: { api_type: "json", ...json } };
     return await this.doPost(path, jsonOptions, query);
   }
@@ -141,6 +143,7 @@ export abstract class Gateway {
     const options: GotOptions = {
       prefixUrl: this.endpoint,
       headers: { "user-agent": this.userAgent },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       searchParams: { ...query, raw_json: 1, api_type: "json" },
       hooks: { afterResponse: [r => this.updateRatelimit(r)] },
     };

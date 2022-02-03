@@ -28,6 +28,7 @@ export interface RedditMore {
   count: number;
   name: string;
   id: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   parent_id: string;
   depth: number;
   children: string[];

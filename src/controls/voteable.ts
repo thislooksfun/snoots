@@ -144,6 +144,7 @@ export abstract class VoteableControls extends ReplyableControls {
    * @returns A promise that resolves when the edit is complete.
    */
   async edit(id: string, newText: string): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const body = { thing_id: this.namespace(id), text: newText };
     await this.gateway.post("api/editusertext", body);
   }

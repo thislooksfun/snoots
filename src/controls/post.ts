@@ -106,6 +106,7 @@ export class PostControls extends VoteableControls {
       q: query,
       sort,
       syntax,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       restrict_sr: restrictSr && !!subreddit,
     };
 

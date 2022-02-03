@@ -43,26 +43,25 @@ export interface TokenResponse {
   scope: string;
 }
 
+/* eslint-disable @typescript-eslint/naming-convention */
 interface RefreshTokenGrant {
   grant_type: "refresh_token";
   refresh_token: string;
 }
-
 interface PasswordGrant {
   grant_type: "password";
   username: string;
   password: string;
 }
-
 interface ClientCredentialsGrant {
   grant_type: "client_credentials";
 }
-
 interface AuthorizationCodeGrant {
   grant_type: "authorization_code";
   code: string;
   redirect_uri: string;
 }
+/* eslint-enable @typescript-eslint/naming-convention */
 
 type Grant =
   | RefreshTokenGrant
@@ -85,9 +84,11 @@ export class OauthGateway extends Gateway {
   ): Promise<OauthGateway> {
     const gateway = new OauthGateway({ refreshToken: "" }, creds, userAgent);
     await gateway.updateTokenFromGrant({
+      /* eslint-disable @typescript-eslint/naming-convention */
       grant_type: "authorization_code",
       code,
       redirect_uri: redirectUri,
+      /* eslint-enable @typescript-eslint/naming-convention */
     });
 
     return gateway;
@@ -125,6 +126,7 @@ export class OauthGateway extends Gateway {
 
   protected async updateAccessToken(): Promise<void> {
     let grant: Grant;
+    /* eslint-disable @typescript-eslint/naming-convention */
     if (this.token?.refresh) {
       grant = {
         grant_type: "refresh_token",
@@ -139,6 +141,7 @@ export class OauthGateway extends Gateway {
     } else {
       grant = { grant_type: "client_credentials" };
     }
+    /* eslint-enable @typescript-eslint/naming-convention */
 
     await this.updateTokenFromGrant(grant);
   }

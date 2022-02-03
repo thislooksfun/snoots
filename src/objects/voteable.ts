@@ -29,6 +29,7 @@ export interface RichTextFlairEmoji {
 /** A rich text flair. */
 export type RichTextFlair = RichTextFlairText | RichTextFlairEmoji;
 
+/* eslint-disable @typescript-eslint/naming-convention */
 /** The Guildings an item has received. */
 export interface Gildings {
   /** Number of Reddit Silver awarded */
@@ -40,6 +41,7 @@ export interface Gildings {
   /** Number of Reddit Platinum awarded */
   gid_3?: number;
 }
+/* eslint-enable @typescript-eslint/naming-convention */
 
 /** The base for all content that you can vote on. */
 export interface VoteableData extends ContentData {

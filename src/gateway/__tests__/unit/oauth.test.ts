@@ -97,9 +97,11 @@ describe("OauthGateway", () => {
           gateway.setToken(token);
 
           const body = {
+            /* eslint-disable @typescript-eslint/naming-convention */
             api_type: "json",
             grant_type: "refresh_token",
             refresh_token: token.refresh,
+            /* eslint-enable @typescript-eslint/naming-convention */
           };
           const n = nock("https://www.reddit.com", commonNockOptions)
             .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
@@ -122,6 +124,7 @@ describe("OauthGateway", () => {
             gateway.setInitialAuth(auth);
 
             const body = {
+              /* eslint-disable @typescript-eslint/naming-convention */
               api_type: "json",
               ...("refreshToken" in auth
                 ? {
@@ -129,6 +132,7 @@ describe("OauthGateway", () => {
                     refresh_token: auth.refreshToken,
                   }
                 : { grant_type: "password", ...auth }),
+              /* eslint-enable @typescript-eslint/naming-convention */
             };
             const n = nock("https://www.reddit.com", commonNockOptions)
               .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
@@ -149,6 +153,7 @@ describe("OauthGateway", () => {
           // eslint-disable-next-line unicorn/no-useless-undefined
           gateway.setInitialAuth(undefined);
 
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           const body = { api_type: "json", grant_type: "client_credentials" };
           const n = nock("https://www.reddit.com", commonNockOptions)
             .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
@@ -304,6 +309,7 @@ describe("OauthGateway", () => {
             .get("/foo/bar?api_type=json&raw_json=1")
             .reply(200, {
               error: "whoops",
+              // eslint-disable-next-line @typescript-eslint/naming-convention
               error_description: "something went wrong :(",
             });
 
@@ -321,6 +327,7 @@ describe("OauthGateway", () => {
 
     describe(".post()", () => {
       it("should pass common values", async () => {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         const expectedBody = { api_type: "json", bar: "foo" };
         const n = nock("https://oauth.reddit.com", commonNockOptions)
           .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
@@ -367,6 +374,7 @@ describe("OauthGateway", () => {
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, {
               error: "whoops",
+              // eslint-disable-next-line @typescript-eslint/naming-convention
               error_description: "something went wrong :(",
             });
 
@@ -384,6 +392,7 @@ describe("OauthGateway", () => {
 
     describe(".postJson()", () => {
       it("should pass common values", async () => {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         const expectedBody = { api_type: "json", bar: "foo" };
         const n = nock("https://oauth.reddit.com", commonNockOptions)
           .post("/foo/bar?api_type=json&raw_json=1", expectedBody)
@@ -430,6 +439,7 @@ describe("OauthGateway", () => {
             .post("/foo/bar?api_type=json&raw_json=1")
             .reply(200, {
               error: "whoops",
+              // eslint-disable-next-line @typescript-eslint/naming-convention
               error_description: "something went wrong :(",
             });
 

@@ -67,6 +67,7 @@ describe("CredsGateway", () => {
           .get("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, {
             error: "whoops",
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             error_description: "something went wrong :(",
           });
 
@@ -82,6 +83,7 @@ describe("CredsGateway", () => {
 
   describe(".post()", () => {
     it("should pass common values", async () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const expectedBody = { api_type: "json", bar: "foo" };
       const n = nock("https://www.reddit.com", commonNockOptions)
         .post("/foo/bar.json?api_type=json&raw_json=1", expectedBody)
@@ -122,6 +124,7 @@ describe("CredsGateway", () => {
           .post("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, {
             error: "whoops",
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             error_description: "something went wrong :(",
           });
 
@@ -137,6 +140,7 @@ describe("CredsGateway", () => {
 
   describe(".postJson()", () => {
     it("should pass common values", async () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const expectedBody = { api_type: "json", bar: "foo" };
       const n = nock("https://www.reddit.com", commonNockOptions)
         .post("/foo/bar.json?api_type=json&raw_json=1", expectedBody)
@@ -177,6 +181,7 @@ describe("CredsGateway", () => {
           .post("/foo/bar.json?api_type=json&raw_json=1")
           .reply(200, {
             error: "whoops",
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             error_description: "something went wrong :(",
           });
 

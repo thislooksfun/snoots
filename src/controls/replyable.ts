@@ -29,14 +29,17 @@ export abstract class ReplyableControls extends BaseControls {
    */
   async report(id: string, reason?: string): Promise<void> {
     await this.gateway.post("api/report", {
+      /* eslint-disable @typescript-eslint/naming-convention */
       reason: "other",
       other_reason: reason,
       thing_id: this.namespace(id),
+      /* eslint-enable @typescript-eslint/naming-convention */
     });
   }
 
   /** @internal */
   async replyImpl<T>(id: string, text: string): Promise<T> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const body = { text, thing_id: this.namespace(id) };
     return await this.gateway.post("api/comment", body);
   }

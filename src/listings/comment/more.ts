@@ -75,6 +75,7 @@ export class MoreComments implements Fetcher<Comment> {
       const page = this.data.children.slice(0, 75);
       const rest = this.data.children.slice(75);
 
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const query = { children: page.join(","), link_id: `t3_${context.post}` };
       const childrenResponse: Data = await context.client.gateway.get(
         "api/morechildren",
@@ -96,6 +97,7 @@ export class MoreComments implements Fetcher<Comment> {
             children: rest,
             id: rest[0],
             name: `t1_${rest[0]}`,
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             parent_id: this.data.parent_id,
           },
         };

@@ -15,6 +15,7 @@ export function fakeMoreListing(name: string): RedditListing {
     count: 0, // TODO
     name: `${name.slice(0, 2)}__`,
     id: "_",
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     parent_id: name,
     depth: 0, // TODO
     children: [],

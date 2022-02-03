@@ -34,6 +34,13 @@ extends:
 rules:
   "@typescript-eslint/consistent-type-exports": error
   "@typescript-eslint/consistent-type-imports": error
+  "@typescript-eslint/naming-convention":
+    - error
+    - selector: [class, interface, typeAlias, typeParameter]
+      format: [PascalCase]
+    - selector: default
+      format: [camelCase]
+      leadingUnderscore: allow
   "@typescript-eslint/no-inferrable-types": "off"
   "@typescript-eslint/no-non-null-assertion": "off"
   "@typescript-eslint/require-await": "off"
