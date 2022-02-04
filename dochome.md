@@ -93,7 +93,7 @@ the largest:
 1. Listings are not arrays, but they can be iterated using `for await`.
 1. Sub-objects are not auto-populated (like `Post` and `Comment`'s `author`). In
    snoowrap the `author` field is a user object, but in snoots it's just a
-   username.
+   string.
 
 What does this mean in practice? Here are some examples:
 
