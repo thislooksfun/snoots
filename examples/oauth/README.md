@@ -11,5 +11,5 @@ fill in the values (info on [user agents][ua]). Finally run `npm install` then
 browser to `localhost:8080/login`.
 
 [express]: https://expressjs.com
-[creds]: https://thislooks.fun/snoots/docs/latest/interfaces/credentials.html
-[ua]: https://thislooks.fun/snoots/docs/latest/interfaces/clientoptions.html#useragent
+[creds]: https://thislooks.fun/snoots/docs/latest/interfaces/Credentials.html
+[ua]: https://thislooks.fun/snoots/docs/latest/interfaces/ClientOptions.html#userAgent

@@ -138,11 +138,7 @@ What does this mean in practice? Here are some examples:
 
 <!-- Links -->
 
-[cd]: ./classes/client.html
-[ua]: ./interfaces/clientoptions.html#useragent
-[creds]: ./interfaces/credentials.html
+[cd]: ./classes/Client.html
+[ua]: ./interfaces/ClientOptions.html#userAgent
+[creds]: ./interfaces/Credentials.html
 [exdir]: https://github.com/thislooksfun/snoots/blob/master/examples
-[listing]: https://thislooks.fun/snoots/docs/latest/classes/listing.html
-[l-foreach]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#foreach
-[l-eachpage]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#eachpage
-[l-some]: https://thislooks.fun/snoots/docs/latest/classes/listing.html#some
