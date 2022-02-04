@@ -90,7 +90,7 @@ export interface ClientOptions {
  * const client = new Client({
  *   userAgent: '<your user agent>',
  *   auth: {
- *     refreshToken: '<the token>`,
+ *     refreshToken: '<the token>',
  *   },
  *   creds: {
  *     clientId: '<your client id>',
