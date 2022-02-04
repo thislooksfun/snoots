@@ -1,3 +1,45 @@
+## [1.0.0-dev.15](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.14...v1.0.0-dev.15) (2022-02-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* `Post.thumbnailHeight` and `Post.thumbnailWidth` have
+been temporarily removed. They were not yet supposed to be exposed, but
+they slipped through the cracks.
+* There is no longer a default export. If you are using
+TypeScript or ESM switch from using `import Client from "snoots"` to
+using `import { Client } from "snoots"`. If you are using CommonJS
+switch from `const Client = require("snoots")` to
+`const { Client } = require("snoots")`, or to
+`const Client = require("snoots").Client`.
+* All internal usages of `null` have been replaced with
+`undefined`. This includes mapping `null` to `undefined` in Reddit's API
+responses. If you were checking any values for existence with `=== null`
+you should replace that check with `=== undefined` (or `== null` or
+`== undefined`).
+* `Client.authFromCode()` has been replaced with
+`Client.fromAuthCode()`.
+* `Client.getAuthUrl()` has been renamed to
+`Client.makeAuthUrl()`.
+
+### Features
+
+* **docs:** update typedoc to 0.22 ([a8260d7](https://github.com/thislooksfun/snoots/commit/a8260d7af94a20fad608beb3317d9f4999f178a6))
+* move all Reddit REST api interaction into new Gateway classes ([8c0856a](https://github.com/thislooksfun/snoots/commit/8c0856a1d1098e8d49794fecdee1f300d6ed3ff4))
+* remove default export ([3df8d41](https://github.com/thislooksfun/snoots/commit/3df8d41a26b3f5d8f0bb59e55d9bcb44d86a3f35))
+* rename Client.getAuthUrl() -> Client.makeAuthUrl() ([ba87fdf](https://github.com/thislooksfun/snoots/commit/ba87fdfe1b5d9d300f140c1bb2a785b79e4565f8))
+* replace `null` with `undefined` ([5ab17b6](https://github.com/thislooksfun/snoots/commit/5ab17b61bb1051e7d6205eccbfc8facf10cc3121))
+* replace Client.authFromCode() with Client.fromAuthCode() ([8fa90b8](https://github.com/thislooksfun/snoots/commit/8fa90b810461dd739b10d51dcdad947424a571af))
+
+
+### Bug Fixes
+
+* export Replyable ([8fc0ddf](https://github.com/thislooksfun/snoots/commit/8fc0ddf3e028c082f3ace118ff412e41614e4b09))
+* remove unused properties ([17a5f36](https://github.com/thislooksfun/snoots/commit/17a5f3624ddde7ac0e88db585319154947492b97))
+* update camelcase to 6.3.0 ([72ee276](https://github.com/thislooksfun/snoots/commit/72ee276c793def28fd36e3710a5c31d8aad1af0a))
+* update got to 11.8.3 ([2ba1587](https://github.com/thislooksfun/snoots/commit/2ba15872c4470e2b91830d70c606296c0f785b1b))
+* update tslib to 2.3.1 ([076e4ab](https://github.com/thislooksfun/snoots/commit/076e4ab4e3245bfad6df3aedf4081a88496c2138))
+
 ## [1.0.0-dev.14](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.13...v1.0.0-dev.14) (2021-05-29)
 
 
