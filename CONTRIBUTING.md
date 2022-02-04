@@ -11,8 +11,8 @@ To get started with local development, do the following:
 git clone https://github.com/thislooksfun/snoots
 # Move into the folder.
 cd snoots
-# Install the dependencies as they are.
-npm ci
+# Install dependencies.
+npm install
 ```
 
 ## Code style

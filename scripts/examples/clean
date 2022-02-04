@@ -13,5 +13,5 @@ echo "# Cleaning example at '$(pwd)'"
 echo "####################"
 echo
 
-npm ci
+npm install
 npm run clean
