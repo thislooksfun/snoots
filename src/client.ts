@@ -130,8 +130,6 @@ export class Client {
   /** Controls for interacting with users. */
   public readonly users: UserControls;
 
-  private _gateway: Gateway;
-
   /**
    * The Gateway to the Reddit API.
    *
@@ -141,19 +139,21 @@ export class Client {
    *
    * @internal
    */
-  public get gateway(): Gateway {
-    return this._gateway;
-  }
+  public readonly gateway: Gateway;
 
   /**
    * Make a new snoots Client.
    *
    * @param options The options to configure this client with.
    */
-  constructor(options: ClientOptions) {
-    this._gateway = options.creds
-      ? new OauthGateway(options.auth, options.creds, options.userAgent)
-      : new AnonGateway(options.userAgent);
+  constructor(options: ClientOptions, _gateway?: Gateway) {
+    if (_gateway) {
+      this.gateway = _gateway;
+    } else {
+      this.gateway = options.creds
+        ? new OauthGateway(options.auth, options.creds, options.userAgent)
+        : new AnonGateway(options.userAgent);
+    }
 
     // Set up controls after we have initialized the internal state.
     this.comments = new CommentControls(this);
@@ -218,8 +218,7 @@ export class Client {
       options.userAgent
     );
 
-    const client = new this(options);
-    client._gateway = gateway;
+    const client = new this(options, gateway);
     return client as InstanceType<Self>;
   }
 
