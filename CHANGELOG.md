@@ -1,3 +1,10 @@
+## [1.0.0-dev.16](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.15...v1.0.0-dev.16) (2022-02-12)
+
+
+### Features
+
+* add optional debugging via the `debug` module ([fbb7bb3](https://github.com/thislooksfun/snoots/commit/fbb7bb31086d72c87c2c967a2bf58e3b8058ab81))
+
 ## [1.0.0-dev.15](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.14...v1.0.0-dev.15) (2022-02-04)
 
 
