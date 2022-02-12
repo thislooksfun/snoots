@@ -155,7 +155,7 @@ export class Client {
       ? new OauthGateway(options.auth, options.creds, options.userAgent)
       : new AnonGateway(options.userAgent);
 
-    // Set up controls after we have initalized the internal state.
+    // Set up controls after we have initialized the internal state.
     this.comments = new CommentControls(this);
     this.posts = new PostControls(this);
     this.subreddits = new SubredditControls(this);
