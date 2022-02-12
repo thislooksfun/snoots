@@ -96,10 +96,7 @@ export class CommentControls extends VoteableControls {
       return new CommentListing(fakeMoreListing(cmtName), context);
     } else if (replies && typeof replies === "object" && "kind" in replies) {
       const repliesObject = replies as RedditObject;
-      if (repliesObject.kind !== "Listing") {
-        console.dir(replies);
-        throw `Unknown type '${repliesObject.kind}'`;
-      }
+      assertKind("Listing", repliesObject);
       return new CommentListing((repliesObject as ListingObject).data, context);
     } else {
       console.dir(replies);
