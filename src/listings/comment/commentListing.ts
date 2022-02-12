@@ -6,9 +6,12 @@ import type {
   RedditMore,
 } from "../listing";
 
+import { makeDebug } from "../../helper/debug";
 import { Listing } from "../listing";
 import { MoreComments } from "./more";
 import { CommentPager } from "./pager";
+
+const debug = makeDebug("listing:comment");
 
 /** @internal */
 export class CommentListing extends Listing<Comment> {
@@ -29,7 +32,7 @@ export class CommentListing extends Listing<Comment> {
           fetcher = new MoreComments(c.data as RedditMore);
           break;
         default:
-          console.dir(c);
+          debug("Invalid child %O", c);
           throw "Invalid item!";
       }
     }

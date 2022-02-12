@@ -47,6 +47,7 @@ rules:
   deprecation/deprecation: error
   import/first: error
   import/no-default-export: error
+  no-console: error
   promise/prefer-await-to-callbacks: error
   promise/prefer-await-to-then: error
   simple-import-sort/exports: error

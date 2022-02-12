@@ -11,6 +11,9 @@ import {
 } from "./controls";
 import { AnonGateway } from "./gateway/anon";
 import { OauthGateway } from "./gateway/oauth";
+import { makeDebug } from "./helper/debug";
+
+const debug = makeDebug("class:Client");
 
 /**
  * Options for instantiating a Client
@@ -147,12 +150,21 @@ export class Client {
    * @param options The options to configure this client with.
    */
   constructor(options: ClientOptions, _gateway?: Gateway) {
+    debug("Creating new Client from options %O", options);
+    debug("Has auth = %b; has creds = %b", options.auth, options.creds);
+
     if (_gateway) {
       this.gateway = _gateway;
+      debug("Using given gateway; type = %s", this.gateway.constructor.name);
     } else {
       this.gateway = options.creds
         ? new OauthGateway(options.auth, options.creds, options.userAgent)
         : new AnonGateway(options.userAgent);
+
+      debug(
+        "Created Gateway for client; type = %s",
+        this.gateway.constructor.name
+      );
     }
 
     // Set up controls after we have initialized the internal state.
@@ -209,6 +221,7 @@ export class Client {
     code: string,
     redirectUri: string
   ): Promise<InstanceType<Self>> {
+    debug("Creating client from auth code '%s'", code);
     if (!options.creds) throw "No creds";
 
     const gateway = await OauthGateway.fromAuthCode(

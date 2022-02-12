@@ -3,11 +3,14 @@ import type { RedditObject } from "../helper/types";
 import type { ListingObject } from "../listings/listing";
 import type { CommentData } from "../objects/comment";
 
+import { makeDebug } from "../helper/debug";
 import { assertKind, fromRedditData } from "../helper/util";
 import { CommentListing } from "../listings/comment";
 import { fakeMoreListing } from "../listings/util";
 import { Comment } from "../objects/comment";
 import { VoteableControls } from "./voteable";
+
+const debug = makeDebug("controls:comment");
 
 /**
  * The ways to distinguish a comment.
@@ -99,7 +102,7 @@ export class CommentControls extends VoteableControls {
       assertKind("Listing", repliesObject);
       return new CommentListing((repliesObject as ListingObject).data, context);
     } else {
-      console.dir(replies);
+      debug("Replies are of unsupported type; %O", replies);
       throw "Unsupported reply type!";
     }
   }

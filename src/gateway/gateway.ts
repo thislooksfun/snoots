@@ -10,6 +10,33 @@ import type {
 
 import got from "got";
 
+import { makeDebug } from "../helper/debug";
+
+// #region debug logging
+const debug = {
+  request: makeDebug("gateway:request"),
+  response: makeDebug("gateway:response"),
+};
+
+function debugRequest(method: string, path: string, options: GotOptions) {
+  debug.request(
+    "Making %s request to path '%s' with options %O",
+    method,
+    path,
+    options
+  );
+}
+
+function debugResponse(method: string, path: string, response: unknown) {
+  debug.response(
+    "Got response for %s request to '%path': %O",
+    method,
+    path,
+    response
+  );
+}
+// #endregion debug logging
+
 /**
  * The gateway to the Reddit api.
  *
@@ -44,7 +71,9 @@ export abstract class Gateway {
    */
   public async get<T>(path: string, query: Query = {}): Promise<T> {
     const options = await this.buildOptions(query);
+    debugRequest("GET", path, options);
     const response: T = await got.get(this.mapPath(path), options).json();
+    debugResponse("GET", path, response);
     return this.unwrap(response);
   }
 
@@ -102,13 +131,14 @@ export abstract class Gateway {
 
   protected async doPost<T>(
     path: string,
-    options: GotOptions,
+    overrideOptions: GotOptions,
     query: Query
   ): Promise<T> {
     const baseOptions = await this.buildOptions(query);
-    const response: T = await got
-      .post(this.mapPath(path), { ...baseOptions, ...options })
-      .json();
+    const options = { ...baseOptions, ...overrideOptions };
+    debugRequest("POST", path, options);
+    const response: T = await got.post(this.mapPath(path), options).json();
+    debugResponse("POST", path, response);
     return this.unwrap(response);
   }
 

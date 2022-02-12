@@ -2,9 +2,12 @@ import type { Data, Maybe } from "../helper/types";
 import type { Credentials } from "./creds";
 import type { BearerAuth } from "./types";
 
+import { makeDebug } from "../helper/debug";
 import { fromRedditData } from "../helper/util";
 import { CredsGateway } from "./creds";
 import { Gateway } from "./gateway";
+
+const debug = makeDebug("gateway:oauth");
 
 /** Username and password based authentication */
 export interface UsernameAuth {
@@ -114,7 +117,13 @@ export class OauthGateway extends Gateway {
 
   protected async ensureTokenValid(): Promise<void> {
     // If the token is missing or expired, update it.
-    if ((this.token?.expiration ?? 0) <= Date.now()) {
+    const expiresAt = this.token?.expiration ?? 0;
+    debug(
+      "Checking if token is expired (expires at %d, current time is %d)",
+      expiresAt,
+      Date.now()
+    );
+    if (expiresAt <= Date.now()) {
       await this.updateAccessToken();
     }
   }
@@ -142,6 +151,7 @@ export class OauthGateway extends Gateway {
   }
 
   private async updateTokenFromGrant(grant: Grant) {
+    debug("Updating token with grant %o", grant);
     const credGate = new CredsGateway(this.creds, this.userAgent);
     const raw: Data = await credGate.post("api/v1/access_token", grant);
     const tkns: TokenResponse = fromRedditData(raw);
@@ -150,5 +160,9 @@ export class OauthGateway extends Gateway {
       expiration: Date.now() + tkns.expiresIn * 1000,
       refresh: tkns.refreshToken,
     };
+    debug(
+      "Token updated successfully, new token expires at %d",
+      this.token.expiration
+    );
   }
 }
