@@ -246,4 +246,16 @@ export class Client {
     }
     return undefined;
   }
+
+  /**
+   * Get the set of authorized scopes for the current session.
+   *
+   * @returns The scopes, or `undefined` if no oauth session exists.
+   */
+  getAuthorizedScopes(): Maybe<string[]> {
+    if (this.gateway instanceof OauthGateway) {
+      return this.gateway.getScopes();
+    }
+    return undefined;
+  }
 }

@@ -31,6 +31,7 @@ export interface Token {
   access: string;
   expiration: number;
   refresh?: string;
+  scopes: string[];
 }
 
 export interface TokenResponse {
@@ -104,6 +105,11 @@ export class OauthGateway extends Gateway {
     return this.token?.refresh;
   }
 
+  /** @internal */
+  public getScopes(): Maybe<string[]> {
+    return this.token?.scopes;
+  }
+
   protected async auth(): Promise<BearerAuth> {
     await this.ensureTokenValid();
     if (!this.token) throw new Error("Something has gone horribly wrong.");
@@ -154,15 +160,17 @@ export class OauthGateway extends Gateway {
     debug("Updating token with grant %o", grant);
     const credGate = new CredsGateway(this.creds, this.userAgent);
     const raw: Data = await credGate.post("api/v1/access_token", grant);
-    const tkns: TokenResponse = fromRedditData(raw);
+    const response: TokenResponse = fromRedditData(raw);
     this.token = {
-      access: tkns.accessToken,
-      expiration: Date.now() + tkns.expiresIn * 1000,
-      refresh: tkns.refreshToken,
+      access: response.accessToken,
+      expiration: Date.now() + response.expiresIn * 1000,
+      refresh: response.refreshToken,
+      scopes: response.scope.split(" "),
     };
     debug(
-      "Token updated successfully, new token expires at %d",
-      this.token.expiration
+      "Token updated successfully, new token expires at %d and has scopes ['%s']",
+      this.token.expiration,
+      this.token.scopes.join("', '")
     );
   }
 }

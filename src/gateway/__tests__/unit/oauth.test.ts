@@ -15,16 +15,17 @@ function fcToken(withRefresh?: boolean): fc.Arbitrary<Token> {
   const access = fc.string();
   const expiration = fc.integer().map(v => v + Date.now());
   const refresh = fc.string({ minLength: 1 });
+  const scopes = fc.array(fc.string());
 
   if (withRefresh === true) {
-    return fc.record({ access, expiration, refresh });
+    return fc.record({ access, expiration, refresh, scopes });
   } else if (withRefresh === false) {
-    return fc.record({ access, expiration });
+    return fc.record({ access, expiration, scopes });
   } else {
     // No preference given, randomize whether or not there is a refresh token.
     return fc.record(
-      { access, expiration, refresh },
-      { requiredKeys: ["access", "expiration"] }
+      { access, expiration, refresh, scopes },
+      { requiredKeys: ["access", "expiration", "scopes"] }
     );
   }
 }
@@ -93,24 +94,28 @@ describe("OauthGateway", () => {
 
     it("uses the stored refresh token, if it has one", async () => {
       await fc.assert(
-        fc.asyncProperty(fcToken(true), async token => {
-          gateway.setToken(token);
+        fc.asyncProperty(
+          fcToken(true),
+          fcTokenResponse(),
+          async (token, tokenResponse) => {
+            gateway.setToken(token);
 
-          const body = {
-            /* eslint-disable @typescript-eslint/naming-convention */
-            api_type: "json",
-            grant_type: "refresh_token",
-            refresh_token: token.refresh,
-            /* eslint-enable @typescript-eslint/naming-convention */
-          };
-          const n = nock("https://www.reddit.com", commonNockOptions)
-            .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
-            .reply(200, { bim: "bom" });
+            const body = {
+              /* eslint-disable @typescript-eslint/naming-convention */
+              api_type: "json",
+              grant_type: "refresh_token",
+              refresh_token: token.refresh,
+              /* eslint-enable @typescript-eslint/naming-convention */
+            };
+            const n = nock("https://www.reddit.com", commonNockOptions)
+              .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
+              .reply(200, tokenResponse);
 
-          await gateway.updateAccessToken();
+            await gateway.updateAccessToken();
 
-          n.done();
-        })
+            n.done();
+          }
+        )
       );
     });
 
@@ -119,7 +124,8 @@ describe("OauthGateway", () => {
         fc.asyncProperty(
           fcToken(false),
           fcClientAuth(),
-          async (token, auth) => {
+          fcTokenResponse(),
+          async (token, auth, tokenResponse) => {
             gateway.setToken(token);
             gateway.setInitialAuth(auth);
 
@@ -136,7 +142,7 @@ describe("OauthGateway", () => {
             };
             const n = nock("https://www.reddit.com", commonNockOptions)
               .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
-              .reply(200, { bim: "bom" });
+              .reply(200, tokenResponse);
 
             await gateway.updateAccessToken();
 
@@ -148,21 +154,25 @@ describe("OauthGateway", () => {
 
     it("falls on client credentials auth if it has no stored refresh token and no initial auth", async () => {
       await fc.assert(
-        fc.asyncProperty(fcToken(false), async token => {
-          gateway.setToken(token);
-          // eslint-disable-next-line unicorn/no-useless-undefined
-          gateway.setInitialAuth(undefined);
+        fc.asyncProperty(
+          fcToken(false),
+          fcTokenResponse(),
+          async (token, tokenResponse) => {
+            gateway.setToken(token);
+            // eslint-disable-next-line unicorn/no-useless-undefined
+            gateway.setInitialAuth(undefined);
 
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          const body = { api_type: "json", grant_type: "client_credentials" };
-          const n = nock("https://www.reddit.com", commonNockOptions)
-            .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
-            .reply(200, { bim: "bom" });
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            const body = { api_type: "json", grant_type: "client_credentials" };
+            const n = nock("https://www.reddit.com", commonNockOptions)
+              .post("/api/v1/access_token.json?raw_json=1&api_type=json", body)
+              .reply(200, tokenResponse);
 
-          await gateway.updateAccessToken();
+            await gateway.updateAccessToken();
 
-          n.done();
-        })
+            n.done();
+          }
+        )
       );
     });
 
@@ -200,13 +210,13 @@ describe("OauthGateway", () => {
     ["not authenticated", undefined],
     [
       "access has expired",
-      { access: "accessTkn", expiration: Date.now() - 9000 },
+      { access: "accessTkn", expiration: Date.now() - 9000, scopes: [] },
     ],
   ])("When %s", (_condition, token) => {
     beforeEach(() => {
       gateway.setToken(token);
       updateAccessTokenSpy.mockImplementation(async () => {
-        gateway.setToken({ access: "accessTkn", expiration: 0 });
+        gateway.setToken({ access: "accessTkn", expiration: 0, scopes: [] });
       });
     });
 
@@ -259,7 +269,11 @@ describe("OauthGateway", () => {
     };
 
     beforeEach(() => {
-      gateway.setToken({ access: "accessTkn", expiration: Date.now() + 9000 });
+      gateway.setToken({
+        access: "accessTkn",
+        expiration: Date.now() + 9000,
+        scopes: [],
+      });
     });
 
     describe(".get()", () => {
