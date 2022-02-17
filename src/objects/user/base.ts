@@ -5,10 +5,10 @@ import type { Comment, ContentData, Post, Subreddit } from "..";
 
 import { Content } from "..";
 
-// TODO: Suspended users give back a very minimal response.
-// BODY: Fetching a suspended user gives back very minimal data, meaning that
-// BODY: this typing below is only a valid base for non-suspended users. I'm not
-// BODY: sure what the best way to deal with this is...
+// TODO: Deal with suspended users.
+// Fetching a suspended user gives back very minimal data, meaning that this
+// typing below is only a valid base for non-suspended users. I'm not sure what
+// the best way to deal with this is...
 
 /** The data for a single Reddit user. */
 export interface UserData extends ContentData {
