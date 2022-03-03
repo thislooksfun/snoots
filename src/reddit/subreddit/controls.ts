@@ -21,11 +21,11 @@ import { PostOrCommentListing } from "../post-or-comment/listing";
 import { Subreddit } from "../subreddit/object";
 import { assertKind, fromRedditData } from "../util";
 
-/** A single capcha identifier and response. */
-export interface Capcha {
-  /** The identifier of the capcha. */
+/** A single captcha identifier and response. */
+export interface Captcha {
+  /** The identifier of the captcha. */
   iden: string;
-  /** The response to the capcha. */
+  /** The response to the captcha. */
   response: string;
 }
 
@@ -58,10 +58,10 @@ export interface TextPostOptions {
   sendReplies?: boolean;
 
   /**
-   * The capcha information. This is only necessary if the authenticated account
+   * The captcha information. This is only necessary if the authenticated account
    * requires a captcha to submit posts and comments.
    */
-  captcha?: Capcha;
+  captcha?: Captcha;
 
   /** Whether or not this post is NSFW (defaults to `false`). */
   nsfw?: boolean;
@@ -87,7 +87,7 @@ interface PostOptions {
   url?: string;
   crosspostFullname?: string;
   sendReplies: boolean;
-  captcha?: Capcha;
+  captcha?: Captcha;
   nsfw: boolean;
   spoiler: boolean;
   // This only applies to link and cross posts

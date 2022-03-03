@@ -16,7 +16,7 @@ export { ReplyableControls } from "./replyable/controls";
 export { Replyable } from "./replyable/object";
 export type {
   BanOptions,
-  Capcha,
+  Captcha,
   LinkPostOptions,
   TextPostOptions,
 } from "./subreddit/controls";
