@@ -3,15 +3,13 @@ import type { Gateway } from "./gateway/gateway";
 import type { ClientAuth } from "./gateway/oauth";
 import type { Maybe } from "./helper/types";
 
-import {
-  CommentControls,
-  PostControls,
-  SubredditControls,
-  UserControls,
-} from "./controls";
 import { AnonGateway } from "./gateway/anon";
 import { OauthGateway } from "./gateway/oauth";
 import { makeDebug } from "./helper/debug";
+import { CommentControls } from "./reddit/comment/controls";
+import { PostControls } from "./reddit/post/controls";
+import { SubredditControls } from "./reddit/subreddit/controls";
+import { UserControls } from "./reddit/user/controls";
 
 const debug = makeDebug("class:Client");
 

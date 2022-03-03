@@ -1,4 +1,4 @@
-import type { Maybe } from "../../..";
+import type { Maybe } from "../../../helper/types";
 import type { ClientAuth, Token, TokenResponse } from "../../oauth";
 
 import fc from "fast-check";

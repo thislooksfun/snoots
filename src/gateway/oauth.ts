@@ -3,7 +3,7 @@ import type { Credentials } from "./creds";
 import type { BearerAuth } from "./types";
 
 import { makeDebug } from "../helper/debug";
-import { fromRedditData } from "../helper/util";
+import { fromRedditData } from "../reddit/util";
 import { CredsGateway } from "./creds";
 import { Gateway } from "./gateway";
 

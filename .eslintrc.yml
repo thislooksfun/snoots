@@ -61,7 +61,7 @@ rules:
         - ["^\\."] # Relative imports
   unicorn/filename-case:
     - error
-    - case: camelCase
+    - case: kebabCase
   # This is already covered by @typescript-eslint/no-this-alias.
   unicorn/no-this-assignment: "off"
   # The node: protocol is only supported in node 16+, and snoots currently

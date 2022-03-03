@@ -19,7 +19,7 @@
     "lint:fix": "npm-run-all lint:fix:*",
     "lint:fix:eslint": "eslint --fix \"**/*.ts\"",
     "lint:fix:prettier": "prettier --write \"**/*\"",
-    "gendoc": "typedoc src/index.ts",
+    "gendoc": "typedoc --treatWarningsAsErrors src/index.ts",
     "prepack": "del-cli \"{dist,types}/**/__types__\"",
     "prepublishOnly": "npm run clean && npm run lint && npm run build"
   },
