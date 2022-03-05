@@ -14,9 +14,9 @@ import type {
 import { assertKind, fromRedditData } from "..//util";
 import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
+import { LockableControls } from "../lockable/controls";
 import { PostListing } from "../post/listing";
 import { Post } from "../post/object";
-import { VoteableControls } from "../voteable/controls";
 
 function isRemoved(dat: Data) {
   if (dat.removed != undefined) return dat.removed as boolean;
@@ -30,7 +30,7 @@ type SplitRawPost = [ListingObject, ListingObject];
  *
  * @category Controls
  */
-export class PostControls extends VoteableControls {
+export class PostControls extends LockableControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "t3");
@@ -210,28 +210,6 @@ export class PostControls extends VoteableControls {
    */
   async unhide(id: string): Promise<void> {
     await this.gateway.post("api/unhide", { id: this.namespace(id) });
-  }
-
-  /**
-   * Lock a post, preventing non-moderators from being able to post comments.
-   *
-   * @param id The ID of the post to lock.
-   *
-   * @returns A promise that resolves when the post has been locked.
-   */
-  async lock(id: string): Promise<void> {
-    await this.gateway.post("api/lock", { id: this.namespace(id) });
-  }
-
-  /**
-   * Unlock a post, allowing non-moderators from being able to post comments.
-   *
-   * @param id The ID of the post to unlock.
-   *
-   * @returns A promise that resolves when the post has been unlocked.
-   */
-  async unlock(id: string): Promise<void> {
-    await this.gateway.post("api/unlock", { id: this.namespace(id) });
   }
 
   /**

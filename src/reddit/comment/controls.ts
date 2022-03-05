@@ -6,8 +6,8 @@ import type { RedditObject } from "../types";
 import { makeDebug } from "../../helper/debug";
 import { Comment } from "../comment/object";
 import { fakeMoreListing } from "../listing/util";
+import { LockableControls } from "../lockable/controls";
 import { assertKind, fromRedditData } from "../util";
-import { VoteableControls } from "../voteable/controls";
 import { CommentListing } from "./listing/listing";
 
 const debug = makeDebug("controls:comment");
@@ -26,7 +26,7 @@ export type DistinguishStates = "none" | "mod" | "sticky";
  *
  * @category Controls
  */
-export class CommentControls extends VoteableControls {
+export class CommentControls extends LockableControls {
   /** @internal */
   constructor(client: Client) {
     super(client, "t1");

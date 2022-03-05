@@ -1,11 +1,11 @@
 import type { Maybe } from "../../helper/types";
 import type { Comment } from "../comment/object";
 import type { Listing } from "../listing/listing";
+import type { LockableData } from "../lockable/object";
 import type { PostControls } from "../post/controls";
 import type { LinkPostOptions } from "../subreddit/controls";
-import type { VoteableData } from "../voteable/object";
 
-import { Voteable } from "../voteable/object";
+import { Lockable } from "../lockable/object";
 
 // TODO: Fully document Media
 // This looks like it can be split into two interfaces?
@@ -74,7 +74,7 @@ import { Voteable } from "../voteable/object";
 // }
 
 /** The attributes specific to Post objects. */
-export interface PostData extends VoteableData {
+export interface PostData extends LockableData {
   /**
    * The text body of the post.
    *
@@ -141,9 +141,6 @@ export interface PostData extends VoteableData {
   // linkFlairText: Maybe<string>;
   // linkFlairTextColor: "dark" | "light";
   // linkFlairType: "text" | "richtext";
-
-  /** Whether or not this post is locked. */
-  locked: boolean;
 
   // TODO: Document or remove PostData.media*
   // media: Maybe<Media>;     // seems to always be undefined
@@ -238,7 +235,7 @@ export interface PostData extends VoteableData {
 }
 
 /** A single post. */
-export class Post extends Voteable implements PostData {
+export class Post extends Lockable implements PostData {
   body: string;
   bodyHtml: Maybe<string>;
   // clicked: boolean;
@@ -262,7 +259,6 @@ export class Post extends Voteable implements PostData {
   // linkFlairText: Maybe<string>;
   // linkFlairTextColor: "dark" | "light";
   // linkFlairType: "text" | "richtext";
-  locked: boolean;
   // media: Maybe<Media>;
   // mediaEmbed: MediaEmbed;
   // mediaOnly: boolean;
@@ -323,7 +319,6 @@ export class Post extends Voteable implements PostData {
     // this.linkFlairText = data.linkFlairText;
     // this.linkFlairTextColor = data.linkFlairTextColor;
     // this.linkFlairType = data.linkFlairType;
-    this.locked = data.locked;
     // this.media = data.media;
     // this.mediaEmbed = data.mediaEmbed;
     // this.mediaOnly = data.mediaOnly;
@@ -441,24 +436,6 @@ export class Post extends Voteable implements PostData {
    */
   async unhide(): Promise<void> {
     return this.controls.unhide(this.id);
-  }
-
-  /**
-   * Lock this post, preventing non-moderators from being able to post comments.
-   *
-   * @returns A promise that resolves when the post has been locked.
-   */
-  async lock(): Promise<void> {
-    return this.controls.lock(this.id);
-  }
-
-  /**
-   * Unlock this post, allowing non-moderators from being able to post comments.
-   *
-   * @returns A promise that resolves when the post has been unlocked.
-   */
-  async unlock(): Promise<void> {
-    return this.controls.unlock(this.id);
   }
 
   /**
