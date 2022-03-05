@@ -2,7 +2,7 @@ import type { Client } from "../../client";
 import type { Query } from "../../gateway/types";
 import type { Data, Maybe } from "../../helper/types";
 import type { Listing, ListingObject, RedditListing } from "../listing/listing";
-import type { PostData } from "../post/object";
+import type { PostData, SuggestedSort } from "../post/object";
 import type { LinkPostOptions } from "../subreddit/controls";
 import type {
   RedditObject,
@@ -168,6 +168,23 @@ export class PostControls extends LockableControls {
   async setContestMode(id: string, enabled: boolean): Promise<void> {
     const body = { state: enabled, id: this.namespace(id) };
     await this.gateway.post("api/set_contest_mode", body);
+  }
+
+  /**
+   * Set the suggested sort for a post.
+   *
+   * @param id The ID of the post to update the suggested sort for.
+   * @param sort The new suggested sort. If this is `undefined` the sort will be
+   * cleared.
+   *
+   * @returns A promise that resolves when the post's suggested sort has been
+   * updated.
+   */
+  async setSuggestedSort(id: string, sort: Maybe<SuggestedSort>) {
+    await this.gateway.post("api/set_suggested_sort", {
+      id: this.namespace(id),
+      sort: sort ?? "",
+    });
   }
 
   /**

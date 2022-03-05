@@ -7,6 +7,16 @@ import type { LinkPostOptions } from "../subreddit/controls";
 
 import { Lockable } from "../lockable/object";
 
+export type SuggestedSort =
+  | "confidence"
+  | "controversial"
+  | "live"
+  | "new"
+  | "old"
+  | "qa"
+  | "random"
+  | "top";
+
 // TODO: Fully document Media
 // This looks like it can be split into two interfaces?
 // export interface Media {
@@ -189,12 +199,11 @@ export interface PostData extends LockableData {
   /** The number of subscribers the subreddit this was posted to has. */
   subredditSubscribers: number;
 
-  // TODO: Document or remove PostData.suggestedSort
   /**
    * The suggested way to sort the comments of this post, or undefined if no
    * such suggestion has been given.
    */
-  // suggestedSort: Maybe<Sort>;
+  suggestedSort: Maybe<SuggestedSort>;
 
   // TODO: Document or remove PostData.thumbnail*
   // thumbnail: 'self' | string;
@@ -277,7 +286,7 @@ export class Post extends Lockable implements PostData {
   // secureMediaEmbed: SecureMediaEmbed;
   spoiler: boolean;
   subredditSubscribers: number;
-  // suggestedSort: Maybe<Sort>;
+  suggestedSort: Maybe<SuggestedSort>;
   // thumbnail: string;
   // thumbnailHeight?: number;
   // thumbnailWidth?: number;
@@ -337,7 +346,7 @@ export class Post extends Lockable implements PostData {
     // this.secureMediaEmbed = data.secureMediaEmbed;
     this.spoiler = data.spoiler;
     this.subredditSubscribers = data.subredditSubscribers;
-    // this.suggestedSort = data.suggestedSort;
+    this.suggestedSort = data.suggestedSort;
     // this.thumbnail = data.thumbnail;
     // this.thumbnailHeight = data.thumbnailHeight;
     // this.thumbnailWidth = data.thumbnailWidth;
@@ -406,6 +415,18 @@ export class Post extends Lockable implements PostData {
    */
   async setContestMode(enabled: boolean): Promise<void> {
     return this.controls.setContestMode(this.id, enabled);
+  }
+
+  /**
+   * Set the suggested sort for this post.
+   *
+   * @param sort The new suggested sort. If this is `undefined` the sort will be
+   * cleared.
+   * @returns A promise that resolves when this post's suggested sort has been
+   * updated.
+   */
+  async setSuggestedSort(sort: Maybe<SuggestedSort>) {
+    return this.controls.setSuggestedSort(this.id, sort);
   }
 
   /**
