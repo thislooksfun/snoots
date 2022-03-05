@@ -1,3 +1,21 @@
+## [1.0.0-dev.17](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.16...v1.0.0-dev.17) (2022-03-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* Renamed type `Capcha` -> `Captcha` (fixed typo).
+
+### Features
+
+* add Client.getAuthorizedScopes() ([1cdcac2](https://github.com/thislooksfun/snoots/commit/1cdcac2e2b7c3f9fb1d9685f8935ac3c304483f6)), closes [#43](https://github.com/thislooksfun/snoots/issues/43)
+* allow getting and setting a post's suggested sort ([b6235b8](https://github.com/thislooksfun/snoots/commit/b6235b83fccb0fa547f9ae8ef8e775acca7a7f3e))
+* allow locking and unlocking comments ([766726b](https://github.com/thislooksfun/snoots/commit/766726bb99b9fc0c23de235411e336440252977a))
+
+
+### Bug Fixes
+
+* fix typo (Capcha -> Captcha) ([774866d](https://github.com/thislooksfun/snoots/commit/774866d5392958dbdb7cd833ad76d0ae37182b5c))
+
 ## [1.0.0-dev.16](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.15...v1.0.0-dev.16) (2022-02-12)
 
 
