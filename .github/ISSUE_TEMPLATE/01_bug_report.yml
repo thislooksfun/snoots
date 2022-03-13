@@ -1,0 +1,74 @@
+name: Bug Report
+description: File a bug report
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reproduction steps
+      description: How can we reproduce this?
+      # Multiline placeholders are broken in Safari.
+      # https://github.com/github/feedback/discussions/4290
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Snoots Version
+      description: What version of snoots are you using?
+      placeholder: v1.2.3
+    validations:
+      required: true
+
+  # TODO: Once we support more than just Node.js
+  # - type: dropdown
+  #   id: platform
+  #   attributes:
+  #     label: Platform
+  #     description: What platform(s) have you tried?
+  #     multiple: true
+  #     options:
+  #       - Node.js
+  #       - Firefox
+  #       - Safari
+  #       - Microsoft Edge
+  #       - Opera
+  #       - Brave
+  #       - Chrome
+  #   validations:
+  #     required: true
+
+  - type: input
+    attributes:
+      # TODO: Rename this to "platform version" once we support browsers.
+      label: Node Version
+      description: What version of Node are you using?
+      placeholder: v16
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Logs
+      description: >
+        Please copy and paste any relevant log output.
+        This will be automatically formatted into code, so no need for backticks.
+        For information on how to enable debug logging run snoots with `DEBUG=snoots`.
+      render: Shell
+
+  - type: textarea
+    attributes:
+      label: Extra Information
+      description: Any additional information that might help resolve this issue.

@@ -1,0 +1,17 @@
+name: Incorrect Documentation
+description: Something is wrong with our docs
+labels: [documentation]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Please check the bleeding-edge docs, available here:
+        https://thislooks.fun/snoots/docs/master, to make sure your issue hasn't
+        been fixed already.
+
+  - type: textarea
+    attributes:
+      label: Describe the issue
+      description: What is wrong with the docs?
+    validations:
+      required: true
