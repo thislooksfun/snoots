@@ -2,16 +2,12 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| alpha   | :white_check_mark: |
+Only the latest version will be actively supported. I'm only one person doing
+this in my spare time.
 
 ## Reporting a Vulnerability
 
-To privately report a vulerability, check out my cross-project
+To privately report a vulnerability, check out my cross-project
 [security policy][secpol].
 
 <!-- Links -->
