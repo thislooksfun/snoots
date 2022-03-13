@@ -1,0 +1,10 @@
+name: Feature Request
+description: How can we make snoots better?
+labels: [feature suggestion]
+body:
+  - type: textarea
+    attributes:
+      label: Feature Description
+      description: Describe the change you would like to see.
+    validations:
+      required: true
