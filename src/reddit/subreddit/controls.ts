@@ -132,24 +132,24 @@ export class SubredditControls extends BaseControls {
    * Add an approved poster.
    *
    * @param subreddit The name of the subreddit to add the contributor to.
-   * @param name The username of the user to add.
+   * @param username The username of the user to add.
    *
    * @returns A promise that resolves when the contributor has been added.
    */
-  async addContributor(subreddit: string, name: string): Promise<void> {
-    await this.friend(subreddit, name, "contributor");
+  async addContributor(subreddit: string, username: string): Promise<void> {
+    await this.friend(subreddit, username, "contributor");
   }
 
   /**
    * Remove an approved poster.
    *
    * @param subreddit The name of the subreddit to remove the contributor from.
-   * @param name The username of the user to remove.
+   * @param username The username of the user to remove.
    *
    * @returns A promise that resolves when the contributor has been removed.
    */
-  async removeContributor(subreddit: string, name: string): Promise<void> {
-    await this.unfriend(subreddit, name, "contributor");
+  async removeContributor(subreddit: string, username: string): Promise<void> {
+    await this.unfriend(subreddit, username, "contributor");
   }
 
   /** @internal */
@@ -161,38 +161,41 @@ export class SubredditControls extends BaseControls {
    * Add a user to the list of approved wiki editors.
    *
    * @param subreddit The name of the subreddit to add the user to.
-   * @param name The username of the user to add.
+   * @param username The username of the user to add.
    *
    * @returns A promise that resolves when the wiki editor has been added.
    */
-  async addWikiContributor(subreddit: string, name: string): Promise<void> {
-    await this.friend(subreddit, name, "wikicontributor");
+  async addWikiContributor(subreddit: string, username: string): Promise<void> {
+    await this.friend(subreddit, username, "wikicontributor");
   }
 
   /**
    * Remove a user from the list of approved wiki editors.
    *
    * @param subreddit The name of the subreddit to remove the user from.
-   * @param name The username of the user to remove.
+   * @param username The username of the user to remove.
    *
    * @returns A promise that resolves when the wiki editor has been removed.
    */
-  async removeWikiContributor(subreddit: string, name: string): Promise<void> {
-    await this.unfriend(subreddit, name, "wikicontributor");
+  async removeWikiContributor(
+    subreddit: string,
+    username: string
+  ): Promise<void> {
+    await this.unfriend(subreddit, username, "wikicontributor");
   }
 
   /**
    * Ban a user from a subreddit.
    *
    * @param subreddit The name of the subreddit to ban the user from.
-   * @param name The username of the user to ban.
+   * @param username The username of the user to ban.
    * @param options Any additional options for the ban.
    *
    * @returns A promise that resolves when the user has been banned.
    */
   async banUser(
     subreddit: string,
-    name: string,
+    username: string,
     options: BanOptions = {}
   ): Promise<void> {
     const friendOptions: Query = {};
@@ -203,19 +206,19 @@ export class SubredditControls extends BaseControls {
     if (options.note != undefined) friendOptions.note = options.note;
     if (options.reason != undefined) friendOptions.ban_reason = options.reason;
 
-    await this.friend(subreddit, name, "banned", friendOptions);
+    await this.friend(subreddit, username, "banned", friendOptions);
   }
 
   /**
    * Unban a user from a subreddit.
    *
    * @param subreddit The name of the subreddit to unban the user from.
-   * @param name The username of the user to unban.
+   * @param username The username of the user to unban.
    *
    * @returns A promise that resolves when the user has been unbanned.
    */
-  async unbanUser(subreddit: string, name: string): Promise<void> {
-    await this.unfriend(subreddit, name, "banned");
+  async unbanUser(subreddit: string, username: string): Promise<void> {
+    await this.unfriend(subreddit, username, "banned");
   }
 
   /** @internal */
@@ -686,13 +689,13 @@ export class SubredditControls extends BaseControls {
   /** @internal */
   protected async friend(
     subreddit: string,
-    name: string,
+    username: string,
     type: string,
     options: Query = {}
   ) {
     await this.gateway.post(`r/${subreddit}/api/friend`, {
       ...options,
-      name,
+      name: username,
       type,
     });
   }
@@ -700,13 +703,13 @@ export class SubredditControls extends BaseControls {
   /** @internal */
   protected async unfriend(
     subreddit: string,
-    name: string,
+    username: string,
     type: string,
     options: Query = {}
   ) {
     await this.gateway.post(`r/${subreddit}/api/unfriend`, {
       ...options,
-      name,
+      name: username,
       type,
     });
   }

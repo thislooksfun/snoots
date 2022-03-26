@@ -839,23 +839,23 @@ export class Subreddit extends Content implements SubredditData {
   /**
    * Add an approved poster.
    *
-   * @param name The username of the user to add.
+   * @param username The username of the user to add.
    *
    * @returns A promise that resolves when the contributor has been added.
    */
-  async addContributor(name: string): Promise<void> {
-    return this.controls.addContributor(this.displayName, name);
+  async addContributor(username: string): Promise<void> {
+    return this.controls.addContributor(this.displayName, username);
   }
 
   /**
    * Remove an approved poster.
    *
-   * @param name The username of the user to remove.
+   * @param username The username of the user to remove.
    *
    * @returns A promise that resolves when the contributor has been removed.
    */
-  async removeContributor(name: string): Promise<void> {
-    return this.controls.removeContributor(this.displayName, name);
+  async removeContributor(username: string): Promise<void> {
+    return this.controls.removeContributor(this.displayName, username);
   }
 
   /**
@@ -870,45 +870,45 @@ export class Subreddit extends Content implements SubredditData {
   /**
    * Add a user to the list of approved wiki editors.
    *
-   * @param name The username of the user to add.
+   * @param username The username of the user to add.
    *
    * @returns A promise that resolves when the wiki editor has been added.
    */
-  async addWikiContributor(name: string): Promise<void> {
-    return this.controls.addWikiContributor(this.displayName, name);
+  async addWikiContributor(username: string): Promise<void> {
+    return this.controls.addWikiContributor(this.displayName, username);
   }
 
   /**
    * Remove a user from the list of approved wiki editors.
    *
-   * @param name The username of the user to remove.
+   * @param username The username of the user to remove.
    *
    * @returns A promise that resolves when the wiki editor has been removed.
    */
-  async removeWikiContributor(name: string): Promise<void> {
-    return this.controls.removeWikiContributor(this.displayName, name);
+  async removeWikiContributor(username: string): Promise<void> {
+    return this.controls.removeWikiContributor(this.displayName, username);
   }
 
   /**
    * Ban a user from this subreddit.
    *
-   * @param name The username of the user to ban.
+   * @param username The username of the user to ban.
    * @param options Any additional options for the ban.
    *
    * @returns A promise that resolves when the user has been banned.
    */
-  async banUser(name: string, options: BanOptions = {}): Promise<void> {
-    return this.controls.banUser(this.displayName, name, options);
+  async banUser(username: string, options: BanOptions = {}): Promise<void> {
+    return this.controls.banUser(this.displayName, username, options);
   }
 
   /**
    * Unban a user from this subreddit.
    *
-   * @param name The username of the user to unban.
+   * @param username The username of the user to unban.
    *
    * @returns A promise that resolves when the user has been unbanned.
    */
-  async unbanUser(name: string): Promise<void> {
-    return this.controls.unbanUser(this.displayName, name);
+  async unbanUser(username: string): Promise<void> {
+    return this.controls.unbanUser(this.displayName, username);
   }
 }
