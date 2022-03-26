@@ -1,14 +1,14 @@
 import type { Client } from "../../client";
-import type { CommentData } from "../comment/object";
 import type { ListingObject } from "../listing/listing";
 import type { RedditObject } from "../types";
+import type { CommentData } from "./object";
 
 import { makeDebug } from "../../helper/debug";
-import { Comment } from "../comment/object";
 import { fakeMoreListing } from "../listing/util";
 import { LockableControls } from "../lockable/controls";
 import { assertKind, fromRedditData } from "../util";
 import { CommentListing } from "./listing/listing";
+import { Comment } from "./object";
 
 const debug = makeDebug("controls:comment");
 

@@ -2,7 +2,6 @@ import type { Client } from "../../client";
 import type { Query } from "../../gateway/types";
 import type { Data, Maybe } from "../../helper/types";
 import type { Listing, ListingObject, RedditListing } from "../listing/listing";
-import type { PostData, SuggestedSort } from "../post/object";
 import type { LinkPostOptions } from "../subreddit/controls";
 import type {
   RedditObject,
@@ -10,13 +9,14 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../types";
+import type { PostData, SuggestedSort } from "./object";
 
 import { assertKind, fromRedditData } from "..//util";
 import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
 import { LockableControls } from "../lockable/controls";
-import { PostListing } from "../post/listing";
-import { Post } from "../post/object";
+import { PostListing } from "./listing";
+import { Post } from "./object";
 
 function isRemoved(dat: Data) {
   if (dat.removed != undefined) return dat.removed as boolean;

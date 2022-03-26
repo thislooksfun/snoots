@@ -1,7 +1,7 @@
 import type { Maybe } from "../../helper/types";
-import type { CommentControls, DistinguishStates } from "../comment/controls";
 import type { Listing } from "../listing/listing";
 import type { LockableData } from "../lockable/object";
+import type { CommentControls, DistinguishStates } from "./controls";
 
 import { Lockable } from "../lockable/object";
 

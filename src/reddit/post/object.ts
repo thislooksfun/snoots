@@ -2,8 +2,8 @@ import type { Maybe } from "../../helper/types";
 import type { Comment } from "../comment/object";
 import type { Listing } from "../listing/listing";
 import type { LockableData } from "../lockable/object";
-import type { PostControls } from "../post/controls";
 import type { LinkPostOptions } from "../subreddit/controls";
+import type { PostControls } from "./controls";
 
 import { Lockable } from "../lockable/object";
 

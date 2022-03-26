@@ -6,18 +6,18 @@ import type { Post } from "../post/object";
 import type { PostSort } from "../post/types";
 import type { Subreddit } from "../subreddit/object";
 import type { RedditObject } from "../types";
-import type { User, UserData } from "../user/object/base-object";
-import type { MyUserData } from "../user/object/my-user";
-import type { OtherUserData } from "../user/object/other-user";
+import type { User, UserData } from "./object/base-object";
+import type { MyUserData } from "./object/my-user";
+import type { OtherUserData } from "./object/other-user";
 import type { UserItemsSort } from "./types";
 
 import { BaseControls } from "../base-controls";
 import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
 import { PostListing } from "../post/listing";
-import { MyUser } from "../user/object/my-user";
-import { OtherUser } from "../user/object/other-user";
 import { assertKind, fromRedditData } from "../util";
+import { MyUser } from "./object/my-user";
+import { OtherUser } from "./object/other-user";
 
 /**
  * Various methods to allow you to interact with users.

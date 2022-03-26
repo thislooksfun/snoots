@@ -3,7 +3,7 @@ import type {
   ListingContext,
   RedditListing,
 } from "../listing/listing";
-import type { Post } from "../post/object";
+import type { Post } from "./object";
 
 import { Listing, Pager } from "../listing/listing";
 

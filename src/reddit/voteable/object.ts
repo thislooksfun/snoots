@@ -2,7 +2,7 @@ import type { Maybe } from "../../helper/types";
 import type { Comment } from "../comment/object";
 import type { ContentData } from "../content";
 import type { SubredditType } from "../subreddit/types";
-import type { VoteableControls } from "../voteable/controls";
+import type { VoteableControls } from "./controls";
 
 import { Replyable } from "../replyable/object";
 

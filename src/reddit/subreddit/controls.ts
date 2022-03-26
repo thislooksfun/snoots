@@ -5,21 +5,21 @@ import type { Comment } from "../comment/object";
 import type { Listing } from "../listing/listing";
 import type { Post } from "../post/object";
 import type { PostSort } from "../post/types";
-import type { SubredditData } from "../subreddit/object";
 import type {
   RedditObject,
   SearchSort,
   SearchSyntax,
   TimeRange,
 } from "../types";
+import type { SubredditData } from "./object";
 
 import { BaseControls } from "../base-controls";
 import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
 import { PostListing } from "../post/listing";
 import { PostOrCommentListing } from "../post-or-comment/listing";
-import { Subreddit } from "../subreddit/object";
 import { assertKind, fromRedditData } from "../util";
+import { Subreddit } from "./object";
 
 /** A single captcha identifier and response. */
 export interface Captcha {

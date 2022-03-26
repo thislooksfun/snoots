@@ -1,5 +1,5 @@
 import type { ContentData } from "../content";
-import type { ReplyableControls } from "../replyable/controls";
+import type { ReplyableControls } from "./controls";
 
 import { Content } from "../content";
 
