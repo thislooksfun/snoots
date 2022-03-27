@@ -905,6 +905,18 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Get the list of approved wiki contributors for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 wiki contributors.
+   *
+   * @returns A listing of approved wiki contributors.
+   */
+  getWikiContributors(): Listing<ModeratorActionedUser> {
+    return this.controls.getWikiContributors(this.displayName);
+  }
+
+  /**
    * Mute a user in this subreddit.
    *
    * This prevents the user from sending modmail to this subreddit for 72 hours.
