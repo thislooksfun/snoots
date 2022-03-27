@@ -11,7 +11,6 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../types";
-import type { User } from "../user/object/base-object";
 import type { SubredditData } from "./object";
 
 import { BaseControls } from "../base-controls";
@@ -19,7 +18,6 @@ import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
 import { PostListing } from "../post/listing";
 import { PostOrCommentListing } from "../post-or-comment/listing";
-import { UserListing } from "../user/listing";
 import { assertKind, fromRedditData } from "../util";
 import { Subreddit } from "./object";
 
@@ -160,20 +158,6 @@ export class SubredditControls extends BaseControls {
   }
 
   /**
-   * Get the list of approved contributors for a subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 contributors.
-   *
-   * @param subreddit The name of the subreddit to get contributors for.
-   *
-   * @returns A listing of approved contributors.
-   */
-  getContributors(subreddit: string): Listing<User> {
-    return this.getAboutListingUsers(subreddit, "contributors");
-  }
-
-  /**
    * Add a user to the list of approved wiki editors.
    *
    * @param subreddit The name of the subreddit to add the user to.
@@ -198,20 +182,6 @@ export class SubredditControls extends BaseControls {
     username: string
   ): Promise<void> {
     await this.unfriend(subreddit, username, "wikicontributor");
-  }
-
-  /**
-   * Get the list of approved wiki contributors for a subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 wiki contributors.
-   *
-   * @param subreddit The name of the subreddit to get wiki contributors for.
-   *
-   * @returns A listing of approved wiki contributors.
-   */
-  getWikiContributors(subreddit: string): Listing<User> {
-    return this.getAboutListingUsers(subreddit, "wikicontributors");
   }
 
   /**
@@ -252,20 +222,6 @@ export class SubredditControls extends BaseControls {
   }
 
   /**
-   * Get the list of banned users for a subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 banned users.
-   *
-   * @param subreddit The name of the subreddit to get banned users for.
-   *
-   * @returns A listing of banned users.
-   */
-  getBannedUsers(subreddit: string): Listing<User> {
-    return this.getAboutListingUsers(subreddit, "banned");
-  }
-
-  /**
    * Mute a user in a subreddit.
    *
    * This prevents the user from sending modmail to the subreddit for 72 hours.
@@ -288,20 +244,6 @@ export class SubredditControls extends BaseControls {
   }
 
   /**
-   * Get the list of muted users for a subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 muted users.
-   *
-   * @param subreddit The name of the subreddit to get muted users for.
-   *
-   * @returns A listing of muted users.
-   */
-  getMutedUsers(subreddit: string): Listing<User> {
-    return this.getAboutListingUsers(subreddit, "muted");
-  }
-
-  /**
    * Ban a user from editing a subreddit's wiki.
    *
    * @param subreddit The name of the subreddit to wikiban the user in.
@@ -319,34 +261,6 @@ export class SubredditControls extends BaseControls {
    */
   async unwikibanUser(subreddit: string, username: string): Promise<void> {
     await this.unfriend(subreddit, username, "wikibanned");
-  }
-
-  /**
-   * Get the list of wikibanned users for a subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 wikibanned users.
-   *
-   * @param subreddit The name of the subreddit to get wikibanned users for.
-   *
-   * @returns A listing of wikibanned users.
-   */
-  getWikibannedUsers(subreddit: string): Listing<User> {
-    return this.getAboutListingUsers(subreddit, "wikibanned");
-  }
-
-  /**
-   * Get the list of moderators for a subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 moderators.
-   *
-   * @param subreddit The name of the subreddit to get moderators for.
-   *
-   * @returns A listing of moderators.
-   */
-  getModerators(subreddit: string): Listing<User> {
-    return this.getAboutListingUsers(subreddit, "moderators");
   }
 
   /** @internal */
@@ -840,16 +754,6 @@ export class SubredditControls extends BaseControls {
       name: username,
       type,
     });
-  }
-
-  /** @internal */
-  protected getAboutListingUsers(
-    subreddit: string,
-    type: string
-  ): Listing<User> {
-    const request = { url: `r/${subreddit}/${type}`, query: {} };
-    const context = { request, client: this.client };
-    return new UserListing(fakeListingAfter(""), context);
   }
 
   /** @internal */

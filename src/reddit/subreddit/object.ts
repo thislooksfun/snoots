@@ -4,7 +4,6 @@ import type { ContentData } from "../content";
 import type { Listing } from "../listing/listing";
 import type { Post } from "../post/object";
 import type { SearchSort, SearchSyntax, Size, TimeRange } from "../types";
-import type { User } from "../user/object/base-object";
 import type {
   BanOptions,
   LinkPostOptions,
@@ -871,18 +870,6 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
-   * Get the list of approved contributors for this subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 contributors.
-   *
-   * @returns A listing of approved contributors.
-   */
-  getContributors(): Listing<User> {
-    return this.controls.getContributors(this.displayName);
-  }
-
-  /**
    * Add a user to the list of approved wiki editors.
    *
    * @param username The username of the user to add.
@@ -902,18 +889,6 @@ export class Subreddit extends Content implements SubredditData {
    */
   async removeWikiContributor(username: string): Promise<void> {
     return this.controls.removeWikiContributor(this.displayName, username);
-  }
-
-  /**
-   * Get the list of approved wiki contributors for a subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 wiki contributors.
-   *
-   * @returns A listing of approved wiki contributors.
-   */
-  getWikiContributors(): Listing<User> {
-    return this.controls.getWikiContributors(this.displayName);
   }
 
   /**
@@ -937,18 +912,6 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
-   * Get the list of muted users for this subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 muted users.
-   *
-   * @returns A listing of muted users.
-   */
-  getMutedUsers(): Listing<User> {
-    return this.controls.getMutedUsers(this.displayName);
-  }
-
-  /**
    * Ban a user from editing this subreddit's wiki.
    *
    * @param username The username of the user to wikiban.
@@ -964,30 +927,6 @@ export class Subreddit extends Content implements SubredditData {
    */
   async unwikibanUser(username: string): Promise<void> {
     return this.controls.unwikibanUser(this.displayName, username);
-  }
-
-  /**
-   * Get the list of wikibanned users for this subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 wikibanned users.
-   *
-   * @returns A listing of wikibanned users.
-   */
-  getWikibannedUsers(): Listing<User> {
-    return this.controls.getWikibannedUsers(this.displayName);
-  }
-
-  /**
-   * Get the list of moderators for this subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 moderators.
-   *
-   * @returns A listing of moderators.
-   */
-  getModerators(): Listing<User> {
-    return this.controls.getModerators(this.displayName);
   }
 
   /**
@@ -1011,17 +950,5 @@ export class Subreddit extends Content implements SubredditData {
    */
   async unbanUser(username: string): Promise<void> {
     return this.controls.unbanUser(this.displayName, username);
-  }
-
-  /**
-   * Get the list of banned users for this subreddit.
-   *
-   * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 banned users.
-   *
-   * @returns A listing of banned users.
-   */
-  getBannedUsers(): Listing<User> {
-    return this.controls.getBannedUsers(this.displayName);
   }
 }
