@@ -335,6 +335,23 @@ export class SubredditControls extends BaseControls {
     await this.unfriend(subreddit, username, "wikibanned");
   }
 
+  /**
+   * Get the list of wikibanned users for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 wikibanned users.
+   *
+   * @param subreddit The name of the subreddit to get wikibanned users for.
+   *
+   * @returns A listing of wikibanned users.
+   */
+  getWikibannedUsers(subreddit: string): Listing<BannedUser> {
+    return new BannedUserListing(fakeListingAfter(""), {
+      request: { url: `r/${subreddit}/about/wikibanned`, query: {} },
+      client: this.client,
+    });
+  }
+
   /** @internal */
   protected getSortedPosts(
     subreddit: string | undefined,

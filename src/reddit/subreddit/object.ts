@@ -968,6 +968,18 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Get the list of wikibanned users for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 wikibanned users.
+   *
+   * @returns A listing of wikibanned users.
+   */
+  getWikibannedUsers(): Listing<BannedUser> {
+    return this.controls.getWikibannedUsers(this.displayName);
+  }
+
+  /**
    * Ban a user from this subreddit.
    *
    * @param username The username of the user to ban.
