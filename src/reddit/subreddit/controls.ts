@@ -301,6 +301,40 @@ export class SubredditControls extends BaseControls {
     return this.getAboutListingUsers(subreddit, "muted");
   }
 
+  /**
+   * Ban a user from editing a subreddit's wiki.
+   *
+   * @param subreddit The name of the subreddit to wikiban the user in.
+   * @param username The username of the user to wikiban.
+   */
+  async wikibanUser(subreddit: string, username: string): Promise<void> {
+    await this.friend(subreddit, username, "wikibanned");
+  }
+
+  /**
+   * Unban a user from editing a subreddit's wiki
+   *
+   * @param subreddit The name of the subreddit to wikiban the user in.
+   * @param username The username of the user to wikiban.
+   */
+  async unwikibanUser(subreddit: string, username: string): Promise<void> {
+    await this.unfriend(subreddit, username, "wikibanned");
+  }
+
+  /**
+   * Get the list of wikibanned users for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 wikibanned users.
+   *
+   * @param subreddit The name of the subreddit to get wikibanned users for.
+   *
+   * @returns A listing of wikibanned users.
+   */
+  getWikibannedUsers(subreddit: string): Listing<User> {
+    return this.getAboutListingUsers(subreddit, "wikibanned");
+  }
+
   /** @internal */
   protected getSortedPosts(
     subreddit: string | undefined,

@@ -949,6 +949,36 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Ban a user from editing this subreddit's wiki.
+   *
+   * @param username The username of the user to wikiban.
+   */
+  async wikibanUser(username: string): Promise<void> {
+    return this.controls.wikibanUser(this.displayName, username);
+  }
+
+  /**
+   * Unban a user from editing this subreddit's wiki
+   *
+   * @param username The username of the user to wikiban.
+   */
+  async unwikibanUser(username: string): Promise<void> {
+    return this.controls.unwikibanUser(this.displayName, username);
+  }
+
+  /**
+   * Get the list of wikibanned users for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 wikibanned users.
+   *
+   * @returns A listing of wikibanned users.
+   */
+  getWikibannedUsers(): Listing<User> {
+    return this.controls.getWikibannedUsers(this.displayName);
+  }
+
+  /**
    * Ban a user from this subreddit.
    *
    * @param username The username of the user to ban.
