@@ -979,6 +979,18 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Get the list of moderators for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 moderators.
+   *
+   * @returns A listing of moderators.
+   */
+  getModerators(): Listing<User> {
+    return this.controls.getModerators(this.displayName);
+  }
+
+  /**
    * Ban a user from this subreddit.
    *
    * @param username The username of the user to ban.

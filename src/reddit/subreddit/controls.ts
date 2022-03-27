@@ -335,6 +335,20 @@ export class SubredditControls extends BaseControls {
     return this.getAboutListingUsers(subreddit, "wikibanned");
   }
 
+  /**
+   * Get the list of moderators for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 moderators.
+   *
+   * @param subreddit The name of the subreddit to get moderators for.
+   *
+   * @returns A listing of moderators.
+   */
+  getModerators(subreddit: string): Listing<User> {
+    return this.getAboutListingUsers(subreddit, "moderators");
+  }
+
   /** @internal */
   protected getSortedPosts(
     subreddit: string | undefined,
