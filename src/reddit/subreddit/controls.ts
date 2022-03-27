@@ -596,12 +596,11 @@ export class SubredditControls extends BaseControls {
     return this.client.posts.search(query, subreddit, time, sort, syntax, true);
   }
 
-  // TODO: allow other sorting
   /**
    * Get a Listing of all the comments in a subreddit.
    *
    * @note Due to the way Reddit implements Listings, this will only contain the
-   * first 1000 posts.
+   * first 1000 comments.
    *
    * @param subreddit The subreddit to get comments from. If this is not
    * provided comments will be fetched from the front page of Reddit.
@@ -609,9 +608,10 @@ export class SubredditControls extends BaseControls {
    *
    * @returns A sorted Listing of comments.
    */
+  // TODO: allow other sorting?
   getSortedComments(subreddit: string, sort: "new" = "new"): Listing<Comment> {
     const url = subreddit ? `r/${subreddit}/` : "";
-    const request = { url: `${url}${sort}`, query: { sort } };
+    const request = { url: `${url}comments`, query: { sort } };
     const context = { request, client: this.client };
     return new CommentListing(fakeListingAfter(""), context);
   }
