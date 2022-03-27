@@ -206,6 +206,9 @@ export class Client {
   /**
    * Create a client from an OAuth code.
    *
+   * @template Self Client or a subclass of Client.
+   * @param this The Client subclass. This is only used for typescript to work
+   * with subclasses, this is not actually a parameter.
    * @param options The Client options.
    * @param code The OAuth code.
    * @param redirectUri The redirect URI. This ***must*** be the same as the uri
