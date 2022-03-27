@@ -14,6 +14,7 @@ import type { SubredditType } from "./types";
 
 import { Content } from "../content";
 
+/** The attributes specific to Subreddit objects. */
 export interface SubredditData extends ContentData {
   /** Whether or not {@link activeUserCount} is intentionally slightly wrong. */
   accountsActiveIsFuzzed: boolean;
@@ -324,6 +325,7 @@ export interface SubredditData extends ContentData {
   // wls: number;
 }
 
+/** A single subreddit. */
 export class Subreddit extends Content implements SubredditData {
   accountsActiveIsFuzzed: boolean;
   activeUserCount: number;
