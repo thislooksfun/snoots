@@ -11,6 +11,7 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../types";
+import type { BannedUser } from "../user/moderator-actioned/banned";
 import type { ModeratorActionedUser } from "../user/moderator-actioned/base";
 import type { SubredditData } from "./object";
 
@@ -19,6 +20,7 @@ import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
 import { PostListing } from "../post/listing";
 import { PostOrCommentListing } from "../post-or-comment/listing";
+import { BannedUserListing } from "../user/moderator-actioned/banned";
 import { ModeratorActionedUserListing } from "../user/moderator-actioned/base";
 import { assertKind, fromRedditData } from "../util";
 import { Subreddit } from "./object";
@@ -255,6 +257,23 @@ export class SubredditControls extends BaseControls {
    */
   async unbanUser(subreddit: string, username: string): Promise<void> {
     await this.unfriend(subreddit, username, "banned");
+  }
+
+  /**
+   * Get the list of banned users for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 banned users.
+   *
+   * @param subreddit The name of the subreddit to get banned users for.
+   *
+   * @returns A listing of banned users.
+   */
+  getBannedUsers(subreddit: string): Listing<BannedUser> {
+    return new BannedUserListing(fakeListingAfter(""), {
+      request: { url: `r/${subreddit}/about/banned`, query: {} },
+      client: this.client,
+    });
   }
 
   /**

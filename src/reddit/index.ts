@@ -29,6 +29,8 @@ export { Subreddit } from "./subreddit/object";
 export type { SubredditType } from "./subreddit/types";
 export type { SearchSort, SearchSyntax, Size, TimeRange } from "./types";
 export { UserControls } from "./user/controls";
+export type { BannedUserData } from "./user/moderator-actioned/banned";
+export { BannedUser } from "./user/moderator-actioned/banned";
 export type { ModeratorActionedUserData } from "./user/moderator-actioned/base";
 export { ModeratorActionedUser } from "./user/moderator-actioned/base";
 export type { UserData } from "./user/object/base-object";
