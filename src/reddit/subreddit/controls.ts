@@ -11,6 +11,7 @@ import type {
   SearchSyntax,
   TimeRange,
 } from "../types";
+import type { ModeratorActionedUser } from "../user/moderator-actioned/base";
 import type { SubredditData } from "./object";
 
 import { BaseControls } from "../base-controls";
@@ -18,6 +19,7 @@ import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
 import { PostListing } from "../post/listing";
 import { PostOrCommentListing } from "../post-or-comment/listing";
+import { ModeratorActionedUserListing } from "../user/moderator-actioned/base";
 import { assertKind, fromRedditData } from "../util";
 import { Subreddit } from "./object";
 
@@ -155,6 +157,23 @@ export class SubredditControls extends BaseControls {
   /** @internal */
   async leaveContributor(subredditId: string): Promise<void> {
     await this.gateway.post("api/leavecontributor", { id: subredditId });
+  }
+
+  /**
+   * Get the list of approved contributors for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 contributors.
+   *
+   * @param subreddit The name of the subreddit to get contributors for.
+   *
+   * @returns A listing of approved contributors.
+   */
+  getContributors(subreddit: string): Listing<ModeratorActionedUser> {
+    return new ModeratorActionedUserListing(fakeListingAfter(""), {
+      request: { url: `r/${subreddit}/about/contributors`, query: {} },
+      client: this.client,
+    });
   }
 
   /**
