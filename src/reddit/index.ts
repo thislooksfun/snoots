@@ -33,6 +33,8 @@ export type { BannedUserData } from "./user/moderator-actioned/banned";
 export { BannedUser } from "./user/moderator-actioned/banned";
 export type { ModeratorActionedUserData } from "./user/moderator-actioned/base";
 export { ModeratorActionedUser } from "./user/moderator-actioned/base";
+export type { ModeratorData } from "./user/moderator-actioned/moderator";
+export { Moderator } from "./user/moderator-actioned/moderator";
 export type { UserData } from "./user/object/base-object";
 export { User } from "./user/object/base-object";
 export type { MyUserData } from "./user/object/my-user";

@@ -22,6 +22,7 @@ import { PostListing } from "../post/listing";
 import { PostOrCommentListing } from "../post-or-comment/listing";
 import { BannedUserListing } from "../user/moderator-actioned/banned";
 import { ModeratorActionedUserListing } from "../user/moderator-actioned/base";
+import { Moderator } from "../user/moderator-actioned/moderator";
 import { assertKind, fromRedditData } from "../util";
 import { Subreddit } from "./object";
 
@@ -350,6 +351,22 @@ export class SubredditControls extends BaseControls {
       request: { url: `r/${subreddit}/about/wikibanned`, query: {} },
       client: this.client,
     });
+  }
+
+  /**
+   * Get the list of moderators for a subreddit.
+   *
+   * @param subreddit The name of the subreddit to get moderators for.
+   *
+   * @returns A listing of moderators.
+   */
+  async getModerators(subreddit: string): Promise<Moderator[]> {
+    const result = await this.gateway.get<RedditObject>(
+      `r/${subreddit}/about/moderators`
+    );
+    assertKind("UserList", result);
+    const moderators = result.data.children as Data[];
+    return moderators.map(m => new Moderator(fromRedditData(m)));
   }
 
   /** @internal */

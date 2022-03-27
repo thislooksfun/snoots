@@ -6,6 +6,7 @@ import type { Post } from "../post/object";
 import type { SearchSort, SearchSyntax, Size, TimeRange } from "../types";
 import type { BannedUser } from "../user/moderator-actioned/banned";
 import type { ModeratorActionedUser } from "../user/moderator-actioned/base";
+import type { Moderator } from "../user/moderator-actioned/moderator";
 import type {
   BanOptions,
   LinkPostOptions,
@@ -977,6 +978,18 @@ export class Subreddit extends Content implements SubredditData {
    */
   getWikibannedUsers(): Listing<BannedUser> {
     return this.controls.getWikibannedUsers(this.displayName);
+  }
+
+  /**
+   * Get the list of moderators for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 moderators.
+   *
+   * @returns A listing of moderators.
+   */
+  async getModerators(): Promise<Moderator[]> {
+    return this.controls.getModerators(this.displayName);
   }
 
   /**
