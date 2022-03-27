@@ -7,6 +7,7 @@ import type { PostControls } from "./controls";
 
 import { Lockable } from "../lockable/object";
 
+/** The suggested way to sort the comments of a post. */
 export type SuggestedSort =
   | "confidence"
   | "controversial"
