@@ -1,3 +1,23 @@
+## [1.0.0-dev.19](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.18...v1.0.0-dev.19) (2022-03-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* Removed the following methods from Subreddit and
+SubredditControls pending finding a way to make them work:
+- getContributors()
+- getWikiContributors()
+- getMutedUsers()
+- getWikibannedUsers()
+- getModerators()
+- getBannedUsers()
+
+### Bug Fixes
+
+* make stubbed listings actually work ([a89c115](https://github.com/thislooksfun/snoots/commit/a89c115acc7f6d0fee1a909f1297da2f221a9712))
+* make SubredditControls::getSortedComments() work ([bf0518e](https://github.com/thislooksfun/snoots/commit/bf0518e40c3abef2a25d37d2ee7b2b6bebb1ae5f))
+* remove broken methods for now ([aedc8bc](https://github.com/thislooksfun/snoots/commit/aedc8bcddd685a1972c12dbbbfe6c7a9c74848bf))
+
 ## [1.0.0-dev.18](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.17...v1.0.0-dev.18) (2022-03-27)
 
 
