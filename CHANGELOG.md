@@ -1,3 +1,15 @@
+## [1.0.0-dev.18](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.17...v1.0.0-dev.18) (2022-03-27)
+
+
+### Features
+
+* add a method to get the approved contributors in a subreddit ([c1edba2](https://github.com/thislooksfun/snoots/commit/c1edba2c48bcd1dc21be8e105bc96d91d1aef74f)), closes [#49](https://github.com/thislooksfun/snoots/issues/49)
+* add a way to get the approved wiki contributors for a subreddit ([aaf06e7](https://github.com/thislooksfun/snoots/commit/aaf06e733681f6bf2353812c2d036e191d3db6ea))
+* add a way to get the list of moderators in a subreddit ([8e1fea9](https://github.com/thislooksfun/snoots/commit/8e1fea9f4ca4291eb51eb6b69ccdec6dea29a255))
+* add a way to get the users banned from a subreddit ([85831df](https://github.com/thislooksfun/snoots/commit/85831df2a8e8486f59741360c0f7a31227f5f9e9))
+* add a way to manage wikibanned users in a subreddit ([8abe658](https://github.com/thislooksfun/snoots/commit/8abe658a863bd246f4e09d1a0b73d5acc3bb7c00))
+* add controls to managing muted users in a subreddit ([d057dc0](https://github.com/thislooksfun/snoots/commit/d057dc0ad1b74981eea384a7d717874d141273e3))
+
 ## [1.0.0-dev.17](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.16...v1.0.0-dev.17) (2022-03-05)
 
 
