@@ -16,6 +16,7 @@ afterAll(() => {
   nock.enableNetConnect();
 });
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const commonNockOptions = { reqheaders: { "user-agent": "fake-user-agent" } };
 
 describe("AnonGateway", () => {

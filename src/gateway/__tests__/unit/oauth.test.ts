@@ -87,6 +87,7 @@ describe("OauthGateway", () => {
   describe(".updateAccessToken()", () => {
     const commonNockOptions = {
       reqheaders: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         "user-agent": "fake-user-agent",
         authorization: "Basic Y0lkOmNTZWNyZXQ=",
       },
@@ -263,6 +264,7 @@ describe("OauthGateway", () => {
   describe("When authenticated", () => {
     const commonNockOptions = {
       reqheaders: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         "user-agent": "fake-user-agent",
         authorization: "bearer accessTkn",
       },

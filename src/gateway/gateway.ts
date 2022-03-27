@@ -172,6 +172,7 @@ export abstract class Gateway {
   protected async buildOptions(query: Query): Promise<GotOptions> {
     const options: GotOptions = {
       prefixUrl: this.endpoint,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { "user-agent": this.userAgent },
       // eslint-disable-next-line @typescript-eslint/naming-convention
       searchParams: { ...query, raw_json: 1, api_type: "json" },
