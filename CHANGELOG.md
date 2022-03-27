@@ -1,3 +1,15 @@
+## [1.0.0-dev.20](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.19...v1.0.0-dev.20) (2022-03-27)
+
+
+### Features
+
+* add a way to get banned users ([de2f41b](https://github.com/thislooksfun/snoots/commit/de2f41b338f454fd0a8310b94bc688d7d2c8686a))
+* add a way to get muted users ([f4d9500](https://github.com/thislooksfun/snoots/commit/f4d9500defe46553d3c0910732c9e0e90f3cfcf5))
+* add a way to get subreddit contributors ([b0f7cef](https://github.com/thislooksfun/snoots/commit/b0f7cefa54e4b077b693aa04431363bbebd34062)), closes [#49](https://github.com/thislooksfun/snoots/issues/49)
+* add a way to get the list of moderators ([7cad99f](https://github.com/thislooksfun/snoots/commit/7cad99fc48de8c56ba72781087e5c7ca0600ea0a))
+* add a way to get wiki contributors ([03ab9ef](https://github.com/thislooksfun/snoots/commit/03ab9efc77c491d96c1a62b220ab2ff464e3de85))
+* add a way to get wikibanned users ([7e4e603](https://github.com/thislooksfun/snoots/commit/7e4e60315576e1634a17d9c8402b5fe689df11e2))
+
 ## [1.0.0-dev.19](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.18...v1.0.0-dev.19) (2022-03-27)
 
 
