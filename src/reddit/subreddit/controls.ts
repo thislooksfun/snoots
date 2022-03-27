@@ -251,6 +251,20 @@ export class SubredditControls extends BaseControls {
     await this.unfriend(subreddit, username, "banned");
   }
 
+  /**
+   * Get the list of banned users for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 banned users.
+   *
+   * @param subreddit The name of the subreddit to get banned users for.
+   *
+   * @returns A listing of banned users.
+   */
+  getBannedUsers(subreddit: string): Listing<User> {
+    return this.getAboutListingUsers(subreddit, "banned");
+  }
+
   /** @internal */
   protected getSortedPosts(
     subreddit: string | undefined,

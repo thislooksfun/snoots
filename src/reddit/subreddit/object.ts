@@ -938,4 +938,16 @@ export class Subreddit extends Content implements SubredditData {
   async unbanUser(username: string): Promise<void> {
     return this.controls.unbanUser(this.displayName, username);
   }
+
+  /**
+   * Get the list of banned users for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 banned users.
+   *
+   * @returns A listing of banned users.
+   */
+  getBannedUsers(): Listing<User> {
+    return this.controls.getBannedUsers(this.displayName);
+  }
 }
