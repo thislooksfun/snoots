@@ -905,6 +905,18 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Get the list of approved wiki contributors for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 wiki contributors.
+   *
+   * @returns A listing of approved wiki contributors.
+   */
+  getWikiContributors(): Listing<User> {
+    return this.controls.getWikiContributors(this.displayName);
+  }
+
+  /**
    * Ban a user from this subreddit.
    *
    * @param username The username of the user to ban.

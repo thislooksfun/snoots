@@ -201,6 +201,20 @@ export class SubredditControls extends BaseControls {
   }
 
   /**
+   * Get the list of approved wiki contributors for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 wiki contributors.
+   *
+   * @param subreddit The name of the subreddit to get wiki contributors for.
+   *
+   * @returns A listing of approved wiki contributors.
+   */
+  getWikiContributors(subreddit: string): Listing<User> {
+    return this.getAboutListingUsers(subreddit, "wikicontributors");
+  }
+
+  /**
    * Ban a user from a subreddit.
    *
    * @param subreddit The name of the subreddit to ban the user from.
