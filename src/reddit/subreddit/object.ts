@@ -4,6 +4,7 @@ import type { ContentData } from "../content";
 import type { Listing } from "../listing/listing";
 import type { Post } from "../post/object";
 import type { SearchSort, SearchSyntax, Size, TimeRange } from "../types";
+import type { User } from "../user/object/base-object";
 import type {
   BanOptions,
   LinkPostOptions,
@@ -867,6 +868,18 @@ export class Subreddit extends Content implements SubredditData {
    */
   async leaveContributor(): Promise<void> {
     await this.controls.leaveContributor(`t5_${this.id}`);
+  }
+
+  /**
+   * Get the list of approved contributors for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 contributors.
+   *
+   * @returns A listing of approved contributors.
+   */
+  getContributors(): Listing<User> {
+    return this.controls.getContributors(this.displayName);
   }
 
   /**
