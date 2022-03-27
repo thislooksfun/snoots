@@ -20,7 +20,7 @@ export class PostOrCommentListing extends Listing<Post | Comment> {
   constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Post | Comment> | undefined;
 
-    if (l.after) {
+    if (l.after != undefined) {
       fetcher = new PostOrCommentPager(l.after);
     }
 

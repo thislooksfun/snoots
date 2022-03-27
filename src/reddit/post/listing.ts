@@ -19,7 +19,7 @@ export class PostListing extends Listing<Post> {
   constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Post> | undefined;
 
-    if (l.after) {
+    if (l.after != undefined) {
       fetcher = new PostPager(l.after);
     }
 

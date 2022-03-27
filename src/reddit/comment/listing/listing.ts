@@ -18,7 +18,7 @@ export class CommentListing extends Listing<Comment> {
   constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Comment> | undefined;
 
-    if (l.after) {
+    if (l.after != undefined) {
       fetcher = new CommentPager(l.after);
     }
 
