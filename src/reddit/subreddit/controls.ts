@@ -280,6 +280,23 @@ export class SubredditControls extends BaseControls {
   }
 
   /**
+   * Get the list of muted users for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 muted users.
+   *
+   * @param subreddit The name of the subreddit to get muted users for.
+   *
+   * @returns A listing of muted users.
+   */
+  getMutedUsers(subreddit: string): Listing<ModeratorActionedUser> {
+    return new ModeratorActionedUserListing(fakeListingAfter(""), {
+      request: { url: `r/${subreddit}/about/muted`, query: {} },
+      client: this.client,
+    });
+  }
+
+  /**
    * Ban a user from editing a subreddit's wiki.
    *
    * @param subreddit The name of the subreddit to wikiban the user in.

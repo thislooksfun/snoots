@@ -937,6 +937,18 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Get the list of muted users for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 muted users.
+   *
+   * @returns A listing of muted users.
+   */
+  getMutedUsers(): Listing<ModeratorActionedUser> {
+    return this.controls.getMutedUsers(this.displayName);
+  }
+
+  /**
    * Ban a user from editing this subreddit's wiki.
    *
    * @param username The username of the user to wikiban.
