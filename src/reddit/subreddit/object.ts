@@ -917,6 +917,38 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
+   * Mute a user in this subreddit.
+   *
+   * This prevents the user from sending modmail to this subreddit for 72 hours.
+   *
+   * @param username The username of the user to mute.
+   */
+  async muteUser(username: string): Promise<void> {
+    return this.controls.muteUser(this.displayName, username);
+  }
+
+  /**
+   * Unmute a user in this subreddit.
+   *
+   * @param username The username of the user to unmute.
+   */
+  async unmuteUser(username: string): Promise<void> {
+    return this.controls.unmuteUser(this.displayName, username);
+  }
+
+  /**
+   * Get the list of muted users for this subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 muted users.
+   *
+   * @returns A listing of muted users.
+   */
+  getMutedUsers(): Listing<User> {
+    return this.controls.getMutedUsers(this.displayName);
+  }
+
+  /**
    * Ban a user from this subreddit.
    *
    * @param username The username of the user to ban.

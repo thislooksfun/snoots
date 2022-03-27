@@ -265,6 +265,42 @@ export class SubredditControls extends BaseControls {
     return this.getAboutListingUsers(subreddit, "banned");
   }
 
+  /**
+   * Mute a user in a subreddit.
+   *
+   * This prevents the user from sending modmail to the subreddit for 72 hours.
+   *
+   * @param subreddit The name of the subreddit to mute the user in.
+   * @param username The username of the user to mute.
+   */
+  async muteUser(subreddit: string, username: string): Promise<void> {
+    await this.friend(subreddit, username, "muted");
+  }
+
+  /**
+   * Unmute a user in a subreddit.
+   *
+   * @param subreddit The name of the subreddit to unmute the user in.
+   * @param username The username of the user to unmute.
+   */
+  async unmuteUser(subreddit: string, username: string): Promise<void> {
+    await this.unfriend(subreddit, username, "muted");
+  }
+
+  /**
+   * Get the list of muted users for a subreddit.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 muted users.
+   *
+   * @param subreddit The name of the subreddit to get muted users for.
+   *
+   * @returns A listing of muted users.
+   */
+  getMutedUsers(subreddit: string): Listing<User> {
+    return this.getAboutListingUsers(subreddit, "muted");
+  }
+
   /** @internal */
   protected getSortedPosts(
     subreddit: string | undefined,
