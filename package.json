@@ -20,7 +20,7 @@
     "lint:fix:eslint": "eslint --fix \"**/*.ts\"",
     "lint:fix:prettier": "prettier --write \"**/*\"",
     "gendoc": "typedoc --treatWarningsAsErrors src/index.ts",
-    "prepack": "del-cli \"{dist,types}/**/__types__\"",
+    "prepack": "del-cli \"{dist,types}/**/__tests__\"",
     "prepublishOnly": "npm run clean && npm run lint && npm run build"
   },
   "dependencies": {
