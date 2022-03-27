@@ -147,6 +147,9 @@ export class Client {
    *
    * @param options The options to configure this client with.
    */
+  constructor(options: ClientOptions);
+  /** @internal */
+  constructor(options: ClientOptions, _gateway: Gateway);
   constructor(options: ClientOptions, _gateway?: Gateway) {
     debug("Creating new Client from options %O", options);
     debug("Has auth = %b; has creds = %b", options.auth, options.creds);
