@@ -11,7 +11,7 @@
     "build": "tsc",
     "test": "jest",
     "test:cover": "jest --collect-coverage",
-    "clean": "del-cli dist docs types",
+    "clean": "del-cli coverage dist docs types",
     "lint": "npm run lint:check",
     "lint:check": "npm-run-all lint:check:*",
     "lint:check:eslint": "eslint \"**/*.ts\"",
