@@ -2,6 +2,35 @@
   "excludeInternal": true,
   "excludePrivate": true,
   "excludeProtected": true,
+  "requiredToBeDocumented": [
+    "Accessor",
+    "CallSignature",
+    "Class",
+    "Constructor",
+    "ConstructorSignature",
+    "Enum",
+    "EnumMember",
+    "Event",
+    "Function",
+    "GetSignature",
+    "IndexSignature",
+    "Interface",
+    "Method",
+    "Module",
+    "Namespace",
+    "ObjectLiteral",
+    "Parameter",
+    "Property",
+    "Reference",
+    "SetSignature",
+    "TypeAlias",
+    "TypeLiteral",
+    "TypeParameter",
+    "Variable"
+  ],
   "media": "./media",
-  "readme": "dochome.md"
+  "readme": "dochome.md",
+  "validation": {
+    "notDocumented": true
+  }
 }
