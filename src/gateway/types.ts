@@ -17,6 +17,7 @@ export interface BearerAuth {
 }
 export type Auth = BasicAuth | BearerAuth;
 
+/** The information about a connection's last-known rate limit. */
 export interface RateLimit {
   /** How many requests are remaining. */
   remaining: number;
