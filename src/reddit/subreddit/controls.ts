@@ -673,17 +673,14 @@ export class SubredditControls extends BaseControls {
   }
 
   /**
-   * Get a random post.
-   *
-   * @note Due to the way Reddit has implemented this, it actually takes _2_ API
-   * requests, not 1.
+   * Get the ID of a random post.
    *
    * @param subreddit The name of the subreddit. If this is left off it will
    * query the front page of Reddit.
    *
-   * @returns A promise that resolves to a random post.
+   * @returns A promise that resolves to a random post ID.
    */
-  async getRandomPost(subreddit?: string): Promise<Post> {
+  async getRandomPostId(subreddit?: string): Promise<string> {
     const base = subreddit ? `r/${subreddit}/` : "";
 
     // Reddit implemented '/random' by redirecting (302) to a random post.
@@ -696,7 +693,7 @@ export class SubredditControls extends BaseControls {
     const postUrl = postInfo.data.location;
     const match = randomRedirectPattern.exec(postUrl);
     if (!match) throw new Error(`Invalid redirect URI '${postUrl}'`);
-    return await this.client.posts.fetch(match[1]);
+    return match[1];
   }
 
   /**

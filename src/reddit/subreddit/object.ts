@@ -735,12 +735,12 @@ export class Subreddit extends Content implements SubredditData {
   }
 
   /**
-   * Get a random post from this subreddit.
+   * Get the ID of a random post from this subreddit.
    *
-   * @returns A promise that resolves to a random post.
+   * @returns A promise that resolves to a random post ID.
    */
-  async getRandomPost(): Promise<Post> {
-    return this.controls.getRandomPost(this.displayName);
+  async getRandomPostId(): Promise<string> {
+    return this.controls.getRandomPostId(this.displayName);
   }
 
   /**

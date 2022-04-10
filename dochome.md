@@ -97,40 +97,40 @@ the largest:
 
 What does this mean in practice? Here are some examples:
 
-1. Reading the title of a random post from r/funny:
+1. Reading the title of the newest post from r/funny:
 
    ```ts
    // snoowrap
-   const title = await client.getSubreddit("funny").getRandomSubmission().title;
+   const title = await client.getSubreddit("funny").getNew()[0].title;
 
    // snoots (literal translation)
    const sub = await client.subreddits.fetch("funny");
-   const post = await sub.getRandomPost();
-   const title = post.title;
+   const post = await sub.getNewPosts().first();
+   const title = post?.title;
 
    // snoots (preferred method, 1 fewer api call)
-   const post = await client.subreddits.getRandomPost("funny");
-   const title = post.title;
+   const post = await client.subreddits.getNewPosts("funny").first();
+   const title = post?.title;
    ```
 
-1. Listing the authors of the newest posts in r/funny:
+1. Listing the authors of the currently hot posts in r/funny:
 
    ```ts
    // snoowrap
-   const posts = await client.getSubreddit("funny").getNew().fetchAll();
+   const posts = await client.getSubreddit("funny").getHot().fetchAll();
    for (const post of posts) {
      console.log(post.author.name);
    }
 
    // snoots (literal translation)
    const sub = await client.subreddits.fetch("funny");
-   const posts = sub.getNewPosts();
+   const posts = sub.getHotPosts();
    for await (const post of posts) {
      console.log(p.author);
    }
 
    // snoots (preferred method, 1 fewer api call)
-   const posts = client.subreddits.getNewPosts("funny");
+   const posts = client.subreddits.getHotPosts("funny");
    for await (const post of posts) {
      console.log(p.author);
    }
