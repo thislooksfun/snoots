@@ -216,12 +216,24 @@ export abstract class Gateway {
     const { headers } = response;
     const remain = Number.parseInt(headers["x-ratelimit-remaining"] as string);
     const reset = Number.parseInt(headers["x-ratelimit-reset"] as string);
-    this.rateLimit = { remaining: remain, reset: Date.now() + reset * 1000 };
-    debug.general(
-      "Updated ratelimit: %d requests remaining, resets at %s",
-      this.rateLimit.remaining,
-      new Date(this.rateLimit.reset)
-    );
+
+    // To prevent race conditions, only update the rate limit if either...
+    if (
+      // ...we don't have one stored
+      !this.rateLimit ||
+      // ...the stored data is expired
+      this.rateLimit.reset < Date.now() ||
+      // ...the number of remaining requests has decreased
+      this.rateLimit.remaining > remain
+    ) {
+      this.rateLimit = { remaining: remain, reset: Date.now() + reset * 1000 };
+      debug.general(
+        "Updated ratelimit: %d requests remaining, resets at %s",
+        this.rateLimit.remaining,
+        new Date(this.rateLimit.reset)
+      );
+    }
+
     return response;
   }
 }
