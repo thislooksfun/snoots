@@ -14,6 +14,7 @@ import { makeDebug } from "../helper/debug";
 
 // #region debug logging
 const debug = {
+  general: makeDebug("gateway"),
   request: makeDebug("gateway:request"),
   response: makeDebug("gateway:response"),
 };
@@ -216,6 +217,11 @@ export abstract class Gateway {
     const remain = Number.parseInt(headers["x-ratelimit-remaining"] as string);
     const reset = Number.parseInt(headers["x-ratelimit-reset"] as string);
     this.rateLimit = { remaining: remain, reset: Date.now() + reset * 1000 };
+    debug.general(
+      "Updated ratelimit: %d requests remaining, resets at %s",
+      this.rateLimit.remaining,
+      new Date(this.rateLimit.reset)
+    );
     return response;
   }
 }
