@@ -1,3 +1,23 @@
+## [1.0.0-dev.21](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.20...v1.0.0-dev.21) (2022-04-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* `getRandomPost()` replace with `getRandomPostId()`.
+
+### Features
+
+* add a way to get the last-known rate limit status for a client ([20f285f](https://github.com/thislooksfun/snoots/commit/20f285f812bf5412a4f60aca25dca843121246b6))
+* add debug logging for rate limit status ([7ef9e83](https://github.com/thislooksfun/snoots/commit/7ef9e834915a2ea33dbe379bc136b24bfc367028))
+* make calls to /random go entirely through OAuth ([87c9640](https://github.com/thislooksfun/snoots/commit/87c9640c422a03111f35c53af7fd94625cc269fa))
+* replace getRandomPost() with getRandomPostId() ([8f56359](https://github.com/thislooksfun/snoots/commit/8f56359a4d5f950547e03be2ef8308b37d4e3cfe))
+
+
+### Bug Fixes
+
+* fix formatting of debug print ([3630026](https://github.com/thislooksfun/snoots/commit/363002623e1ec17e480d8d4fc4d0a5201a9bf8b0))
+* prevent race condition when updating rate limit data ([0d1b3b7](https://github.com/thislooksfun/snoots/commit/0d1b3b7b3a59355f43e2a3e72dff32b78784352a))
+
 ## [1.0.0-dev.20](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.19...v1.0.0-dev.20) (2022-03-27)
 
 
