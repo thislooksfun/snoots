@@ -3,7 +3,7 @@
 
 ### ⚠ BREAKING CHANGES
 
-* `getRandomPost()` replace with `getRandomPostId()`.
+* `getRandomPost()` replaced with `getRandomPostId()`.
 
 ### Features
 
