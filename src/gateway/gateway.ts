@@ -29,7 +29,7 @@ function debugRequest(method: string, path: string, options: GotOptions) {
 
 function debugResponse(method: string, path: string, response: unknown) {
   debug.response(
-    "Got response for %s request to '%path': %O",
+    "Got response for %s request to '%s': %O",
     method,
     path,
     response
