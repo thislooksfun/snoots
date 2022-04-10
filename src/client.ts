@@ -1,6 +1,7 @@
 import type { Credentials } from "./gateway/creds";
 import type { Gateway } from "./gateway/gateway";
 import type { ClientAuth } from "./gateway/oauth";
+import type { RateLimit } from "./gateway/types";
 import type { Maybe } from "./helper/types";
 
 import { AnonGateway } from "./gateway/anon";
@@ -141,6 +142,17 @@ export class Client {
    * @internal
    */
   public readonly gateway: Gateway;
+
+  /**
+   * Get the last-known rate limit status for this client.
+   *
+   * @note The rate limit status is only updated when a request is made from
+   * this client. It will also get out of sync if there are multiple clients
+   * using the same authorization (and thus the same rate limit pool).
+   */
+  get rateLimit(): Maybe<RateLimit> {
+    return this.gateway.getRateLimit();
+  }
 
   /**
    * Make a new snoots Client.

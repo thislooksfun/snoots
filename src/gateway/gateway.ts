@@ -128,6 +128,11 @@ export abstract class Gateway {
     return await this.doPost(path, jsonOptions, query);
   }
 
+  /** @internal */
+  public getRateLimit(): Maybe<RateLimit> {
+    return this.rateLimit ? { ...this.rateLimit } : undefined;
+  }
+
   protected abstract auth(): Promise<Maybe<Auth>>;
 
   protected async doPost<T>(
