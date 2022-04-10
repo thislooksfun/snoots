@@ -100,6 +100,13 @@ interface PostOptions {
 }
 
 /**
+ * The url pattern that `/random` will redirect to. Used to both verify the
+ * redirect and extract the post ID.
+ */
+const randomRedirectPattern =
+  /https:\/\/www\.reddit\.com\/r\/.+?\/comments\/(.+?)\/.+?\//;
+
+/**
  * Various methods to allow you to interact with subreddits.
  *
  * @category Controls
@@ -668,6 +675,9 @@ export class SubredditControls extends BaseControls {
   /**
    * Get a random post.
    *
+   * @note Due to the way Reddit has implemented this, it actually takes _2_ API
+   * requests, not 1.
+   *
    * @param subreddit The name of the subreddit. If this is left off it will
    * query the front page of Reddit.
    *
@@ -675,7 +685,18 @@ export class SubredditControls extends BaseControls {
    */
   async getRandomPost(subreddit?: string): Promise<Post> {
     const base = subreddit ? `r/${subreddit}/` : "";
-    return this.client.posts.fetchPath(`${base}random`);
+
+    // Reddit implemented '/random' by redirecting (302) to a random post.
+    const postInfo: RedditObject<{ location: string }> = await this.gateway.get(
+      `${base}random`
+    );
+    assertKind("snoots_redirect", postInfo);
+
+    // Extract the post ID from the redirect URI.
+    const postUrl = postInfo.data.location;
+    const match = randomRedirectPattern.exec(postUrl);
+    if (!match) throw new Error(`Invalid redirect URI '${postUrl}'`);
+    return await this.client.posts.fetch(match[1]);
   }
 
   /**

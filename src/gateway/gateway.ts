@@ -176,7 +176,13 @@ export abstract class Gateway {
       headers: { "user-agent": this.userAgent },
       // eslint-disable-next-line @typescript-eslint/naming-convention
       searchParams: { ...query, raw_json: 1, api_type: "json" },
-      hooks: { afterResponse: [r => this.updateRatelimit(r)] },
+      hooks: {
+        afterResponse: [
+          r => this.transformRedirect(r),
+          r => this.updateRatelimit(r),
+        ],
+      },
+      followRedirect: false,
     };
 
     const auth = await this.auth();
@@ -190,6 +196,19 @@ export abstract class Gateway {
     }
 
     return options;
+  }
+
+  protected transformRedirect(response: GotResponse): GotResponse {
+    const { statusCode, headers } = response;
+    if (headers.location && statusCode >= 300 && statusCode < 400) {
+      response.rawBody = Buffer.from(
+        JSON.stringify({
+          kind: "snoots_redirect",
+          data: { location: headers.location },
+        })
+      );
+    }
+    return response;
   }
 
   protected updateRatelimit(response: GotResponse): GotResponse {

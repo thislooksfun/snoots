@@ -46,28 +46,7 @@ export class PostControls extends LockableControls {
    * @throws
    */
   async fetch(id: string): Promise<Post> {
-    return this.fetchPath(`comments/${id}`);
-  }
-
-  /**
-   * Fetch a path as a post.
-   *
-   * This is an internal method used to fetch other paths as posts, namely it is
-   * used for getting a random post from a subreddit, which uses the path
-   * `/r/<sub>/random` instead of the normal `comments/<id>`.
-   *
-   * You can use this method, but you most likely don't want to. If you end up
-   * needing this method in order to interact with the Reddit API please open an
-   * issue or submit a pull request so we can add official support for your use
-   * case.
-   *
-   * @internal
-   *
-   * @param path
-   * @returns
-   */
-  async fetchPath(path: string): Promise<Post> {
-    const splitRaw: SplitRawPost = await this.gateway.get(path);
+    const splitRaw: SplitRawPost = await this.gateway.get(`comments/${id}`);
     return this.fromSplitRaw(splitRaw);
   }
 
