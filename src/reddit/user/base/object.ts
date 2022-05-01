@@ -4,8 +4,8 @@ import type { Listing } from "../../listing/listing";
 import type { Post } from "../../post/object";
 import type { PostSort } from "../../post/types";
 import type { Subreddit } from "../../subreddit/object";
-import type { UserControls } from "../controls";
 import type { UserItemsSort } from "../types";
+import type { BaseUserControls } from "./controls";
 
 import { Content } from "../../content";
 
@@ -44,7 +44,7 @@ export interface UserData extends ContentData {
    * Whether or not this user is a friend of the authorized user.
    *
    * @note This is only provided if you use {@link UserControls.fetch}, *not* if
-   * you use {@link UserControls.fetchMe}.
+   * you use {@link MyUserControls.fetch}.
    */
   isFriend?: boolean;
 
@@ -96,10 +96,10 @@ export abstract class User extends Content implements UserData {
   totalKarma: number;
   verified: boolean;
 
-  protected controls: UserControls;
+  protected controls: BaseUserControls;
 
   /** @internal */
-  constructor(controls: UserControls, data: UserData) {
+  constructor(controls: BaseUserControls, data: UserData) {
     super(data);
     this.controls = controls;
 
@@ -127,9 +127,7 @@ export abstract class User extends Content implements UserData {
    *
    * @returns A promise that resolves to the newly fetched user.
    */
-  async refetch(): Promise<User> {
-    return this.controls.fetch(this.name);
-  }
+  abstract refetch(): Promise<User>;
 
   /**
    * Fetch the user subreddit for this user.

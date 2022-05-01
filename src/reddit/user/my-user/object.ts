@@ -1,8 +1,8 @@
 import type { Maybe } from "../../../helper/types";
-import type { UserControls } from "../controls";
-import type { UserData } from "./base-object";
+import type { UserData } from "../base/object";
+import type { MyUserControls } from "./controls";
 
-import { User } from "./base-object";
+import { User } from "../base/object";
 
 /** The data for the authorized user. */
 export interface MyUserData extends UserData {
@@ -116,7 +116,7 @@ export interface MyUserData extends UserData {
   /**
    * Whether or not this user has seen the "give award" tooltip.
    *
-   * @note This is only set when using {@link UserControls.fetchMe}, *not* when
+   * @note This is only set when using {@link MyUserControls.fetch}, *not* when
    * using {@link UserControls.fetch}.
    */
   seenGiveAwardTooltip?: boolean;
@@ -124,7 +124,7 @@ export interface MyUserData extends UserData {
   /**
    * Whether or not this user has seen the layout switch interface.
    *
-   * @note This is only set when using {@link UserControls.fetchMe}, *not* when
+   * @note This is only set when using {@link MyUserControls.fetch}, *not* when
    * using {@link UserControls.fetch}.
    */
   seenLayoutSwitch?: boolean;
@@ -133,7 +133,7 @@ export interface MyUserData extends UserData {
    * Whether or not this user has seen a popup saying that buying Reddit premium
    * lets you disable (some) ads.
    *
-   * @note This is only set when using {@link UserControls.fetchMe}, *not* when
+   * @note This is only set when using {@link MyUserControls.fetch}, *not* when
    * using {@link UserControls.fetch}.
    */
   seenPremiumAdblockModal?: boolean;
@@ -141,7 +141,7 @@ export interface MyUserData extends UserData {
   /**
    * Whether or not this user has seen a popup about the redesign.
    *
-   * @note This is only set when using {@link UserControls.fetchMe}, *not* when
+   * @note This is only set when using {@link MyUserControls.fetch}, *not* when
    * using {@link UserControls.fetch}.
    */
   seenRedesignModal?: boolean;
@@ -150,7 +150,7 @@ export interface MyUserData extends UserData {
    * Whether or not this user has seen the first-time user experience (ftux)
    * popup about the subreddit chat feature.
    *
-   * @note This is only set when using {@link UserControls.fetchMe}, *not* when
+   * @note This is only set when using {@link MyUserControls.fetch}, *not* when
    * using {@link UserControls.fetch}.
    */
   seenSubredditChatFtux?: boolean;
@@ -202,9 +202,12 @@ export class MyUser extends User implements MyUserData {
   seenSubredditChatFtux?: boolean;
   suspensionExpirationUtc: Maybe<number>;
 
+  protected override controls: MyUserControls;
+
   /** @internal */
-  constructor(controls: UserControls, data: MyUserData) {
+  constructor(controls: MyUserControls, data: MyUserData) {
     super(controls, data);
+    this.controls = controls;
 
     this.canCreateSubreddit = data.canCreateSubreddit;
     this.canEditName = data.canEditName;
@@ -241,5 +244,16 @@ export class MyUser extends User implements MyUserData {
     this.seenRedesignModal = data.seenRedesignModal;
     this.seenSubredditChatFtux = data.seenSubredditChatFtux;
     this.suspensionExpirationUtc = data.suspensionExpirationUtc;
+  }
+
+  /**
+   * Re-fetch this user.
+   *
+   * Note: This returns a _new object_, it is _not_ mutating.
+   *
+   * @returns A promise that resolves to the newly fetched user.
+   */
+  async refetch(): Promise<MyUser> {
+    return this.controls.fetch();
   }
 }

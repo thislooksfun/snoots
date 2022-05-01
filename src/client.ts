@@ -10,7 +10,8 @@ import { makeDebug } from "./helper/debug";
 import { CommentControls } from "./reddit/comment/controls";
 import { PostControls } from "./reddit/post/controls";
 import { SubredditControls } from "./reddit/subreddit/controls";
-import { UserControls } from "./reddit/user/controls";
+import { MyUserControls } from "./reddit/user/my-user/controls";
+import { UserControls } from "./reddit/user/other-user/controls";
 
 const debug = makeDebug("class:Client");
 
@@ -125,6 +126,8 @@ export interface ClientOptions {
 export class Client {
   /** Controls for interacting with comments. */
   public readonly comments: CommentControls;
+  /** Controls for interacting with the currently authorized user. */
+  public readonly me: MyUserControls;
   /** Controls for interacting with posts. */
   public readonly posts: PostControls;
   /** Controls for interacting with subreddits. */
@@ -182,6 +185,7 @@ export class Client {
 
     // Set up controls after we have initialized the internal state.
     this.comments = new CommentControls(this);
+    this.me = new MyUserControls(this);
     this.posts = new PostControls(this);
     this.subreddits = new SubredditControls(this);
     this.users = new UserControls(this);

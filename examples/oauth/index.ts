@@ -60,7 +60,7 @@ app.get("/auth", async (req, res) => {
     );
 
     // Get and display the user's information so we know it worked!
-    const user = await client.users.fetchMe();
+    const user = await client.me.fetch();
     res.send(`Hello ${user.name}!`);
   } catch (e) {
     // If something goes wrong, log it.
