@@ -24,4 +24,15 @@ export class UserControls extends BaseUserControls {
     const raw: RedditObject = await this.gateway.get(`user/${username}/about`);
     return this.fromRaw(raw);
   }
+
+  /**
+   * Check whether whether or not a username is available.
+   *
+   * @param username The username to check.
+   *
+   * @returns Whether or not the username is available.
+   */
+  async isUsernameAvailable(username: string): Promise<boolean> {
+    return this.gateway.get("api/username_available", { user: username });
+  }
 }
