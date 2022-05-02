@@ -24,6 +24,7 @@ import { BannedUserListing } from "../user/moderator-actioned/banned";
 import { ModeratorActionedUserListing } from "../user/moderator-actioned/base";
 import { Moderator } from "../user/moderator-actioned/moderator";
 import { assertKind, fromRedditData } from "../util";
+import { SubredditListing } from "./listing";
 import { Subreddit } from "./object";
 
 /** A single captcha identifier and response. */
@@ -469,6 +470,29 @@ export class SubredditControls extends BaseControls {
     time: TimeRange = "all"
   ): Listing<Post> {
     return this.getSortedPosts(subreddit, "controversial", { time });
+  }
+
+  /** @internal */
+  protected getSubreddits(where: string): Listing<Subreddit> {
+    const request = {
+      url: `subreddits/${where}`,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      query: { show: "all", sr_detail: true },
+    };
+    const context = { request, client: this.client };
+    return new SubredditListing(fakeListingAfter(""), context);
+  }
+
+  /**
+   * Get the list of default subreddits.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 subreddits.
+   *
+   * @returns A Listing of Subreddits.
+   */
+  getDefault(): Listing<Subreddit> {
+    return this.getSubreddits("default");
   }
 
   /** @internal */
