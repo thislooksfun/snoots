@@ -495,6 +495,18 @@ export class SubredditControls extends BaseControls {
     return this.getSubreddits("default");
   }
 
+  /**
+   * Get the newest subreddits.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 subreddits.
+   *
+   * @returns A Listing of Subreddits.
+   */
+  getNew(): Listing<Subreddit> {
+    return this.getSubreddits("new");
+  }
+
   /** @internal */
   protected getAboutListing(
     subreddit: string,
