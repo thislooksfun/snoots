@@ -1,3 +1,26 @@
+## [1.0.0-dev.22](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.21...v1.0.0-dev.22) (2022-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* `Client.users.fetchMe()` is now `Client.me.fetch()`.
+
+### Features
+
+* add MyUserControls::getContributorSubreddits() ([48f41c0](https://github.com/thislooksfun/snoots/commit/48f41c02eb007aeb816d104bb41e182a3a9027f9))
+* add MyUserControls::getModeratedSubreddits() ([291c74f](https://github.com/thislooksfun/snoots/commit/291c74f9d6d419d0f417dfbc0950eb4c1c802ac3))
+* add MyUserControls::getSubscribedSubreddits() ([2ff0f50](https://github.com/thislooksfun/snoots/commit/2ff0f5006501884ef3ea43d4574c64e3ae620f1e))
+* add SubredditControls::getDefault() ([1d170a4](https://github.com/thislooksfun/snoots/commit/1d170a4c9f25bf1f848b9fce1292cdd2fcaa60de))
+* add SubredditControls::getNew() ([49be5ca](https://github.com/thislooksfun/snoots/commit/49be5cab5c4b5a86e938578f7b74d5048a5a0136))
+* add SubredditControls::getPopular() ([cc91c08](https://github.com/thislooksfun/snoots/commit/cc91c081076d19518bbb4a729c952a179aebc8e7))
+* add SubredditControls::getPremium() ([5a1274b](https://github.com/thislooksfun/snoots/commit/5a1274b4309a936db825dacfa8951343898f09c2))
+* add UserControls::isUsernameAvailable() ([3a56e77](https://github.com/thislooksfun/snoots/commit/3a56e776534e23212f322d946ee487c88cf5abb3))
+
+
+### Code Refactoring
+
+* add separate controls for MyUser ([57adf74](https://github.com/thislooksfun/snoots/commit/57adf744909ec911d7a99d8c8d04df1f30189e7b))
+
 ## [1.0.0-dev.21](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.20...v1.0.0-dev.21) (2022-04-10)
 
 
