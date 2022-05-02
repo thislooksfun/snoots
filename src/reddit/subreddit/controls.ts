@@ -519,6 +519,18 @@ export class SubredditControls extends BaseControls {
     return this.getSubreddits("popular");
   }
 
+  /**
+   * Get the list of premium-only subreddits.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 subreddits.
+   *
+   * @returns A Listing of Subreddits.
+   */
+  getPremium(): Listing<Subreddit> {
+    return this.getSubreddits("premium");
+  }
+
   /** @internal */
   protected getAboutListing(
     subreddit: string,
