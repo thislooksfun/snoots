@@ -40,4 +40,16 @@ export class MyUserControls extends BaseUserControls {
   getContributorSubreddits(): Listing<Subreddit> {
     return this.getMySubreddits("contributor");
   }
+
+  /**
+   * Get the subreddits the authenticated account is a moderator in.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 subreddits.
+   *
+   * @returns A Listing of Subreddits.
+   */
+  getModeratedSubreddits(): Listing<Subreddit> {
+    return this.getMySubreddits("moderator");
+  }
 }
