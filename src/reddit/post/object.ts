@@ -299,7 +299,7 @@ export class Post extends Lockable implements PostData {
   // whitelistStatus: string;
   // wls: number;
 
-  protected controls: PostControls;
+  protected override controls: PostControls;
 
   /** @internal */
   constructor(controls: PostControls, data: PostData) {

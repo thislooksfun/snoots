@@ -76,7 +76,7 @@ export class Comment extends Lockable implements CommentData {
   replies: Listing<Comment>;
   scoreHidden: boolean;
 
-  protected controls: CommentControls;
+  protected override controls: CommentControls;
 
   /** @internal */
   constructor(controls: CommentControls, data: CommentData) {

@@ -284,7 +284,7 @@ export abstract class Voteable extends Replyable implements VoteableData {
   userReports: [string, number][];
   userReportsDismissed?: [string, number][];
 
-  protected controls: VoteableControls;
+  protected override controls: VoteableControls;
 
   /** @internal */
   constructor(controls: VoteableControls, data: VoteableData) {

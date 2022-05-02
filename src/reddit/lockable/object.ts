@@ -13,7 +13,7 @@ export interface LockableData extends VoteableData {
 export abstract class Lockable extends Voteable implements LockableData {
   locked: boolean;
 
-  protected controls: LockableControls;
+  protected override controls: LockableControls;
 
   /** @internal */
   constructor(controls: LockableControls, data: LockableData) {

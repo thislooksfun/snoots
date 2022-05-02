@@ -52,7 +52,7 @@ class PublicOauthGateway extends OauthGateway {
     this.initialAuth = auth;
   }
 
-  public updateAccessToken(): Promise<void> {
+  public override updateAccessToken(): Promise<void> {
     return super.updateAccessToken();
   }
 }
