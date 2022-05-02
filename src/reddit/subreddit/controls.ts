@@ -507,6 +507,18 @@ export class SubredditControls extends BaseControls {
     return this.getSubreddits("new");
   }
 
+  /**
+   * Get the most popular subreddits.
+   *
+   * @note Due to the way Reddit implements Listings, this will only contain the
+   * first 1000 subreddits.
+   *
+   * @returns A Listing of Subreddits.
+   */
+  getPopular(): Listing<Subreddit> {
+    return this.getSubreddits("popular");
+  }
+
   /** @internal */
   protected getAboutListing(
     subreddit: string,
