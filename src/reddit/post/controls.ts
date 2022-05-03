@@ -224,7 +224,7 @@ export class PostControls extends LockableControls {
    *
    * @param id The ID of the post to unmark.
    *
-   * @returns A promise that resolves when the post has been umarked.
+   * @returns A promise that resolves when the post has been unmarked.
    */
   async unmarkNsfw(id: string): Promise<void> {
     await this.gateway.post("api/unmarknsfw", { id: this.namespace(id) });
@@ -233,7 +233,7 @@ export class PostControls extends LockableControls {
   /**
    * Mark a post as a spoiler.
    *
-   * @param id The ID of the post to mark as a spoler.
+   * @param id The ID of the post to mark as a spoiler.
    *
    * @returns A promise that resolves when the post has been marked.
    */
@@ -246,7 +246,7 @@ export class PostControls extends LockableControls {
    *
    * @param id The ID of the post to unmark.
    *
-   * @returns A promise that resolves when the post has been umarked.
+   * @returns A promise that resolves when the post has been unmarked.
    */
   async unmarkSpoiler(id: string): Promise<void> {
     await this.gateway.post("api/unspoiler", { id: this.namespace(id) });

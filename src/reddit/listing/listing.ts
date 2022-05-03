@@ -69,8 +69,9 @@ export abstract class Pager<T> implements Fetcher<T> {
  * intentionally exposes as little as possible about the internal workings to
  * minimize the amount of boilerplate needed to interact with them.
  *
- * @note Since Reddit's responses are paged, Listings only implement asyncInterator.
- * This means that if you want to loop over it you have to use `for await`:
+ * @note Since Reddit's responses are paged, Listings only implement
+ * asyncIterator. This means that if you want to loop over it you have to use
+ * `for await`:
  * ```ts
  * const posts = await client.subreddits.getNewPosts("funny");
  * for await (const post of posts) {

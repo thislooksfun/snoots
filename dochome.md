@@ -38,7 +38,7 @@ To get started making a bot with snoots:
 
 ## Crawler / Scraper
 
-If you just want to retreive information from the Reddit api without controlling
+If you just want to retrieve information from the Reddit api without controlling
 a user account you can do that!
 
 1. [Create an application][creds]<sup>1</sup>

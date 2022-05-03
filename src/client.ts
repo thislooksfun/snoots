@@ -197,7 +197,7 @@ export class Client {
    * @param clientId The ID of the Reddit app.
    * @param scopes The scopes to authorize with.
    * @param redirectUri The uri to redirect to after authorization.
-   * @param state Some arbetrary state that will be passed back upon
+   * @param state Some arbitrary state that will be passed back upon
    * authorization. This is used as a CSRF token to prevent various attacks.
    * @param temporary Whether the auth should be temporary (expires after 1hr),
    * or permanent.

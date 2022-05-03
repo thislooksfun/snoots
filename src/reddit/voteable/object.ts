@@ -31,7 +31,7 @@ export interface RichTextFlairEmoji {
 export type RichTextFlair = RichTextFlairText | RichTextFlairEmoji;
 
 /* eslint-disable @typescript-eslint/naming-convention */
-/** The Guildings an item has received. */
+/** The Gildings an item has received. */
 export interface Gildings {
   /** Number of Reddit Silver awarded */
   gid_1?: number;
@@ -120,10 +120,10 @@ export interface VoteableData extends ContentData {
   /** The unix timestamp when this item was edited, or `false` if it wasn't. */
   edited: number | false;
 
-  /** How many times this item has been guilded. */
+  /** How many times this item has been gilded. */
   gilded: number;
 
-  /** The guildings that this item has received. */
+  /** The gildings that this item has received. */
   gildings: Gildings;
 
   /** Whether or not future reports of this item will be ignored. */

@@ -472,7 +472,7 @@ export class Post extends Lockable implements PostData {
   /**
    * Mark this post as not NSFW.
    *
-   * @returns A promise that resolves when the post has been umarked.
+   * @returns A promise that resolves when the post has been unmarked.
    */
   async unmarkNsfw(): Promise<void> {
     return this.controls.unmarkNsfw(this.id);
@@ -490,7 +490,7 @@ export class Post extends Lockable implements PostData {
   /**
    * Mark this post is not a spoiler.
    *
-   * @returns A promise that resolves when the post has been umarked.
+   * @returns A promise that resolves when the post has been unmarked.
    */
   async unmarkSpoiler(): Promise<void> {
     return this.controls.unmarkSpoiler(this.id);
