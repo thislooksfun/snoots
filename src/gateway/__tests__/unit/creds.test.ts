@@ -7,7 +7,7 @@ let gateway: CredsGateway;
 beforeAll(() => {
   nock.disableNetConnect();
 
-  const creds = { clientId: "cid", clientSecret: "csec" };
+  const creds = { clientId: "c.id", clientSecret: "c.secret" };
   gateway = new CredsGateway(creds, "fake-user-agent");
 });
 
@@ -22,7 +22,7 @@ const commonNockOptions = {
   reqheaders: {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     "user-agent": "fake-user-agent",
-    authorization: "Basic Y2lkOmNzZWM=",
+    authorization: "Basic Yy5pZDpjLnNlY3JldA==",
   },
 };
 

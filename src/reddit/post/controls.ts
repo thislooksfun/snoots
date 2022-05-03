@@ -291,13 +291,15 @@ export class PostControls extends LockableControls {
   }
 
   /** @internal */
-  fromRaw(raw: RedditObject, comments?: RedditListing): Post {
+  fromRaw(
+    raw: RedditObject,
+    comments: RedditListing = fakeListingAfter("")
+  ): Post {
     assertKind("t3", raw);
 
     const rDat = raw.data;
-    const cmts = comments ?? fakeListingAfter("");
     const context = { post: rDat.id as string, client: this.client };
-    rDat.comments = new CommentListing(cmts, context);
+    rDat.comments = new CommentListing(comments, context);
 
     // Rename properties.
     rDat.body = rDat.selftext as string;

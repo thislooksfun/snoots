@@ -25,7 +25,7 @@ app.get("/login", (_req, res) => {
     creds.clientId,
     ["identity"],
     redirectUri,
-    "thestate", // This should be RANDOM and validated in /auth.
+    "some-state", // This should be RANDOM and validated in /auth.
     true
   );
 
@@ -45,7 +45,7 @@ app.get("/auth", async (req, res) => {
 
   // Here you should check that the state is one generated in /login. If it's
   // different it's a likely CSRF attack and should be handled accordingly.
-  if (state !== "thestate") {
+  if (state !== "some-state") {
     res.status(403).send("Unauthorized");
     return;
   }

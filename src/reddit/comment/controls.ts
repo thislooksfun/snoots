@@ -81,13 +81,13 @@ export class CommentControls extends LockableControls {
     const rDat = raw.data;
     const postId = (rDat.link_id as string).slice(3);
     const postName = rDat.name as string;
-    rDat.replies = this.listingifyReplies(rDat.replies, postName, postId);
+    rDat.replies = this.convertRepliesToListing(rDat.replies, postName, postId);
     const data: CommentData = fromRedditData(rDat);
     return new Comment(this, data);
   }
 
   /** @internal */
-  protected listingifyReplies(
+  protected convertRepliesToListing(
     replies: unknown,
     cmtName: string,
     postId: string
