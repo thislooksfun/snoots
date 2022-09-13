@@ -12,9 +12,20 @@ export { LockableControls } from "./lockable/controls";
 export type { LockableData } from "./lockable/object";
 export { Lockable } from "./lockable/object";
 export { PostControls } from "./post/controls";
-export type { PostData, SuggestedSort } from "./post/object";
+export type {
+  ImageMetadata,
+  MediaMetadata,
+  MediaMetadataItem,
+  PostData,
+  SuggestedSort,
+} from "./post/object";
 export { Post } from "./post/object";
-export type { PostSort } from "./post/types";
+export type {
+  HotPostListingOptions,
+  PostListingOptions,
+  PostSort,
+  TimeRangeListingOptions,
+} from "./post/types";
 export { ReplyableControls } from "./replyable/controls";
 export { Replyable } from "./replyable/object";
 export type {

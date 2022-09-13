@@ -3,6 +3,11 @@ import type { Comment } from "../comment/object";
 import type { ContentData } from "../content";
 import type { Listing } from "../listing/listing";
 import type { Post } from "../post/object";
+import type {
+  HotPostListingOptions,
+  PostListingOptions,
+  TimeRangeListingOptions,
+} from "../post/types";
 import type { SearchSort, SearchSyntax, Size, TimeRange } from "../types";
 import type { BannedUser } from "../user/moderator-actioned/banned";
 import type { ModeratorActionedUser } from "../user/moderator-actioned/base";
@@ -541,10 +546,12 @@ export class Subreddit extends Content implements SubredditData {
    * @note Due to the way Reddit implements Listings, this will only contain the
    * first 1000 posts.
    *
+   * @param options Options controlling pagination and filtering.
+   *
    * @returns A listing of posts, with the newest ones first.
    */
-  getNewPosts(): Listing<Post> {
-    return this.controls.getNewPosts(this.displayName);
+  getNewPosts(options?: PostListingOptions): Listing<Post> {
+    return this.controls.getNewPosts(this.displayName, options);
   }
 
   /**
@@ -553,12 +560,12 @@ export class Subreddit extends Content implements SubredditData {
    * @note Due to the way Reddit implements Listings, this will only contain the
    * first 1000 posts.
    *
-   * @param time The time scale to filter by.
+   * @param options Options controlling pagination and filtering.
    *
    * @returns A listing of posts, with the top rated ones first.
    */
-  getTopPosts(time: TimeRange = "all"): Listing<Post> {
-    return this.controls.getTopPosts(this.displayName, time);
+  getTopPosts(options?: TimeRangeListingOptions): Listing<Post> {
+    return this.controls.getTopPosts(this.displayName, options);
   }
 
   /**
@@ -567,10 +574,12 @@ export class Subreddit extends Content implements SubredditData {
    * @note Due to the way Reddit implements Listings, this will only contain the
    * first 1000 posts.
    *
+   * @param options Options controlling pagination and filtering.
+   *
    * @returns A listing of posts, with the hottest ones first.
    */
-  getHotPosts(): Listing<Post> {
-    return this.controls.getHotPosts(this.displayName);
+  getHotPosts(options?: HotPostListingOptions): Listing<Post> {
+    return this.controls.getHotPosts(this.displayName, options);
   }
 
   /**
@@ -579,10 +588,12 @@ export class Subreddit extends Content implements SubredditData {
    * @note Due to the way Reddit implements Listings, this will only contain the
    * first 1000 posts.
    *
+   * @param options Options controlling pagination and filtering.
+   *
    * @returns A listing of posts, with the rising ones first.
    */
-  getRisingPosts(): Listing<Post> {
-    return this.controls.getRisingPosts(this.displayName);
+  getRisingPosts(options?: PostListingOptions): Listing<Post> {
+    return this.controls.getRisingPosts(this.displayName, options);
   }
 
   /**
@@ -591,12 +602,12 @@ export class Subreddit extends Content implements SubredditData {
    * @note Due to the way Reddit implements Listings, this will only contain the
    * first 1000 posts.
    *
-   * @param time The time scale to filter by.
+   * @param options Options controlling pagination and filtering.
    *
    * @returns A listing of posts, with the most controversial ones first.
    */
-  getControversialPosts(time: TimeRange = "all"): Listing<Post> {
-    return this.controls.getControversialPosts(this.displayName, time);
+  getControversialPosts(options?: TimeRangeListingOptions): Listing<Post> {
+    return this.controls.getControversialPosts(this.displayName, options);
   }
 
   /**

@@ -4,7 +4,12 @@ import type { Data } from "../../helper/types";
 import type { Comment } from "../comment/object";
 import type { Listing } from "../listing/listing";
 import type { Post } from "../post/object";
-import type { PostSort } from "../post/types";
+import type {
+  HotPostListingOptions,
+  PostListingOptions,
+  PostSort,
+  TimeRangeListingOptions,
+} from "../post/types";
 import type {
   RedditObject,
   SearchSort,
@@ -378,10 +383,10 @@ export class SubredditControls extends BaseControls {
   }
 
   /** @internal */
-  protected getSortedPosts(
+  protected getSortedPosts<TOptions extends PostListingOptions>(
     subreddit: string | undefined,
     sort: PostSort,
-    options: Query = {}
+    options?: TOptions
   ): Listing<Post> {
     const url = subreddit ? `r/${subreddit}/` : "";
     const request = {
@@ -389,7 +394,7 @@ export class SubredditControls extends BaseControls {
       query: { show: "all", ...options },
     };
     const context = { request, client: this.client };
-    return new PostListing(fakeListingAfter(""), context);
+    return new PostListing(fakeListingAfter(options?.after ?? ""), context);
   }
 
   /**
@@ -400,11 +405,12 @@ export class SubredditControls extends BaseControls {
    *
    * @param subreddit The name of the subreddit. If this is left off it will
    * query the front page of Reddit.
+   * @param options Options controlling pagination and filtering.
    *
    * @returns A listing of posts, with the newest ones first.
    */
-  getNewPosts(subreddit?: string): Listing<Post> {
-    return this.getSortedPosts(subreddit, "new");
+  getNewPosts(subreddit?: string, options?: PostListingOptions): Listing<Post> {
+    return this.getSortedPosts(subreddit, "new", options);
   }
 
   /**
@@ -415,12 +421,15 @@ export class SubredditControls extends BaseControls {
    *
    * @param subreddit The name of the subreddit. If this is left off it will
    * query the front page of Reddit.
-   * @param time The time scale to filter by.
+   * @param options Options controlling pagination and filtering.
    *
    * @returns A listing of posts, with the top rated ones first.
    */
-  getTopPosts(subreddit?: string, time: TimeRange = "all"): Listing<Post> {
-    return this.getSortedPosts(subreddit, "top", { time });
+  getTopPosts(
+    subreddit?: string,
+    options?: TimeRangeListingOptions
+  ): Listing<Post> {
+    return this.getSortedPosts(subreddit, "top", options);
   }
 
   /**
@@ -431,11 +440,15 @@ export class SubredditControls extends BaseControls {
    *
    * @param subreddit The name of the subreddit. If this is left off it will
    * query the front page of Reddit.
+   * @param options Options controlling pagination and filtering.
    *
    * @returns A listing of posts, with the hottest ones first.
    */
-  getHotPosts(subreddit?: string): Listing<Post> {
-    return this.getSortedPosts(subreddit, "hot");
+  getHotPosts(
+    subreddit?: string,
+    options?: HotPostListingOptions
+  ): Listing<Post> {
+    return this.getSortedPosts(subreddit, "hot", options);
   }
 
   /**
@@ -446,11 +459,15 @@ export class SubredditControls extends BaseControls {
    *
    * @param subreddit The name of the subreddit. If this is left off it will
    * query the front page of Reddit.
+   * @param options Options controlling pagination and filtering.
    *
    * @returns A listing of posts, with the rising ones first.
    */
-  getRisingPosts(subreddit?: string): Listing<Post> {
-    return this.getSortedPosts(subreddit, "hot");
+  getRisingPosts(
+    subreddit?: string,
+    options?: PostListingOptions
+  ): Listing<Post> {
+    return this.getSortedPosts(subreddit, "rising", options);
   }
 
   /**
@@ -461,15 +478,15 @@ export class SubredditControls extends BaseControls {
    *
    * @param subreddit The name of the subreddit. If this is left off it will
    * query the front page of Reddit.
-   * @param time The time scale to filter by.
+   * @param options Options controlling pagination and filtering.
    *
    * @returns A listing of posts, with the most controversial ones first.
    */
   getControversialPosts(
     subreddit?: string,
-    time: TimeRange = "all"
+    options?: TimeRangeListingOptions
   ): Listing<Post> {
-    return this.getSortedPosts(subreddit, "controversial", { time });
+    return this.getSortedPosts(subreddit, "controversial", options);
   }
 
   /** @internal */

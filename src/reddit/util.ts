@@ -3,6 +3,8 @@ import type { RedditObject } from "./types";
 
 import camelCase from "camelcase";
 
+import { Listing } from "./listing/listing";
+
 /**
  * An invalid kind of object
  */
@@ -36,8 +38,17 @@ export function assertKind(kind: string, redditObject: RedditObject) {
 export function fromRedditData<T>(data: Data): T {
   const out: Data = {};
   for (const key in data) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    out[camelCase(key)] = data[key] === null ? undefined : data[key];
+    let value: unknown = data[key];
+    if (
+      typeof value === "object" &&
+      value !== null &&
+      !(value instanceof Listing)
+    ) {
+      value = fromRedditData(value);
+    } else if (value === null) {
+      value = undefined;
+    }
+    out[camelCase(key)] = value;
   }
   return out as T;
 }

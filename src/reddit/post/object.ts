@@ -84,6 +84,53 @@ export type SuggestedSort =
 //   id: string;
 // }
 
+/**
+ * Metadata for a single image variant.
+ */
+export interface ImageMetadata {
+  /** The width of this image variant */
+  x: number;
+  /** The height of this image variant */
+  y: number;
+  /** The full URL of this image variant */
+  u: string;
+}
+
+/**
+ * Metadata for a media item of a post.
+ */
+export interface MediaMetadataItem {
+  /**
+   * The unique id of this media item.
+   */
+  id: string;
+  /**
+   * Status of this media item
+   */
+  status: string;
+  /**
+   * The media type
+   */
+  e: string;
+  /**
+   * MIME Type, e.g. `image/jpg`
+   */
+  m: string;
+  /**
+   * Thumbnails
+   */
+  p: ImageMetadata[];
+  /**
+   * Original suurce image
+   */
+  s: ImageMetadata;
+}
+
+/**
+ * Metadata for all media items attached to this post.
+ */
+export type MediaMetadata = Record<string, MediaMetadataItem>;
+
 /** The attributes specific to Post objects. */
 export interface PostData extends LockableData {
   /**
@@ -153,10 +200,11 @@ export interface PostData extends LockableData {
   // linkFlairTextColor: "dark" | "light";
   // linkFlairType: "text" | "richtext";
 
-  // TODO: Document or remove PostData.media*
-  // media: Maybe<Media>;     // seems to always be undefined
+  /** The media item included in this post */
+  // media: Maybe<Media>;
   // mediaEmbed: MediaEmbed;  // seems to always be {}
-  // mediaMetadata?: unknown[];
+  /** Media metadata for images in this post. */
+  mediaMetadata: Maybe<MediaMetadata>;
   // mediaOnly: boolean;
 
   /** The number of comments on this post. */
@@ -271,6 +319,7 @@ export class Post extends Lockable implements PostData {
   // linkFlairType: "text" | "richtext";
   // media: Maybe<Media>;
   // mediaEmbed: MediaEmbed;
+  mediaMetadata: Maybe<MediaMetadata>;
   // mediaOnly: boolean;
   numComments: number;
   numCrossposts: number;
@@ -331,6 +380,7 @@ export class Post extends Lockable implements PostData {
     // this.linkFlairType = data.linkFlairType;
     // this.media = data.media;
     // this.mediaEmbed = data.mediaEmbed;
+    this.mediaMetadata = data.mediaMetadata;
     // this.mediaOnly = data.mediaOnly;
     this.numComments = data.numComments;
     this.numCrossposts = data.numCrossposts;

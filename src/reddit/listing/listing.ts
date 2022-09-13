@@ -65,6 +65,36 @@ export abstract class Pager<T> implements Fetcher<T> {
 }
 
 /**
+ * Common parameters for listings.
+ */
+export interface ListingParameters {
+  /**
+   * Indicate the fullname of an item in the listing to use as the anchor point of the slice.
+   *
+   * Only one of `after`/`before` should be specified.
+   */
+  after?: string;
+  /**
+   * Indicate the fullname of an item in the listing to use as the anchor point of the slice.
+   *
+   * Only one of `after`/`before` should be specified.
+   */
+  before?: string;
+  /**
+   * The number of items already seen in this listing. (default: 0)
+   */
+  count?: number;
+  /**
+   * The maximum number of items to return in this slice of the listing. (default: 25, maximum: 100)
+   */
+  limit?: number;
+  /**
+   * If `all` is passed, filters such as "hide links that I have voted on" will be disabled.
+   */
+  show?: "all";
+}
+
+/**
  * A Listing of items.
  *
  * Listings are probably the most common data type on Reddit. Snoots
