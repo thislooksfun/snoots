@@ -4,8 +4,8 @@ import type { ContentData } from "../content";
 import type { Listing } from "../listing/listing";
 import type { Post } from "../post/object";
 import type {
+  BasePostListingOptions,
   HotPostListingOptions,
-  PostListingOptions,
   TimeRangeListingOptions,
 } from "../post/types";
 import type { SearchSort, SearchSyntax, Size, TimeRange } from "../types";
@@ -550,7 +550,7 @@ export class Subreddit extends Content implements SubredditData {
    *
    * @returns A listing of posts, with the newest ones first.
    */
-  getNewPosts(options?: PostListingOptions): Listing<Post> {
+  getNewPosts(options?: BasePostListingOptions): Listing<Post> {
     return this.controls.getNewPosts(this.displayName, options);
   }
 
@@ -592,7 +592,7 @@ export class Subreddit extends Content implements SubredditData {
    *
    * @returns A listing of posts, with the rising ones first.
    */
-  getRisingPosts(options?: PostListingOptions): Listing<Post> {
+  getRisingPosts(options?: BasePostListingOptions): Listing<Post> {
     return this.controls.getRisingPosts(this.displayName, options);
   }
 

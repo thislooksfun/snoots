@@ -5,9 +5,27 @@ import type { TimeRange } from "../types";
 export type PostSort = "controversial" | "hot" | "new" | "rising" | "top";
 
 /**
+ * Automatically select post listing options based on post sorting
+ *
+ * @typeParam TSort The way to sort posts in a subreddit
+ */
+export type PostListingOptions<TSort extends PostSort> =
+  TSort extends "controversial"
+    ? TimeRangeListingOptions | undefined
+    : TSort extends "hot"
+    ? HotPostListingOptions | undefined
+    : TSort extends "new"
+    ? BasePostListingOptions | undefined
+    : TSort extends "rising"
+    ? BasePostListingOptions | undefined
+    : TSort extends "top"
+    ? TimeRangeListingOptions | undefined
+    : never;
+
+/**
  * Post listing options.
  */
-export interface PostListingOptions extends ListingParameters {
+export interface BasePostListingOptions extends ListingParameters {
   /**
    * Expand subreddits
    */
@@ -17,7 +35,7 @@ export interface PostListingOptions extends ListingParameters {
 /**
  * Options for post listing sorted by "hot".
  */
-export interface HotPostListingOptions extends PostListingOptions {
+export interface HotPostListingOptions extends BasePostListingOptions {
   /**
    * A country code to filter by.
    */
@@ -27,7 +45,7 @@ export interface HotPostListingOptions extends PostListingOptions {
 /**
  * Options for post listing sorted by "top" or "controversial".
  */
-export interface TimeRangeListingOptions extends PostListingOptions {
+export interface TimeRangeListingOptions extends BasePostListingOptions {
   /**
    * The time range for posts that should be included in the listing
    */

@@ -5,6 +5,7 @@ import type { Comment } from "../comment/object";
 import type { Listing } from "../listing/listing";
 import type { Post } from "../post/object";
 import type {
+  BasePostListingOptions,
   HotPostListingOptions,
   PostListingOptions,
   PostSort,
@@ -383,10 +384,10 @@ export class SubredditControls extends BaseControls {
   }
 
   /** @internal */
-  protected getSortedPosts<TOptions extends PostListingOptions>(
+  protected getSortedPosts<TSort extends PostSort>(
     subreddit: string | undefined,
-    sort: PostSort,
-    options?: TOptions
+    sort: TSort,
+    options?: PostListingOptions<TSort>
   ): Listing<Post> {
     const url = subreddit ? `r/${subreddit}/` : "";
     const request = {
@@ -409,7 +410,10 @@ export class SubredditControls extends BaseControls {
    *
    * @returns A listing of posts, with the newest ones first.
    */
-  getNewPosts(subreddit?: string, options?: PostListingOptions): Listing<Post> {
+  getNewPosts(
+    subreddit?: string,
+    options?: BasePostListingOptions
+  ): Listing<Post> {
     return this.getSortedPosts(subreddit, "new", options);
   }
 
@@ -465,7 +469,7 @@ export class SubredditControls extends BaseControls {
    */
   getRisingPosts(
     subreddit?: string,
-    options?: PostListingOptions
+    options?: BasePostListingOptions
   ): Listing<Post> {
     return this.getSortedPosts(subreddit, "rising", options);
   }

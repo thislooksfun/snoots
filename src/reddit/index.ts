@@ -21,6 +21,7 @@ export type {
 } from "./post/object";
 export { Post } from "./post/object";
 export type {
+  BasePostListingOptions,
   HotPostListingOptions,
   PostListingOptions,
   PostSort,
