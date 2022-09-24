@@ -1,6 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:js-lib", "npm:unpublishSafe", ""],
+  "extends": ["config:js-lib", ":rebaseStalePrs"],
+  "rollbackPrs": true,
+  "stabilityDays": 3,
+  "internalChecksFilter": "strict",
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
