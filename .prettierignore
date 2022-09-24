@@ -36,7 +36,6 @@ yarn-error.log*
 # Other unsupported types
 *.txt
 *.map
-Dockerfile
 
 # Misc files
 .eslintignore
