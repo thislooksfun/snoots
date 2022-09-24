@@ -10,7 +10,6 @@
     "ConstructorSignature",
     "Enum",
     "EnumMember",
-    "Event",
     "Function",
     "GetSignature",
     "IndexSignature",

@@ -157,7 +157,7 @@ export abstract class Gateway {
   }
 
   protected unwrap<T>(response: SomeResponse<T>): T {
-    if (typeof response !== "object") {
+    if (typeof response !== "object" || response == undefined) {
       return response;
     } else if ("json" in response) {
       const { errors, data } = response.json;
