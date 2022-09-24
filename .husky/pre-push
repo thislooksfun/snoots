@@ -16,3 +16,4 @@ echo "All commits matched enforced style!"
 npm run lint
 npm run build
 npm run gendoc
+./scripts/examples/build-all
