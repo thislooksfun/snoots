@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.8.0
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+        uses: styfle/cancel-workflow-action@0.10.0
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - run: npm ci
@@ -23,7 +23,7 @@ jobs:
         run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
       - name: Update dochome
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         env:
           VERSION: ${{ steps.branch.outputs.short_ref }}
         with:
@@ -40,7 +40,7 @@ jobs:
       - run: npm run gendoc
 
       - name: Deploy docs
-        uses: JamesIves/github-pages-deploy-action@4.0.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: docs
