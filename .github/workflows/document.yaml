@@ -34,7 +34,7 @@ jobs:
             const root = process.env.GITHUB_WORKSPACE;
             const dochomePth = path.join(root, "dochome.md");
             const template = fs.readFileSync(dochomePth, { encoding: "utf-8" });
-            const dochome = template.replace(/{{version}}/g, process.env.VERSION);
+            const dochome = template.replace(/VERSION_IDENTIFIER/g, process.env.VERSION);
             fs.writeFileSync(dochomePth, dochome);
 
       - run: npm run gendoc

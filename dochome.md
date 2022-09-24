@@ -1,6 +1,6 @@
 <!-- This README will become the documentation home page. -->
 
-# Snoots @ {{version}}
+# Snoots @ VERSION_IDENTIFIER
 
 Welcome to the snoots documentation!
 
