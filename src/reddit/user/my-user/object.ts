@@ -164,7 +164,7 @@ export interface MyUserData extends UserData {
 
 /** The authorized user. */
 export class MyUser extends User implements MyUserData {
-  isMe: true = true;
+  isMe = true as const;
 
   canCreateSubreddit: boolean;
   canEditName: boolean;

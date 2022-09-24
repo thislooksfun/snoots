@@ -14,7 +14,7 @@ export interface OtherUserData extends UserData {
 
 /** A user other than the authorized user. */
 export class OtherUser extends User implements OtherUserData {
-  isMe: false = false;
+  isMe = false as const;
 
   acceptChats: boolean;
   acceptPms: boolean;
