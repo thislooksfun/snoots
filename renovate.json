@@ -20,6 +20,17 @@
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all non-major dev dependencies",
       "groupSlug": "dev-minor-patch"
+    },
+    {
+      "description": "Disable PRs for non-major Renovate updates",
+      "matchPaths": ["renovate-update-notification/Dockerfile"],
+      "enabled": false
+    },
+    {
+      "description": "Create a PR whenever there is a new major Renovate version",
+      "matchPaths": ["renovate-update-notification/Dockerfile"],
+      "matchUpdateTypes": ["major"],
+      "enabled": true
     }
   ]
 }
