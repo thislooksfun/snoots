@@ -16,6 +16,7 @@ import { CommentListing } from "../comment/listing/listing";
 import { fakeListingAfter } from "../listing/util";
 import { LockableControls } from "../lockable/controls";
 import { PostListing } from "./listing";
+import { convertMediaMetadata } from "./media";
 import { Post } from "./object";
 
 function isRemoved(dat: Data) {
@@ -36,7 +37,7 @@ type SplitRawPost = [
 export class PostControls extends LockableControls {
   /** @internal */
   constructor(client: Client) {
-    super(client, "t3");
+    super(client, "t3_");
   }
 
   /**
@@ -310,6 +311,9 @@ export class PostControls extends LockableControls {
 
     // Ensure 'removed' is set and is a boolean.
     rDat.removed = isRemoved(rDat);
+
+    // Convert the media_metadata object into our own data structure
+    rDat.mediaMetadata = convertMediaMetadata(rDat.media_metadata);
 
     const data: PostData = fromRedditData(rDat);
 

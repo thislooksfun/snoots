@@ -29,7 +29,7 @@ export interface BasePostListingOptions extends ListingParameters {
   /**
    * Expand subreddits
    */
-  srDetail?: boolean;
+  expandSubreddits?: boolean;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface HotPostListingOptions extends BasePostListingOptions {
   /**
    * A country code to filter by.
    */
-  g?: string;
+  countryCode?: string;
 }
 
 /**
@@ -49,5 +49,5 @@ export interface TimeRangeListingOptions extends BasePostListingOptions {
   /**
    * The time range for posts that should be included in the listing
    */
-  t?: TimeRange;
+  timeRange?: TimeRange;
 }

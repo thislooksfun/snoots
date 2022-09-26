@@ -392,7 +392,7 @@ export class SubredditControls extends BaseControls {
     const url = subreddit ? `r/${subreddit}/` : "";
     const request = {
       url: `${url}${sort}`,
-      query: { show: "all", ...options },
+      query: this.convertListingOptions(sort, options),
     };
     const context = { request, client: this.client };
     return new PostListing(fakeListingAfter(options?.after ?? ""), context);
@@ -959,6 +959,52 @@ export class SubredditControls extends BaseControls {
       name: username,
       type,
     });
+  }
+
+  /** @internal */
+  protected convertListingOptions<TSort extends PostSort>(
+    sort: TSort,
+    options?: PostListingOptions<TSort>
+  ) {
+    let query: Query;
+    if (sort === "top" || sort === "controversial") {
+      const { timeRange, expandSubreddits, ...rest } =
+        options as TimeRangeListingOptions;
+      query = {
+        show: "all",
+        t: timeRange,
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        sr_detail: expandSubreddits,
+        ...rest,
+      };
+    } else if (sort === "hot") {
+      const { countryCode, expandSubreddits, ...rest } =
+        options as HotPostListingOptions;
+      query = {
+        show: "all",
+        g: countryCode,
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        sr_detail: expandSubreddits,
+        ...rest,
+      };
+    } else {
+      const { expandSubreddits, ...rest } = options as BasePostListingOptions;
+      query = {
+        show: "all",
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        sr_detail: expandSubreddits,
+        ...rest,
+      };
+    }
+
+    // We can't use `this.namespace` here because it would use the subreddit namespace (/r or t5_)
+    // but what we actually need is Link (t3_)
+    //
+    // if (query.after) {
+    //   query.after = this.namespace(query.after as string)
+    // }
+
+    return query;
   }
 
   /** @internal */

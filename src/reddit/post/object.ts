@@ -84,53 +84,6 @@ export type SuggestedSort =
 //   id: string;
 // }
 
-/**
- * Metadata for a single image variant.
- */
-export interface ImageMetadata {
-  /** The width of this image variant */
-  x: number;
-  /** The height of this image variant */
-  y: number;
-  /** The full URL of this image variant */
-  u: string;
-}
-
-/**
- * Metadata for a media item of a post.
- */
-export interface MediaMetadataItem {
-  /**
-   * The unique id of this media item.
-   */
-  id: string;
-  /**
-   * Status of this media item
-   */
-  status: string;
-  /**
-   * The media type
-   */
-  e: string;
-  /**
-   * MIME Type, e.g. `image/jpg`
-   */
-  m: string;
-  /**
-   * Thumbnails
-   */
-  p: ImageMetadata[];
-  /**
-   * Original suurce image
-   */
-  s: ImageMetadata;
-}
-
-/**
- * Metadata for all media items attached to this post.
- */
-export type MediaMetadata = Record<string, MediaMetadataItem>;
-
 /** The attributes specific to Post objects. */
 export interface PostData extends LockableData {
   /**

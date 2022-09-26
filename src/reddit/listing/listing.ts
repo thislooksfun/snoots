@@ -70,22 +70,14 @@ export abstract class Pager<T> implements Fetcher<T> {
 export interface ListingParameters {
   /**
    * Indicate the fullname of an item in the listing to use as the anchor point of the slice.
-   *
-   * Only one of `after`/`before` should be specified.
    */
   after?: string;
-  /**
-   * Indicate the fullname of an item in the listing to use as the anchor point of the slice.
-   *
-   * Only one of `after`/`before` should be specified.
-   */
-  before?: string;
   /**
    * The number of items already seen in this listing. (default: 0)
    */
   count?: number;
   /**
-   * The maximum number of items to return in this slice of the listing. (default: 25, maximum: 100)
+   * The maximum number of items to return in this slice of the listing. (default: 100, maximum: 100)
    */
   limit?: number;
   /**

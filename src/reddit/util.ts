@@ -39,16 +39,26 @@ export function fromRedditData<T>(data: Data): T {
   const out: Data = {};
   for (const key in data) {
     let value: unknown = data[key];
-    if (
-      typeof value === "object" &&
-      value !== null &&
-      !(value instanceof Listing)
-    ) {
-      value = fromRedditData(value);
+    if (isObject(value)) {
+      if (Array.isArray(value)) {
+        value = value.map((item: Data) => {
+          return isObject(value) ? fromRedditData(item) : value;
+        });
+      } else if (!isListing(value)) {
+        value = fromRedditData(value);
+      }
     } else if (value === null) {
       value = undefined;
     }
     out[camelCase(key)] = value;
   }
   return out as T;
+}
+
+function isObject(value: unknown): value is Data {
+  return typeof value === "object" && value !== null;
+}
+
+function isListing<T>(value: unknown): value is Listing<T> {
+  return value instanceof Listing;
 }
