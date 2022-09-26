@@ -387,7 +387,7 @@ export class SubredditControls extends BaseControls {
   protected getSortedPosts<TSort extends PostSort>(
     subreddit: string | undefined,
     sort: TSort,
-    options?: PostListingOptions<TSort>
+    options: PostListingOptions<TSort> = {}
   ): Listing<Post> {
     const url = subreddit ? `r/${subreddit}/` : "";
     const request = {
@@ -997,12 +997,9 @@ export class SubredditControls extends BaseControls {
       };
     }
 
-    // We can't use `this.namespace` here because it would use the subreddit namespace (/r or t5_)
-    // but what we actually need is Link (t3_)
-    //
-    // if (query.after) {
-    //   query.after = this.namespace(query.after as string)
-    // }
+    // We don't need `after` to be part of the query options, it will be handled
+    // by the `PostListing`.
+    delete query.after;
 
     return query;
   }

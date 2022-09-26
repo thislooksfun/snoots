@@ -9,18 +9,19 @@ export type PostSort = "controversial" | "hot" | "new" | "rising" | "top";
  *
  * @typeParam TSort The way to sort posts in a subreddit
  */
-export type PostListingOptions<TSort extends PostSort> =
-  TSort extends "controversial"
-    ? TimeRangeListingOptions | undefined
-    : TSort extends "hot"
-    ? HotPostListingOptions | undefined
-    : TSort extends "new"
-    ? BasePostListingOptions | undefined
-    : TSort extends "rising"
-    ? BasePostListingOptions | undefined
-    : TSort extends "top"
-    ? TimeRangeListingOptions | undefined
-    : never;
+export type PostListingOptions<TSort extends PostSort> = [TSort] extends [
+  "controversial"
+]
+  ? TimeRangeListingOptions
+  : [TSort] extends ["hot"]
+  ? HotPostListingOptions
+  : [TSort] extends ["new"]
+  ? BasePostListingOptions
+  : [TSort] extends ["rising"]
+  ? BasePostListingOptions
+  : [TSort] extends ["top"]
+  ? TimeRangeListingOptions
+  : BasePostListingOptions;
 
 /**
  * Post listing options.
