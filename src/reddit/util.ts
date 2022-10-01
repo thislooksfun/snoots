@@ -42,7 +42,7 @@ export function fromRedditData<T>(data: Data): T {
     if (isObject(value)) {
       if (Array.isArray(value)) {
         value = value.map((item: Data) => {
-          return isObject(value) ? fromRedditData(item) : value;
+          return isObject(item) ? fromRedditData(item) : item;
         });
       } else if (!isListing(value)) {
         value = fromRedditData(value);
