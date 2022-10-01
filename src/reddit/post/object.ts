@@ -4,6 +4,7 @@ import type { Listing } from "../listing/listing";
 import type { LockableData } from "../lockable/object";
 import type { LinkPostOptions } from "../subreddit/controls";
 import type { PostControls } from "./controls";
+import type { MediaMetadata } from "./media";
 
 import { Lockable } from "../lockable/object";
 
