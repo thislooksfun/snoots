@@ -4,12 +4,16 @@ interface RawImageMetadata {
   u: string;
 }
 
-interface RawMediaMetadataItem {
+interface FailedRawMediaMetadataItem {
+  status: "failed";
+}
+
+interface ValidRawMediaMetadataItem {
   id: string;
   /**
    * Status of this media item
    */
-  status: string;
+  status: "valid";
   /**
    * The media type
    */
@@ -28,6 +32,10 @@ interface RawMediaMetadataItem {
   s: RawImageMetadata;
 }
 
+type RawMediaMetadataItem =
+  | FailedRawMediaMetadataItem
+  | ValidRawMediaMetadataItem;
+
 export type RawMediaMetadata = Record<string, RawMediaMetadataItem>;
 
 /**
@@ -42,13 +50,32 @@ export interface ImageMetadata {
   url: string;
 }
 
-export type MediaMetadataItemStatus = "valid";
+/**
+ * Possible `status` values for a media metadata item.
+ */
+export type MediaMetadataItemStatus = "valid" | "failed";
+
+/**
+ * Possible `type` values for a media metadata item.
+ */
 export type MediaMetadataItemType = "Image";
 
 /**
- * Metadata for a media item of a post.
+ * Metadata for media items of a post that could not be processed.
+ *
+ * Only has a status of `failed` and no other properties.
  */
-export interface MediaMetadataItem {
+export interface FailedMediaMetadataItem {
+  /**
+   * Status of this media item
+   */
+  status: "failed";
+}
+
+/**
+ * Metadata for a media item of a post that was successfully processed.
+ */
+export interface ValidMediaMetadataItem {
   /**
    * The unique id of this media item.
    */
@@ -76,6 +103,13 @@ export interface MediaMetadataItem {
 }
 
 /**
+ * Metadata for a media item of a post.
+ */
+export type MediaMetadataItem =
+  | FailedMediaMetadataItem
+  | ValidMediaMetadataItem;
+
+/**
  * Metadata for all media items attached to this post.
  */
 export type MediaMetadata = Record<string, MediaMetadataItem>;
@@ -95,15 +129,20 @@ export function convertMediaMetadata(
 
   const mediaMetadata: MediaMetadata = {};
   for (const id of Object.keys(rawMediaMetadata)) {
-    const { status, e, m, p, s } = rawMediaMetadata[id];
-    mediaMetadata[id] = {
-      id,
-      status: status as MediaMetadataItemStatus,
-      type: e as MediaMetadataItemType,
-      mimeType: m,
-      previews: p.map(value => convertImageMetadata(value)),
-      source: convertImageMetadata(s),
-    };
+    const item = rawMediaMetadata[id];
+    if (item.status === "failed") {
+      mediaMetadata[id] = item;
+    } else if (item.status === "valid") {
+      const { status, e, m, p, s } = item;
+      mediaMetadata[id] = {
+        id,
+        status,
+        type: e as MediaMetadataItemType,
+        mimeType: m,
+        previews: p.map(value => convertImageMetadata(value)),
+        source: convertImageMetadata(s),
+      };
+    }
   }
 
   return mediaMetadata;

@@ -13,9 +13,12 @@ export type { LockableData } from "./lockable/object";
 export { Lockable } from "./lockable/object";
 export { PostControls } from "./post/controls";
 export type {
+  FailedMediaMetadataItem,
   ImageMetadata,
   MediaMetadata,
   MediaMetadataItem,
+  MediaMetadataItemStatus,
+  ValidMediaMetadataItem,
 } from "./post/media";
 export type { PostData, SuggestedSort } from "./post/object";
 export { Post } from "./post/object";
