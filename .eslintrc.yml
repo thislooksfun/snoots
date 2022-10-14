@@ -75,6 +75,7 @@ rules:
           description: true
         sr:
           subreddit: true
+  unicorn/switch-case-braces: [error, avoid]
 
 overrides:
   - files: ["**/__tests__/**/*.ts"]
