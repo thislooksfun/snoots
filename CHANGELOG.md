@@ -1,3 +1,15 @@
+## [1.0.0-dev.23](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.22...v1.0.0-dev.23) (2022-10-14)
+
+
+### Features
+
+* make BaseControls::namespace() public ([f13d40b](https://github.com/thislooksfun/snoots/commit/f13d40bc41f2254480a607c65c48b1f98ee59ef0))
+
+
+### Bug Fixes
+
+* handle posts with no default comments ([3f48474](https://github.com/thislooksfun/snoots/commit/3f48474fedf2af582a87d026e0f8d8f1ef29637a)), closes [#67](https://github.com/thislooksfun/snoots/issues/67)
+
 ## [1.0.0-dev.22](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.21...v1.0.0-dev.22) (2022-05-02)
 
 
