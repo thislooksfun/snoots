@@ -25,6 +25,6 @@ export abstract class BaseControls {
    * @returns The namespaced version of the id.
    */
   protected namespace(id: string): string {
-    return this.prefix + id;
+    return id.startsWith(this.prefix) ? id : this.prefix + id;
   }
 }
