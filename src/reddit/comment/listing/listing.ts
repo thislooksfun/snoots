@@ -18,7 +18,17 @@ export class CommentListing extends Listing<Comment> {
   constructor(l: RedditListing, context: ListingContext) {
     let fetcher: Fetcher<Comment> | undefined;
 
-    if (l.after != undefined) {
+    if (context.post) {
+      fetcher = new MoreComments({
+        children: [],
+        count: 0,
+        depth: 0,
+        id: "_",
+        name: "t1__",
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        parent_id: context.client.posts.namespace(context.post),
+      });
+    } else if (l.after != undefined) {
       fetcher = new CommentPager(l.after);
     }
 
