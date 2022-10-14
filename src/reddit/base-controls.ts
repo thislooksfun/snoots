@@ -18,13 +18,13 @@ export abstract class BaseControls {
   }
 
   /**
-   * Namespace an id with the prefix.
+   * Namespace an id with the proper prefix for its type.
    *
-   * @param id The ID of the item.
+   * @param id The ID to namespace.
    *
    * @returns The namespaced version of the id.
    */
-  protected namespace(id: string): string {
+  public namespace(id: string): string {
     return id.startsWith(this.prefix) ? id : this.prefix + id;
   }
 }
