@@ -71,7 +71,7 @@ export class MoreComments implements Fetcher<Comment> {
       }
     } else {
       // api/morechildren can't handle more than ~75 items at a time, so we have
-      // to batch it. Yes the docs *say* 100, but if we do that we start loosing
+      // to batch it. Yes the docs *say* 100, but if we do that we start losing
       // items.
       const page = this.data.children.slice(0, 75);
       const rest = this.data.children.slice(75);
