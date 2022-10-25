@@ -4,6 +4,7 @@
   "rollbackPrs": true,
   "stabilityDays": 3,
   "internalChecksFilter": "strict",
+  "schedule": ["on saturday"],
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
