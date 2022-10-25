@@ -8,7 +8,11 @@ while IFS= read -r line; do
   old="${parts[3]}"
   new="${parts[1]}"
 
-  npx commitlint -f "$old" -t "$new"
+  if [ "${old}" = "0000000000000000000000000000000000000000" ]; then
+    npx commitlint -f 'master' -t "$new"
+  else
+    npx commitlint -f "$old" -t "$new"
+  fi
 done < /dev/stdin
 
 echo "All commits matched enforced style!"
