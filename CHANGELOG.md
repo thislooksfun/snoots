@@ -1,3 +1,10 @@
+## [1.0.0-dev.24](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.23...v1.0.0-dev.24) (2022-11-12)
+
+
+### Bug Fixes
+
+* properly handle comment replies ([e754d3f](https://github.com/thislooksfun/snoots/commit/e754d3fd26fbf9ad24ba3a1d3ee85f8950e0a819)), closes [#67](https://github.com/thislooksfun/snoots/issues/67) [#71](https://github.com/thislooksfun/snoots/issues/71)
+
 ## [1.0.0-dev.23](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.22...v1.0.0-dev.23) (2022-10-14)
 
 
