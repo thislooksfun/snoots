@@ -1,3 +1,10 @@
+## [1.0.0-dev.25](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.24...v1.0.0-dev.25) (2022-12-04)
+
+
+### Bug Fixes
+
+* unbreak search()ed post comments yet again ([09876c6](https://github.com/thislooksfun/snoots/commit/09876c67025677ee2072480571a798aa5165c7ac)), closes [#71](https://github.com/thislooksfun/snoots/issues/71)
+
 ## [1.0.0-dev.24](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.23...v1.0.0-dev.24) (2022-11-12)
 
 
