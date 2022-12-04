@@ -63,12 +63,10 @@ export class MoreComments implements Fetcher<Comment> {
         });
 
       const child = childrenResponse[1].data.children[0];
-      if (!child) {
-        return new CommentListing(emptyRedditListing, context);
-      } else {
-        const replies = child.data.replies as ListingObject;
-        return new CommentListing(replies.data ?? emptyRedditListing, context);
-      }
+      if (!child) return new CommentListing(emptyRedditListing, context);
+
+      const replies = child.data.replies as ListingObject;
+      return new CommentListing(replies.data ?? emptyRedditListing, context);
     } else {
       // api/morechildren can't handle more than ~75 items at a time, so we have
       // to batch it. Yes the docs *say* 100, but if we do that we start losing
