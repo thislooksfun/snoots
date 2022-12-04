@@ -11,6 +11,7 @@ import { makeDebug } from "../../../helper/debug";
 import { Listing } from "../../listing/listing";
 import { MoreComments } from "./more";
 import { CommentPager } from "./pager";
+import { PostComments } from "./post";
 
 const debug = makeDebug("listing:comment");
 
@@ -21,15 +22,10 @@ function makeFetcher(
   if (after == undefined) return undefined;
 
   if (after === "" && context.post) {
-    return new MoreComments({
-      children: [],
-      count: 0,
-      depth: 0,
-      id: "_",
-      name: "t1__",
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      parent_id: context.client.posts.namespace(context.post),
-    });
+    // HACK: Some posts, notably the ones returned by search, don't have their
+    // own comments listing. To ensure we can still get comments for those posts
+    // we use a custom fetcher that just jump-starts the fetching process.
+    return new PostComments();
   }
 
   return new CommentPager(after);
