@@ -1,4 +1,4 @@
-# snoots
+# snoots [![Verified on Openbase](https://badges.openbase.com/js/verified/snoots.svg?token=zh8jCN102bomfKH61A6jP1lPivsLI8K7SnqxRbLNChI=)](https://openbase.com/js/snoots?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 <p align="center">
   <a href="https://github.com/semantic-release/semantic-release"
