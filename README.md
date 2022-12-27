@@ -68,7 +68,7 @@
 
 A modern, fully-featured, strongly-typed reddit api wrapper.
 
-# WARNING
+# :warning: WARNING :warning:
 
 This project is in early alpha. Things can (and likely will) change at any time
 for any reason without warning, and large parts of the api are not yet
