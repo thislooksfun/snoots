@@ -1,3 +1,10 @@
+## [1.0.0-dev.27](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.26...v1.0.0-dev.27) (2022-12-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency got to ^11.8.6 ([82e6310](https://github.com/thislooksfun/snoots/commit/82e631023ec8ee77c80508058916a01a4038b968))
+
 ## [1.0.0-dev.26](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.25...v1.0.0-dev.26) (2022-12-04)
 
 
