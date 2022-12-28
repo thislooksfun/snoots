@@ -1,8 +1,15 @@
 import type { Client } from "../..";
-import type { ModeratorNoteData, ModeratorNoteType } from "./types";
+import type { Data } from "../../helper/types";
+import type {
+  ModeratorNoteData,
+  ModeratorNoteType,
+  ModeratorNoteUserNoteLabelType,
+} from "./types";
 
 import { BaseControls } from "../..";
 import { ModeratorNote } from "./object";
+
+const moderatorNoteAPIEndpoint = "api/mod/notes";
 
 /**
  * Various methods to allow you to interact with moderator notes.
@@ -52,7 +59,7 @@ export class ModeratorNoteControls extends BaseControls {
    * @param user account username (not prefixed)
    */
   async deleteNote(noteId: string, subreddit: string, user: string) {
-    return this.gateway.delete("api/mod/notes", {
+    return this.gateway.delete(moderatorNoteAPIEndpoint, {
       subreddit,
       user,
       /* eslint-disable-next-line @typescript-eslint/naming-convention */
@@ -81,7 +88,7 @@ export class ModeratorNoteControls extends BaseControls {
     const redditResponse = await this.gateway.get<{
       /* eslint-disable-next-line @typescript-eslint/naming-convention */
       mod_notes: Array<ModeratorNoteData>;
-    }>("api/mod/notes", {
+    }>(moderatorNoteAPIEndpoint, {
       subreddit,
       user,
       filter,
@@ -93,10 +100,28 @@ export class ModeratorNoteControls extends BaseControls {
   }
 
   /**
-   *
+   * @param subreddit Subreddit display name
+   * @param user username targetted
+   * @param note String of up to 250 characters to be made as a note
+   * @param label Optional label to add to the note
+   * @param redditId prefixed ID of comment or submission to link note to
    */
-  async createNote() {
-    return;
+  async createNote(
+    subreddit: string,
+    user: string,
+    note: string,
+    label?: ModeratorNoteUserNoteLabelType,
+    redditId?: string
+  ) {
+    const payload = { subreddit, user, note } as Data;
+    if (label) payload.label = label;
+    /* eslint-disable-next-line @typescript-eslint/naming-convention */
+    if (redditId) payload.reddit_id = redditId;
+    const result = await this.gateway.post<{ created: Data }>(
+      moderatorNoteAPIEndpoint,
+      payload
+    );
+    return this.noteFromRedditData(result.created);
   }
 
   /**

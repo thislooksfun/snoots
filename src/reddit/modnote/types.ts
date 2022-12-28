@@ -16,6 +16,9 @@ export type ModeratorNoteUserNoteLabelType =
   | "SPAM_WATCH"
   | "SPAM_WARNING"
   | "ABUSE_WARNING"
+  | "BOT_BAN"
+  | "PERMA_BAN"
+  | "BAN"
   | null;
 
 export interface ModeratorNoteActionData {
@@ -39,6 +42,6 @@ export interface ModeratorNoteData {
   id: string;
   userNoteData: ModeratorNoteUserNoteData;
   createdAt: number;
-  cursor: string;
+  cursor?: string;
   type: ModeratorNoteType;
 }

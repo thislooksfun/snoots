@@ -14,7 +14,7 @@ export class ModeratorNote implements ModeratorNoteData {
   id: string;
   userNoteData: ModeratorNoteUserNoteData;
   createdAt: number;
-  cursor: string;
+  cursor?: string;
   type: ModeratorNoteType;
 
   protected controls: ModeratorNoteControls;
