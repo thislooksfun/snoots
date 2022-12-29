@@ -68,7 +68,7 @@ export class ModeratorNoteControls extends BaseControls {
   }
 
   /**
-   *
+   * Retrieve usernotes for a user on a given subreddit filtered by type
    *
    * @param subreddit subreddit name (not prefixed)
    * @param user account username (not prefixed)
@@ -100,6 +100,9 @@ export class ModeratorNoteControls extends BaseControls {
   }
 
   /**
+   * Create a moderator note for a user on a subreddit, optionally linking to content.
+   * Returns newly created note
+   *
    * @param subreddit Subreddit display name
    * @param user username targetted
    * @param note String of up to 250 characters to be made as a note
@@ -112,7 +115,7 @@ export class ModeratorNoteControls extends BaseControls {
     note: string,
     label?: ModeratorNoteUserNoteLabelType,
     redditId?: string
-  ) {
+  ): Promise<ModeratorNote> {
     const payload = { subreddit, user, note } as Data;
     if (label) payload.label = label;
     /* eslint-disable-next-line @typescript-eslint/naming-convention */
@@ -125,10 +128,34 @@ export class ModeratorNoteControls extends BaseControls {
   }
 
   /**
+   * Fetch the most recent moderator note made for each of a subreddit-username pair. These are returned as
+   * a flat array, with the index of each entry matching the index of the corresponding subreddit-username pair
+   * supplied to the function
    *
+   * @param SubredditUsernamePairs Array of tuples. The first element of the tuple is a subreddit display name,
+   * the second element is a corresponding username. For each tuple in the array, the most recent moderator note
+   * for that subreddit-username pair will be returned. Duplicate entries result in undefined behaviour.
+   * The array of tuples must have a maximum of 500 entries.
    */
-  async getRecent() {
-    return;
+  async getRecent(
+    subredditUsernamePairs: Array<[string, string]>
+  ): Promise<Array<ModeratorNote>> {
+    // Reduce down pairs for reddit API format (CSV)
+    // eslint-disable-next-line unicorn/no-array-reduce
+    const [subreddits, users] = subredditUsernamePairs.reduce(
+      (previous, current) => {
+        return [previous[0] + "," + current[0], previous[1] + "," + current[1]];
+      }
+    );
+
+    // Await response from API in order to post-process response
+    const results = await this.gateway.get<{
+      /* eslint-disable-next-line @typescript-eslint/naming-convention */
+      mod_notes: Array<ModeratorNoteData>;
+    }>("api/mod/notes/recent", { subreddits, users });
+
+    // Transform response into ModeratorNote instances
+    return results.mod_notes.map(data => this.noteFromRedditData(data));
   }
 
   getSubreddit(data: ModeratorNoteData) {
