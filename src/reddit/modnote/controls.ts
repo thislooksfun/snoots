@@ -142,6 +142,7 @@ export class ModeratorNoteControls extends BaseControls {
   }
 
   getContent(data: ModeratorNoteData) {
+    if (!data.userNoteData.redditId) return;
     return data.userNoteData.redditId.startsWith("t1_")
       ? this.client.comments.fetch(data.userNoteData.redditId)
       : this.client.posts.fetch(data.userNoteData.redditId);

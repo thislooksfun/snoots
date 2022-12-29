@@ -22,15 +22,15 @@ export type ModeratorNoteUserNoteLabelType =
   | null;
 
 export interface ModeratorNoteActionData {
-  action: string;
-  redditId: string; // Comment or Submission prefixed ID
-  details: string;
-  description: unknown;
+  action: string | null;
+  redditId: string | null; // Comment or Submission prefixed ID
+  details: string | null;
+  description: unknown | null;
 }
 
 export interface ModeratorNoteUserNoteData {
   note: string | null;
-  redditId: string; // Comment or Submission prefixed ID
+  redditId: string | null; // Comment or Submission prefixed ID
   label: ModeratorNoteUserNoteLabelType;
 }
 
