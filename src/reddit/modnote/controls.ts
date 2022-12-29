@@ -2,7 +2,7 @@ import type { Client } from "../..";
 import type { Data } from "../../helper/types";
 import type {
   ModeratorNoteData,
-  ModeratorNoteType,
+  ModeratorNoteTypeSearch,
   ModeratorNoteUserNoteLabelType,
 } from "./types";
 
@@ -79,7 +79,7 @@ export class ModeratorNoteControls extends BaseControls {
   async getNotes(
     subreddit: string,
     user: string,
-    filter: ModeratorNoteType = "ALL",
+    filter: ModeratorNoteTypeSearch = "ALL",
     limit: number = 25,
     before?: string
   ): Promise<Array<ModeratorNote>> {
@@ -132,7 +132,7 @@ export class ModeratorNoteControls extends BaseControls {
    * a flat array, with the index of each entry matching the index of the corresponding subreddit-username pair
    * supplied to the function
    *
-   * @param SubredditUsernamePairs Array of tuples. The first element of the tuple is a subreddit display name,
+   * @param subredditUsernamePairs Array of tuples. The first element of the tuple is a subreddit display name,
    * the second element is a corresponding username. For each tuple in the array, the most recent moderator note
    * for that subreddit-username pair will be returned. Duplicate entries result in undefined behaviour.
    * The array of tuples must have a maximum of 500 entries.
@@ -158,16 +158,37 @@ export class ModeratorNoteControls extends BaseControls {
     return results.mod_notes.map(data => this.noteFromRedditData(data));
   }
 
+  /**
+   * Utility function for fetching the subreddit to which the moderator note pertains
+   * @internal
+   * @param data The moderator note regarding which the subreddit is of interest
+   */
   getSubreddit(data: ModeratorNoteData) {
     return this.client.subreddits.fetch(data.subreddit);
   }
+
+  /**
+   * Utility function for fetching the user that resulted in the creation of the moderator note
+   * @internal
+   * @param data The moderator note regarding which the subreddit is of interest
+   */
   getOperator(data: ModeratorNoteData) {
     return this.client.users.fetch(data.operator);
   }
+
+  /** Utility function for fetching the user to which the moderator note pertains
+   * @internal
+   * @param data The moderator note regarding which the subreddit is of interest
+   */
   getUser(data: ModeratorNoteData) {
     return this.client.users.fetch(data.user);
   }
 
+  /** Utility function for fetching the content to which the note pertains.
+   * Returns undefined if the note does not link to content
+   * @internal
+   * @param data The moderator note regarding which the subreddit is of interest
+   */
   getContent(data: ModeratorNoteData) {
     if (!data.userNoteData.redditId) return;
     return data.userNoteData.redditId.startsWith("t1_")
