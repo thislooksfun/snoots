@@ -64,8 +64,8 @@ export interface TextPostOptions {
   sendReplies?: boolean;
 
   /**
-   * The captcha information. This is only necessary if the authenticated account
-   * requires a captcha to submit posts and comments.
+   * The captcha information. This is only necessary if the authenticated
+   * account requires a captcha to submit posts and comments.
    */
   captcha?: Captcha;
 

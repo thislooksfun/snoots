@@ -11,6 +11,7 @@ parserOptions:
 
 plugins:
   - "@typescript-eslint"
+  - comment-length
   - deprecation
   - eslint-comments
   - import
@@ -24,6 +25,7 @@ extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
   - plugin:@typescript-eslint/recommended-requiring-type-checking
+  - plugin:comment-length/recommended
   - plugin:eslint-comments/recommended
   - plugin:import/recommended
   - plugin:import/typescript
@@ -46,6 +48,8 @@ rules:
   "@typescript-eslint/no-non-null-assertion": "off"
   "@typescript-eslint/no-unused-vars": "off"
   "@typescript-eslint/require-await": "off"
+  comment-length/limit-multi-line-comments: error
+  comment-length/limit-single-line-comments: error
   deprecation/deprecation: error
   import/first: error
   import/no-default-export: error
