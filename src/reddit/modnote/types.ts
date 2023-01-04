@@ -28,7 +28,8 @@ export type ModeratorNoteUserNoteLabelType =
 /** Moderator note netails specific to moderator action that created the note */
 export interface ModeratorNoteActionData {
   // TO DO: define type for possible values of this property
-  /** Enum describing the action that resulted in the note creation, if through moderator action */
+  /** Enum describing the action that resulted in the note creation, if
+   * through moderator action */
   action: string | null;
 
   /** Prefixed content ID to which the note pertains or null */
@@ -43,7 +44,8 @@ export interface ModeratorNoteActionData {
 
 /** Moderator note details specific to the note itself */
 export interface ModeratorNoteUserNoteData {
-  /** A string of maximum length 250 that might be associated with the moderator note */
+  /** A string of maximum length 250 that might be associated with the moderator
+   * note */
   note: string | null;
 
   /** A prefixed ID of content to which the note pertains or null */
@@ -76,9 +78,11 @@ export interface ModeratorNoteData {
   /** Time of creation (TODO: Figure out if seconds or milliseconds) */
   createdAt: number;
 
-  /** Where the note is one of a list, this field represents its place in said list */
+  /** Where the note is one of a list, this field represents its place in
+   * said list */
   cursor?: string;
 
-  /** A description of how the note came to exist, either by manual addition or as a result of a moderator action*/
+  /** A description of how the note came to exist, either by manual
+   * addition or as a result of a moderator action */
   type: ModeratorNoteType;
 }

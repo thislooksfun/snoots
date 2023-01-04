@@ -35,22 +35,26 @@ export class ModeratorNote implements ModeratorNoteData {
     this.type = data.type;
   }
 
-  /** Utility function for fetching the subreddit to which the moderator note pertains */
+  /** Utility function for fetching the subreddit to which the moderator note
+   * pertains */
   getSubreddit() {
     return this.controls.getSubreddit(this);
   }
 
-  /** Utility function for fetching the user that resulted in the creation of the moderator note*/
+  /** Utility function for fetching the user that resulted in the creation of
+   * the moderator note */
   getOperator() {
     return this.controls.getOperator(this);
   }
 
-  /** Utility function for fetching the user to which the moderator note pertains */
+  /** Utility function for fetching the user to which the moderator note
+   * pertains */
   getUser() {
     return this.controls.getUser(this);
   }
 
-  /** Utility function for fetching the content to which the note pertains. Returns undefined if the note does not link to content */
+  /** Utility function for fetching the content to which the note pertains.
+   *  Returns undefined if the note does not link to content */
   getContent() {
     return this.controls.getContent(this);
   }

@@ -56,7 +56,8 @@ export interface BanOptions {
 /** Extra options for submitting a post. */
 export interface TextPostOptions {
   /**
-   * Whether or not to send inbox replies for the new post (defaults to `true`).
+   * Whether or not to send inbox replies for the new post (defaults to
+   * `true`).
    *
    * If you want to change this later you can use
    * {@link Post.enableInboxReplies} and {@link Post.disableInboxReplies}.
@@ -64,8 +65,8 @@ export interface TextPostOptions {
   sendReplies?: boolean;
 
   /**
-   * The captcha information. This is only necessary if the authenticated account
-   * requires a captcha to submit posts and comments.
+   * The captcha information. This is only necessary if the authenticated
+   * account requires a captcha to submit posts and comments.
    */
   captcha?: Captcha;
 
@@ -79,8 +80,8 @@ export interface TextPostOptions {
 /** Extra options for submitting a link post. */
 export interface LinkPostOptions extends TextPostOptions {
   /**
-   * Whether or not to error if this link has been submitted before (defaults to
-   * `false`).
+   * Whether or not to error if this link has been submitted before (defaults
+   * to `false`).
    */
   unique?: boolean;
 }

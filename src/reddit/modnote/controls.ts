@@ -100,8 +100,8 @@ export class ModeratorNoteControls extends BaseControls {
   }
 
   /**
-   * Create a moderator note for a user on a subreddit, optionally linking to content.
-   * Returns newly created note
+   * Create a moderator note for a user on a subreddit, optionally linking to
+   * content. Returns newly created note
    *
    * @param subreddit Subreddit display name
    * @param user username targetted
@@ -118,7 +118,7 @@ export class ModeratorNoteControls extends BaseControls {
   ): Promise<ModeratorNote> {
     const payload = { subreddit, user, note } as Data;
     if (label) payload.label = label;
-    /* eslint-disable-next-line @typescript-eslint/naming-convention */
+
     if (redditId) payload.reddit_id = redditId;
     const result = await this.gateway.post<{ created: Data }>(
       moderatorNoteAPIEndpoint,
@@ -128,14 +128,17 @@ export class ModeratorNoteControls extends BaseControls {
   }
 
   /**
-   * Fetch the most recent moderator note made for each of a subreddit-username pair. These are returned as
-   * a flat array, with the index of each entry matching the index of the corresponding subreddit-username pair
-   * supplied to the function
+   * Fetch the most recent moderator note made for each of a subreddit-username
+   * pair. These are returned as a flat array, with the index of each entry
+   * matching the index of the corresponding subreddit-username pair supplied
+   * to the function
    *
-   * @param subredditUsernamePairs Array of tuples. The first element of the tuple is a subreddit display name,
-   * the second element is a corresponding username. For each tuple in the array, the most recent moderator note
-   * for that subreddit-username pair will be returned. Duplicate entries result in undefined behaviour.
-   * The array of tuples must have a maximum of 500 entries.
+   * @param subredditUsernamePairs Array of tuples. The first element of the
+   * tuple is a subreddit display name, the second element is a corresponding
+   * username. For each tuple in the array, the most recent moderator note for
+   * that subreddit-username pair will be returned. Duplicate entries result
+   * in undefined behaviour. The array of tuples must have a maximum of 500
+   * entries.
    */
   async getRecent(
     subredditUsernamePairs: Array<[string, string]>
