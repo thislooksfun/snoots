@@ -1,4 +1,5 @@
 import type { Client } from "../../client";
+import type { WikiSettings, WikiSettingsAndEditors } from "./types";
 
 import { BaseControls } from "../base-controls";
 
@@ -28,10 +29,13 @@ export class WikiControls extends BaseControls {
     subreddit: string,
     username: string
   ) {
-    return this.gateway.post(`r/${subreddit}/api/wiki/alloweditor/${act}`, {
-      page,
-      username,
-    });
+    return this.gateway.post<void>(
+      `r/${subreddit}/api/wiki/alloweditor/${act}`,
+      {
+        page,
+        username,
+      }
+    );
   }
 
   /**
@@ -40,7 +44,7 @@ export class WikiControls extends BaseControls {
    * @param page The name of an existing wiki page
    * @param subreddit The subreddit on which the wiki page exists
    * @param username the name of an existing user
-   * @returns UNDOCUMENTED
+   * @returns Does not return anything
    */
   async addEditor(page: string, subreddit: string, username: string) {
     return this.allowEditor("add", page, subreddit, username);
@@ -52,7 +56,7 @@ export class WikiControls extends BaseControls {
    * @param page The name of an existing wiki page
    * @param subreddit The subreddit on which the wiki page exists
    * @param username the name of an existing user
-   * @returns UNDOCUMENTED
+   * @returns Does not return anything
    */
   async removeEditor(page: string, subreddit: string, username: string) {
     return this.allowEditor("del", page, subreddit, username);
@@ -125,10 +129,14 @@ export class WikiControls extends BaseControls {
    * Retrieve a list of wiki pages in this subreddit
    *
    * @param subreddit The subreddit from which to fetch a list of wiki pages
-   * @returns
+   * @returns List of wiki pages on subreddit as array of strings
    */
   async getPages(subreddit: string) {
-    return this.gateway.get(`r/${subreddit}/wiki/pages`);
+    const { data } = await this.gateway.get<{
+      kind: "wikipagelisting";
+      data: Array<string>;
+    }>(`r/${subreddit}/wiki/pages`);
+    return data;
   }
 
   /*
@@ -154,8 +162,29 @@ export class WikiControls extends BaseControls {
    * @param subreddit The subreddit on which the wiki page exists
    * @returns
    */
-  async getSettings(subreddit: string, page: string) {
-    return this.gateway.get(`r/${subreddit}/wiki/settings/${page}`);
+  async getSettings(
+    subreddit: string,
+    page: string
+  ): Promise<WikiSettingsAndEditors> {
+    const results = await this.gateway.get<{
+      kind: "wikipagesettings";
+      data: {
+        permlevel: number;
+        editors: Array<{
+          kind: "t2";
+          data: {
+            name: string;
+          };
+        }>;
+        listed: boolean;
+      };
+    }>(`r/${subreddit}/wiki/settings/${page}`);
+
+    return {
+      permlevel: results.data.permlevel,
+      listed: results.data.listed,
+      editors: results.data.editors.map(object => object.data.name),
+    };
   }
 
   /**
@@ -165,7 +194,29 @@ export class WikiControls extends BaseControls {
    * @param subreddit The subreddit on which the wiki page exists
    * @returns
    */
-  async changeSettings(subreddit: string, page: string) {
-    return this.gateway.post(`r/${subreddit}/wiki/settings/${page}`, {});
+  async changeSettings(
+    subreddit: string,
+    page: string,
+    settings: WikiSettings
+  ) {
+    const results = await this.gateway.post<{
+      kind: "wikipagesettings";
+      data: {
+        permlevel: number;
+        editors: Array<{
+          kind: "t2";
+          data: {
+            name: string;
+          };
+        }>;
+        listed: boolean;
+      };
+    }>(`r/${subreddit}/wiki/settings/${page}`, settings);
+
+    return {
+      permlevel: results.data.permlevel,
+      listed: results.data.listed,
+      editors: results.data.editors.map(object => object.data.name),
+    };
   }
 }
