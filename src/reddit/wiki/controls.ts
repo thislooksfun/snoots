@@ -45,40 +45,40 @@ export class WikiControls extends BaseControls {
   /**
    * Add a user as an editor on a wiki page
    *
-   * @param page The name of an existing wiki page
    * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing wiki page
    * @param username the name of an existing user
    * @returns Does not return anything
    */
-  async addEditor(page: string, subreddit: string, username: string) {
+  async addEditor(subreddit: string, page: string, username: string) {
     return this.allowEditor("add", page, subreddit, username);
   }
 
   /**
    * Remove a user as an editor on a wiki page
    *
-   * @param page The name of an existing wiki page
    * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing wiki page
    * @param username the name of an existing user
    * @returns Does not return anything
    */
-  async removeEditor(page: string, subreddit: string, username: string) {
+  async removeEditor(subreddit: string, page: string, username: string) {
     return this.allowEditor("del", page, subreddit, username);
   }
 
   /**
    * Edit or create a wiki page
    *
-   * @param page The name of an existing page or new wiki page to create
    * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing page or new wiki page to create
    * @param content
    * @param previous The starting point revision for this edit
    * @param reason A string up to 256 characters long, consisting of printable characters
    * @returns UNDOCUMENTED
    */
   async editPage(
-    page: string,
     subreddit: string,
+    page: string,
     content: string,
     previous: string,
     reason: string
@@ -94,12 +94,12 @@ export class WikiControls extends BaseControls {
   /**
    * Toggle the public visibility of a wiki page revision
    *
-   * @param page The name of an existing page or new wiki page to create
    * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing page or new wiki page to create
    * @param revision a wiki revision ID
    * @returns
    */
-  async toggleVisibility(page: string, subreddit: string, revision: string) {
+  async toggleVisibility(subreddit: string, page: string, revision: string) {
     return this.gateway.post(`r/${subreddit}/api/wiki/hide`, {
       page,
       revision,
@@ -109,12 +109,12 @@ export class WikiControls extends BaseControls {
   /**
    * Revert a wiki page to revision
    *
-   * @param page The name of an existing page or new wiki page to create
    * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing page or new wiki page to create
    * @param revision a wiki revision ID
    * @returns
    */
-  async revertPage(page: string, subreddit: string, revision: string) {
+  async revertPage(subreddit: string, page: string, revision: string) {
     return this.gateway.post(`r/${subreddit}/api/wiki/revert`, {
       page,
       revision,
@@ -194,8 +194,8 @@ export class WikiControls extends BaseControls {
   /**
    * Update the permissions and visibility of wiki page
    *
-   * @param page The name of an existing page or new wiki page to create
    * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing page or new wiki page to create
    * @returns
    */
   async changeSettings(
