@@ -68,6 +68,11 @@ rules:
         - ["^@?\\w"] # Packages
         - ["^"] # All other packages
         - ["^\\."] # Relative imports
+  spaced-comment:
+    - error
+    - always
+    - block:
+        balanced: true
   unicorn/filename-case:
     - error
     - case: kebabCase
