@@ -520,6 +520,7 @@ export class Post extends Lockable implements PostData {
   // assignFlair(options: { text: string; cssClass: string }): Promise<this>;
   // getLinkFlairTemplates(): Promise<FlairTemplate[]>;
   // markAsRead(): Promise<this>;
+  // eslint-disable-next-line comment-length/limit-single-line-comments
   // selectFlair(options: { flair_template_id: string; text?: string; }): Promise<this>;
   // setSuggestedSort(sort: Sort): Promise<this>;
 }
