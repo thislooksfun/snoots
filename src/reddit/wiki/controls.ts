@@ -1,4 +1,5 @@
 import type { Client } from "../../client";
+import type { RedditObject } from "../types";
 import type {
   wikiPermissionLevel,
   WikiSettings,
@@ -6,6 +7,7 @@ import type {
 } from "./types";
 
 import { BaseControls } from "../base-controls";
+import { WikiPage } from "./object";
 
 /**
  * The base controls for interacting with wiki pages
@@ -97,7 +99,7 @@ export class WikiControls extends BaseControls {
    * @param subreddit The subreddit on which the wiki page exists
    * @param page The name of an existing page or new wiki page to create
    * @param revision a wiki revision ID
-   * @returns
+   * @returns UNDOCUMENTED
    */
   async toggleVisibility(subreddit: string, page: string, revision: string) {
     return this.gateway.post(`r/${subreddit}/api/wiki/hide`, {
@@ -195,7 +197,7 @@ export class WikiControls extends BaseControls {
    * Update the permissions and visibility of wiki page
    *
    * @param subreddit The subreddit on which the wiki page exists
-   * @param page The name of an existing page or new wiki page to create
+   * @param page The name of an existing page
    * @returns
    */
   async changeSettings(
@@ -222,5 +224,52 @@ export class WikiControls extends BaseControls {
       listed: results.data.listed,
       editors: results.data.editors.map(object => object.data.name),
     };
+  }
+
+  /**
+   * Fetches the most recent, or revision `v` of a wiki page. Supposedly will
+   * compare two version if provided with `v2`, but could not reproduce.
+   *
+   * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing page
+   * @param v Optional, the specific version of the wiki page to be retrieved
+   * @param v2 Optional provided `v`, compares the two versions (UNRELIABLE)
+   * @returns Wiki page object
+   */
+  async getPage(subreddit: string, page: string, v?: string, v2?: string) {
+    const oAPIArguments: Record<string, string> = {};
+    if (v != undefined) oAPIArguments.v = v;
+    if (v2 != undefined) oAPIArguments.v2 = v2;
+
+    const results = await this.gateway.get<RedditObject<object>>(
+      `r/${subreddit}/wiki/${page}`,
+      oAPIArguments
+    );
+
+    return this.wikiPageInstanceFromRedditAPI(subreddit, page, results.data);
+  }
+
+  /** @internal */
+  private wikiPageInstanceFromRedditAPI(
+    subreddit: string,
+    page: string,
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    data: any
+  ) {
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+    return new WikiPage(this, {
+      subreddit,
+      page,
+      contentMD: data.content_md,
+      mayRevise: data.may_revise,
+      reason: data.reason,
+      revisionDate: data.revision_date,
+      revisionBy: data.revision_by.data.name,
+      revisionID: data.revision_id,
+      contentHTML: data.content_html,
+    });
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment */
+    /* eslint-enable @typescript-eslint/no-unsafe-member-access */
   }
 }

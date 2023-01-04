@@ -31,3 +31,32 @@ export interface WikiSettings {
 export interface WikiSettingsAndEditors extends WikiSettings {
   editors: Array<string>;
 }
+
+export interface WikiPageData {
+  /** Subreddit display name */
+  subreddit: string;
+
+  /** Wiki page name */
+  page: string;
+
+  /** Markdown formatted wiki page contents */
+  contentMD: string;
+
+  /** UNDOCUMENTED */
+  mayRevise: boolean;
+
+  /** UNDOCUMENTED */
+  reason: string;
+
+  /** Time of current revision creation in seconds */
+  revisionDate: number;
+
+  /** Username of person to make current revision */
+  revisionBy: string;
+
+  /** UUID of revision */
+  revisionID: string;
+
+  /** HTML formatted wiki page contents */
+  contentHTML: string;
+}
