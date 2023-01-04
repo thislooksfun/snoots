@@ -41,6 +41,7 @@ rules:
     - selector: default
       format: [camelCase]
       leadingUnderscore: allow
+  "@typescript-eslint/no-explicit-any": error
   "@typescript-eslint/no-inferrable-types": "off"
   "@typescript-eslint/no-non-null-assertion": "off"
   "@typescript-eslint/no-unused-vars": "off"
@@ -48,6 +49,9 @@ rules:
   deprecation/deprecation: error
   import/first: error
   import/no-default-export: error
+  import/no-duplicates: error
+  import/no-named-as-default-member: error
+  import/no-named-as-default: error
   no-console: error
   promise/prefer-await-to-callbacks: error
   promise/prefer-await-to-then: error
