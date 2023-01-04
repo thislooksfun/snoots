@@ -1,5 +1,9 @@
 import type { Client } from "../../client";
-import type { WikiSettings, WikiSettingsAndEditors } from "./types";
+import type {
+  wikiPermissionLevel,
+  WikiSettings,
+  WikiSettingsAndEditors,
+} from "./types";
 
 import { BaseControls } from "../base-controls";
 
@@ -169,7 +173,7 @@ export class WikiControls extends BaseControls {
     const results = await this.gateway.get<{
       kind: "wikipagesettings";
       data: {
-        permlevel: number;
+        permlevel: wikiPermissionLevel;
         editors: Array<{
           kind: "t2";
           data: {
@@ -202,7 +206,7 @@ export class WikiControls extends BaseControls {
     const results = await this.gateway.post<{
       kind: "wikipagesettings";
       data: {
-        permlevel: number;
+        permlevel: wikiPermissionLevel;
         editors: Array<{
           kind: "t2";
           data: {
