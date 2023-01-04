@@ -43,6 +43,7 @@ rules:
       leadingUnderscore: allow
   "@typescript-eslint/no-inferrable-types": "off"
   "@typescript-eslint/no-non-null-assertion": "off"
+  "@typescript-eslint/no-unused-vars": "off"
   "@typescript-eslint/require-await": "off"
   deprecation/deprecation: error
   import/first: error
