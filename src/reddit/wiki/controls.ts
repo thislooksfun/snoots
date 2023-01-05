@@ -7,6 +7,8 @@ import type {
 } from "./types";
 
 import { BaseControls } from "../base-controls";
+import { fakeListingAfter } from "../listing/util";
+import { WikiRevisionsListing } from "./listing";
 import { WikiPage } from "./object";
 
 /**
@@ -145,21 +147,56 @@ export class WikiControls extends BaseControls {
     return data;
   }
 
-  /*
-    async getRecentChanges(
+  /**
+   * Fetch a listing of recent changes made on the wiki for a subreddit
+   *
+   * @param subreddit The subreddit for whose wiki the list of revisions is
+   * sought
+   * @returns Listing of recent changes.
+   * @note Accepts more parameters, including after, before, count, limit,
+   * show, and sr_detail
+   */
+  getRecentChanges(subreddit: string) {
+    const request = { url: `r/${subreddit}/wiki/revisions/`, query: {} };
+    const context = { request, client: this.client };
+    return new WikiRevisionsListing(fakeListingAfter(""), context);
+  }
 
-    ){
+  /**
+   * Fetch a listing of recent changes made on a specified wiki page
+   *
+   * @param subreddit The subreddit on which exists the wiki page
+   * @param page The page for which a listing of recent changes is sought
+   * @returns A listing of recent changes for a given wiki page
+   * @note Accepts more parameters, including after, before, count, limit,
+   * show, and sr_detail
+   */
+  getRecentChangesForPage(subreddit: string, page: string) {
+    const request = { url: `r/${subreddit}/wiki/revisions/${page}`, query: {} };
+    const context = { request, client: this.client };
+    return new WikiRevisionsListing(fakeListingAfter(""), context);
+  }
 
-    }
-    */
-
-  /*
-    async getRecentChangesForPage(
-
-    ){
-
-    }
-    */
+  /**
+   * Transforms response from GET or POST request to
+   * `r/${subreddit}/wiki/settings/${page}` into a format that snoots uses
+   * @internal
+   * @param param0 Response from `r/${subreddit}/wiki/settings/${page}`
+   * @returns WikiSettingsAndEditors object
+   */
+  private buildSettingsObjectFromResponse({
+    data: { permlevel, editors, listed },
+  }: RedditObject<{
+    permlevel: wikiPermissionLevel;
+    editors: Array<RedditObject<{ name: string }>>;
+    listed: boolean;
+  }>): WikiSettingsAndEditors {
+    return {
+      permlevel,
+      listed,
+      editors: editors.map(object => object.data.name),
+    };
+  }
 
   /**
    * Retrieve the current permission settings for page
@@ -172,25 +209,15 @@ export class WikiControls extends BaseControls {
     subreddit: string,
     page: string
   ): Promise<WikiSettingsAndEditors> {
-    const results = await this.gateway.get<{
-      kind: "wikipagesettings";
-      data: {
-        permlevel: wikiPermissionLevel;
-        editors: Array<{
-          kind: "t2";
-          data: {
-            name: string;
-          };
-        }>;
-        listed: boolean;
-      };
-    }>(`r/${subreddit}/wiki/settings/${page}`);
-
-    return {
-      permlevel: results.data.permlevel,
-      listed: results.data.listed,
-      editors: results.data.editors.map(object => object.data.name),
-    };
+    return this.buildSettingsObjectFromResponse(
+      await this.gateway.get<
+        RedditObject<{
+          permlevel: wikiPermissionLevel;
+          editors: Array<RedditObject<{ name: string }>>;
+          listed: boolean;
+        }>
+      >(`r/${subreddit}/wiki/settings/${page}`)
+    );
   }
 
   /**
@@ -205,25 +232,15 @@ export class WikiControls extends BaseControls {
     page: string,
     settings: WikiSettings
   ) {
-    const results = await this.gateway.post<{
-      kind: "wikipagesettings";
-      data: {
-        permlevel: wikiPermissionLevel;
-        editors: Array<{
-          kind: "t2";
-          data: {
-            name: string;
-          };
-        }>;
-        listed: boolean;
-      };
-    }>(`r/${subreddit}/wiki/settings/${page}`, settings);
-
-    return {
-      permlevel: results.data.permlevel,
-      listed: results.data.listed,
-      editors: results.data.editors.map(object => object.data.name),
-    };
+    return this.buildSettingsObjectFromResponse(
+      await this.gateway.post<
+        RedditObject<{
+          permlevel: wikiPermissionLevel;
+          editors: Array<RedditObject<{ name: string }>>;
+          listed: boolean;
+        }>
+      >(`r/${subreddit}/wiki/settings/${page}`, settings)
+    );
   }
 
   /**

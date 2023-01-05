@@ -45,8 +45,8 @@ export interface WikiPageData {
   /** UNDOCUMENTED */
   mayRevise: boolean;
 
-  /** UNDOCUMENTED */
-  reason: string;
+  /** Reason for most recent revision */
+  reason: string | null;
 
   /** Time of current revision creation in seconds */
   revisionDate: number;
@@ -59,4 +59,24 @@ export interface WikiPageData {
 
   /** HTML formatted wiki page contents */
   contentHTML: string;
+}
+
+export interface WikiPageRevisionData {
+  /** Username of person to make current revision */
+  author: string;
+
+  /** Time of current revision creation in seconds */
+  timestamp: number;
+
+  /** Wiki page name */
+  page: string;
+
+  /** Is the page hidden from general view */
+  hidden: boolean;
+
+  /** Reason for revision */
+  reason: string | null;
+
+  /** UUID of revision */
+  revisionID: string;
 }

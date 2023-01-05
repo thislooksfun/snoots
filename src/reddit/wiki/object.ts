@@ -6,7 +6,7 @@ export class WikiPage implements WikiPageData {
   page: string;
   contentMD: string;
   mayRevise: boolean;
-  reason: string;
+  reason: string | null;
   revisionDate: number;
   revisionBy: string;
   revisionID: string;
