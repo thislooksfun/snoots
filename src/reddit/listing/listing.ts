@@ -13,10 +13,10 @@ export interface ListingContext {
 }
 
 /** @internal */
-export interface RedditListing {
+export interface RedditListing<T = RedditObject> {
   after?: string;
   before?: string;
-  children: RedditObject[];
+  children: T[];
   dist?: number;
   modhash?: string;
 }
