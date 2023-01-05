@@ -1,12 +1,17 @@
+import type { RedditObject } from "../types";
 import type { RedditListing, RedditMore } from "./listing";
 
 export const emptyRedditListing: RedditListing = { children: [] };
 
-export function fakeListingAfter(after: string): RedditListing {
+export function fakeListingAfter<T = RedditObject>(
+  after: string
+): RedditListing<T> {
   return { after, children: [] };
 }
 
-export function fakeListingBefore(before: string): RedditListing {
+export function fakeListingBefore<T = RedditObject>(
+  before: string
+): RedditListing<T> {
   return { before, children: [] };
 }
 
