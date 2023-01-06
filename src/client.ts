@@ -47,7 +47,7 @@ export interface ClientOptions {
    * > * Change your client's User-Agent string to something unique and
    * >   descriptive, including the target platform, a unique application
    * >   identifier, a version string, and your username as contact
-   * information, >   in the following format:
+   * >   information, in the following format:
    * >   `<platform>:<app ID>:<version string> (by /u/<reddit username>)`
    * >     * Example: `User-Agent: android:com.example.myredditapp:v1.2.3 (by
    * >       /u/kemitche)`
@@ -58,9 +58,8 @@ export interface ClientOptions {
    * >       application allows us to safely block old buggy/broken versions of
    * >       your app.
    * >     * **NEVER lie about your user-agent.** This includes spoofing
-   * popular >       browsers and spoofing other bots. We will ban liars with
-   * extreme
-   * >       prejudice.
+   * >       popular browsers and spoofing other bots. We will ban liars with
+   * >       extreme prejudice.
    *
    * [rls]: https://github.com/reddit-archive/reddit/wiki/api#rules
    */
