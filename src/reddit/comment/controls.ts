@@ -1,5 +1,5 @@
 import type { Client } from "../../client";
-import type { ListingObject } from "../listing/listing";
+import type { RedditObjectListing } from "../listing/listing";
 import type { RedditObject } from "../types";
 import type { CommentData } from "./object";
 
@@ -42,9 +42,10 @@ export class CommentControls extends LockableControls {
    * @throws If the comment couldn't be found.
    */
   async fetch(id: string): Promise<Comment> {
-    const listingObject: ListingObject = await this.gateway.get("api/info", {
-      id: this.namespace(id),
-    });
+    const listingObject: RedditObject<RedditObjectListing> =
+      await this.gateway.get("api/info", {
+        id: this.namespace(id),
+      });
 
     assertKind("Listing", listingObject);
 
@@ -100,7 +101,10 @@ export class CommentControls extends LockableControls {
     } else if (replies && typeof replies === "object" && "kind" in replies) {
       const repliesObject = replies as RedditObject;
       assertKind("Listing", repliesObject);
-      return new CommentListing((repliesObject as ListingObject).data, context);
+      return new CommentListing(
+        (repliesObject as RedditObject<RedditObjectListing>).data,
+        context
+      );
     } else {
       debug("Replies are of unsupported type; %O", replies);
       throw "Unsupported reply type!";

@@ -13,16 +13,16 @@ export interface ListingContext {
 }
 
 /** @internal */
-export interface RedditListing<T = RedditObject> {
+export interface RedditListing<TChild> {
   after?: string;
   before?: string;
-  children: T[];
+  children: TChild[];
   dist?: number;
   modhash?: string;
 }
 
 /** @internal */
-export type ListingObject<T = RedditObject> = RedditObject<RedditListing<T>>;
+export type RedditObjectListing = RedditListing<RedditObject>;
 
 /** @internal */
 export interface RedditMore {
@@ -50,9 +50,11 @@ export abstract class Pager<T> implements Fetcher<T> {
 
   abstract fetch(context: ListingContext): Promise<Listing<T>>;
 
-  protected async nextPage<T = RedditObject>(
+
+  protected async nextPage<TPageItems = RedditObject>(
     context: ListingContext
-  ): Promise<RedditListing<T>> {
+  ): Promise<RedditListing<TPageItems>> {
+
     if (!context.request) throw "Unable to fetch next page";
     const query = { limit: "100", after: this.after, ...context.request.query };
     const nextListingObject: RedditObject = await context.client.gateway.get(
@@ -60,7 +62,7 @@ export abstract class Pager<T> implements Fetcher<T> {
       query
     );
     assertKind("Listing", nextListingObject);
-    return nextListingObject.data as RedditListing<T>;
+    return nextListingObject.data as RedditListing<TPageItems>;
   }
 }
 

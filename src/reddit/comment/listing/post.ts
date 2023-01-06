@@ -1,8 +1,9 @@
 import type {
   Fetcher,
   ListingContext,
-  ListingObject,
+  RedditObjectListing,
 } from "../../listing/listing";
+import type { RedditObject } from "../../types";
 import type { Comment } from "../object";
 
 import { emptyRedditListing } from "../../listing/util";
@@ -17,11 +18,11 @@ export class PostComments implements Fetcher<Comment> {
     }
 
     const pth = `comments/${context.post}`;
-    const childrenResponse: [unknown, ListingObject] =
+    const childrenResponse: [unknown, RedditObject<RedditObjectListing>] =
       await context.client.gateway.get(pth, { comment: context.post });
 
     return new CommentListing(
-      childrenResponse[1].data ?? emptyRedditListing,
+      childrenResponse[1].data ?? emptyRedditListing(),
       context
     );
   }

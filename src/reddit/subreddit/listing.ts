@@ -1,7 +1,7 @@
 import type {
   Fetcher,
   ListingContext,
-  RedditListing,
+  RedditObjectListing,
 } from "../listing/listing";
 import type { Subreddit } from "./object";
 
@@ -16,7 +16,7 @@ class SubredditPager extends Pager<Subreddit> {
 
 /** @internal */
 export class SubredditListing extends Listing<Subreddit> {
-  constructor(l: RedditListing, context: ListingContext) {
+  constructor(l: RedditObjectListing, context: ListingContext) {
     let fetcher: Fetcher<Subreddit> | undefined;
 
     if (l.after != undefined) {
