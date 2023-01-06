@@ -2,8 +2,8 @@ import type { Data } from "../../../helper/types";
 import type {
   Fetcher,
   ListingContext,
-  ListingObject,
   RedditMore,
+  RedditObjectListing,
 } from "../../listing/listing";
 import type { RedditObject } from "../../types";
 import type { Comment } from "../object";
@@ -30,7 +30,8 @@ function fixCommentTree(objects: RedditObject[]) {
   for (const item of objects) {
     const parent = map[item.data.parent_id as string];
     if (parent) {
-      const parentReplies = parent.data.replies as ListingObject;
+      const parentReplies = parent.data
+        .replies as RedditObject<RedditObjectListing>;
       parentReplies.data.children.push(item);
     } else if (item.kind === "t1") {
       tree.push(item);
@@ -57,16 +58,16 @@ export class MoreComments implements Fetcher<Comment> {
     if (this.data.name === "t1__") {
       const id = this.data.parent_id.slice(3);
       const pth = `comments/${context.post}`;
-      const childrenResponse: [unknown, ListingObject] =
+      const childrenResponse: [unknown, RedditObject<RedditObjectListing>] =
         await context.client.gateway.get(pth, {
           comment: id,
         });
 
       const child = childrenResponse[1].data.children[0];
-      if (!child) return new CommentListing(emptyRedditListing, context);
+      if (!child) return new CommentListing(emptyRedditListing(), context);
 
-      const replies = child.data.replies as ListingObject;
-      return new CommentListing(replies.data ?? emptyRedditListing, context);
+      const replies = child.data.replies as RedditObject<RedditObjectListing>;
+      return new CommentListing(replies.data ?? emptyRedditListing(), context);
     } else {
       // api/morechildren can't handle more than ~75 items at a time, so we have
       // to batch it. Yes the docs *say* 100, but if we do that we start losing
