@@ -50,11 +50,9 @@ export abstract class Pager<T> implements Fetcher<T> {
 
   abstract fetch(context: ListingContext): Promise<Listing<T>>;
 
-
   protected async nextPage<TPageItems = RedditObject>(
     context: ListingContext
   ): Promise<RedditListing<TPageItems>> {
-
     if (!context.request) throw "Unable to fetch next page";
     const query = { limit: "100", after: this.after, ...context.request.query };
     const nextListingObject: RedditObject = await context.client.gateway.get(
