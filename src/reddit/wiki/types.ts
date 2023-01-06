@@ -14,9 +14,7 @@ export enum wikiPermissionLevel {
   onlyModerators = 2,
 }
 
-/**
- * Changeable settings for a wiki page
- */
+/** Changeable settings for a wiki page */
 export interface WikiSettings {
   /** Determines who should be allowed to access and edit a page */
   permlevel: wikiPermissionLevel;
@@ -29,9 +27,11 @@ export interface WikiSettings {
 
 /** Settings for a wiki page, including a readonly list of editors */
 export interface WikiSettingsAndEditors extends WikiSettings {
+  /** Array of usernames of wiki page editors */
   editors: Array<string>;
 }
 
+/** The attributes specific to the WikiPage object */
 export interface WikiPageData {
   /** Subreddit display name */
   subreddit: string;
@@ -61,6 +61,7 @@ export interface WikiPageData {
   contentHTML: string;
 }
 
+/** The attributes specific to wiki page revision objects */
 export interface WikiPageRevisionData {
   /** Username of person to make current revision */
   author: string;

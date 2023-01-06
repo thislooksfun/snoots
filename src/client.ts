@@ -12,6 +12,7 @@ import { PostControls } from "./reddit/post/controls";
 import { SubredditControls } from "./reddit/subreddit/controls";
 import { MyUserControls } from "./reddit/user/my-user/controls";
 import { UserControls } from "./reddit/user/other-user/controls";
+import { WikiControls } from "./reddit/wiki/controls";
 
 const debug = makeDebug("class:Client");
 
@@ -45,8 +46,8 @@ export interface ClientOptions {
    *
    * > * Change your client's User-Agent string to something unique and
    * >   descriptive, including the target platform, a unique application
-   * >   identifier, a version string, and your username as contact information,
-   * >   in the following format:
+   * >   identifier, a version string, and your username as contact
+   * information, >   in the following format:
    * >   `<platform>:<app ID>:<version string> (by /u/<reddit username>)`
    * >     * Example: `User-Agent: android:com.example.myredditapp:v1.2.3 (by
    * >       /u/kemitche)`
@@ -56,8 +57,9 @@ export interface ClientOptions {
    * >     * Including the version number and updating it as you build your
    * >       application allows us to safely block old buggy/broken versions of
    * >       your app.
-   * >     * **NEVER lie about your user-agent.** This includes spoofing popular
-   * >       browsers and spoofing other bots. We will ban liars with extreme
+   * >     * **NEVER lie about your user-agent.** This includes spoofing
+   * popular >       browsers and spoofing other bots. We will ban liars with
+   * extreme
    * >       prejudice.
    *
    * [rls]: https://github.com/reddit-archive/reddit/wiki/api#rules
@@ -66,10 +68,11 @@ export interface ClientOptions {
 }
 
 /**
- * The main Client class. This is the primary way you will interact with snoots.
+ * The main Client class. This is the primary way you will interact with
+ * snoots.
  *
- * Every Client instance is fully independent, so you are free to create as many
- * as you require.
+ * Every Client instance is fully independent, so you are free to create as
+ * many as you require.
  *
  * @example The most common way to use snoots is to make a client
  * ```ts
@@ -134,13 +137,16 @@ export class Client {
   public readonly subreddits: SubredditControls;
   /** Controls for interacting with users. */
   public readonly users: UserControls;
+  /** Controls for interacting with wiki pages */
+  public readonly wiki: WikiControls;
 
   /**
    * The Gateway to the Reddit API.
    *
-   * You can use this directly, but you most likely don't want to. If you end up
-   * needing this in order to interact with the Reddit API please open an issue
-   * or submit a pull request so we can add official support for your use case.
+   * You can use this directly, but you most likely don't want to. If you end
+   * up needing this in order to interact with the Reddit API please open an
+   * issue or submit a pull request so we can add official support for your use
+   * case.
    *
    * @internal
    */
@@ -189,6 +195,7 @@ export class Client {
     this.posts = new PostControls(this);
     this.subreddits = new SubredditControls(this);
     this.users = new UserControls(this);
+    this.wiki = new WikiControls(this);
   }
 
   /**

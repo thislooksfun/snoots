@@ -39,10 +39,7 @@ export class WikiControls extends BaseControls {
   ) {
     return this.gateway.post<void>(
       `r/${subreddit}/api/wiki/alloweditor/${act}`,
-      {
-        page,
-        username,
-      }
+      { page, username }
     );
   }
 
@@ -75,48 +72,50 @@ export class WikiControls extends BaseControls {
    *
    * @param subreddit The subreddit on which the wiki page exists
    * @param page The name of an existing page or new wiki page to create
-   * @param content
+   * @param content String containing desired content of the wiki page (to edit or create) in markdown format
    * @param previous The starting point revision for this edit
    * @param reason A string up to 256 characters long, consisting of printable characters
-   * @returns UNDOCUMENTED
+   * @returns Returns an empty object
    */
   async editPage(
     subreddit: string,
     page: string,
     content: string,
-    previous: string,
-    reason: string
+    reason?: string,
+    previous?: string
   ) {
-    return this.gateway.post(`r/${subreddit}/api/wiki/edit`, {
-      content,
-      page,
-      previous,
-      reason,
-    });
+    const queryObject: Record<string, string> = { content, page };
+    if (reason != undefined) queryObject.reason = reason;
+    if (previous != undefined) queryObject.previous = previous;
+    return this.gateway.post<Record<string, never>>(
+      `r/${subreddit}/api/wiki/edit`,
+      queryObject
+    );
   }
 
   /**
    * Toggle the public visibility of a wiki page revision
    *
    * @param subreddit The subreddit on which the wiki page exists
-   * @param page The name of an existing page or new wiki page to create
+   * @param page The name of an existing wiki page
    * @param revision a wiki revision ID
-   * @returns UNDOCUMENTED
+   * @returns Returns boolean indicating whether the page is now hidden (`true` indicates it is hidden)
    */
   async toggleVisibility(subreddit: string, page: string, revision: string) {
-    return this.gateway.post(`r/${subreddit}/api/wiki/hide`, {
-      page,
-      revision,
-    });
+    const response = await this.gateway.post<{ status: boolean }>(
+      `r/${subreddit}/api/wiki/hide`,
+      { page, revision }
+    );
+    return response.status;
   }
 
   /**
    * Revert a wiki page to revision
    *
    * @param subreddit The subreddit on which the wiki page exists
-   * @param page The name of an existing page or new wiki page to create
+   * @param page The name of an existing wiki page
    * @param revision a wiki revision ID
-   * @returns
+   * @returns UNDOCUMENTED
    */
   async revertPage(subreddit: string, page: string, revision: string) {
     return this.gateway.post(`r/${subreddit}/api/wiki/revert`, {
@@ -125,13 +124,15 @@ export class WikiControls extends BaseControls {
     });
   }
 
-  /*
-    async getDiscussions(
-
-    ){
-
-    }
-    */
+  /**
+   * Get a listing of discussions for a given wiki page
+   * @param subreddit The subreddit on which the wiki page exists
+   * @param page The name of an existing wiki page
+   */
+  getDiscussions(/* subreddit: string, page: string */): never {
+    // return this.gateway.get(`r/${subreddit}/wiki/discussions/${page}`);
+    throw new Error("Not Implemented");
+  }
 
   /**
    * Retrieve a list of wiki pages in this subreddit
@@ -181,20 +182,17 @@ export class WikiControls extends BaseControls {
    * Transforms response from GET or POST request to
    * `r/${subreddit}/wiki/settings/${page}` into a format that snoots uses
    * @internal
-   * @param param0 Response from `r/${subreddit}/wiki/settings/${page}`
+   * @ignore
+   * @param response Response from `r/${subreddit}/wiki/settings/${page}`
    * @returns WikiSettingsAndEditors object
    */
-  private buildSettingsObjectFromResponse({
-    data: { permlevel, editors, listed },
-  }: RedditObject<{
-    permlevel: wikiPermissionLevel;
-    editors: Array<RedditObject<{ name: string }>>;
-    listed: boolean;
-  }>): WikiSettingsAndEditors {
+  private buildSettingsObjectFromResponse(
+    response: WikiPageSettingsResponse
+  ): WikiSettingsAndEditors {
     return {
-      permlevel,
-      listed,
-      editors: editors.map(object => object.data.name),
+      permlevel: response.data.permlevel,
+      listed: response.data.listed,
+      editors: response.data.editors.map(object => object.data.name),
     };
   }
 
@@ -203,20 +201,14 @@ export class WikiControls extends BaseControls {
    *
    * @param page The name of an existing page or new wiki page to create
    * @param subreddit The subreddit on which the wiki page exists
-   * @returns
+   * @returns An object containing the present settings of the wiki page
    */
   async getSettings(
     subreddit: string,
     page: string
   ): Promise<WikiSettingsAndEditors> {
     return this.buildSettingsObjectFromResponse(
-      await this.gateway.get<
-        RedditObject<{
-          permlevel: wikiPermissionLevel;
-          editors: Array<RedditObject<{ name: string }>>;
-          listed: boolean;
-        }>
-      >(`r/${subreddit}/wiki/settings/${page}`)
+      await this.gateway.get(`r/${subreddit}/wiki/settings/${page}`)
     );
   }
 
@@ -225,7 +217,8 @@ export class WikiControls extends BaseControls {
    *
    * @param subreddit The subreddit on which the wiki page exists
    * @param page The name of an existing page
-   * @returns
+   * @param settings An object containing the updated settings. All member fields must be set
+   * @returns An object containing the present settings of the wiki page
    */
   async changeSettings(
     subreddit: string,
@@ -233,13 +226,7 @@ export class WikiControls extends BaseControls {
     settings: WikiSettings
   ) {
     return this.buildSettingsObjectFromResponse(
-      await this.gateway.post<
-        RedditObject<{
-          permlevel: wikiPermissionLevel;
-          editors: Array<RedditObject<{ name: string }>>;
-          listed: boolean;
-        }>
-      >(`r/${subreddit}/wiki/settings/${page}`, settings)
+      await this.gateway.post(`r/${subreddit}/wiki/settings/${page}`, settings)
     );
   }
 
@@ -290,3 +277,10 @@ export class WikiControls extends BaseControls {
     /* eslint-enable @typescript-eslint/no-unsafe-member-access */
   }
 }
+
+/** @internal */
+type WikiPageSettingsResponse = RedditObject<{
+  permlevel: wikiPermissionLevel;
+  editors: Array<RedditObject<{ name: string }>>;
+  listed: boolean;
+}>;

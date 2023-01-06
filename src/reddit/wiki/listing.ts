@@ -8,6 +8,7 @@ import type { WikiPageRevisionData } from "./types";
 
 import { Listing, Pager } from "../listing/listing";
 
+/** @internal */
 type WikiRevisionsRedditResponse = {
   author: RedditObject<{ name: string }>;
   timestamp: number;
@@ -18,6 +19,7 @@ type WikiRevisionsRedditResponse = {
   id: string;
 };
 
+/** @internal */
 class WikiRevisionsPager extends Pager<WikiPageRevisionData> {
   async fetch(context: ListingContext): Promise<WikiRevisionsListing> {
     const pg = await this.nextPage<WikiRevisionsRedditResponse>(context);
@@ -25,7 +27,9 @@ class WikiRevisionsPager extends Pager<WikiPageRevisionData> {
   }
 }
 
+/** Listing class for wiki page revisions */
 export class WikiRevisionsListing extends Listing<WikiPageRevisionData> {
+  /** @internal */
   constructor(
     l: RedditListing<WikiRevisionsRedditResponse>,
     context: ListingContext
