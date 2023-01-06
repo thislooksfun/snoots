@@ -1,6 +1,8 @@
 import type { Client } from "../../client";
+import type { Listing } from "../listing/listing";
 import type { RedditObject } from "../types";
 import type {
+  WikiPageRevisionData,
   wikiPermissionLevel,
   WikiSettings,
   WikiSettingsAndEditors,
@@ -157,7 +159,7 @@ export class WikiControls extends BaseControls {
    * @note Accepts more parameters, including after, before, count, limit,
    * show, and sr_detail
    */
-  getRecentChanges(subreddit: string) {
+  getRecentChanges(subreddit: string): Listing<WikiPageRevisionData> {
     const request = { url: `r/${subreddit}/wiki/revisions/`, query: {} };
     const context = { request, client: this.client };
     return new WikiRevisionsListing(fakeListingAfter(""), context);
@@ -172,7 +174,10 @@ export class WikiControls extends BaseControls {
    * @note Accepts more parameters, including after, before, count, limit,
    * show, and sr_detail
    */
-  getRecentChangesForPage(subreddit: string, page: string) {
+  getRecentChangesForPage(
+    subreddit: string,
+    page: string
+  ): Listing<WikiPageRevisionData> {
     const request = { url: `r/${subreddit}/wiki/revisions/${page}`, query: {} };
     const context = { request, client: this.client };
     return new WikiRevisionsListing(fakeListingAfter(""), context);

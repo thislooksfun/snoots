@@ -48,7 +48,6 @@ export { VoteableControls } from "./voteable/controls";
 export type { Gildings, VoteableData } from "./voteable/object";
 export { Voteable } from "./voteable/object";
 export { WikiControls } from "./wiki/controls";
-export { WikiRevisionsListing } from "./wiki/listing";
 export { WikiPage } from "./wiki/object";
 export type {
   WikiPageData,
