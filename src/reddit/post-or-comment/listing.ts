@@ -2,7 +2,7 @@ import type { Comment } from "../comment/object";
 import type {
   Fetcher,
   ListingContext,
-  RedditListing,
+  RedditObjectListing,
 } from "../listing/listing";
 import type { Post } from "../post/object";
 
@@ -17,7 +17,7 @@ class PostOrCommentPager extends Pager<Post | Comment> {
 }
 
 export class PostOrCommentListing extends Listing<Post | Comment> {
-  constructor(l: RedditListing, context: ListingContext) {
+  constructor(l: RedditObjectListing, context: ListingContext) {
     let fetcher: Fetcher<Post | Comment> | undefined;
 
     if (l.after != undefined) {

@@ -1,7 +1,7 @@
 import type { Client } from "../../client";
 import type { Query } from "../../gateway/types";
 import type { Data, Maybe } from "../../helper/types";
-import type { Listing, ListingObject, RedditListing } from "../listing/listing";
+import type { Listing, RedditObjectListing } from "../listing/listing";
 import type { LinkPostOptions } from "../subreddit/controls";
 import type {
   RedditObject,
@@ -23,7 +23,10 @@ function isRemoved(dat: Data) {
   return !!dat.removal_reason || !!dat.removed_by || !!dat.removed_by_category;
 }
 
-type SplitRawPost = [ListingObject, ListingObject];
+type SplitRawPost = [
+  RedditObject<RedditObjectListing>,
+  RedditObject<RedditObjectListing>
+];
 
 /**
  * Various methods to allow you to interact with posts.
@@ -293,7 +296,7 @@ export class PostControls extends LockableControls {
   /** @internal */
   fromRaw(
     raw: RedditObject,
-    comments: RedditListing = fakeListingAfter("")
+    comments: RedditObjectListing = fakeListingAfter("")
   ): Post {
     assertKind("t3", raw);
 

@@ -2,8 +2,8 @@ import type { Maybe } from "../../../helper/types";
 import type {
   Fetcher,
   ListingContext,
-  RedditListing,
   RedditMore,
+  RedditObjectListing,
 } from "../../listing/listing";
 import type { Comment } from "../object";
 
@@ -16,7 +16,7 @@ import { PostComments } from "./post";
 const debug = makeDebug("listing:comment");
 
 function makeFetcher(
-  after: RedditListing["after"],
+  after: RedditObjectListing["after"],
   context: ListingContext
 ): Maybe<Fetcher<Comment>> {
   if (after == undefined) return undefined;
@@ -33,7 +33,7 @@ function makeFetcher(
 
 /** @internal */
 export class CommentListing extends Listing<Comment> {
-  constructor(l: RedditListing, context: ListingContext) {
+  constructor(l: RedditObjectListing, context: ListingContext) {
     let fetcher: Maybe<Fetcher<Comment>>;
 
     const comments: Comment[] = [];

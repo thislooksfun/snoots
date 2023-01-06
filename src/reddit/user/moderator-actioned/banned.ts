@@ -1,7 +1,7 @@
 import type {
   Fetcher,
   ListingContext,
-  RedditListing,
+  RedditObjectListing,
 } from "../../listing/listing";
 import type { ModeratorActionedUserData } from "./base";
 
@@ -44,7 +44,7 @@ class BannedUserPager extends Pager<BannedUser> {
 
 /** @internal */
 export class BannedUserListing extends Listing<BannedUser> {
-  constructor(l: RedditListing, context: ListingContext) {
+  constructor(l: RedditObjectListing, context: ListingContext) {
     let fetcher: Fetcher<BannedUser> | undefined;
 
     if (l.after != undefined) {
