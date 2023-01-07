@@ -11,6 +11,16 @@ export { Listing } from "./listing/listing";
 export { LockableControls } from "./lockable/controls";
 export type { LockableData } from "./lockable/object";
 export { Lockable } from "./lockable/object";
+export { ModeratorNoteControls } from "./modnote/controls";
+export { ModeratorNote } from "./modnote/object";
+export type {
+  ModeratorNoteActionData,
+  ModeratorNoteData,
+  ModeratorNoteType,
+  ModeratorNoteTypeSearch,
+  ModeratorNoteUserNoteData,
+  ModeratorNoteUserNoteLabelType,
+} from "./modnote/types";
 export { PostControls } from "./post/controls";
 export type { PostData, SuggestedSort } from "./post/object";
 export { Post } from "./post/object";
