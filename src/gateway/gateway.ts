@@ -79,6 +79,28 @@ export abstract class Gateway {
   }
 
   /**
+   * Issue a DELETE request to the Reddit API.
+   *
+   * You can use this method, but you most likely don't want to. If you end up
+   * needing this method in order to interact with the Reddit API please open an
+   * issue or submit a pull request so we can add official support for your use
+   * case.
+   *
+   * @internal
+   *
+   * @param path The path to DELETE.
+   * @param query The query params.
+   * @returns The result.
+   */
+  public async delete<T>(path: string, query: Query = {}): Promise<T> {
+    const options = await this.buildOptions(query);
+    debugRequest("DELETE", path, options);
+    const response: T = await got.delete(this.mapPath(path), options).json();
+    debugResponse("DELETE", path, response);
+    return this.unwrap(response);
+  }
+
+  /**
    * Issue a POST request to the Reddit API with x-www-form-urlencoded data.
    *
    * You can use this method, but you most likely don't want to. If you end up
