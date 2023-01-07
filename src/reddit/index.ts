@@ -11,6 +11,32 @@ export { Listing } from "./listing/listing";
 export { LockableControls } from "./lockable/controls";
 export type { LockableData } from "./lockable/object";
 export { Lockable } from "./lockable/object";
+
+export { ModmailControls } from "./modmail/controls";
+export type {
+  ModmailConversation,
+  ModmailConversationData,
+} from "./modmail/conversation/object";
+export type { ModmailConversationOwner } from "./modmail/conversation/types";
+export type { ModmailConversationDetailedData } from "./modmail/conversationDetailed/object";
+export { ModmailConversationDetailed } from "./modmail/conversationDetailed/object";
+export type {
+  ModmailConversationDetailedDataApproveStatus,
+  ModmailConversationDetailedDataBanStatus,
+  ModmailConversationDetailedDataModeratorActionUser,
+  ModmailConversationDetailedDataMuteStatus,
+  ModmailConversationDetailedDataRecentConversation,
+  ModmailConversationModeratorAction,
+  modmailConversationModeratorActionType,
+  ModmailConversationUserData,
+} from "./modmail/conversationDetailed/types";
+export type { ModmailConversationMessageData } from "./modmail/conversationMessage/types";
+export type {
+  ModmailMuteDurationHours,
+  ModmailParticipant,
+  ModmailSort,
+  ModmailState,
+} from "./modmail/types";
 export { ModeratorNoteControls } from "./modnote/controls";
 export { ModeratorNote } from "./modnote/object";
 export type {

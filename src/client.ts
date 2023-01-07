@@ -8,6 +8,7 @@ import { AnonGateway } from "./gateway/anon";
 import { OauthGateway } from "./gateway/oauth";
 import { makeDebug } from "./helper/debug";
 import { CommentControls } from "./reddit/comment/controls";
+import { ModmailControls } from "./reddit/modmail/controls";
 import { ModeratorNoteControls } from "./reddit/modnote/controls";
 import { PostControls } from "./reddit/post/controls";
 import { SubredditControls } from "./reddit/subreddit/controls";
@@ -137,11 +138,12 @@ export class Client {
   public readonly subreddits: SubredditControls;
   /** Controls for interacting with users. */
   public readonly users: UserControls;
+  /** Controls for interacting with modmail */
+  public readonly modmail: ModmailControls;
   /** Controls for interacting with wiki pages */
   public readonly wiki: WikiControls;
   /** Controls for interacting with moderator notes. */
   public readonly moderatorNotes: ModeratorNoteControls;
-
 
   /**
    * The Gateway to the Reddit API.
@@ -198,6 +200,7 @@ export class Client {
     this.posts = new PostControls(this);
     this.subreddits = new SubredditControls(this);
     this.users = new UserControls(this);
+    this.modmail = new ModmailControls(this);
     this.wiki = new WikiControls(this);
     this.moderatorNotes = new ModeratorNoteControls(this);
   }
