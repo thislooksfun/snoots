@@ -9,10 +9,12 @@ import { OauthGateway } from "./gateway/oauth";
 import { makeDebug } from "./helper/debug";
 import { CommentControls } from "./reddit/comment/controls";
 import { ModmailControls } from "./reddit/modmail/controls";
+import { ModeratorNoteControls } from "./reddit/modnote/controls";
 import { PostControls } from "./reddit/post/controls";
 import { SubredditControls } from "./reddit/subreddit/controls";
 import { MyUserControls } from "./reddit/user/my-user/controls";
 import { UserControls } from "./reddit/user/other-user/controls";
+import { WikiControls } from "./reddit/wiki/controls";
 
 const debug = makeDebug("class:Client");
 
@@ -47,7 +49,7 @@ export interface ClientOptions {
    * > * Change your client's User-Agent string to something unique and
    * >   descriptive, including the target platform, a unique application
    * >   identifier, a version string, and your username as contact
-   * information, >   in the following format:
+   * >   information, in the following format:
    * >   `<platform>:<app ID>:<version string> (by /u/<reddit username>)`
    * >     * Example: `User-Agent: android:com.example.myredditapp:v1.2.3 (by
    * >       /u/kemitche)`
@@ -58,9 +60,8 @@ export interface ClientOptions {
    * >       application allows us to safely block old buggy/broken versions of
    * >       your app.
    * >     * **NEVER lie about your user-agent.** This includes spoofing
-   * popular >       browsers and spoofing other bots. We will ban liars with
-   * extreme
-   * >       prejudice.
+   * >       popular browsers and spoofing other bots. We will ban liars with
+   * >       extreme prejudice.
    *
    * [rls]: https://github.com/reddit-archive/reddit/wiki/api#rules
    */
@@ -139,6 +140,10 @@ export class Client {
   public readonly users: UserControls;
   /** Controls for interacting with modmail */
   public readonly modmail: ModmailControls;
+  /** Controls for interacting with wiki pages */
+  public readonly wiki: WikiControls;
+  /** Controls for interacting with moderator notes. */
+  public readonly moderatorNotes: ModeratorNoteControls;
 
   /**
    * The Gateway to the Reddit API.
@@ -196,6 +201,8 @@ export class Client {
     this.subreddits = new SubredditControls(this);
     this.users = new UserControls(this);
     this.modmail = new ModmailControls(this);
+    this.wiki = new WikiControls(this);
+    this.moderatorNotes = new ModeratorNoteControls(this);
   }
 
   /**

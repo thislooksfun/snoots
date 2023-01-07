@@ -11,6 +11,7 @@ export { Listing } from "./listing/listing";
 export { LockableControls } from "./lockable/controls";
 export type { LockableData } from "./lockable/object";
 export { Lockable } from "./lockable/object";
+
 export { ModmailControls } from "./modmail/controls";
 export type {
   ModmailConversation,
@@ -36,6 +37,16 @@ export type {
   ModmailSort,
   ModmailState,
 } from "./modmail/types";
+export { ModeratorNoteControls } from "./modnote/controls";
+export { ModeratorNote } from "./modnote/object";
+export type {
+  ModeratorNoteActionData,
+  ModeratorNoteData,
+  ModeratorNoteType,
+  ModeratorNoteTypeSearch,
+  ModeratorNoteUserNoteData,
+  ModeratorNoteUserNoteLabelType,
+} from "./modnote/types";
 export { PostControls } from "./post/controls";
 export type { PostData, SuggestedSort } from "./post/object";
 export { Post } from "./post/object";
@@ -72,3 +83,12 @@ export type { UserItemsSort } from "./user/types";
 export { VoteableControls } from "./voteable/controls";
 export type { Gildings, VoteableData } from "./voteable/object";
 export { Voteable } from "./voteable/object";
+export { WikiControls } from "./wiki/controls";
+export { WikiPage } from "./wiki/object";
+export type {
+  WikiPageData,
+  WikiPageRevisionData,
+  wikiPermissionLevel,
+  WikiSettings,
+  WikiSettingsAndEditors,
+} from "./wiki/types";
