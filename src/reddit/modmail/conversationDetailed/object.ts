@@ -8,20 +8,32 @@ import type {
 
 import { ModmailConversation } from "../conversation/object";
 
+/** The attributes specific to ModmailConversationDetailed objects */
 export interface ModmailConversationDetailedData
   extends ModmailConversationData {
+  /** Array of messages belonging to the conversation */
   messages: Array<ModmailConversationMessageData>;
+
+  /** Details regarding the original sender of the modmail conversation */
   user: ModmailConversationUserData;
-  modActions: ModmailConversationModeratorAction;
+
+  /** Details regarding moderator actions performed in the conversation */
+  modActions: Array<ModmailConversationModeratorAction>;
 }
 
+/** a single detailed modmail conversation */
 export class ModmailConversationDetailed
   extends ModmailConversation
   implements ModmailConversationDetailedData
 {
+  /** @inheritDoc */
   messages: Array<ModmailConversationMessageData>;
+
+  /** @inheritDoc */
   user: ModmailConversationUserData;
-  modActions: ModmailConversationModeratorAction;
+
+  /** @inheritDoc */
+  modActions: Array<ModmailConversationModeratorAction>;
 
   /** @internal */
   constructor(
@@ -30,8 +42,8 @@ export class ModmailConversationDetailed
   ) {
     super(controls, data);
 
-    (this.messages = data.messages),
-      (this.user = data.user),
-      (this.modActions = data.modActions);
+    this.messages = data.messages;
+    this.user = data.user;
+    this.modActions = data.modActions;
   }
 }

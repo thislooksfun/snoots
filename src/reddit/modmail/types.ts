@@ -1,3 +1,4 @@
+/** Possible modmail conversation states against which to filter */
 export type ModmailState =
   | "all"
   | "appeals"
@@ -12,6 +13,7 @@ export type ModmailState =
   | "join_requests"
   | "new";
 
+/** Possible modmail conversation sortings */
 export type ModmailSort = "recent" | "mod" | "user" | "unread";
 
 /** Durations for which a user may be muted, in hours */

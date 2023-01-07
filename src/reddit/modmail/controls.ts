@@ -1,6 +1,9 @@
 import type { Client } from "../../client";
 import type { ModmailConversationData } from "./conversation/object";
-import type { ModmailConversationUserData } from "./conversationDetailed/types";
+import type {
+  ModmailConversationModeratorAction,
+  ModmailConversationUserData,
+} from "./conversationDetailed/types";
 import type { ModmailConversationMessageData } from "./conversationMessage/types";
 import type {
   ModmailMuteDurationHours,
@@ -24,11 +27,11 @@ export class ModmailControls extends BaseControls {
   }
 
   /**
-   *
+   * Bulk mark as read modmail conversations by state
    * @param subreddit A subreddit or array of subreddit display names
    * @param filterState Mark only certain conversations as read according to their state.
    * @returns
-   * @throws `HTTPError` if
+   * @throws `HTTPError` in all circumstances
    */
   async bulkMarkRead(
     subreddit: string | Array<string>,
@@ -42,7 +45,7 @@ export class ModmailControls extends BaseControls {
   }
 
   /**
-   *
+   * Get undetailed `ModmailConversation` objects
    * @param subreddit A subreddit or array of subreddit display names
    * @param after A modmail conversation ID
    * @param limit the maximum number of modmail conversations as a number between `0` and `100` (defaults to `25`)
@@ -83,18 +86,24 @@ export class ModmailControls extends BaseControls {
     }
     */
 
+  /**
+   * Get `ModmailConversationDetailed` for a given conversation ID
+   * @param conversationID ID of the modmail conversation in question
+   * @param markRead Mark the modmail as read at the same time
+   * @returns
+   */
   async getConversation(conversationID: string, markRead: boolean) {
     const results = await this.gateway.get<{
       conversation: ModmailConversationData;
       messages: Record<string, ModmailConversationMessageData>;
       user: ModmailConversationUserData;
-      modActions: unknown;
+      modActions: Record<string, ModmailConversationModeratorAction>;
     }>(`api/mod/conversations/${conversationID}`, { markRead });
     return new ModmailConversationDetailed(this, {
       ...results.conversation,
       messages: Object.values(results.messages),
       user: results.user,
-      modActions: results.modActions,
+      modActions: Object.values(results.modActions),
     } as ModmailConversationDetailed);
   }
 
@@ -109,6 +118,11 @@ export class ModmailControls extends BaseControls {
     }
     */
 
+  /**
+   * Give approved status to the original sender of the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
   async approveParticipant(conversationID: string) {
     return this.gateway.post(
       `api/mod/conversations/${conversationID}/approve`,
@@ -116,6 +130,11 @@ export class ModmailControls extends BaseControls {
     );
   }
 
+  /**
+   * Archive a modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
   async archiveConversation(conversationID: string) {
     return this.gateway.post(
       `api/mod/conversations/${conversationID}/archive`,
@@ -123,6 +142,11 @@ export class ModmailControls extends BaseControls {
     );
   }
 
+  /**
+   * Remove approved status from original sender of the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
   async disapproveParticipant(conversationID: string) {
     return this.gateway.post(
       `api/mod/conversations/${conversationID}/disapprove`,
@@ -130,6 +154,11 @@ export class ModmailControls extends BaseControls {
     );
   }
 
+  /**
+   * Highlight the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
   async highlightConversation(conversationID: string) {
     return this.gateway.post(
       `api/mod/conversations/${conversationID}/highlight`,
@@ -143,6 +172,12 @@ export class ModmailControls extends BaseControls {
     }
     */
 
+  /**
+   * Temporarily mute the original sender of the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @param duration Duration in hours to mute participant of conversation
+   * @returns
+   */
   async muteParticipant(
     conversationID: string,
     duration: ModmailMuteDurationHours
@@ -154,9 +189,9 @@ export class ModmailControls extends BaseControls {
   }
 
   /**
-   *
-   * @param conversationID
-   * @param duration An integer between 1 and 999
+   *Temporarily ban the original sender of the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @param duration Number between 1 and 999 in days for which to ban participant
    * @returns
    */
   async tempBanParticipant(conversationID: string, duration: number) {
@@ -166,6 +201,11 @@ export class ModmailControls extends BaseControls {
     );
   }
 
+  /**
+   * Unarchive the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
   async unarchiveConversation(conversationID: string) {
     return this.gateway.post(
       `api/mod/conversations/${conversationID}/unarchive`,
@@ -173,6 +213,11 @@ export class ModmailControls extends BaseControls {
     );
   }
 
+  /**
+   * Unban the original sender of the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
   async unbanParticipant(conversationID: string) {
     return this.gateway.post(
       `api/mod/conversations/${conversationID}/unban`,
@@ -180,6 +225,11 @@ export class ModmailControls extends BaseControls {
     );
   }
 
+  /**
+   * Unmute the original sender of the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
   async unmuteParticipant(conversationID: string) {
     return this.gateway.post(
       `api/mod/conversations/${conversationID}/unmute`,
@@ -193,6 +243,10 @@ export class ModmailControls extends BaseControls {
     }
     */
 
+  /**
+   * Undocumented
+   * @returns
+   */
   async getSubreddits() {
     return this.gateway.get("api/mod/conversations/subreddits");
   }
