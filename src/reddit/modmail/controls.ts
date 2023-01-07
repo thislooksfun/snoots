@@ -60,7 +60,7 @@ export class ModmailControls extends BaseControls {
     limit: number = 25,
     sort: ModmailSort = "recent",
     state: ModmailState = "all"
-  ): Promise<unknown> {
+  ): Promise<Array<ModmailConversation>> {
     if (subreddit instanceof Array<string>) subreddit = subreddit.join(",");
     if (limit < 0 || limit > 100) limit = Math.min(Math.max(limit, 0), 100);
 
