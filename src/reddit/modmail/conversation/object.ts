@@ -1,0 +1,151 @@
+import type { ModmailControls } from "../controls";
+import type { ModmailMuteDurationHours, ModmailParticipant } from "../types";
+import type { ModmailConversationOwner } from "./types";
+
+export interface ModmailConversationData {
+  /** Unknown */
+  isAuto: boolean;
+
+  /** Information on the original sender */
+  participant: ModmailParticipant;
+
+  /** Unknown, perhaps an array of objects describing the messages
+   * in the conversation */
+  objIds: unknown;
+
+  /** Whether the modmail conversation may be replied to. This probably has
+   * something to do with whether the original sender is muted or has been
+   * banned
+   */
+  isRepliable: boolean;
+
+  lastUserUpdate: string; // Formatted timestamp
+
+  /** Unknown, perhaps whether it is a mod discussion */
+  isInternal: boolean;
+
+  lastModUpdate: unknown; // Probably formatted timestamp
+
+  /** Array of information on users who have sent messages within the
+   * conversation. This list contains duplicate entries, one for each message
+   */
+  authors: Array<ModmailParticipant>; // array
+
+  lastUpdated: string; // Formatted timestamp
+
+  legacyFirstMessageId: string;
+
+  /** Unknown. 0 appears to be unreplied to, 1 has some sort of reply? */
+  state: number; // Not sure what this state is
+
+  conversationType: string; // 'sr_user' ?
+
+  lastUnread: string; // Formatted timestamp
+
+  /** Unknown, perhaps describes the subreddit to which the modmail
+   * modmail conversation belongs
+   */
+  owner: ModmailConversationOwner; // object
+
+  /** Subject of the modmail conversation */
+  subject: string;
+
+  /** ID of the conversation */
+  id: string;
+
+  /** Whether the conversation has been highlighted */
+  isHighlighted: boolean;
+
+  /** Number of messages within the modmail conversation */
+  numMessages: number;
+}
+
+export class ModmailConversation implements ModmailConversationData {
+  isAuto: boolean;
+  participant: ModmailParticipant;
+  objIds: unknown;
+  isRepliable: boolean;
+  lastUserUpdate: string;
+  isInternal: boolean;
+  lastModUpdate: unknown;
+  authors: Array<ModmailParticipant>;
+  lastUpdated: string;
+  legacyFirstMessageId: string;
+  state: number;
+  conversationType: string;
+  lastUnread: string;
+  owner: ModmailConversationOwner;
+  subject: string;
+  id: string;
+  isHighlighted: boolean;
+  numMessages: number;
+
+  private readonly controls: ModmailControls;
+
+  constructor(controls: ModmailControls, data: ModmailConversationData) {
+    this.isAuto = data.isAuto;
+    this.participant = data.participant;
+    this.objIds = data.objIds;
+    this.isRepliable = data.isRepliable;
+    this.lastUserUpdate = data.lastUserUpdate;
+    this.isInternal = data.isInternal;
+    this.authors = data.authors;
+    this.lastUpdated = data.lastUpdated;
+    this.legacyFirstMessageId = data.legacyFirstMessageId;
+    this.state = data.state;
+    this.conversationType = data.conversationType;
+    this.lastUnread = data.lastUnread;
+    this.owner = data.owner;
+    this.subject = data.subject;
+    this.id = data.id;
+    this.isHighlighted = data.isHighlighted;
+    this.numMessages = data.numMessages;
+
+    this.controls = controls;
+  }
+
+  async getDetailed(markRead: boolean) {
+    return this.controls.getConversation(this.id, markRead);
+  }
+
+  async approveParticipant() {
+    return this.controls.approveParticipant(this.id);
+  }
+  async archive() {
+    return this.controls.archiveConversation(this.id);
+  }
+  async disapproveParticipant() {
+    return this.controls.disapproveParticipant(this.id);
+  }
+  async highlight() {
+    return this.controls.highlightConversation(this.id);
+  }
+
+  /*
+   * async unhighlight(){ return
+   * this.controls.unhighlightConversation(this.id) }
+   */
+
+  async muteParticipant(duration: ModmailMuteDurationHours) {
+    return this.controls.muteParticipant(this.id, duration);
+  }
+
+  async tempBanParticipant(duration: number) {
+    return this.controls.tempBanParticipant(this.id, duration);
+  }
+
+  async unarchive() {
+    return this.controls.unarchiveConversation(this.id);
+  }
+
+  async unbanParticipant() {
+    return this.controls.unbanParticipant(this.id);
+  }
+
+  async unmuteParticipant() {
+    return this.controls.unmuteParticipant(this.id);
+  }
+
+  /* async markAsRead(){ return this.controls.markAsRead(this.id) } */
+  /* async markAsUnread(){ return this.controls.markAsUnread(this.id) } */
+}
