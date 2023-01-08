@@ -35,6 +35,7 @@ export type {
   ModmailParticipant,
   ModmailSort,
   ModmailState,
+  ModmailUnreadCount,
 } from "./modmail/types";
 export { ModeratorNoteControls } from "./modnote/controls";
 export { ModeratorNote } from "./modnote/object";

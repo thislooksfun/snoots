@@ -49,3 +49,35 @@ export interface ModmailParticipant {
   /** Unknown */
   isDeleted: boolean;
 }
+
+/** Interface for returning the quantities of unread modmail conversations
+ * by category
+ */
+export interface ModmailUnreadCount {
+  /** Number of unread archived conversations */
+  archived: number;
+
+  /** Number of unread ban appeals */
+  appeals: number;
+
+  /** Number of unread highlighted conversations */
+  highlighted: number;
+
+  /** Number of unread notifications */
+  notifications: number;
+
+  /** Number of unread join requests */
+  joinRequests: number;
+
+  /** Number of unread filtered conversations */
+  filtered: number;
+
+  /** Number of new unread conversations */
+  new: number;
+
+  /** Number of in-progress unread conversations */
+  inProgress: number;
+
+  /** Number of unread private moderator conversations */
+  mod: number;
+}

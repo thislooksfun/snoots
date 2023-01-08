@@ -10,6 +10,7 @@ import type {
   ModmailMuteDurationHours,
   ModmailSort,
   ModmailState,
+  ModmailUnreadCount,
 } from "./types";
 
 import { BaseControls } from "../base-controls";
@@ -295,8 +296,11 @@ export class ModmailControls extends BaseControls {
    * Undocumented
    * @returns
    */
-  async getSubreddits() {
-    return this.gateway.get("api/mod/conversations/subreddits");
+  async getSubreddits(): Promise<string[]> {
+    const response = await this.gateway.get<{
+      subreddits: Record<string, { name: string }>;
+    }>("api/mod/conversations/subreddits");
+    return Object.values(response.subreddits).map(sub => sub.name);
   }
 
   /**
@@ -313,9 +317,20 @@ export class ModmailControls extends BaseControls {
     });
   }
 
-  /*
-    async getUnreadCount( ){
-
-    }
-    */
+  async getUnreadCount(): Promise<ModmailUnreadCount> {
+    const response = await this.gateway.get<Record<string, number>>(
+      "api/mod/conversations/unread/count"
+    );
+    return {
+      archived: response.archived,
+      appeals: response.appeals,
+      highlighted: response.highlighted,
+      notifications: response.notifications,
+      joinRequests: response.join_requests,
+      filtered: response.filtered,
+      new: response.new,
+      inProgress: response.inprogress,
+      mod: response.mod,
+    };
+  }
 }
