@@ -6,4 +6,3 @@
 node_modules
 .env
 *.tgz
-src/reddit/modnote/__tests__/modnotes.spec.ts
