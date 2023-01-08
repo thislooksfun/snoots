@@ -338,6 +338,11 @@ export class ModmailControls extends BaseControls {
     });
   }
 
+  /**
+   * Get the number of unread modmail conversations by category
+   * @returns An object containing the counts of unread conversations by
+   * category
+   */
   async getUnreadCount(): Promise<ModmailUnreadCount> {
     const response = await this.gateway.get<Record<string, number>>(
       "api/mod/conversations/unread/count"
