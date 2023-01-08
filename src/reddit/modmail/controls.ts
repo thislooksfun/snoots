@@ -28,6 +28,16 @@ export class ModmailControls extends BaseControls {
     super(client, "");
   }
 
+  /** @internal */
+  private createModmailConversationFromResponse(response: {
+    conversation: ModmailConversationData;
+    messages: Record<string, ModmailConversationMessageData>;
+    // user: ModmailConversationUserData;
+    modActions: Record<string, ModmailConversationModeratorAction>;
+  }) {
+    return new ModmailConversation(this, response.conversation);
+  }
+
   /**
    * Bulk mark as read modmail conversations by state
    * @param subreddit A subreddit or array of subreddit display names
@@ -114,13 +124,9 @@ export class ModmailControls extends BaseControls {
       isAuthorHidden,
     };
     if (to != undefined) queryObject.to = to;
-    const response = await this.gateway.post<{
-      conversation: ModmailConversationData;
-      messages: Record<string, ModmailConversationMessageData>;
-      // user: ModmailConversationUserData;
-      modActions: Record<string, ModmailConversationModeratorAction>;
-    }>(`api/mod/conversations`, queryObject);
-    return new ModmailConversation(this, response.conversation);
+    return this.createModmailConversationFromResponse(
+      await this.gateway.post(`api/mod/conversations`, queryObject)
+    );
   }
 
   /**
@@ -144,16 +150,31 @@ export class ModmailControls extends BaseControls {
     } as ModmailConversationDetailed);
   }
 
-  /*
-    async replyToConversation(
-        conversationID: string,
-        isAuthorHidden: boolean,
-        isInternal: boolean,
-        body: string // markdown
-    ){
-
-    }
-    */
+  /**
+   * Respond to a modmail conversation. This function is NOT mutating, and
+   * will simply return a new `ModmailConversation` object
+   *
+   * @param conversationID ID of the modmail conversation in question
+   * @param body Markdown formatted body of the response
+   * @param isAuthorHidden Whether the username of the new response should be
+   * hidden
+   * @param isInternal Whether the new message is an internal moderator note
+   * @returns New `ModmailConversation` object
+   */
+  async replyToConversation(
+    conversationID: string,
+    body: string,
+    isAuthorHidden: boolean,
+    isInternal: boolean
+  ) {
+    return this.createModmailConversationFromResponse(
+      await this.gateway.post(`api/mod/conversations/${conversationID}`, {
+        body,
+        isAuthorHidden,
+        isInternal,
+      })
+    );
+  }
 
   /**
    * Give approved status to the original sender of the modmail conversation

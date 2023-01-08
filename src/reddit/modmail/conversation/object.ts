@@ -157,6 +157,25 @@ export class ModmailConversation implements ModmailConversationData {
     return this.controls.getConversation(this.id, markRead);
   }
 
+  /**
+   * Create a new message in the modmail conversation. This function is NOT
+   * mutating, and instead returns a new `ModmailConversation` object
+   *
+   * @param body Markdown formatted body of the response
+   * @param isAuthorHidden Whether the username of the new response should
+   * be hidden
+   * @param isInternal Whether the new message is an internal moderator note
+   * @returns New `ModmailConversation` object
+   */
+  async reply(body: string, isAuthorHidden: boolean, isInternal: boolean) {
+    return this.controls.replyToConversation(
+      this.id,
+      body,
+      isAuthorHidden,
+      isInternal
+    );
+  }
+
   /** Give approved status to the original sender of the modmail conversation */
   async approveParticipant() {
     return this.controls.approveParticipant(this.id);
