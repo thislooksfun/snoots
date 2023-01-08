@@ -279,11 +279,17 @@ export class ModmailControls extends BaseControls {
     );
   }
 
-  /*
-    async markAsRead( conversationIDs: string | string[] ){
-
-    }
-    */
+  /**
+   * Mark conversations as read
+   *
+   * @param conversationIds A string or array of strings of conversation ids
+   * @returns
+   */
+  async markAsRead(conversationIds: string | string[]) {
+    if (conversationIds instanceof Array<string>)
+      conversationIds = conversationIds.join(",");
+    return this.gateway.post("api/mod/conversations/read", { conversationIds });
+  }
 
   /**
    * Undocumented
@@ -293,11 +299,19 @@ export class ModmailControls extends BaseControls {
     return this.gateway.get("api/mod/conversations/subreddits");
   }
 
-  /*
-    async markAsUnread( conversationIDs: string[] ){
-
-    }
-    */
+  /**
+   * Mark conversations as unread
+   *
+   * @param conversationIds A string or array of strings of conversation ids
+   * @returns
+   */
+  async markAsUnread(conversationIds: string | string[]) {
+    if (conversationIds instanceof Array<string>)
+      conversationIds = conversationIds.join(",");
+    return this.gateway.post("api/mod/conversations/unread", {
+      conversationIds,
+    });
+  }
 
   /*
     async getUnreadCount( ){

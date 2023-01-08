@@ -214,6 +214,13 @@ export class ModmailConversation implements ModmailConversationData {
     return this.controls.unmuteParticipant(this.id);
   }
 
-  /* async markAsRead(){ return this.controls.markAsRead(this.id) } */
-  /* async markAsUnread(){ return this.controls.markAsUnread(this.id) } */
+  /** Mark the conversation as read */
+  async markAsRead() {
+    return this.controls.markAsRead(this.id);
+  }
+
+  /** Mark the conversation as unread */
+  async markAsUnread() {
+    return this.controls.markAsUnread(this.id);
+  }
 }
