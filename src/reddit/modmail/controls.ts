@@ -166,11 +166,17 @@ export class ModmailControls extends BaseControls {
     );
   }
 
-  /*
-    async unhighlightConversation(conversationID: string){
-        return this.gateway.delete(`api/mod/conversations/${conversationID}/highlight`, {})
-    }
-    */
+  /**
+   * Unhighlight the modmail conversation
+   * @param conversationID ID of the modmail conversation in question
+   * @returns
+   */
+  async unhighlightConversation(conversationID: string) {
+    return this.gateway.delete(
+      `api/mod/conversations/${conversationID}/highlight`,
+      {}
+    );
+  }
 
   /**
    * Temporarily mute the original sender of the modmail conversation

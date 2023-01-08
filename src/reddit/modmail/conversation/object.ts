@@ -177,10 +177,10 @@ export class ModmailConversation implements ModmailConversationData {
     return this.controls.highlightConversation(this.id);
   }
 
-  /*
-   * async unhighlight(){ return
-   * this.controls.unhighlightConversation(this.id) }
-   */
+  /** Unhighlight the modmail conversation */
+  async unhighlight() {
+    return this.controls.unhighlightConversation(this.id);
+  }
 
   /**
    * Temporarily mute the original sender of the modmail conversation
