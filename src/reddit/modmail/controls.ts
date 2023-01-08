@@ -1,4 +1,5 @@
 import type { Client } from "../../client";
+import type { Data } from "../../helper/types";
 import type { ModmailConversationData } from "./conversation/object";
 import type {
   ModmailConversationModeratorAction,
@@ -80,11 +81,46 @@ export class ModmailControls extends BaseControls {
     );
   }
 
-  /*
-    async createNewConversation( ){
-
-    }
-    */
+  /**
+   * Creates a new modmail conversation for a particular subreddit
+   *
+   * @param to Can be EITHER a username (pass as "username" or "u/username"),
+   * a subreddit (passed as "r/subreddit") or `null`. If `null` is passed,
+   * the behavior of is inferred as either: an internal moderator discussion
+   * if the authenticated moderator has modmail permissions, OR, a new
+   * modmail conversation with the given `subreddit`, started as a normal
+   * user
+   * @param subject The subject of the new conversation, as a string having
+   * no more than 100 characters
+   * @param subreddit The subreddit that will host the modmail conversation.
+   * Please note, that this is different from the `to` field.
+   * @param body The body of the first message in the new conversation in
+   * markdown format
+   * @param isAuthorHidden Boolean value, whether the username of the author
+   * is hidden. Most likely only useful when a username is passed as `to`
+   */
+  async createNewConversation(
+    to: string | undefined,
+    subject: string,
+    subreddit: string,
+    body: string,
+    isAuthorHidden: boolean
+  ) {
+    const queryObject: Data = {
+      subject,
+      srName: subreddit,
+      body,
+      isAuthorHidden,
+    };
+    if (to != undefined) queryObject.to = to;
+    const response = await this.gateway.post<{
+      conversation: ModmailConversationData;
+      messages: Record<string, ModmailConversationMessageData>;
+      // user: ModmailConversationUserData;
+      modActions: Record<string, ModmailConversationModeratorAction>;
+    }>(`api/mod/conversations`, queryObject);
+    return new ModmailConversation(this, response.conversation);
+  }
 
   /**
    * Get `ModmailConversationDetailed` for a given conversation ID

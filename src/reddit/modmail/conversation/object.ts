@@ -38,13 +38,13 @@ export interface ModmailConversationData {
   lastUpdated: string; // Formatted timestamp
 
   /** Unknown */
-  legacyFirstMessageId: string;
+  legacyFirstMessageId: string | null;
 
   /** Unknown. 0 appears to be unreplied to, 1 has some sort of reply? */
   state: number; // Not sure what this state is
 
   /** Unknown */
-  conversationType: string; // 'sr_user' ?
+  conversationType: string; // 'sr_user' | 'internal'
 
   /** Unknown */
   lastUnread: string; // Formatted timestamp
@@ -97,7 +97,7 @@ export class ModmailConversation implements ModmailConversationData {
   lastUpdated: string;
 
   /** @inheritDoc */
-  legacyFirstMessageId: string;
+  legacyFirstMessageId: string | null;
 
   /** @inheritDoc */
   state: number;
