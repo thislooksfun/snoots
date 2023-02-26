@@ -30,8 +30,8 @@
     "tslib": "^2.4.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.4.3",
-    "@commitlint/config-conventional": "17.4.3",
+    "@commitlint/cli": "17.4.4",
+    "@commitlint/config-conventional": "17.4.4",
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/git": "10.0.1",
@@ -40,8 +40,8 @@
     "@semantic-release/release-notes-generator": "10.0.3",
     "@types/debug": "4.1.7",
     "@types/jest": "29.4.0",
-    "@typescript-eslint/eslint-plugin": "5.52.0",
-    "@typescript-eslint/parser": "5.52.0",
+    "@typescript-eslint/eslint-plugin": "5.53.0",
+    "@typescript-eslint/parser": "5.53.0",
     "del-cli": "5.0.0",
     "eslint": "8.34.0",
     "eslint-config-prettier": "8.6.0",
