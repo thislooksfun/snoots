@@ -17,7 +17,6 @@ export type {
   ImageMetadata,
   MediaMetadata,
   MediaMetadataItem,
-  MediaMetadataItemStatus,
   ValidMediaMetadataItem,
 } from "./post/media";
 export type { PostData, SuggestedSort } from "./post/object";

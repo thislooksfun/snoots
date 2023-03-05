@@ -51,11 +51,6 @@ export interface ImageMetadata {
 }
 
 /**
- * Possible `status` values for a media metadata item.
- */
-export type MediaMetadataItemStatus = "valid" | "failed";
-
-/**
  * Possible `type` values for a media metadata item.
  */
 export type MediaMetadataItemType = "Image";
@@ -83,7 +78,7 @@ export interface ValidMediaMetadataItem {
   /**
    * Status of this media item
    */
-  status: MediaMetadataItemStatus;
+  status: "valid";
   /**
    * The media type
    */

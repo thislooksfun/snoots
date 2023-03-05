@@ -964,7 +964,7 @@ export class SubredditControls extends BaseControls {
   /** @internal */
   protected convertListingOptions<TSort extends PostSort>(
     sort: TSort,
-    options?: PostListingOptions<TSort>
+    options: PostListingOptions<TSort> = {}
   ) {
     let query: Query;
     if (sort === "top" || sort === "controversial") {
