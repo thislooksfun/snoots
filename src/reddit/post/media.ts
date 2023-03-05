@@ -115,8 +115,8 @@ export type MediaMetadataItem =
 export type MediaMetadata = Record<string, MediaMetadataItem>;
 
 /**
- * Converts the raw media metadata object returned from Reddit into a more user friendly
- * object with more descriptive object keys.
+ * Converts the raw media metadata object returned from Reddit into a more user
+ * friendly object with more descriptive object keys.
  *
  * @param rawMediaMetadata The raw media metadata object returned from Reddit
  */
