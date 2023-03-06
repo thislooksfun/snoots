@@ -37,7 +37,7 @@ type SplitRawPost = [
 export class PostControls extends LockableControls {
   /** @internal */
   constructor(client: Client) {
-    super(client, "t3_");
+    super(client, "t3");
   }
 
   /**
