@@ -1,3 +1,10 @@
+## [1.0.0-dev.28](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.27...v1.0.0-dev.28) (2023-04-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency tslib to ^2.5.0 ([7577950](https://github.com/thislooksfun/snoots/commit/757795040ae1ec6e63e91103ccb4e10f157deca0))
+
 ## [1.0.0-dev.27](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.26...v1.0.0-dev.27) (2022-12-27)
 
 
