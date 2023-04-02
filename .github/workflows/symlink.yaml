@@ -9,13 +9,15 @@ on:
     workflows: ["Publish Documentation", "Release"]
     types: [completed]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   symlink:
     name: Update symlinks
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.11.0
       - uses: actions/checkout@v3
         with:
           ref: gh-pages

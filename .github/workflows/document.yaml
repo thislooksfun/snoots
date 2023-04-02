@@ -4,13 +4,15 @@ on:
   push:
     branches: [master]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploydoc:
     name: Deploy documentation
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.11.0
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:

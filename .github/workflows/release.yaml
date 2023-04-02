@@ -6,6 +6,10 @@ on:
     branches: [master]
     types: [completed]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   release:
     name: Release
@@ -16,8 +20,6 @@ jobs:
       didRelease: ${{ steps.semrel.outputs.new-release-published }}
       newVersion: v${{ steps.semrel.outputs.release-version }}
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.11.0
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
