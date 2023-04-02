@@ -27,7 +27,7 @@
     "camelcase": "^6.3.0",
     "debug": "^4.3.4",
     "got": "^11.8.6",
-    "tslib": "^2.4.1"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "17.5.1",
