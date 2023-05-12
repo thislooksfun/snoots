@@ -206,10 +206,25 @@ export interface PostData extends LockableData {
    */
   suggestedSort: Maybe<SuggestedSort>;
 
-  // TODO: Document or remove PostData.thumbnail*
-  // thumbnail: 'self' | string;
-  // thumbnailHeight?: number;
-  // thumbnailWidth?: number;
+  /**
+   * The redditmedia URL for the thumbnail of the post.
+   * Not to be confused with preview media, thumbnails are usually 140px wide.
+   * Self-posts and NSFW posts do not have thumbnails and return their
+   * respective type instead of an URL.
+   */
+  thumbnail: "self" | "nsfw" | string;
+
+  /**
+   * Height of the thumbnail image in pixels. `undefined` for self-posts and
+   * NSFW posts.
+   */
+  thumbnailHeight?: number;
+
+  /**
+   * Width of the thumbnail image in pixels. `undefined` for
+   * self-posts and NSFW posts.
+   */
+  thumbnailWidth?: number;
 
   /** The title of this post. */
   title: string;
@@ -288,9 +303,9 @@ export class Post extends Lockable implements PostData {
   spoiler: boolean;
   subredditSubscribers: number;
   suggestedSort: Maybe<SuggestedSort>;
-  // thumbnail: string;
-  // thumbnailHeight?: number;
-  // thumbnailWidth?: number;
+  thumbnail: string;
+  thumbnailHeight: Maybe<number>;
+  thumbnailWidth: Maybe<number>;
   title: string;
   upvoteRatio: number;
   url: string;
@@ -348,9 +363,9 @@ export class Post extends Lockable implements PostData {
     this.spoiler = data.spoiler;
     this.subredditSubscribers = data.subredditSubscribers;
     this.suggestedSort = data.suggestedSort;
-    // this.thumbnail = data.thumbnail;
-    // this.thumbnailHeight = data.thumbnailHeight;
-    // this.thumbnailWidth = data.thumbnailWidth;
+    this.thumbnail = data.thumbnail;
+    this.thumbnailHeight = data.thumbnailHeight;
+    this.thumbnailWidth = data.thumbnailWidth;
     this.title = data.title;
     this.upvoteRatio = data.upvoteRatio;
     this.url = data.url;
