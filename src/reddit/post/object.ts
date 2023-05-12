@@ -303,7 +303,7 @@ export class Post extends Lockable implements PostData {
   spoiler: boolean;
   subredditSubscribers: number;
   suggestedSort: Maybe<SuggestedSort>;
-  thumbnail: string;
+  thumbnail: "self" | "nsfw" | string;
   thumbnailHeight: Maybe<number>;
   thumbnailWidth: Maybe<number>;
   title: string;
