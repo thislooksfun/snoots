@@ -4,9 +4,8 @@
 set -e
 echo "Linting commits before push..."
 while IFS= read -r line; do
-  parts=($line)
-  old="${parts[3]}"
-  new="${parts[1]}"
+  old=$(echo "$line" | awk '{print $4}')
+  new=$(echo "$line" | awk '{print $2}')
 
   if [ "${old}" = "0000000000000000000000000000000000000000" ]; then
     npx commitlint -f 'master' -t "$new"
