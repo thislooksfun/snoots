@@ -1,3 +1,10 @@
+## [1.0.0-dev.29](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.28...v1.0.0-dev.29) (2023-05-17)
+
+
+### Bug Fixes
+
+* respect the time range when getting top posts ([cdba4cd](https://github.com/thislooksfun/snoots/commit/cdba4cd384d2ce77b7095e66f92a17fbc4002708))
+
 ## [1.0.0-dev.28](https://github.com/thislooksfun/snoots/compare/v1.0.0-dev.27...v1.0.0-dev.28) (2023-04-02)
 
 
