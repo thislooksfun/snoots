@@ -420,7 +420,7 @@ export class SubredditControls extends BaseControls {
    * @returns A listing of posts, with the top rated ones first.
    */
   getTopPosts(subreddit?: string, time: TimeRange = "all"): Listing<Post> {
-    return this.getSortedPosts(subreddit, "top", { time });
+    return this.getSortedPosts(subreddit, "top", { t: time });
   }
 
   /**
@@ -469,7 +469,7 @@ export class SubredditControls extends BaseControls {
     subreddit?: string,
     time: TimeRange = "all"
   ): Listing<Post> {
-    return this.getSortedPosts(subreddit, "controversial", { time });
+    return this.getSortedPosts(subreddit, "controversial", { t: time });
   }
 
   /** @internal */
