@@ -45,7 +45,7 @@
     "del-cli": "5.0.0",
     "eslint": "8.40.0",
     "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-comment-length": "0.9.3",
+    "eslint-plugin-comment-length": "1.1.0",
     "eslint-plugin-deprecation": "1.4.1",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.27.5",
