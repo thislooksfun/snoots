@@ -1,3 +1,13 @@
+# This repository is archived
+
+I have lost interest in the project. Reddit's API is awfully designed and really not fun to work with, and all the projects I had in mind that inspired me to start this project have since fallen through or been shut down.
+
+Additionally, Reddit's recent decision to effectively kill 3rd party applications with their API costs, and the continued public slander, misinformation, broken promises, and lack of care about accessibility by Reddit's leadership<sup>[\[1\]](https://redd.it/142kct8)[\[2\]](https://redd.it/145l7wp)[\[3\]](https://www.theverge.com/2023/6/5/23749188)</sup> has made me not want to have anything further to do with reddit or their API until and unless things change.
+
+If Reddit makes steps to fix what they have broken, both their relations with their users and their API, then I might revive this project. But unless that happens this project is dead.
+
+---
+
 # snoots
 
 <p align="center">
